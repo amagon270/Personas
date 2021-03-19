@@ -15,6 +15,8 @@ class _LoginPage extends State<LoginPage> {
   String _errorMessage;
   String _email;
   String _password;
+  String _firstName;
+  String _lastName;
   bool _showPassword;
 
   BuildContext context;
@@ -62,7 +64,7 @@ class _LoginPage extends State<LoginPage> {
 
   Widget emailInput() {
     return Padding(
-      padding: const EdgeInsets.only(top: 100.0),
+      padding: const EdgeInsets.only(top: 70.0),
       child: new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.emailAddress,
@@ -105,6 +107,38 @@ class _LoginPage extends State<LoginPage> {
     );
   }
 
+  Widget firstNameInput() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: TextFormField(
+        maxLines: 1,
+        decoration: InputDecoration(
+          hintText: 'First Name',
+          icon: Icon(Icons.account_circle),
+        ),  
+        validator: (value) => value.isEmpty ? 'Field can\'t be empty' : null,
+        onSaved: (value) => _firstName = value.trim(),
+        key: Key("loginFirstName")
+      ),
+    );
+  }
+
+  Widget lastNameInput() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: TextFormField(
+        maxLines: 1,
+        decoration: InputDecoration(
+          hintText: 'Last Name',
+          icon: Icon(Icons.account_circle),
+        ),  
+        validator: (value) => value.isEmpty ? 'Field can\'t be empty' : null,
+        onSaved: (value) => _lastName = value.trim(),
+        key: Key("loginLastName")
+      ),
+    );
+  }
+
   Widget primaryButton() {
     return Padding(
       padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
@@ -112,7 +146,7 @@ class _LoginPage extends State<LoginPage> {
         height: 40.0,
         child: FlatButton(
           key: Key("loginPrimaryButton"),
-          child: new Text('Login', style: new TextStyle(fontSize: 20.0, color: Colors.black)),
+          child: new Text('signup', style: new TextStyle(fontSize: 20.0, color: Colors.black)),
           onPressed: validateAndSubmit,
         ),
       )
@@ -124,6 +158,8 @@ class _LoginPage extends State<LoginPage> {
       //showLogo(),
       emailInput(),
       passwordInput(),
+      firstNameInput(),
+      lastNameInput(),
       showErrorMessage(),
       primaryButton(),
       //showSecondaryButton(),
@@ -144,29 +180,6 @@ class _LoginPage extends State<LoginPage> {
     );
   }
 
-  void validateAndSubmit() async {
-    FormState form = _formKey.currentState;
-    setState(() {
-      _errorMessage = "";
-      _isLoading = true;
-    });
-    
-    if (form.validate()) {
-      form.save();
-      try {
-        context.read<User>().login(_email, _password);
-      } catch (e) {
-        print('Error: $e');
-        setState(() {
-          _isLoading = false;
-          _errorMessage = e.toString();
-          _formKey.currentState.reset();
-        });
-      }
-    }
-    _isLoading = false;
-  }
-
   @override
   Widget build(BuildContext context) {
     this.context = context;
@@ -178,5 +191,28 @@ class _LoginPage extends State<LoginPage> {
         ],
       )
     );
+  }
+
+  void validateAndSubmit() async {
+    FormState form = _formKey.currentState;
+    setState(() {
+      _errorMessage = "";
+      _isLoading = true;
+    });
+    
+    if (form.validate()) {
+      form.save();
+      try {
+        context.read<User>().signup(_email, _password, _firstName, _lastName);
+      } catch (e) {
+        print('Error: $e');
+        setState(() {
+          _isLoading = false;
+          _errorMessage = e.toString();
+          _formKey.currentState.reset();
+        });
+      }
+    }
+    _isLoading = false;
   }
 }

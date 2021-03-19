@@ -25,8 +25,9 @@ dependencies:
     sdk: flutter
   provider: ^4.3.3
   path_provider: ^0.4.1
-
-  cupertino_icons: ^1.0.0
+  nanoid: ^0.1.0
+  
+  password_hash: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -37,5 +38,7 @@ flutter:
 
   assets:
     - assets/questions/questions.json
+    - assets/questions/personaQuestions.json
+    - assets/user.json
 
 

@@ -1,0 +1,125 @@
+[
+    {
+        "id" : "001",
+        "code" : "normal question",
+        "type" : "MultipleChoice",
+        "text" : "This is question 1", 
+        "options" : [
+            {
+                "code" : "1",
+                "text": "Answer 1",
+                "image" : ""
+            },
+            {
+                "code" : "2",
+                "text": "Answer 2",
+                "image" : ""
+            },
+            {
+                "code" : "3",
+                "text": "Answer 3",
+                "image" : ""
+            },
+            {
+                "code" : "4",
+                "text": "Answer 4",
+                "image" : ""
+            }
+        ],
+        "min" : 0,
+        "max" : 0,
+        "labels" : [] 
+    },
+    {
+        "id" : "002",
+        "code" : "3 answers",
+        "type" : "MultipleChoice",
+        "text" : "This is question 2", 
+        "options" : [
+            {
+                "code" : "1",
+                "text": "Answer a",
+                "image" : ""
+            },
+            {
+                "code" : "2",
+                "text": "Answer b",
+                "image" : ""
+            },
+            {
+                "code" : "3",
+                "text": "Answer c",
+                "image" : ""
+            }
+        ],
+        "min" : 0,
+        "max" : 0,
+        "labels" : [] 
+    },
+    {
+        "id" : "003",
+        "code" : "7 answers",
+        "type" : "MultipleChoice",
+        "text" : "This is question 3", 
+        "options" : [
+            {
+                "code" : "1",
+                "text": "Answer 1",
+                "image" : ""
+            },
+            {
+                "code" : "2",
+                "text": "Answer 2",
+                "image" : ""
+            },
+            {
+                "code" : "3",
+                "text": "Answer 3",
+                "image" : ""
+            },
+            {
+                "code" : "4",
+                "text": "Answer 4",
+                "image" : ""
+            },
+            {
+                "code" : "5",
+                "text": "Answer 5",
+                "image" : ""
+            },
+            {
+                "code" : "6",
+                "text": "Answer 6",
+                "image" : ""
+            },
+            {
+                "code" : "7",
+                "text": "Answer 7",
+                "image" : ""
+            }
+        ],
+        "min" : 0,
+        "max" : 0,
+        "labels" : [] 
+    },
+    {
+        "id" : "004",
+        "code" : "Slider",
+        "type" : "Slider",
+        "text" : "This is a slider question", 
+        "options" : [],
+        "min" : 0,
+        "max" : 10,
+        "labels" : ["low", "medium", "high"] 
+    },
+    {
+        "id" : "005",
+        "code" : "5",
+        "type" : "ColourPicker",
+        "text" : "Pick a colour", 
+        "options" : [],
+        "min" : 0,
+        "max" : 0,
+        "labels" : [] 
+    }
+]

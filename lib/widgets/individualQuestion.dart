@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class IndividualQuestion extends StatefulWidget {
   IndividualQuestion({Key key, this.question}) : super(key: key);
 
-  final QuestionData question;
+  final Question question;
 
   @override
   _IndividualQuestion createState() => _IndividualQuestion();
@@ -14,6 +14,7 @@ class IndividualQuestion extends StatefulWidget {
 class _IndividualQuestion extends State<IndividualQuestion> {
   
   String currentlySelected;
+  String answer;
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +28,11 @@ class _IndividualQuestion extends State<IndividualQuestion> {
             onChanged: (value) {
               setState(() {
                 currentlySelected = value;
-                widget.question.answer = value;
+                answer = value;
               });
             },
           ),
-          Text(option, style: Theme.of(context).textTheme.bodyText1),
+          Text(option.text, style: Theme.of(context).textTheme.bodyText1),
         ])
       );
     });
@@ -39,7 +40,7 @@ class _IndividualQuestion extends State<IndividualQuestion> {
     padding: EdgeInsets.all(20),
       child: Column(
         children: [
-          Text(widget.question.question, style: Theme.of(context).textTheme.headline6),
+          Text(widget.question.text, style: Theme.of(context).textTheme.headline6),
           ...options
         ],
       )

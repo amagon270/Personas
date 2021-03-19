@@ -1,68 +1,82 @@
-import 'package:Personas/widgets/questionService.dart';
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:nanoid/async/nanoid.dart';
+import 'package:password_hash/pbkdf2.dart';
+import 'package:password_hash/salt.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'auth.dart';
 
 class User with ChangeNotifier, DiagnosticableTreeMixin {
   String id;
+  String firstName;
+  String lastName;
   String email;
-  List<QuestionData> questions;
-  QuestionData currentQuestion;
+  DateTime dateCreated;
 
   User() {
-    loadQuestions();
+    checkExistingUser();
+  }
+
+  void checkExistingUser() async {
+    Map userData = await getUserData();
+    print(userData);
+    if (userData != null) {
+      assignUserData(userData);
+    }
+    notifyListeners();
   }
 
   void login(String email, String password) {
     Map newUser = Auth.tempLoginCheck(email, password);
     id = newUser["id"];
-    loadAnswers();
+
     notifyListeners();
   }
 
-  void loadQuestions() async {
-    addQuestions(await QuestionService.loadQuestions());
-    currentQuestion = QuestionService.askQuestion(questions);
+  void signup(String email, String password, String firstName, String lastName) async {
+    var id = await nanoid(16);
+    var salt = Salt.generateAsBase64String(16);
+    var hash = PBKDF2().generateKey(password, salt, 1000, 32);
+    int time = DateTime.now().millisecondsSinceEpoch;
+    Map userData = {"id": id, "email": email, "firstName": firstName, "lastName": lastName, "password": hash, "salt": salt, "created": time};
+    setUserData(json.encode(userData));
+    assignUserData(userData);
     notifyListeners();
   }
 
-  void loadAnswers() async {
-    Map answers = await QuestionService.getAnswers(id);
-    answers.forEach((key, value) {
-      questions.where((element) => element.id == key).first.answer = value;
-    });
+  void assignUserData(Map userData) {
+    id = userData["id"] ?? "";
+    firstName = userData["firstName"] ?? "";
+    lastName = userData["lastName"] ?? "";
+    email = userData["email"] ?? "";
+    dateCreated = DateTime.fromMillisecondsSinceEpoch(userData["created"]) ?? DateTime.now();
   }
 
-  void askQuestion() {
-    QuestionData newQuestion = QuestionService.askQuestion(questions);
-    currentQuestion = newQuestion;
-    notifyListeners();
-  }
-
-  void addQuestions(List<QuestionData> newQuestions) {
-    if (questions == null) {
-      questions = newQuestions;
-    } else {
-      questions.addAll(newQuestions);
+  Future<Map> getUserData() async {
+    final directory = await getApplicationDocumentsDirectory();
+    final path = directory.path;
+    try {
+      final file = File('$path/user.json');
+      final data = await file.readAsString();
+      return json.decode(data);
+    } catch (e) {
+      print(e.toString());
+      return null;
     }
   }
 
-  Future<List<String>> showAnswers() async {
-    List<String> answersList = new List<String>();
-    Map answers = await QuestionService.getAnswers(id);
-    answers.forEach((key, value) {
-      QuestionData question = questions.firstWhere((element) => element.id == key, orElse: () {return QuestionData("000", "Sorry we are out of questions", []);});
-      answersList.add(
-        "Question: " + question.question + 
-        "\nAnswer: " + value
-      );
-    });
-    return answersList;
-  }
-
-  void resetAnswers() {
-    QuestionService.resetAnswers(id);
-    loadQuestions();
+  void setUserData(String userData) async {
+    final directory = await getApplicationDocumentsDirectory();
+    final path = directory.path;
+    try {
+      final file = File('$path/user.json');
+      file.writeAsString(userData);
+    } catch (e) {
+      print(e);
+    }
   }
 }
