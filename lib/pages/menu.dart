@@ -5,10 +5,25 @@ class MenuPage extends StatelessWidget {
   List<Widget> createMenu(BuildContext context) {
     List<Widget> items = new List<Widget>();
     items.add(
+      Container(
+        padding: EdgeInsets.all(20),
+        alignment: Alignment.center,
+        child: Text("Menu", style: TextStyle(fontSize: 20),)
+      )
+    );
+    items.add(
       RaisedButton(
         child: Text("Create Persona"),
         onPressed: () {
           Navigator.pushNamed(context, "/createPersona");
+        },
+      )
+    );
+    items.add(
+      RaisedButton(
+        child: Text("View Personas"),
+        onPressed: () {
+          Navigator.pushNamed(context, "/viewPersonas");
         },
       )
     );

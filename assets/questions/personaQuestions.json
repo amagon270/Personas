@@ -1,54 +1,46 @@
 [
     {
-        "id" : "001",
-        "code" : "normal question",
+        "id" : "",
+        "code" : "Intro",
         "type" : "MultipleChoice",
-        "text" : "This is question 1", 
-        "options" : [
-            {
-                "code" : "1",
-                "text": "Answer 1",
-                "image" : ""
-            },
-            {
-                "code" : "2",
-                "text": "Answer 2",
-                "image" : ""
-            },
-            {
-                "code" : "3",
-                "text": "Answer 3",
-                "image" : ""
-            },
-            {
-                "code" : "4",
-                "text": "Answer 4",
-                "image" : ""
-            }
-        ],
+        "text" : "OK, Think of a persona.", 
+        "options" : [],
         "min" : 0,
         "max" : 0,
         "labels" : [] 
+    },{
+        "id" : "personaColor",
+        "code" : "Persona Colour",
+        "type" : "ColourPicker",
+        "text" : "Now think of a colour that feels right for this persona, and select it from the colour palette.", 
+        "options" : [],
+        "min" : 0,
+        "max" : 0,
+        "labels" : [] 
+    },{
+        "id" : "001",
+        "code" : "energy levels",
+        "type" : "Slider",
+        "text" : "How much energy does this persona have?", 
+        "options" : [],
+        "min" : 0,
+        "max" : 10,
+        "labels" : ["low", "medium", "high"] 
     },
     {
         "id" : "002",
-        "code" : "3 answers",
+        "code" : "roundedness",
         "type" : "MultipleChoice",
-        "text" : "This is question 2", 
+        "text" : "Does this persona feel more round or square?", 
         "options" : [
             {
-                "code" : "1",
-                "text": "Answer a",
+                "code" : "round",
+                "text": "◯",
                 "image" : ""
             },
             {
-                "code" : "2",
-                "text": "Answer b",
-                "image" : ""
-            },
-            {
-                "code" : "3",
-                "text": "Answer c",
+                "code" : "square",
+                "text": "□",
                 "image" : ""
             }
         ],
@@ -111,15 +103,5 @@
         "min" : 0,
         "max" : 10,
         "labels" : ["low", "medium", "high"] 
-    },
-    {
-        "id" : "005",
-        "code" : "5",
-        "type" : "ColourPicker",
-        "text" : "Pick a colour", 
-        "options" : [],
-        "min" : 0,
-        "max" : 0,
-        "labels" : [] 
     }
 ]

@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:Personas/widgets/utility.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:nanoid/async/nanoid.dart';
 import 'package:password_hash/pbkdf2.dart';
 import 'package:password_hash/salt.dart';
 import 'package:path_provider/path_provider.dart';
@@ -23,9 +23,12 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
 
   void checkExistingUser() async {
     Map userData = await getUserData();
-    print(userData);
+    print("get user data $userData");
     if (userData != null) {
+      print("Create new User");
       assignUserData(userData);
+    } else {
+      id = "";
     }
     notifyListeners();
   }
@@ -38,7 +41,7 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
   }
 
   void signup(String email, String password, String firstName, String lastName) async {
-    var id = await nanoid(16);
+    var id = await UtilityFunctions.generateId();
     var salt = Salt.generateAsBase64String(16);
     var hash = PBKDF2().generateKey(password, salt, 1000, 32);
     int time = DateTime.now().millisecondsSinceEpoch;
@@ -65,6 +68,7 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
       return json.decode(data);
     } catch (e) {
       print(e.toString());
+      print("test print on return null in getUserData");
       return null;
     }
   }

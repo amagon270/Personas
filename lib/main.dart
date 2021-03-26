@@ -1,7 +1,8 @@
 import 'package:Personas/pages/createPersona.dart';
 import 'package:Personas/pages/login.dart';
 import 'package:Personas/pages/menu.dart';
-import 'package:Personas/pages/questions.dart';
+import 'package:Personas/pages/viewPersona.dart';
+import 'package:Personas/pages/viewPersonas.dart';
 import 'package:Personas/widgets/user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -37,6 +38,10 @@ class Personas extends StatelessWidget {
     switch (settings.name) {
       case "/createPersona":
         return MaterialPageRoute(builder: (context) => CreatePersona());
+      case "/viewPersonas":
+        return MaterialPageRoute(builder: (context) => ViewPersonas());
+      case "/viewPersona":
+        return MaterialPageRoute(builder: (context) => ViewPersona(persona: settings.arguments));
       default:
         return MaterialPageRoute(builder: (context) => HomePage());
     }
