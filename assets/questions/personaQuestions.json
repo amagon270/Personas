@@ -20,9 +20,28 @@
     },{
         "id" : "001",
         "code" : "energy levels",
-        "type" : "Slider",
+        "type" : "MultipleChoice",
         "text" : "How much energy does this persona have?", 
-        "options" : [],
+        "options" : [
+            {
+                "code" : "low",
+                "text": "low",
+                "image" : "",
+                "order" : 1
+            },
+            {
+                "code" : "medium",
+                "text": "medium",
+                "image" : "",
+                "order" : 2
+            },
+            {
+                "code" : "high",
+                "text": "high",
+                "image" : "",
+                "order" : 3
+            }
+        ],
         "min" : 0,
         "max" : 10,
         "labels" : ["low", "medium", "high"] 
@@ -35,13 +54,15 @@
         "options" : [
             {
                 "code" : "round",
-                "text": "◯",
-                "image" : ""
+                "text": "",
+                "image" : "assets/images/circle.png",
+                "order" : 1
             },
             {
                 "code" : "square",
-                "text": "□",
-                "image" : ""
+                "text": "",
+                "image" : "assets/images/square.png",
+                "order" : 2
             }
         ],
         "min" : 0,
@@ -50,44 +71,80 @@
     },
     {
         "id" : "003",
-        "code" : "7 answers",
-        "type" : "MultipleChoice",
-        "text" : "This is question 3", 
+        "code" : "Polygon",
+        "type" : "Polygon",
+        "text" : "Polygon example question", 
         "options" : [
             {
                 "code" : "1",
                 "text": "Answer 1",
-                "image" : ""
+                "image" : "",
+                "order" : 1
             },
             {
                 "code" : "2",
                 "text": "Answer 2",
-                "image" : ""
+                "image" : "",
+                "order" : 2
             },
             {
                 "code" : "3",
                 "text": "Answer 3",
-                "image" : ""
+                "image" : "",
+                "order" : 3
             },
             {
                 "code" : "4",
                 "text": "Answer 4",
-                "image" : ""
+                "image" : "",
+                "order" : 4
             },
             {
                 "code" : "5",
                 "text": "Answer 5",
-                "image" : ""
+                "image" : "",
+                "order" : 5
             },
             {
                 "code" : "6",
                 "text": "Answer 6",
-                "image" : ""
+                "image" : "",
+                "order" : 6
+            }
+        ],
+        "min" : 0,
+        "max" : 0,
+        "labels" : [] 
+    },
+    {
+        "id" : "polygonTest",
+        "code" : "PolygonTest",
+        "type" : "Polygon",
+        "text" : "Polygon example question with 4", 
+        "options" : [
+            {
+                "code" : "1",
+                "text": "Answer 1",
+                "image" : "",
+                "order" : 1
             },
             {
-                "code" : "7",
-                "text": "Answer 7",
-                "image" : ""
+                "code" : "2",
+                "text": "Answer 2",
+                "image" : "",
+                "order" : 2
+            },
+            {
+                "code" : "3",
+                "text": "Answer 3",
+                "image" : "",
+                "order" : 3
+            },
+            {
+                "code" : "4",
+                "text": "Answer 4",
+                "image" : "",
+                "order" : 4
             }
         ],
         "min" : 0,
@@ -103,5 +160,72 @@
         "min" : 0,
         "max" : 10,
         "labels" : ["low", "medium", "high"] 
+    },
+    {
+        "id" : "LabelSliderTest",
+        "code" : "LabelSlider",
+        "type" : "Slider",
+        "text" : "This is a slider question", 
+        "options" : [],
+        "min" : 0,
+        "max" : 9,
+        "labels" : ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"] 
+    },
+    {
+        "id" : "005",
+        "code" : "MultipleSelect",
+        "type" : "MultipleSelect",
+        "text" : "Select every option that applies", 
+        "options" : [
+            {
+                "code" : "1",
+                "text": "Answer 1",
+                "image" : "",
+                "order" : 1
+            },
+            {
+                "code" : "2",
+                "text": "Answer 2",
+                "image" : "",
+                "order" : 2
+            },
+            {
+                "code" : "3",
+                "text": "Answer 3",
+                "image" : "",
+                "order" : 3
+            },
+            {
+                "code" : "4",
+                "text": "Answer 4",
+                "image" : "",
+                "order" : 4
+            },
+            {
+                "code" : "5",
+                "text": "Answer 5",
+                "image" : "",
+                "order" : 5
+            },
+            {
+                "code" : "6",
+                "text": "Answer 6",
+                "image" : "",
+                "order" : 6
+            }
+        ],
+        "min" : 0,
+        "max" : 0,
+        "labels" : []
+    },
+    {
+        "id" : "personaName",
+        "code" : "Persona Name",
+        "type" : "TextInput",
+        "text" : "Give a name to this persona", 
+        "options" : [],
+        "min" : 0,
+        "max" : 0,
+        "labels" : [] 
     }
 ]

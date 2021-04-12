@@ -86,7 +86,7 @@ class _LoginPage extends State<LoginPage> {
       padding: const EdgeInsets.only(top: 10.0),
       child: TextFormField(
         maxLines: 1,
-        obscureText: _showPassword,
+        obscureText: !_showPassword,
         decoration: InputDecoration(
           hintText: 'Password',
           icon: Icon(Icons.lock),

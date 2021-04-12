@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:Personas/widgets/personaService.dart';
 import 'package:Personas/widgets/utility.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,8 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
   String email;
   DateTime dateCreated;
 
+  bool hasWatchedIntro;
+
   User() {
     checkExistingUser();
   }
@@ -25,11 +28,20 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
     Map userData = await getUserData();
     print("get user data $userData");
     if (userData != null) {
-      print("Create new User");
       assignUserData(userData);
     } else {
-      id = "";
+      Map data = {"id": "", "email": "", "firstName": "", "lastName": "", "password": "", "salt": "", "watchedIntro" : false};
+      assignUserData(data);
+      setUserData(json.encode(data));
     }
+    notifyListeners();
+  }
+
+  void watchIntro() async {
+    hasWatchedIntro = true;
+    Map data = await getUserData();
+    data["watchedIntro"] = true;
+    setUserData(json.encode(data));
     notifyListeners();
   }
 
@@ -45,7 +57,7 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
     var salt = Salt.generateAsBase64String(16);
     var hash = PBKDF2().generateKey(password, salt, 1000, 32);
     int time = DateTime.now().millisecondsSinceEpoch;
-    Map userData = {"id": id, "email": email, "firstName": firstName, "lastName": lastName, "password": hash, "salt": salt, "created": time};
+    Map userData = {"id": id, "email": email, "firstName": firstName, "lastName": lastName, "password": hash, "salt": salt, "created": time, "watchedIntro" : hasWatchedIntro};
     setUserData(json.encode(userData));
     assignUserData(userData);
     notifyListeners();
@@ -56,7 +68,11 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
     firstName = userData["firstName"] ?? "";
     lastName = userData["lastName"] ?? "";
     email = userData["email"] ?? "";
-    dateCreated = DateTime.fromMillisecondsSinceEpoch(userData["created"]) ?? DateTime.now();
+    dateCreated = userData["created"] != null ? DateTime.fromMillisecondsSinceEpoch(userData["created"]) : DateTime.now();
+    hasWatchedIntro = userData["watchedIntro"] ?? false;
+
+    //TODO - Work out a better system for this
+    PersonaService().userId = id;
   }
 
   Future<Map> getUserData() async {

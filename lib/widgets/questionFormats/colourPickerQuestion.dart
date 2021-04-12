@@ -42,7 +42,7 @@ class _ColourPickerQuestion extends State<ColourPickerQuestion> {
                         titlePadding: const EdgeInsets.all(0.0),
                         contentPadding: const EdgeInsets.all(0.0),
                         content: SingleChildScrollView(
-                          child: MaterialPicker(
+                          child: ColorPicker(
                             pickerColor: currentColor,
                             onColorChanged: (color) {
                               setState(() {

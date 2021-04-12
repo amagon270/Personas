@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  video_player: ^1.0.1
   provider: ^4.3.3
   path_provider: ^0.4.1
   nanoid: ^0.1.0
@@ -41,5 +42,6 @@ flutter:
     - assets/questions/questions.json
     - assets/questions/personaQuestions.json
     - assets/user.json
+    - assets/images/
 
 

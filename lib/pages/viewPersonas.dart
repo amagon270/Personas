@@ -1,22 +1,23 @@
-import 'package:Personas/widgets/questionService.dart';
-import 'package:Personas/widgets/user.dart';
+import 'package:Personas/widgets/personaService.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class ViewPersonas extends StatelessWidget {
 
   List<Widget> createPersonaList(List<Persona> personas, BuildContext context) {
     List<Widget> widgets = new List<Widget>();
     personas.forEach((persona) {
-      widgets.add(FlatButton(
+      widgets.add(Container(
+          decoration: BoxDecoration(
+            color: persona.color,
+            border: Border.all(width: 1, color: Colors.black12),
+  
+          ),
+        child: FlatButton(
         color: persona.color,
-        child: Container(
-          decoration: BoxDecoration(color: persona.color),
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
-        ),
+        child: Container(child: Text(persona.name)),
         onPressed: () {
           Navigator.of(context).pushNamed("/viewPersona", arguments: persona);
-        }
+        })
       ));
     });
     return widgets;
@@ -24,14 +25,12 @@ class ViewPersonas extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(title: Text("Personas"),),
       body: SafeArea(
         child: FutureBuilder(
-          future: QuestionService.getPersonas(context.read<User>().id),
+          future: PersonaService().getPersonas(),
           builder: (context, snapshot) {
-            print(snapshot.data);
             if (!snapshot.hasData) {
               return Text("Getting Results");
             } else {

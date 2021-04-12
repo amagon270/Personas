@@ -1,7 +1,9 @@
 import 'package:Personas/widgets/personaService.dart';
+import 'package:Personas/widgets/user.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class MenuPage extends StatelessWidget {
+class DevMenuPage extends StatelessWidget {
 
   List<Widget> createMenu(BuildContext context) {
     List<Widget> items = new List<Widget>();
@@ -9,38 +11,30 @@ class MenuPage extends StatelessWidget {
       Container(
         padding: EdgeInsets.all(20),
         alignment: Alignment.center,
-        child: Text("Menu", style: TextStyle(fontSize: 20),)
+        child: Text("Dev Menu", style: TextStyle(fontSize: 20),)
       )
     );
     items.add(
       RaisedButton(
-        child: Text("Create Persona"),
+        child: Text("Menu"),
         onPressed: () {
-          Navigator.pushNamed(context, "/createPersona");
+          Navigator.pop(context);
         },
       )
     );
     items.add(
       RaisedButton(
-        child: Text("View Personas"),
+        child: Text("Delete All Personas"),
         onPressed: () {
-          Navigator.pushNamed(context, "/viewPersonas");
+          PersonaService().deleteAllPersonas();
         },
       )
     );
     items.add(
       RaisedButton(
-        child: Text("View Intro"),
-        onPressed: () {
-          Navigator.pushNamed(context, "/intro");
-        },
-      )
-    );
-    items.add(
-      RaisedButton(
-        child: Text("Dev Menu"),
-        onPressed: () {
-          Navigator.pushNamed(context, "/devMenu");
+        child: Text("Delete User"),
+        onPressed: () async {
+          context.read<User>().setUserData("{}");
         },
       )
     );

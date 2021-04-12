@@ -1,19 +1,22 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:Personas/widgets/interviewService.dart';
 import 'package:Personas/widgets/questionFormats/colourPickerQuestion.dart';
 import 'package:Personas/widgets/questionFormats/multipleChoiceQuestion.dart';
+import 'package:Personas/widgets/questionFormats/multipleSelectQuestion.dart';
+import 'package:Personas/widgets/questionFormats/polygonQuestion.dart';
 import 'package:Personas/widgets/questionFormats/sliderQuestion.dart';
+import 'package:Personas/widgets/questionFormats/textInputQuestion.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
 
 enum QuestionType {
   MultipleChoice,
   Slider,
   Polygon,
   Circle,
-  ColourPicker
+  ColourPicker,
+  MultipleSelect,
+  TextInput
 }
 
 //allows calling string.toEnum({Enum}.values) to turn a string into an Enum e.g. "Slider".toEnum(QuestionType.values)
@@ -25,17 +28,19 @@ extension EnumParser on String {
 }
 
 class QuestionOption {
-  QuestionOption(this.code, this.text, {this.image});
+  QuestionOption(this.code, this.text, {this.image, this.order});
 
   String code;
   String text;
   String image;
+  int order;
 
   Map getAsMap() {
     Map newMap = Map();
     newMap["code"] = code;
     newMap["text"] = text;
     newMap["image"] = image ?? "";
+    newMap["order"] = order;
     return newMap;
   }
 }
@@ -52,37 +57,50 @@ class Question {
   int max;
   List<String> labels;
 
-  Widget generateQuestionWidget({ValueChanged selectAnswer, dynamic startValue}) {
+  Widget generateQuestionWidget({ValueChanged selectAnswer, dynamic startValue, bool editable = true}) {
     selectAnswer ??= doNothingFunction;
     switch (type) {
       case QuestionType.MultipleChoice:
-        return MultipleChoiceQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue,);
+        return MultipleChoiceQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue, editable: editable,);
       case QuestionType.Slider:
-        return SliderQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue);
+        return SliderQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue, editable: editable);
       case QuestionType.Polygon:
-        // TODO: Handle this case.
+        return PolygonQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue, editable: editable);
         break;
       case QuestionType.Circle:
         // TODO: Handle this case.
         break;
       case QuestionType.ColourPicker:
         return ColourPickerQuestion(question: this, selectAnswer: selectAnswer);
+      case QuestionType.MultipleSelect:
+        return MultipleSelectQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue, editable: editable);
+      case QuestionType.TextInput:
+        return TextInputQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue,);
       default:
        return MultipleChoiceQuestion(question: this);
     }
   }
 
+  //mostly just here as a null safe funtion for generateQuestionWidget.
   void doNothingFunction(dynamic nothing) {}
 }
 
-class Persona {
-  String id;
-  String name;
-  Color color;
-  List<QuestionResponse> answers;
-}
-
 class QuestionService {
+  static final QuestionService _instance = QuestionService._internal();
+  factory QuestionService() => _instance;
+
+  QuestionService._internal() {
+    assignQuestions();
+  }
+
+  List<Question> _allQuestions;
+
+  void assignQuestions() async {
+    _allQuestions = await loadQuestions();
+  }
+
+  List<Question> get allQuestions => _allQuestions;
+
   static Future<List<Question>> loadQuestions() async {
     final data = await rootBundle.loadString("assets/questions/personaQuestions.json");
     List<dynamic> decodedData = json.decode(data);
@@ -96,81 +114,14 @@ class QuestionService {
       var max = question["max"];
       var labels = (question["labels"] as List<dynamic>).map((e) => e as String).toList();
       List<QuestionOption> newOptions = new List<QuestionOption>();
-      (question['options'] as List).forEach((option) {
-        newOptions.add(QuestionOption(option["code"], option["text"], image: option["image"]));
+      (question['options'] as List)?.forEach((option) {
+        newOptions.add(QuestionOption(option["code"], option["text"], image: option["image"], order: option["order"]));
       });
 
-      Question newQuestion = Question(id, code, text, type, newOptions, min: min ?? 0, max: max ?? 0, labels: labels ?? []);
+      Question newQuestion = Question(id, code, text, type, newOptions ?? [], min: min ?? 0, max: max ?? 0, labels: labels ?? []);
       
       newQuestions.add(newQuestion);
     });
     return newQuestions;
-  }
-
-  static void answerQuestion(Question question, String personaId, String answer, String userId) async {
-    final directory = await getApplicationDocumentsDirectory();
-    final file = File('${directory.path}/userAnswers.json');
-    String userAnswers = "{}";
-    try{
-      userAnswers = await file.readAsString();
-    } catch (e) {
-      print("Couldn't find file, creating new file");
-      userAnswers = '{"$userId" : {}}';
-    }
-    Map decodedData = json.decode(userAnswers);
-    decodedData[userId] ??= {};
-    decodedData[userId][personaId] ??= {};
-    decodedData[userId][personaId]["answers"] ??= {};
-    //this is here to allow for special pieces of data like the name and colour of a persona
-    switch (question.id) {
-      case "personaName": 
-        decodedData[userId][personaId]["name"] = answer;
-        break;
-      case "personaColor": 
-        decodedData[userId][personaId]["color"] = answer;
-        break;
-      case "":
-        break;
-      default:
-        decodedData[userId][personaId]["answers"][question.id] = answer ?? "code";
-        break;
-    }
-    String newUserAnswers = json.encode(decodedData);
-    await file.writeAsString(newUserAnswers);
-  }
-
-  static Future<List<Persona>> getPersonas(String userId) async {
-    final directory = await getApplicationDocumentsDirectory();
-    final file = File('${directory.path}/userAnswers.json');
-    String userAnswers = "{}";
-    try{
-      userAnswers = await file.readAsString();
-    } catch (e) {
-      print("Couldn't find file, creating new file");
-      userAnswers = '{"$userId" : {}}';
-    }
-    Map decodedData = json.decode(userAnswers);
-    print(decodedData);
-
-    List<Question> allQuestions = await loadQuestions();
-    List<Persona> allPersonas = new List<Persona>();
-
-    decodedData[userId].forEach((id, persona) {
-      Persona _persona = new Persona();
-      _persona.id = id;
-      _persona.name = persona["name"] ?? "";
-      int colorInt = int.parse(persona["color"]);
-      _persona.color = new Color(colorInt);
-      List<QuestionResponse> _personaAnswers = new List<QuestionResponse>();
-      
-      persona["answers"]?.forEach((question, answer) async {
-        Question questionObject = allQuestions.firstWhere((e) => (e.id == question));
-        _personaAnswers.add(new QuestionResponse(questionObject, answer));
-      });
-      _persona.answers = _personaAnswers;
-      allPersonas.add(_persona);
-    });
-    //print(allPersonas);
-    return allPersonas;
   }
 }

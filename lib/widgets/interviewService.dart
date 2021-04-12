@@ -1,3 +1,4 @@
+import 'package:Personas/widgets/personaService.dart';
 import 'package:Personas/widgets/questionService.dart';
 import 'package:Personas/widgets/utility.dart';
 
@@ -30,9 +31,11 @@ class InterviewService {
   int currentIndex;
   Session currentSession;
 
+  static final Question endQuestion = Question("end", "", "", QuestionType.MultipleChoice, []);
+
   Future<Session> startSession() async {
     if (currentSession == null) {
-      currentIndex = -1;
+      currentIndex = 0;
       currentSession = new Session(await UtilityFunctions.generateId());
       allQuestions = await QuestionService.loadQuestions();
       //allQuestions.sort((a, b) => int.parse(a.id).compareTo(int.parse(b.id)));
@@ -40,26 +43,27 @@ class InterviewService {
     return currentSession;
   }
 
-  Question nextQuestion() {
-    currentIndex++;
+  Question nextQuestion(String userId) {
+    //all temporary untill we get the proper ai going
     if (allQuestions.length > currentIndex) {
-      currentSession.questions.add(allQuestions[currentIndex]);
-      return allQuestions[currentIndex];
+      Question newQuestion = allQuestions[currentIndex];
+      currentSession.questions.add(newQuestion);
+      currentIndex++;
+      return newQuestion;
     } else {
-      // TODO implement an end of persona function
+      PersonaService().save("Test", currentSession, userId);
+      return endQuestion;
     }
   }
 
-  QuestionResponse getQuestionResponse(String questionId) {
-    return currentSession.answers.firstWhere((e) => (e.question.id == questionId), orElse: (null));
-  }
-
   void answerQuestion(String questionId, String personaId, String response, String userId) {
+    //I have a few null question things that i didn't want answerd here so i just skip them
     if (questionId != null && questionId != "") {
       Question question = getQuestionById(currentSession, questionId);
       QuestionResponse questionResponse = new QuestionResponse(question, response);
-      currentSession.answers.add(questionResponse);
-      QuestionService.answerQuestion(question, personaId, questionResponse.choice, userId);
+      if (!PersonaService.specialQuestionIds.contains(questionId)) {
+        currentSession.answers.add(questionResponse);
+      }
     }
   }
 
@@ -70,5 +74,9 @@ class InterviewService {
   ///searches through every question asked in the given session for one with a matching id
   Question getQuestionById(Session session, String id) {
     return session.questions.firstWhere((e) => (e.id == id), orElse: (null));
+  }
+
+  QuestionResponse getQuestionResponse(String questionId) {
+    return currentSession.answers.firstWhere((e) => (e.question.id == questionId), orElse: (null));
   }
 }
