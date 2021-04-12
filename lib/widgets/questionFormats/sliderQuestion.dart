@@ -27,7 +27,6 @@ class _SliderQuestion extends State<SliderQuestion> {
     }
     print(_currentSliderValue);
     //widget.selectAnswer(widget.question.min?.toDouble() ?? 0);
-    reset = false;
   }
 
   @override
