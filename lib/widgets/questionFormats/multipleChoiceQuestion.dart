@@ -41,14 +41,12 @@ class _MultipleChoiceQuestion extends State<MultipleChoiceQuestion> {
           Radio(
             value: option,
             groupValue: currentlySelected,
-            onChanged: (value) {
-              if (widget.editable) {
-                setState(() {
-                  currentlySelected = value;
-                  widget.selectAnswer(value.code);
-                });
-              }
-            },
+            onChanged: widget.editable ? (value) {
+              setState(() {
+                currentlySelected = value;
+                widget.selectAnswer(value.code);
+              });
+            } : null,
           ),
           Text(option.text, style: Theme.of(context).textTheme.bodyText1),
           image

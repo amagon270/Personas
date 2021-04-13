@@ -29,6 +29,12 @@ class _IntroducitonPage extends State<IntroducitonPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) { 
     return Scaffold(
       body: SafeArea(

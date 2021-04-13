@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:Personas/widgets/questionFormats/colourPickerQuestion.dart';
+import 'package:Personas/widgets/questionFormats/middleSliderQuestion.dart';
 import 'package:Personas/widgets/questionFormats/multipleChoiceQuestion.dart';
 import 'package:Personas/widgets/questionFormats/multipleSelectQuestion.dart';
 import 'package:Personas/widgets/questionFormats/polygonQuestion.dart';
@@ -12,6 +13,7 @@ import 'package:flutter/services.dart';
 enum QuestionType {
   MultipleChoice,
   Slider,
+  MiddleSlider,
   Polygon,
   Circle,
   ColourPicker,
@@ -63,7 +65,9 @@ class Question {
       case QuestionType.MultipleChoice:
         return MultipleChoiceQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue, editable: editable,);
       case QuestionType.Slider:
-        return SliderQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue, editable: editable);
+        return SliderQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue, editable: editable, key: UniqueKey(),);
+      case QuestionType.MiddleSlider:
+        return MiddleSliderQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue, editable: editable, key: UniqueKey(),);
       case QuestionType.Polygon:
         return PolygonQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue, editable: editable);
         break;

@@ -49,14 +49,12 @@ class _MultipleSelectQuestion extends State<MultipleSelectQuestion> {
           children: [
             Checkbox(
               value: currentlySelected[option.code],
-              onChanged: (value) {
-                if (widget.editable) {
-                  setState(() {
-                    currentlySelected[option.code] = !currentlySelected[option.code];
-                    widget.selectAnswer(json.encode(currentlySelected));
-                  });
-                }
-              },
+              onChanged: widget.editable ? (value) {
+                setState(() {
+                  currentlySelected[option.code] = !currentlySelected[option.code];
+                  widget.selectAnswer(json.encode(currentlySelected));
+                });
+              } : null,
             ),
             Text(option.text, style: Theme.of(context).textTheme.bodyText1),
             image

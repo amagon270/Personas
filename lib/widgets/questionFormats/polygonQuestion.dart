@@ -64,14 +64,12 @@ class _PolygonQuestion extends State<PolygonQuestion> {
                 child: Radio(
                   value: option,
                   groupValue: currentlySelected,
-                  onChanged: (value) {
-                    if (widget.editable) {
-                      setState(() {
-                        currentlySelected = value;
-                        widget.selectAnswer(value.code);
-                      });
-                    }
-                  },
+                  onChanged: widget.editable ? (value) {
+                    setState(() {
+                      currentlySelected = value;
+                      widget.selectAnswer(value.code);
+                    });
+                  } : null,
                 ),
               )
             ]
