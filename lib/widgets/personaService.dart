@@ -96,8 +96,8 @@ class PersonaService {
       _persona.color = new Color(colorInt);
       List<QuestionResponse> _personaAnswers = new List<QuestionResponse>();
       persona["answers"]?.forEach((question, answer) async {
-        Question questionObject = allQuestions.firstWhere((e) => (e.id == question));
-        _personaAnswers.add(new QuestionResponse(questionObject, answer));
+        Question questionObject = allQuestions.firstWhere((e) => (e.id == question), orElse: () {return null;},);
+        if (questionObject != null) _personaAnswers.add(new QuestionResponse(questionObject, answer));
       });
       _persona.answers = _personaAnswers;
       allPersonas.add(_persona);
@@ -111,7 +111,6 @@ class PersonaService {
     decodedData[userId] ??= {};
     decodedData[userId][persona.id] ??= {};
     decodedData[userId][persona.id]["answers"] ??= {};
-    //this is here to allow for special pieces of data like the name and colour of a persona
     decodedData[userId][persona.id]["name"] = persona.name;
     decodedData[userId][persona.id]["color"] = persona.color.value;
     persona.answers.forEach((answer) {

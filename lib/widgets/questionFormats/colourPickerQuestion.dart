@@ -43,6 +43,8 @@ class _ColourPickerQuestion extends State<ColourPickerQuestion> {
                         contentPadding: const EdgeInsets.all(0.0),
                         content: SingleChildScrollView(
                           child: ColorPicker(
+                            showLabel: false,
+                            enableAlpha: false,
                             pickerColor: currentColor,
                             onColorChanged: (color) {
                               setState(() {
@@ -65,7 +67,7 @@ class _ColourPickerQuestion extends State<ColourPickerQuestion> {
                     },
                   );
                 },
-                child: Text('Choose Colour'),
+                child: Text('Choose Colour', style: Theme.of(context).textTheme.button),
               ),
             )
           ]

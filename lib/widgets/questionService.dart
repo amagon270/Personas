@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:Personas/widgets/questionFormats/colourPickerQuestion.dart';
 import 'package:Personas/widgets/questionFormats/middleSliderQuestion.dart';
+import 'package:Personas/widgets/questionFormats/multiPolygonQuestion.dart';
 import 'package:Personas/widgets/questionFormats/multipleChoiceQuestion.dart';
 import 'package:Personas/widgets/questionFormats/multipleSelectQuestion.dart';
 import 'package:Personas/widgets/questionFormats/polygonQuestion.dart';
@@ -15,6 +16,7 @@ enum QuestionType {
   Slider,
   MiddleSlider,
   Polygon,
+  MultiPolygon,
   Circle,
   ColourPicker,
   MultipleSelect,
@@ -64,20 +66,21 @@ class Question {
     switch (type) {
       case QuestionType.MultipleChoice:
         return MultipleChoiceQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue, editable: editable,);
+      case QuestionType.MultipleSelect:
+        return MultipleSelectQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue, editable: editable);
       case QuestionType.Slider:
         return SliderQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue, editable: editable, key: UniqueKey(),);
       case QuestionType.MiddleSlider:
         return MiddleSliderQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue, editable: editable, key: UniqueKey(),);
       case QuestionType.Polygon:
         return PolygonQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue, editable: editable);
-        break;
+      case QuestionType.MultiPolygon:
+        return MultiPolygonQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue, editable: editable);
       case QuestionType.Circle:
         // TODO: Handle this case.
         break;
       case QuestionType.ColourPicker:
         return ColourPickerQuestion(question: this, selectAnswer: selectAnswer);
-      case QuestionType.MultipleSelect:
-        return MultipleSelectQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue, editable: editable);
       case QuestionType.TextInput:
         return TextInputQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue,);
       default:

@@ -14,7 +14,12 @@ class ViewPersonas extends StatelessWidget {
           ),
         child: FlatButton(
         color: persona.color,
-        child: Container(child: Text(persona.name)),
+        child: Container(
+          child: Text(
+            persona.name,
+            style: TextStyle(color: persona.color.computeLuminance() > 0.35 ? Colors.black : Colors.white),
+          )
+        ),
         onPressed: () {
           Navigator.of(context).pushNamed("/viewPersona", arguments: persona);
         })

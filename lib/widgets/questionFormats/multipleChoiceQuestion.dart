@@ -30,7 +30,9 @@ class _MultipleChoiceQuestion extends State<MultipleChoiceQuestion> {
   Widget build(BuildContext context) {
     List<Widget> options = new List<Widget>();
     List<QuestionOption> questionOptions = widget.question.options;
+
     questionOptions.sort((a, b) => a.order.compareTo(b.order));
+    
     questionOptions.forEach((option) {
       Widget image = Container(
         width: 40,

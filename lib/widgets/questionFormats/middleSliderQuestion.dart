@@ -58,9 +58,10 @@ class _MiddleSliderQuestion extends State<MiddleSliderQuestion> {
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(widget.question.labels.first),
-                Text(widget.question.labels[_currentSliderValue.truncate()]),
+                Text(widget.question.labels[_currentSliderValue.truncate()], textAlign: TextAlign.center,),
                 Text(widget.question.labels.last)
               ]
             )

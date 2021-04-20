@@ -56,6 +56,7 @@ class _SliderQuestion extends State<SliderQuestion> {
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ...labels
               ]
