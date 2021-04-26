@@ -50,12 +50,13 @@ class QuestionOption {
 }
 
 class Question {
-  Question(this.id, this.code, this.text, this.type, this.options, {this.min, this.max, this.labels});
+  Question(this.id, this.code, this.text, this.type, this.fact, this.options, {this.min, this.max, this.labels});
 
   String id;
   String code;
   String text;
   QuestionType type;
+  String fact;
   List<QuestionOption> options;
   int min;
   int max;
@@ -108,6 +109,10 @@ class QuestionService {
 
   List<Question> get allQuestions => _allQuestions;
 
+  Question getQuestionById(String id) {
+    return _allQuestions?.firstWhere((e) => (e.id == id), orElse: () {return null;});
+  }
+
   static Future<List<Question>> loadQuestions() async {
     final data = await rootBundle.loadString("assets/questions/personaQuestions.json");
     List<dynamic> decodedData = json.decode(data);
@@ -117,6 +122,7 @@ class QuestionService {
       var code = question["code"];
       var type = question["type"].toString().toEnum(QuestionType.values);
       var text = question["text"];
+      var subject = question["subject"];
       var min = question["min"];
       var max = question["max"];
       var labels = (question["labels"] as List<dynamic>).map((e) => e as String).toList();
@@ -125,7 +131,7 @@ class QuestionService {
         newOptions.add(QuestionOption(option["code"], option["text"], image: option["image"], order: option["order"]));
       });
 
-      Question newQuestion = Question(id, code, text, type, newOptions ?? [], min: min ?? 0, max: max ?? 0, labels: labels ?? []);
+      Question newQuestion = Question(id, code, text, type, subject, newOptions ?? [], min: min ?? 0, max: max ?? 0, labels: labels ?? []);
       
       newQuestions.add(newQuestion);
     });

@@ -40,20 +40,63 @@ class Personas extends StatelessWidget {
   }
 
   Route<dynamic> routeHandler(RouteSettings settings) {
+    Widget newPage;
     switch (settings.name) {
       case "/createPersona":
-        return MaterialPageRoute(builder: (context) => CreatePersona());
+        newPage = CreatePersona();
+        break;
       case "/viewPersonas":
-        return MaterialPageRoute(builder: (context) => ViewPersonas());
+        newPage = ViewPersonas();
+        break;
       case "/viewPersona":
-        return MaterialPageRoute(builder: (context) => ViewPersona(persona: settings.arguments));
+        newPage = ViewPersona(persona: settings.arguments);
+        break;
       case "/devMenu":
-        return MaterialPageRoute(builder: (context) => DevMenuPage());
+        newPage = DevMenuPage();
+        break;
       case "/intro":
-        return MaterialPageRoute(builder: (context) => IntroducitonPage());
+        newPage = IntroducitonPage();
+        break;
       default:
-        return MaterialPageRoute(builder: (context) => HomePage());
+        newPage = HomePage();
+        break;
     }
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) {return newPage;},
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var begin = Offset(1.0, 0.0);
+        var end = Offset.zero;
+        var curve = Curves.easeInOut;
+
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var tweenscale = Tween(begin: 0.1, end: 1.0); 
+        var offsetAnimation = animation.drive(tween); 
+
+
+        return SlideTransition(
+          position: offsetAnimation,
+          child: ScaleTransition(
+            scale: animation.drive(tweenscale),
+            child: child
+          )
+        );
+        return ScaleTransition(
+          scale: animation.drive(tweenscale),
+          child: SlideTransition(
+            position: offsetAnimation,
+            child: child,
+          )
+        );
+        return ScaleTransition(
+          scale: animation.drive(tweenscale),
+          child: child
+        );
+        return SlideTransition(
+          position: offsetAnimation,
+          child: child,
+        );
+      },
+    );
   }
 }
 

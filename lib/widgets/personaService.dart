@@ -10,6 +10,7 @@ class Persona {
   String id;
   String name;
   Color color;
+  List<Fact> facts;
   List<QuestionResponse> answers;
 }
 
@@ -20,7 +21,7 @@ class PersonaService {
   List<Persona> allPersonas;
   String userId;
 
-  static final List<String> specialQuestionIds = [""];
+  static final List<String> specialQuestionIds = ["", "intro"];
 
   PersonaService._internal();
 
@@ -94,11 +95,17 @@ class PersonaService {
       _persona.name = persona["name"] ?? "";
       int colorInt = persona["color"] ?? 0;
       _persona.color = new Color(colorInt);
+
+      persona["facts"]?.forEach((subject, value) async {
+        _persona.facts.add(Fact(subject, value));
+      });
+
       List<QuestionResponse> _personaAnswers = new List<QuestionResponse>();
       persona["answers"]?.forEach((question, answer) async {
         Question questionObject = allQuestions.firstWhere((e) => (e.id == question), orElse: () {return null;},);
         if (questionObject != null) _personaAnswers.add(new QuestionResponse(questionObject, answer));
       });
+
       _persona.answers = _personaAnswers;
       allPersonas.add(_persona);
     });
@@ -111,8 +118,14 @@ class PersonaService {
     decodedData[userId] ??= {};
     decodedData[userId][persona.id] ??= {};
     decodedData[userId][persona.id]["answers"] ??= {};
+    decodedData[userId][persona.id]["facts"] ??= {};
+
     decodedData[userId][persona.id]["name"] = persona.name;
     decodedData[userId][persona.id]["color"] = persona.color.value;
+    decodedData[userId][persona.id]["facts"] = persona.facts;
+    persona.facts.forEach((fact) {
+      decodedData[userId][persona.id]["facts"][fact.subject] = fact.value;
+    });
     persona.answers.forEach((answer) {
       decodedData[userId][persona.id]["answers"][answer.question.id] = answer.choice;
     });

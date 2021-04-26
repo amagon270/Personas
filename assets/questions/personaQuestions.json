@@ -1,9 +1,10 @@
 [
     {
-        "id" : "",
+        "id" : "intro",
         "code" : "Intro",
         "type" : "MultipleChoice",
         "text" : "OK, Think of a persona.", 
+        "subject" : "",
         "options" : [],
         "min" : 0,
         "max" : 0,
@@ -13,6 +14,7 @@
         "code" : "Persona Colour",
         "type" : "ColourPicker",
         "text" : "Now think of a colour that feels right for this persona, and select it from the colour palette.", 
+        "subject" : "color",
         "options" : [],
         "min" : 0,
         "max" : 0,
@@ -22,6 +24,7 @@
         "code" : "energy levels",
         "type" : "MultipleChoice",
         "text" : "How much energy does this persona have?", 
+        "subject" : "energy",
         "options" : [
             {
                 "code" : "low",
@@ -51,6 +54,7 @@
         "code" : "roundedness",
         "type" : "MultipleChoice",
         "text" : "Does this persona feel more round or square?", 
+        "subject" : "roundness",
         "options" : [
             {
                 "code" : "round",
@@ -74,6 +78,7 @@
         "code" : "Polygon",
         "type" : "Polygon",
         "text" : "Polygon example question", 
+        "subject" : "test1",
         "options" : [
             {
                 "code" : "1",
@@ -121,6 +126,7 @@
         "code" : "PolygonTest",
         "type" : "MultiPolygon",
         "text" : "Multiple Select Polygon example question", 
+        "subject" : "test2",
         "options" : [
             {
                 "code" : "1",
@@ -168,6 +174,7 @@
         "code" : "Slider",
         "type" : "Slider",
         "text" : "This is a slider question", 
+        "subject" : "test3",
         "options" : [],
         "min" : 0,
         "max" : 10,
@@ -178,6 +185,7 @@
         "code" : "LabelSlider",
         "type" : "MiddleSlider",
         "text" : "This is a slider question", 
+        "subject" : "happiness",
         "options" : [],
         "min" : 0,
         "max" : 0,
@@ -188,6 +196,7 @@
         "code" : "MultipleSelect",
         "type" : "MultipleSelect",
         "text" : "Select every option that applies", 
+        "subject" : "test4",
         "options" : [
             {
                 "code" : "1",
@@ -235,6 +244,7 @@
         "code" : "Persona Name",
         "type" : "TextInput",
         "text" : "Give a name to this persona", 
+        "subject" : "name",
         "options" : [],
         "min" : 0,
         "max" : 0,

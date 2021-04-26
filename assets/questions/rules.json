@@ -1,0 +1,27 @@
+[
+    {
+        "id" : "start",
+        "triggerType" : "Always",
+        "tests" : [],
+        "action" : {
+            "questionId" : "intro"
+        }
+    },{
+        "id" : "test",
+        "triggerType" : "All",
+        "tests" : [
+            {
+                "factId" : "Happiness",
+                "operation" : "GreaterThan",
+                "parameter" : 5
+            }
+        ],
+        "action" : {
+            "fact" : {
+                "subject" : "happiness",
+                "value" : 3
+            },
+            "questionId" : "factTest"
+        }
+    }
+]

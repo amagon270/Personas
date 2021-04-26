@@ -31,7 +31,7 @@ class _CreatePersona extends State<CreatePersona> {
   }
 
   _selectAnswer(dynamic answer) {
-    currentQuestionResponse.choice = answer.toString();
+    currentQuestionResponse.choice = answer;
     if (canHitNext == false) {
       setState(() {
         canHitNext = true;
