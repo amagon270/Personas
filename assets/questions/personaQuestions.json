@@ -10,6 +10,16 @@
         "max" : 0,
         "labels" : [] 
     },{
+        "id" : "end",
+        "code" : "End",
+        "type" : "MultipleChoice",
+        "text" : "", 
+        "subject" : "",
+        "options" : [],
+        "min" : 0,
+        "max" : 0,
+        "labels" : [] 
+    },{
         "id" : "personaColor",
         "code" : "Persona Colour",
         "type" : "ColourPicker",

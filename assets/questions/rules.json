@@ -23,5 +23,22 @@
             },
             "questionId" : "factTest"
         }
+    },{
+        "id" : "001",
+        "triggerType" : "All",
+        "tests" : [
+            {
+                "factId" : "happiness",
+                "operation" : "GreaterThan",
+                "parameter" : 5
+            }
+        ],
+        "action" : {
+            "fact" : {
+                "subject" : "happiness",
+                "value" : 3
+            },
+            "questionId" : "factTest"
+        }
     }
 ]

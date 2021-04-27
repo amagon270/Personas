@@ -40,6 +40,7 @@ class Session {
     dateStarted = DateTime.now();
     questions = new List<Question>();
     answers = new List<QuestionResponse>();
+    facts = new List<Fact>();
   }
 }
 
@@ -102,10 +103,12 @@ class InterviewService {
     bool action;
     bool actionChange;
     bool actionComparison;
+    //for TriggerType.all start with true and if any test fails set it to false
     if (rule.triggerType == TriggerType.All) {
       action = true;
       actionChange = false;
       actionComparison = false;
+    //for TriggerType.any start with false and if any test succeeds set it to true
     } else if (rule.triggerType == TriggerType.Any) {
       action = false;
       actionChange = true;
@@ -116,24 +119,38 @@ class InterviewService {
       actionComparison = true;
     }
     rule.tests?.forEach((test) {
+      //setting up blank facts if they don't exist.  In this case just assume a minimal value 
+      //unless we are checking that it exists then skip this part
+      if (currentSession.facts.where((fact) => fact.subject == test.fact).length == 0 && test.operation != Operator.Exists) {
+        //can't use a switch here because of the comparison i'm doing
+        if (test.parameter is int) {
+          currentSession.facts.add(Fact(test.fact, 0));
+        } else if (test.parameter is bool) {
+          currentSession.facts.add(Fact(test.fact, false));
+        } else if (test.parameter is String) {
+          currentSession.facts.add(Fact(test.fact, ""));
+        } else {
+          currentSession.facts.add(Fact(test.fact, 0));
+        }
+      }
       switch (test.operation) {
         case Operator.GreaterThan:
-          if (actionComparison == (test.parameter > currentSession.facts.firstWhere((e) => e.subject == test.fact).value)) {
+          if (actionComparison == (test.parameter > currentSession.facts.firstWhere((fact) => fact.subject == test.fact).value)) {
             action = actionChange;
           }
           break;
         case Operator.LessThan:
-          if (actionComparison == (test.parameter < currentSession.facts.firstWhere((e) => e.subject == test.fact).value)) {
+          if (actionComparison == (test.parameter < currentSession.facts.firstWhere((fact) => fact.subject == test.fact).value)) {
             action = actionChange;
           }
           break;
         case Operator.EqualTo:
-          if (actionComparison == (test.parameter == currentSession.facts.firstWhere((e) => e.subject == test.fact).value)) {
+          if (actionComparison == (test.parameter == currentSession.facts.firstWhere((fact) => fact.subject == test.fact).value)) {
             action = actionChange;
           }
           break;
         case Operator.Exists:
-          if (actionComparison == (currentSession.facts.firstWhere((e) => e.subject == test.fact).value != null)) {
+          if (actionComparison == (currentSession.facts.where((fact) => fact.subject == test.fact).length == 0)) {
             action = actionChange;
           }
           break;
@@ -141,11 +158,15 @@ class InterviewService {
     });
 
     if (action) {
-      if (rule.action.fact != null) {
+      if (rule.action.fact != null && rule.action.questionId != null) {
+        
+      } else if (rule.action.fact != null) {
         currentSession.facts.add(rule.action.fact);
         return nextQuestion(userId);
       } else if (rule.action.questionId != null) {
-        return QuestionService().getQuestionById(rule.action.questionId);
+        Question question = QuestionService().getQuestionById(rule.action.questionId);
+        currentSession.questions.add(question);
+        return question;
       }
     }
 
@@ -195,7 +216,9 @@ class InterviewService {
       var triggerType = rule["triggerType"].toString().toEnum(TriggerType.values);
       List<RuleTest> newTests = new List<RuleTest>();
       (rule['tests'] as List)?.forEach((test) {
-        newTests.add(RuleTest(test["factId"], test["operation"], parameter: test["parameter"]));
+        RuleTest _newTest = RuleTest(test["factId"], test["operation"].toString().toEnum(Operator.values), parameter: test["parameter"]);
+        // print("Adding tests to rule: factId ${_newTest.fact}, operation ${_newTest.operation}, parameter ${_newTest.parameter}");
+        newTests.add(_newTest);
       });
 
       Map action = rule["action"];
