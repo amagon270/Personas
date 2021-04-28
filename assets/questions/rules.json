@@ -7,38 +7,25 @@
             "questionId" : "intro"
         }
     },{
-        "id" : "test",
-        "triggerType" : "All",
-        "tests" : [
-            {
-                "factId" : "Happiness",
-                "operation" : "GreaterThan",
-                "parameter" : 5
-            }
-        ],
+        "id" : "color",
+        "triggerType" : "Always",
+        "tests" : [],
         "action" : {
-            "fact" : {
-                "subject" : "happiness",
-                "value" : 3
-            },
-            "questionId" : "factTest"
+            "questionId" : "personaColor"
         }
     },{
-        "id" : "001",
-        "triggerType" : "All",
-        "tests" : [
-            {
-                "factId" : "happiness",
-                "operation" : "GreaterThan",
-                "parameter" : 5
-            }
-        ],
+        "id" : "energy",
+        "triggerType" : "Always",
+        "tests" : [],
         "action" : {
-            "fact" : {
-                "subject" : "happiness",
-                "value" : 3
-            },
-            "questionId" : "factTest"
+            "questionId" : "personaEnergy"
+        }
+    },{
+        "id" : "roundness",
+        "triggerType" : "Always",
+        "tests" : [],
+        "action" : {
+            "questionId" : "personaRoundness"
         }
     }
 ]

@@ -71,8 +71,20 @@ class RuleTest {
 class Fact {
   Fact(this.subject, this.value);
 
-  String subject;
+  final String subject;
   dynamic value;
+
+  @override 
+  bool operator ==(Object other) => 
+    identical(this, other) || 
+    other is Fact &&
+    runtimeType == other.runtimeType &&
+    subject == other.subject;
+
+  @override
+  int get hashCode => subject.hashCode;
+
+
 }
 
 class InterviewService {
@@ -83,6 +95,7 @@ class InterviewService {
   Session currentSession;
 
   static final Question endQuestion = Question("end", "", "", QuestionType.MultipleChoice, "", []);
+  static final Question blankQuestion = Question("blank", "", "Something went wrong with the question", QuestionType.MultipleChoice, "", []);
 
   Future<Session> startSession() async {
     if (currentSession == null) {
@@ -95,7 +108,11 @@ class InterviewService {
     return currentSession;
   }
 
-  Question nextQuestion(String userId) {
+  Question nextQuestion() {
+    if (currentRuleIndex >= allRules.length) {
+      PersonaService().save("Test", currentSession);
+      return endQuestion;
+    }
     Rule rule = allRules[currentRuleIndex];
     currentRuleIndex++;
 
@@ -125,12 +142,8 @@ class InterviewService {
         //can't use a switch here because of the comparison i'm doing
         if (test.parameter is int) {
           currentSession.facts.add(Fact(test.fact, 0));
-        } else if (test.parameter is bool) {
-          currentSession.facts.add(Fact(test.fact, false));
         } else if (test.parameter is String) {
           currentSession.facts.add(Fact(test.fact, ""));
-        } else {
-          currentSession.facts.add(Fact(test.fact, 0));
         }
       }
       switch (test.operation) {
@@ -145,7 +158,7 @@ class InterviewService {
           }
           break;
         case Operator.EqualTo:
-          if (actionComparison == (test.parameter == currentSession.facts.firstWhere((fact) => fact.subject == test.fact).value)) {
+          if (actionComparison == (test.parameter == currentSession.facts.firstWhere((fact) => fact.subject == test.fact, orElse: () => null,)?.value)) {
             action = actionChange;
           }
           break;
@@ -158,28 +171,62 @@ class InterviewService {
     });
 
     if (action) {
+      //if both fact and question exist in the rule do both
+      print("rule: ${rule.action.fact?.subject}, question ${rule.action.questionId}");
       if (rule.action.fact != null && rule.action.questionId != null) {
-        
+        addFactToList(rule.action.fact, currentSession.facts);
+        Question question = QuestionService().getQuestionById(rule.action.questionId);
+        if (question != null) {
+          currentSession.questions.add(question);
+          return question;
+        } else {
+          return blankQuestion;
+        }
+      //if only the fact exist in the rule add the fact then ask the next question
       } else if (rule.action.fact != null) {
-        currentSession.facts.add(rule.action.fact);
-        return nextQuestion(userId);
+        addFactToList(rule.action.fact, currentSession.facts);
+        return nextQuestion();
+      //if only the question exists then return the question
       } else if (rule.action.questionId != null) {
         Question question = QuestionService().getQuestionById(rule.action.questionId);
-        currentSession.questions.add(question);
-        return question;
+        if (question != null) {
+          currentSession.questions.add(question);
+          return question;
+        } else {
+          return blankQuestion;
+        }
+      //if no action was specified then as a failsafe return the blank question
+      } else {
+        return blankQuestion;
       }
     }
+  }
 
-    //all temporary untill we get the proper ai going
-    // if (allQuestions.length > currentIndex) {
-    //   Question newQuestion = allQuestions[currentIndex];
-    //   currentSession.questions.add(newQuestion);
-    //   currentIndex++;
-    //   return newQuestion;
-    // } else {
-    //   PersonaService().save("Test", currentSession, userId);
-    //   return endQuestion;
-    // }
+  QuestionResponse previousQuestion() {
+    //The currentRuleIndex is always 1 ahead of the current rule.  Maybe i should change it but i think its fine
+    currentRuleIndex -= 2;
+    Rule rule = allRules[currentRuleIndex];
+    currentRuleIndex++;
+
+    currentSession.questions.removeLast();
+
+    //remove any facts added by rules
+    if (rule.action.fact != null) {
+      removeFactFromList(rule.action.fact, currentSession.facts);
+    }
+    //remove any facts added by questions
+    if (rule.action.questionId != null) {
+      QuestionResponse answer = currentSession.answers.firstWhere((answer) => answer.question.id == rule.action.questionId, orElse: () => null,);
+      if (answer != null) {
+        removeFactFromList(Fact(answer.question.fact, answer.choice), currentSession.facts);
+        currentSession.answers.remove(answer);
+        return answer;
+      } else {
+        return QuestionResponse(currentSession.questions.last, "");
+      }
+    } else {
+      return previousQuestion();
+    }
   }
 
   void answerQuestion(String questionId, String personaId, dynamic response, String userId) {
@@ -189,7 +236,33 @@ class InterviewService {
       QuestionResponse questionResponse = new QuestionResponse(question, response);
       if (!PersonaService.specialQuestionIds.contains(questionId)) {
         currentSession.answers.add(questionResponse);
-        currentSession.facts.add(Fact(question.fact, response));
+        addFactToList(Fact(question.fact, response), currentSession.facts);
+      }
+    }
+  }
+
+  void addFactToList(Fact newFact, List<Fact> list) {
+    Fact existingFact = list.firstWhere((fact) => fact == newFact, orElse: () {return null;},);
+    if (existingFact != null) {
+      if (newFact.value is int) {
+        existingFact.value += newFact.value;
+      } else {
+        existingFact.value = newFact.value;
+      }
+    } else {
+      list.add(newFact);
+    }
+  }
+
+  void removeFactFromList(Fact newFact, List<Fact> list) {
+    Fact existingFact = list.firstWhere((fact) => fact == newFact, orElse: () {return null;},);
+    if (existingFact != null) {
+      if (newFact.value is int) {
+          existingFact.value -= newFact.value;
+      } else if (newFact.value is String) {
+        existingFact.value = "";
+      } else {
+        list.removeWhere((fact) => fact.subject == newFact.subject);
       }
     }
   }
@@ -200,11 +273,11 @@ class InterviewService {
 
   ///searches through every question asked in the given session for one with a matching id
   Question getSessionQuestionById(Session session, String id) {
-    return session.questions.firstWhere((e) => (e.id == id), orElse: (null));
+    return session.questions.firstWhere((e) => (e.id == id), orElse: () => null);
   }
 
   QuestionResponse getQuestionResponse(String questionId) {
-    return currentSession.answers.firstWhere((e) => (e.question.id == questionId), orElse: (null));
+    return currentSession.answers.firstWhere((e) => (e.question.id == questionId), orElse: () => null);
   }
 
   static Future<List<Rule>> loadRules() async {
@@ -222,12 +295,13 @@ class InterviewService {
       });
 
       Map action = rule["action"];
-      RuleAction newAction;
+      RuleAction newAction = RuleAction();
       if (action["fact"] != null) {
         Fact fact = Fact(action["fact"]["subject"], action["fact"]["value"]);
-        newAction = RuleAction(fact: fact);
-      } else {
-        newAction = RuleAction(questionId: action["questionId"]);
+        newAction.fact = fact;
+      } 
+      if (action["questionId"] != null) {
+        newAction.questionId = action["questionId"];
       }
 
       Rule newRule = Rule(id, triggerType, newTests, newAction);

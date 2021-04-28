@@ -16,14 +16,16 @@ class _CreatePersona extends State<CreatePersona> {
   Question currentQuestion;
   QuestionResponse currentQuestionResponse;
   Color currentColor = Colors.white;
-  bool canHitNext;
+  bool canTapNext;
   Widget currentQuestionWidget;
+  int currentQuestionindex;
 
   @override
   void initState() {
     super.initState();
     interviewService = new InterviewService();
-    canHitNext = true;
+    canTapNext = true;
+    currentQuestionindex = 0;
   }
   
   void dispose() {
@@ -32,9 +34,9 @@ class _CreatePersona extends State<CreatePersona> {
 
   _selectAnswer(dynamic answer) {
     currentQuestionResponse.choice = answer;
-    if (canHitNext == false) {
+    if (canTapNext == false) {
       setState(() {
-        canHitNext = true;
+        canTapNext = true;
       });
     }
     if (currentQuestionResponse.question.id == "personaColor") {
@@ -46,7 +48,6 @@ class _CreatePersona extends State<CreatePersona> {
 
   @override
   Widget build(BuildContext context) {
-    //Color complementaryColor = Color.fromRGBO(255-currentColor.red, 255-currentColor.green, 255-currentColor.blue, 1);
     return Theme(
       data: ThemeData(
         brightness: currentColor.computeLuminance() > 0.25 ? Brightness.light : Brightness.dark,
@@ -64,8 +65,9 @@ class _CreatePersona extends State<CreatePersona> {
               if (snapshot.data == null) {
                 return Text("Loading");
               } else {
+                //initilizing on the first question
                 if (currentQuestion == null) {
-                  currentQuestion = interviewService.nextQuestion(context.read<User>().id);
+                  currentQuestion = interviewService.nextQuestion();
                   currentQuestionResponse = new QuestionResponse(currentQuestion, null);
                   currentQuestionWidget = currentQuestion?.generateQuestionWidget(selectAnswer: _selectAnswer) ?? Text("Loading");
                 }
@@ -75,20 +77,43 @@ class _CreatePersona extends State<CreatePersona> {
                   child: Column(
                     children: [
                       currentQuestionWidget,
-                      RaisedButton(
-                        child: Text("Next", style: Theme.of(context).textTheme.button),
-                        onPressed: canHitNext ? () {
-                          interviewService.answerQuestion(currentQuestion.id, snapshot.data.id, currentQuestionResponse.choice, context.read<User>().id);
-                          setState(() {
-                            currentQuestion = interviewService.nextQuestion(context.read<User>().id);
-                            canHitNext = false;
-                            currentQuestionResponse = new QuestionResponse(currentQuestion, null);
-                            currentQuestionWidget = currentQuestion?.generateQuestionWidget(selectAnswer: _selectAnswer) ?? Text("Loading");
-                          });
-                          if (currentQuestion == InterviewService.endQuestion) {
-                            Navigator.pop(context);
-                          }
-                        } : null,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          //Back button doesn't appear on the first question
+                          currentQuestionindex > 0 ? RaisedButton(
+                            child: Text("Back", style: Theme.of(context).textTheme.button),
+                            onPressed: () {
+                              setState(() {
+                                currentQuestionindex--;
+                                canTapNext = true;
+                                currentQuestionResponse = interviewService.previousQuestion();
+                                currentQuestion = currentQuestionResponse.question;
+                                currentQuestionWidget = currentQuestion?.generateQuestionWidget(selectAnswer: _selectAnswer, startValue: currentQuestionResponse.choice) ?? Text("Loading");
+                              });
+                            }
+                          ) : null,
+                          RaisedButton(
+                            child: Text("Next", style: Theme.of(context).textTheme.button),
+                            //next button can't be tapped unless the user has selected an answer
+                            onPressed: canTapNext ? () {
+                              currentQuestionindex++;
+                              interviewService.answerQuestion(currentQuestion.id, snapshot.data.id, currentQuestionResponse.choice, context.read<User>().id);
+                              setState(() {
+                                currentQuestion = interviewService.nextQuestion();
+                                //TODO - I think i might add a text only question to avoid things like this
+                                if (currentQuestion != InterviewService.blankQuestion) {
+                                  canTapNext = false;
+                                }
+                                currentQuestionResponse = new QuestionResponse(currentQuestion, null);
+                                currentQuestionWidget = currentQuestion?.generateQuestionWidget(selectAnswer: _selectAnswer) ?? Text("Loading");
+                              });
+                              if (currentQuestion == InterviewService.endQuestion) {
+                                Navigator.pop(context);
+                              }
+                            } : null,
+                          ),
+                        ].where((o) => o != null).toList()
                       ),
                     ]
                   )

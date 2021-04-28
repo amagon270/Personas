@@ -11,7 +11,7 @@
         "labels" : [] 
     },{
         "id" : "end",
-        "code" : "End",
+        "code" : "",
         "type" : "MultipleChoice",
         "text" : "", 
         "subject" : "",
@@ -30,7 +30,7 @@
         "max" : 0,
         "labels" : [] 
     },{
-        "id" : "001",
+        "id" : "personaEnergy",
         "code" : "energy levels",
         "type" : "MultipleChoice",
         "text" : "How much energy does this persona have?", 
@@ -60,7 +60,7 @@
         "labels" : ["low", "medium", "high"] 
     },
     {
-        "id" : "002",
+        "id" : "personaRoundness",
         "code" : "roundedness",
         "type" : "MultipleChoice",
         "text" : "Does this persona feel more round or square?", 

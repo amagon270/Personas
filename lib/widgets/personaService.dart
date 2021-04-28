@@ -21,42 +21,32 @@ class PersonaService {
   List<Persona> allPersonas;
   String userId;
 
-  static final List<String> specialQuestionIds = ["", "intro"];
+  static final List<String> specialQuestionIds = ["", "intro", "end", "blank"];
 
   PersonaService._internal();
 
-  void save(String name, Session session, String userId) {
+  void save(String name, Session session) {
     Persona persona = new Persona();
     persona.id = session.id;
 
     //specifically find the color response and remove it from normal questions
     QuestionResponse colorResponse = session.answers.firstWhere((e) => (e.question.id == "personaColor"), orElse: () {return null;},);
-    String colorString = colorResponse?.choice ?? "0";
+    int colorString = colorResponse?.choice ?? 0;
     session.answers.removeWhere((e) => (e.question.id == "personaColor"));
 
     //specifically find the name of the persona and remove it from normal questions
     QuestionResponse nameResponse = session.answers.firstWhere((e) => (e.question.id == "personaName"), orElse: () {return null;},);
     session.answers.removeWhere((e) => (e.question.id == "personaName"));
 
-    persona.color = Color(int.parse(colorString));
-    persona.name = nameResponse.choice;
+    persona.color = Color(colorString) ?? Colors.white;
+    persona.name = nameResponse?.choice ?? "";
     persona.answers = session.answers;
+    persona.facts = session.facts;
     savePersona(persona, userId);
   }
 
   void edit(Persona data) {
     savePersona(data, userId);
-  }
-
-  ///I really need to work out a better way to handle userId
-  Future<List<Persona>> list() async {
-    while (userId == null) {
-      sleep(Duration(milliseconds: 10));
-    }
-    if (allPersonas == null) {
-      allPersonas = await getPersonas();
-    }
-    return allPersonas;
   }
 
   Persona get(String personaId) {
@@ -96,17 +86,19 @@ class PersonaService {
       int colorInt = persona["color"] ?? 0;
       _persona.color = new Color(colorInt);
 
+      List<Fact> _facts = new List<Fact>();
       persona["facts"]?.forEach((subject, value) async {
-        _persona.facts.add(Fact(subject, value));
+        _facts.add(Fact(subject, value));
       });
+      _persona.facts = _facts;
 
       List<QuestionResponse> _personaAnswers = new List<QuestionResponse>();
       persona["answers"]?.forEach((question, answer) async {
         Question questionObject = allQuestions.firstWhere((e) => (e.id == question), orElse: () {return null;},);
         if (questionObject != null) _personaAnswers.add(new QuestionResponse(questionObject, answer));
       });
-
       _persona.answers = _personaAnswers;
+
       allPersonas.add(_persona);
     });
     this.allPersonas = allPersonas;
@@ -122,11 +114,13 @@ class PersonaService {
 
     decodedData[userId][persona.id]["name"] = persona.name;
     decodedData[userId][persona.id]["color"] = persona.color.value;
-    decodedData[userId][persona.id]["facts"] = persona.facts;
-    persona.facts.forEach((fact) {
+
+    persona.facts?.forEach((fact) {
+      print(fact.subject);
+      print(decodedData[userId][persona.id]["facts"]);
       decodedData[userId][persona.id]["facts"][fact.subject] = fact.value;
     });
-    persona.answers.forEach((answer) {
+    persona.answers?.forEach((answer) {
       decodedData[userId][persona.id]["answers"][answer.question.id] = answer.choice;
     });
     
