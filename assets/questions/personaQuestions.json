@@ -38,18 +38,19 @@
         "options" : [
             {
                 "code" : "low",
+                "value" : "low",
                 "text": "low",
                 "image" : "",
                 "order" : 1
-            },
-            {
+            },{
                 "code" : "medium",
+                "value" : "medium",
                 "text": "medium",
                 "image" : "",
                 "order" : 2
-            },
-            {
+            },{
                 "code" : "high",
+                "value" : "high",
                 "text": "high",
                 "image" : "",
                 "order" : 3
@@ -58,8 +59,7 @@
         "min" : 0,
         "max" : 10,
         "labels" : ["low", "medium", "high"] 
-    },
-    {
+    },{
         "id" : "personaRoundness",
         "code" : "roundedness",
         "type" : "MultipleChoice",
@@ -68,12 +68,13 @@
         "options" : [
             {
                 "code" : "round",
+                "value" : "round",
                 "text": "",
                 "image" : "assets/images/circle.png",
                 "order" : 1
-            },
-            {
+            },{
                 "code" : "square",
+                "value" : "square",
                 "text": "",
                 "image" : "assets/images/square.png",
                 "order" : 2
@@ -82,8 +83,7 @@
         "min" : 0,
         "max" : 0,
         "labels" : [] 
-    },
-    {
+    },{
         "id" : "003",
         "code" : "Polygon",
         "type" : "Polygon",
@@ -92,36 +92,37 @@
         "options" : [
             {
                 "code" : "1",
+                "value" : 1,
                 "text": "Answer 1",
                 "image" : "",
                 "order" : 1
-            },
-            {
+            },{
                 "code" : "2",
+                "value" : 2,
                 "text": "Answer 2",
                 "image" : "",
                 "order" : 2
-            },
-            {
+            },{
                 "code" : "3",
+                "value" : 3,
                 "text": "Answer 3",
                 "image" : "",
                 "order" : 3
-            },
-            {
+            },{
                 "code" : "4",
+                "value" : 4,
                 "text": "Answer 4",
                 "image" : "",
                 "order" : 4
-            },
-            {
+            },{
                 "code" : "5",
+                "value" : 5,
                 "text": "Answer 5",
                 "image" : "",
                 "order" : 5
-            },
-            {
+            },{
                 "code" : "6",
+                "value" : 6,
                 "text": "Answer 6",
                 "image" : "",
                 "order" : 6
@@ -130,8 +131,7 @@
         "min" : 0,
         "max" : 0,
         "labels" : [] 
-    },
-    {
+    },{
         "id" : "multiPolygonTest",
         "code" : "PolygonTest",
         "type" : "MultiPolygon",
@@ -140,36 +140,37 @@
         "options" : [
             {
                 "code" : "1",
+                "value" : 1,
                 "text": "Answer 1",
                 "image" : "",
                 "order" : 1
-            },
-            {
+            },{
                 "code" : "2",
+                "value" : 2,
                 "text": "Answer 2",
                 "image" : "",
                 "order" : 2
-            },
-            {
+            },{
                 "code" : "3",
+                "value" : 3,
                 "text": "Answer 3",
                 "image" : "",
                 "order" : 3
-            },
-            {
+            },{
                 "code" : "4",
+                "value" : 4,
                 "text": "Answer 4",
                 "image" : "",
                 "order" : 4
-            },
-            {
+            },{
                 "code" : "5",
+                "value" : 5,
                 "text": "Answer 5",
                 "image" : "",
                 "order" : 5
-            },
-            {
+            },{
                 "code" : "6",
+                "value" : 6,
                 "text": "Answer 6",
                 "image" : "",
                 "order" : 6
@@ -178,8 +179,7 @@
         "min" : 0,
         "max" : 0,
         "labels" : [] 
-    },
-    {
+    },{
         "id" : "004",
         "code" : "Slider",
         "type" : "Slider",
@@ -189,8 +189,7 @@
         "min" : 0,
         "max" : 10,
         "labels" : ["low", "medium", "high"] 
-    },
-    {
+    },{
         "id" : "LabelSliderTest",
         "code" : "LabelSlider",
         "type" : "MiddleSlider",
@@ -200,8 +199,7 @@
         "min" : 0,
         "max" : 0,
         "labels" : ["Ecstatic", "Joyfull\nTest1\nTest2", "Happy\nTest1\nTest2", "Indifferent\nTest1\nTest2", "sad", "Sorrowful", "Depressed"] 
-    },
-    {
+    },{
         "id" : "005",
         "code" : "MultipleSelect",
         "type" : "MultipleSelect",
@@ -210,36 +208,37 @@
         "options" : [
             {
                 "code" : "1",
+                "value" : 1,
                 "text": "Answer 1",
                 "image" : "",
                 "order" : 1
-            },
-            {
+            },{
                 "code" : "2",
+                "value" : 2,
                 "text": "Answer 2",
                 "image" : "",
                 "order" : 2
-            },
-            {
+            },{
                 "code" : "3",
+                "value" : 3,
                 "text": "Answer 3",
                 "image" : "",
                 "order" : 3
-            },
-            {
+            },{
                 "code" : "4",
+                "value" : 4,
                 "text": "Answer 4",
                 "image" : "",
                 "order" : 4
-            },
-            {
+            },{
                 "code" : "5",
+                "value" : 5,
                 "text": "Answer 5",
                 "image" : "",
                 "order" : 5
-            },
-            {
+            },{
                 "code" : "6",
+                "value" : 6,
                 "text": "Answer 6",
                 "image" : "",
                 "order" : 6
@@ -248,8 +247,7 @@
         "min" : 0,
         "max" : 0,
         "labels" : []
-    },
-    {
+    },{
         "id" : "personaName",
         "code" : "Persona Name",
         "type" : "TextInput",

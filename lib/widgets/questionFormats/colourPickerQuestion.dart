@@ -4,10 +4,9 @@ import 'package:Personas/widgets/questionService.dart';
 
 
 class ColourPickerQuestion extends StatefulWidget {
-  ColourPickerQuestion({Key key, this.question, this.selectAnswer}) : super(key: key);
+  ColourPickerQuestion({Key key, this.data}) : super(key: key);
 
-  final Question question;
-  final ValueChanged selectAnswer;
+  final QuestionInputData data;
 
   State<ColourPickerQuestion> createState() => _ColourPickerQuestion();
 }
@@ -29,7 +28,7 @@ class _ColourPickerQuestion extends State<ColourPickerQuestion> {
           children:[ 
             Container(
               padding: EdgeInsets.all(20),
-              child: Text(widget.question.text, style: Theme.of(context).textTheme.headline6,)
+              child: Text(widget.data.question.text, style: Theme.of(context).textTheme.headline6,)
             ),
             Center(
               child: RaisedButton(
@@ -49,7 +48,7 @@ class _ColourPickerQuestion extends State<ColourPickerQuestion> {
                             onColorChanged: (color) {
                               setState(() {
                                 currentColor = color;
-                                widget.selectAnswer(color.value);
+                                widget.data.selectAnswer(color.value);
                               });
                             },
                             //enableLabel: true,

@@ -15,7 +15,8 @@ enum Operator {
   GreaterThan,
   LessThan,
   EqualTo,
-  Exists
+  Exists,
+  Contains
 }
 
 class QuestionResponse {
@@ -36,11 +37,15 @@ class Session {
   List<QuestionResponse> answers; 
   List<Fact> facts;
 
+  //I need this to store memory of facts for the back button
+  List<Fact> individualFacts;
+
   Session(this.id) {
     dateStarted = DateTime.now();
     questions = new List<Question>();
     answers = new List<QuestionResponse>();
     facts = new List<Fact>();
+    individualFacts = new List<Fact>();
   }
 }
 
@@ -102,21 +107,13 @@ class InterviewService {
       currentIndex = 0;
       currentRuleIndex = 0;
       currentSession = new Session(await UtilityFunctions.generateId());
-      allQuestions = await QuestionService.loadQuestions();
+      allQuestions =  await QuestionService.loadQuestions();
       allRules = await loadRules();
     }
     return currentSession;
   }
 
-  Question nextQuestion() {
-    if (currentRuleIndex >= allRules.length) {
-      PersonaService().save("Test", currentSession);
-      return endQuestion;
-    }
-    Rule rule = allRules[currentRuleIndex];
-    currentRuleIndex++;
-
-    //Unpacks the TriggerType operator in the rule.  
+  bool _checkRule(Rule rule) {
     bool action;
     bool actionChange;
     bool actionComparison;
@@ -146,35 +143,66 @@ class InterviewService {
           currentSession.facts.add(Fact(test.fact, ""));
         }
       }
+      //This goes against clarity but also saves about 20+ lines of repeating code so I'm sticking with it
+      //e.g. GreaterThan with All Type; test.parameter is 3 and fact.value is 1
+      //action starts at true; actionComparison is false; actionChange is false
+      //fact > parameter is false; actionComparison is also false; action = actionChange 
+      //action = false; 
+      //all future tests can only set action to false again so it will never become true after 1 test fails
+      //oposite done with Any Type; Action starts false and can only be changed to true
+      dynamic factValue = currentSession.facts.firstWhere((fact) => fact.subject == test.fact, orElse: () => null,)?.value;
       switch (test.operation) {
         case Operator.GreaterThan:
-          if (actionComparison == (test.parameter > currentSession.facts.firstWhere((fact) => fact.subject == test.fact).value)) {
+          if (actionComparison == (factValue > test.parameter)) {
             action = actionChange;
           }
           break;
         case Operator.LessThan:
-          if (actionComparison == (test.parameter < currentSession.facts.firstWhere((fact) => fact.subject == test.fact).value)) {
+          if (actionComparison == (factValue < test.parameter)) {
             action = actionChange;
           }
           break;
         case Operator.EqualTo:
-          if (actionComparison == (test.parameter == currentSession.facts.firstWhere((fact) => fact.subject == test.fact, orElse: () => null,)?.value)) {
+          if (actionComparison == (factValue == test.parameter)) {
             action = actionChange;
           }
           break;
         case Operator.Exists:
-          if (actionComparison == (currentSession.facts.where((fact) => fact.subject == test.fact).length == 0)) {
+          if (actionComparison == (currentSession.facts.where((fact) => fact.subject == test.fact).length != 0)) {
+            action = actionChange;
+          }
+          break;
+        case Operator.Contains:
+          if (factValue is List) {
+            if (actionComparison == factValue.contains(test.parameter)) {
+              action = actionChange;
+            }
+          } else if (actionComparison == (factValue == test.parameter)) {
             action = actionChange;
           }
           break;
       }
     });
 
+    return action;
+  }
+
+  Question nextQuestion() {
+    if (currentRuleIndex >= allRules.length) {
+      PersonaService().save("Test", currentSession);
+      return endQuestion;
+    }
+    Rule rule = allRules[currentRuleIndex];
+    currentRuleIndex++;
+
+    bool action = _checkRule(rule);
+
     if (action) {
       //if both fact and question exist in the rule do both
       print("rule: ${rule.action.fact?.subject}, question ${rule.action.questionId}");
       if (rule.action.fact != null && rule.action.questionId != null) {
         addFactToList(rule.action.fact, currentSession.facts);
+        currentSession.individualFacts.add(rule.action.fact);
         Question question = QuestionService().getQuestionById(rule.action.questionId);
         if (question != null) {
           currentSession.questions.add(question);
@@ -182,10 +210,13 @@ class InterviewService {
         } else {
           return blankQuestion;
         }
+
       //if only the fact exist in the rule add the fact then ask the next question
       } else if (rule.action.fact != null) {
         addFactToList(rule.action.fact, currentSession.facts);
+        currentSession.individualFacts.add(rule.action.fact);
         return nextQuestion();
+
       //if only the question exists then return the question
       } else if (rule.action.questionId != null) {
         Question question = QuestionService().getQuestionById(rule.action.questionId);
@@ -195,18 +226,27 @@ class InterviewService {
         } else {
           return blankQuestion;
         }
-      //if no action was specified then as a failsafe return the blank question
-      } else {
-        return blankQuestion;
       }
+      //if no action was specified then as a failsafe return the blank question
+      return blankQuestion;
+    } else {
+      return nextQuestion();
     }
   }
 
   QuestionResponse previousQuestion() {
-    //The currentRuleIndex is always 1 ahead of the current rule.  Maybe i should change it but i think its fine
-    currentRuleIndex -= 2;
-    Rule rule = allRules[currentRuleIndex];
-    currentRuleIndex++;
+    Rule rule;
+    if (currentSession.individualFacts.length > 0) {
+      removeFactFromList(currentSession.individualFacts.last, currentSession.facts);
+      currentSession.individualFacts.removeLast();
+    }
+
+    do {
+      //The currentRuleIndex is always 1 ahead of the current rule.  Maybe i should change it but i think its fine
+      currentRuleIndex -= 2;
+      rule = allRules[currentRuleIndex];
+      currentRuleIndex++;
+    } while (_checkRule(rule) == false);
 
     currentSession.questions.removeLast();
 
@@ -237,6 +277,7 @@ class InterviewService {
       if (!PersonaService.specialQuestionIds.contains(questionId)) {
         currentSession.answers.add(questionResponse);
         addFactToList(Fact(question.fact, response), currentSession.facts);
+        currentSession.individualFacts.add(Fact(question.fact, response));
       }
     }
   }
@@ -284,9 +325,11 @@ class InterviewService {
     final data = await rootBundle.loadString("assets/questions/rules.json");
     List<dynamic> decodedData = json.decode(data);
     List<Rule> newRules = new List<Rule>();
+
     decodedData.forEach((rule) {
       String id = rule["id"] ?? "";
       var triggerType = rule["triggerType"].toString().toEnum(TriggerType.values);
+
       List<RuleTest> newTests = new List<RuleTest>();
       (rule['tests'] as List)?.forEach((test) {
         RuleTest _newTest = RuleTest(test["factId"], test["operation"].toString().toEnum(Operator.values), parameter: test["parameter"]);

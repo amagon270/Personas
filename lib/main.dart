@@ -75,6 +75,10 @@ class Personas extends StatelessWidget {
 
         return SlideTransition(
           position: offsetAnimation,
+          child: child,
+        );
+        return SlideTransition(
+          position: offsetAnimation,
           child: ScaleTransition(
             scale: animation.drive(tweenscale),
             child: child
@@ -91,10 +95,7 @@ class Personas extends StatelessWidget {
           scale: animation.drive(tweenscale),
           child: child
         );
-        return SlideTransition(
-          position: offsetAnimation,
-          child: child,
-        );
+        
       },
     );
   }

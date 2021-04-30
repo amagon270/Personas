@@ -27,5 +27,51 @@
         "action" : {
             "questionId" : "personaRoundness"
         }
+    },{
+        "id" : "TriggerTypeAllTest",
+        "triggerType" : "All",
+        "tests" : [
+            {
+                "factId" : "energy",
+                "operation" : "EqualTo",
+                "parameter" : "low"
+            },{
+                "factId" : "roundness",
+                "operation" : "EqualTo",
+                "parameter" : "round"
+            }
+        ],
+        "action" : {
+            "questionId" : "003"
+        }
+    },{
+        "id" : "Test1FactTest",
+        "triggerType" : "All",
+        "tests" : [
+            {
+                "factId" : "test1",
+                "operation" : "GreaterThan",
+                "parameter" : 3
+            }
+        ],
+        "action" : {
+            "questionId" : "LabelSliderTest"
+        }
+    },{
+        "id" : "TriggerTypeAnyTest",
+        "triggerType" : "Any",
+        "tests" : [
+            {
+                "factId" : "energy",
+                "operation" : "EqualTo",
+                "parameter" : "low"
+            },{
+                "factId" : "roundness",
+                "operation" : "EqualTo",
+                "parameter" : "round"
+            }],
+        "action" : {
+            "questionId" : "004"
+        }
     }
 ]

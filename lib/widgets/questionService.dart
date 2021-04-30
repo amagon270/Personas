@@ -32,9 +32,10 @@ extension EnumParser on String {
 }
 
 class QuestionOption {
-  QuestionOption(this.code, this.text, {this.image, this.order});
+  QuestionOption(this.code, this.value, this.text, {this.image, this.order});
 
   String code;
+  dynamic value;
   String text;
   String image;
   int order;
@@ -42,11 +43,21 @@ class QuestionOption {
   Map getAsMap() {
     Map newMap = Map();
     newMap["code"] = code;
+    newMap["value"] = value;
     newMap["text"] = text;
     newMap["image"] = image ?? "";
     newMap["order"] = order;
     return newMap;
   }
+}
+
+class QuestionInputData {
+  QuestionInputData(this.question, this.selectAnswer, {this.startValue, this.editable = true});
+
+  Question question;
+  ValueChanged selectAnswer;
+  dynamic startValue;
+  bool editable;
 }
 
 class Question {
@@ -63,34 +74,34 @@ class Question {
   List<String> labels;
 
   Widget generateQuestionWidget({ValueChanged selectAnswer, dynamic startValue, bool editable = true}) {
-    selectAnswer ??= doNothingFunction;
+
+    selectAnswer ??= (value) {};
+    QuestionInputData inputData = QuestionInputData(this, selectAnswer, startValue: startValue, editable: editable);
+
     switch (type) {
       case QuestionType.MultipleChoice:
-        return MultipleChoiceQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue, editable: editable,);
+        return MultipleChoiceQuestion(data: inputData);
       case QuestionType.MultipleSelect:
-        return MultipleSelectQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue, editable: editable);
+        return MultipleSelectQuestion(data: inputData);
       case QuestionType.Slider:
-        return SliderQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue, editable: editable, key: UniqueKey(),);
+        return SliderQuestion(data: inputData, key: UniqueKey(),);
       case QuestionType.MiddleSlider:
-        return MiddleSliderQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue, editable: editable, key: UniqueKey(),);
+        return MiddleSliderQuestion(data: inputData, key: UniqueKey(),);
       case QuestionType.Polygon:
-        return PolygonQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue, editable: editable);
+        return PolygonQuestion(data: inputData);
       case QuestionType.MultiPolygon:
-        return MultiPolygonQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue, editable: editable);
+        return MultiPolygonQuestion(data: inputData);
       case QuestionType.Circle:
         // TODO: Handle this case.
         break;
       case QuestionType.ColourPicker:
-        return ColourPickerQuestion(question: this, selectAnswer: selectAnswer);
+        return ColourPickerQuestion(data: inputData);
       case QuestionType.TextInput:
-        return TextInputQuestion(question: this, selectAnswer: selectAnswer, startValue: startValue,);
+        return TextInputQuestion(data: inputData);
       default:
-       return MultipleChoiceQuestion(question: this);
+       return MultipleChoiceQuestion(data: inputData);
     }
   }
-
-  //mostly just here as a null safe funtion for generateQuestionWidget.
-  void doNothingFunction(dynamic nothing) {}
 }
 
 class QuestionService {
@@ -128,7 +139,7 @@ class QuestionService {
       var labels = (question["labels"] as List<dynamic>).map((e) => e as String).toList();
       List<QuestionOption> newOptions = new List<QuestionOption>();
       (question['options'] as List)?.forEach((option) {
-        newOptions.add(QuestionOption(option["code"], option["text"], image: option["image"], order: option["order"]));
+        newOptions.add(QuestionOption(option["code"], option["value"], option["text"], image: option["image"], order: option["order"]));
       });
 
       Question newQuestion = Question(id, code, text, type, subject, newOptions ?? [], min: min ?? 0, max: max ?? 0, labels: labels ?? []);

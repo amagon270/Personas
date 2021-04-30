@@ -1,5 +1,4 @@
 import 'package:Personas/widgets/interviewService.dart';
-import 'package:Personas/widgets/personaService.dart';
 import 'package:Personas/widgets/questionService.dart';
 import 'package:Personas/widgets/user.dart';
 import 'package:flutter/material.dart';

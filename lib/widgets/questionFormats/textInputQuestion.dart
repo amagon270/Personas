@@ -1,14 +1,11 @@
-import 'package:Personas/widgets/interviewService.dart';
 import 'package:Personas/widgets/questionService.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TextInputQuestion extends StatefulWidget {
-  TextInputQuestion({Key key, this.question, this.selectAnswer, this.startValue}) : super(key: key);
+  TextInputQuestion({Key key, this.data}) : super(key: key);
 
-  final Question question;
-  final ValueChanged selectAnswer;
-  final String startValue;
+  final QuestionInputData data;
 
   @override
   _TextInputQuestion createState() => _TextInputQuestion();
@@ -34,12 +31,12 @@ class _TextInputQuestion extends State<TextInputQuestion> {
     padding: EdgeInsets.all(20),
       child: Column(
         children: [
-          Text(widget.question.text, style: Theme.of(context).textTheme.headline6),
+          Text(widget.data.question.text, style: Theme.of(context).textTheme.headline6),
           TextField(
             controller: _controller,
             onChanged: (String value) async {
               setState(() {
-                widget.selectAnswer(value);
+                widget.data.selectAnswer(value);
               });
             },
           )

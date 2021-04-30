@@ -1,16 +1,12 @@
-import 'package:Personas/widgets/interviewService.dart';
 import 'package:Personas/widgets/questionService.dart';
 import 'package:Personas/widgets/utility.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MultipleChoiceQuestion extends StatefulWidget {
-  MultipleChoiceQuestion({Key key, this.question, this.selectAnswer, this.startValue, this.editable}) : super(key: key);
+  MultipleChoiceQuestion({Key key, this.data}) : super(key: key);
 
-  final Question question;
-  final ValueChanged selectAnswer;
-  final String startValue;
-  final bool editable;
+  final QuestionInputData data;
 
   @override
   _MultipleChoiceQuestion createState() => _MultipleChoiceQuestion();
@@ -23,13 +19,13 @@ class _MultipleChoiceQuestion extends State<MultipleChoiceQuestion> {
   @override
   void initState() {
     super.initState();
-    currentlySelected = widget.question.options.firstWhere((e) => e.code == widget.startValue, orElse: () {return null;},);
+    currentlySelected = widget.data.question.options.firstWhere((e) => e.value == widget.data.startValue, orElse: () {return null;},);
   }
 
   @override
   Widget build(BuildContext context) {
     List<Widget> options = new List<Widget>();
-    List<QuestionOption> questionOptions = widget.question.options;
+    List<QuestionOption> questionOptions = widget.data.question.options;
 
     questionOptions.sort((a, b) => a.order.compareTo(b.order));
     
@@ -43,10 +39,10 @@ class _MultipleChoiceQuestion extends State<MultipleChoiceQuestion> {
           Radio(
             value: option,
             groupValue: currentlySelected,
-            onChanged: widget.editable ? (value) {
+            onChanged: widget.data.editable ? (value) {
               setState(() {
                 currentlySelected = value;
-                widget.selectAnswer(value.code);
+                widget.data.selectAnswer(value.value);
               });
             } : null,
           ),
@@ -59,7 +55,7 @@ class _MultipleChoiceQuestion extends State<MultipleChoiceQuestion> {
     padding: EdgeInsets.all(20),
       child: Column(
         children: [
-          Text(widget.question.text, style: Theme.of(context).textTheme.headline6),
+          Text(widget.data.question.text, style: Theme.of(context).textTheme.headline6),
           ...options
         ],
       )

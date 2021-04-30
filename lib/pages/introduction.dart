@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:Personas/widgets/user.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 

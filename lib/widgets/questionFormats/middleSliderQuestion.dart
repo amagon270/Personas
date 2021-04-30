@@ -2,12 +2,9 @@ import 'package:Personas/widgets/questionService.dart';
 import 'package:flutter/material.dart';
 
 class MiddleSliderQuestion extends StatefulWidget {
-  MiddleSliderQuestion({Key key, this.question, this.selectAnswer, this.startValue, this.editable}) : super(key: key);
+  MiddleSliderQuestion({Key key, this.data}) : super(key: key);
 
-  final Question question;
-  final ValueChanged selectAnswer;
-  final String startValue;
-  final bool editable;
+  final QuestionInputData data;
 
   @override
   _MiddleSliderQuestion createState() => _MiddleSliderQuestion();
@@ -20,37 +17,37 @@ class _MiddleSliderQuestion extends State<MiddleSliderQuestion> {
   @override
   void initState() {
     super.initState();
-    _currentSliderValue = widget.question.min?.toDouble() ?? 0;
-    if (widget.startValue != null) {
-      _currentSliderValue = double.parse(widget.startValue);
+    _currentSliderValue = widget.data.question.min?.toDouble() ?? 0;
+    if (widget.data.startValue != null) {
+      _currentSliderValue = widget.data.startValue;
     }
     print(_currentSliderValue);
-    //widget.selectAnswer(widget.question.min?.toDouble() ?? 0);
+    //widget.data.selectAnswer(widget.data.question.min?.toDouble() ?? 0);
   }
 
   @override
   Widget build(BuildContext context) {
     //print(_currentSliderValue);
-    int labelLength = widget.question.labels.length - 1;
+    int labelLength = widget.data.question.labels.length - 1;
 
     List<Widget> labels = new List<Widget>();
-    widget.question.labels.forEach((label) {
+    widget.data.question.labels.forEach((label) {
       labels.add(Text(label));
     });
     return Container(
       padding: EdgeInsets.all(20),
       child: Column(
         children: [
-          Text(widget.question.text, style: Theme.of(context).textTheme.headline6),
+          Text(widget.data.question.text, style: Theme.of(context).textTheme.headline6),
           Slider(
             value: _currentSliderValue,
-            min: widget.question.min?.toDouble() ?? 0,
+            min: widget.data.question.min?.toDouble() ?? 0,
             max: labelLength.toDouble(),
             divisions: labelLength,
-            onChanged: widget.editable ? (value) {
+            onChanged: widget.data.editable ? (value) {
               setState(() {
                 _currentSliderValue = value;
-                widget.selectAnswer(value);
+                widget.data.selectAnswer(value);
               });
             } : null,
           ),
@@ -60,9 +57,9 @@ class _MiddleSliderQuestion extends State<MiddleSliderQuestion> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(widget.question.labels.first),
-                Text(widget.question.labels[_currentSliderValue.truncate()], textAlign: TextAlign.center,),
-                Text(widget.question.labels.last)
+                Text(widget.data.question.labels.first),
+                Text(widget.data.question.labels[_currentSliderValue.truncate()], textAlign: TextAlign.center,),
+                Text(widget.data.question.labels.last)
               ]
             )
           )

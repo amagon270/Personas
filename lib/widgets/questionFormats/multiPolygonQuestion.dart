@@ -7,12 +7,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MultiPolygonQuestion extends StatefulWidget {
-  MultiPolygonQuestion({Key key, this.question, this.selectAnswer, this.startValue, this.editable}) : super(key: key);
+  MultiPolygonQuestion({Key key, this.data}) : super(key: key);
 
-  final Question question;
-  final ValueChanged selectAnswer;
-  final String startValue;
-  final bool editable;
+  final QuestionInputData data;
 
   @override
   _MultiPolygonQuestion createState() => _MultiPolygonQuestion();
@@ -25,8 +22,8 @@ class _MultiPolygonQuestion extends State<MultiPolygonQuestion> {
   @override
   void initState() {
     super.initState();
-    if (widget.startValue != null) {
-      currentlySelected = Map<String, bool>.from(json.decode(widget.startValue));
+    if (widget.data.startValue != null) {
+      currentlySelected = Map<String, bool>.from(json.decode(widget.data.startValue));
     }
   }
 
@@ -34,7 +31,7 @@ class _MultiPolygonQuestion extends State<MultiPolygonQuestion> {
   Widget build(BuildContext context) {
     currentlySelected ??= new Map<String, bool>();
     List<Widget> options = new List<Widget>();
-    List<QuestionOption> questionOptions = widget.question.options;
+    List<QuestionOption> questionOptions = widget.data.question.options;
 
     questionOptions.sort((a, b) => a.order.compareTo(b.order));
     double _questionsLength = questionOptions.length.toDouble();
@@ -45,7 +42,7 @@ class _MultiPolygonQuestion extends State<MultiPolygonQuestion> {
         child: UtilityFunctions.getImageFromString(option.image)
       );
 
-      currentlySelected[option.code] ??= false;
+      currentlySelected[option.value] ??= false;
       double factor = ((option.order/_questionsLength)*pi*2) - pi;
 
       options.add(
@@ -71,11 +68,11 @@ class _MultiPolygonQuestion extends State<MultiPolygonQuestion> {
               ),
               Positioned(
                 child: Checkbox(
-                  value: currentlySelected[option.code],
-                  onChanged: widget.editable ? (value) {
+                  value: currentlySelected[option.value],
+                  onChanged: widget.data.editable ? (value) {
                     setState(() {
-                      currentlySelected[option.code] = !currentlySelected[option.code];
-                      widget.selectAnswer(json.encode(currentlySelected));
+                      currentlySelected[option.value] = !currentlySelected[option.value];
+                      widget.data.selectAnswer(json.encode(currentlySelected));
                     });
                   } : null,
                 ),
@@ -89,7 +86,7 @@ class _MultiPolygonQuestion extends State<MultiPolygonQuestion> {
       padding: EdgeInsets.all(10),
       child: Column(
         children: [
-          Text(widget.question.text, style: Theme.of(context).textTheme.headline6, textAlign: TextAlign.center,),
+          Text(widget.data.question.text, style: Theme.of(context).textTheme.headline6, textAlign: TextAlign.center,),
           Container(
             padding: EdgeInsets.all(20),
             height: MediaQuery.of(context).size.width,

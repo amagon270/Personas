@@ -2,16 +2,12 @@ import 'dart:math';
 
 import 'package:Personas/widgets/questionService.dart';
 import 'package:Personas/widgets/utility.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PolygonQuestion extends StatefulWidget {
-  PolygonQuestion({Key key, this.question, this.selectAnswer, this.startValue, this.editable}) : super(key: key);
+  PolygonQuestion({Key key, this.data}) : super(key: key);
 
-  final Question question;
-  final ValueChanged selectAnswer;
-  final String startValue;
-  final bool editable;
+  final QuestionInputData data;
 
   @override
   _PolygonQuestion createState() => _PolygonQuestion();
@@ -24,21 +20,25 @@ class _PolygonQuestion extends State<PolygonQuestion> {
   @override
   void initState() {
     super.initState();
-    currentlySelected = widget.question.options.firstWhere((e) => e.code == widget.startValue, orElse: () {return null;},);
+    currentlySelected = widget.data.question.options.firstWhere((e) => e.value == widget.data.startValue, orElse: () {return null;},);
   }
 
   @override
   Widget build(BuildContext context) {
+
     List<Widget> options = new List<Widget>();
-    List<QuestionOption> questionOptions = widget.question.options;
+    List<QuestionOption> questionOptions = widget.data.question.options;
+
     questionOptions.sort((a, b) => a.order.compareTo(b.order));
-    double test = questionOptions.length.toDouble();
+    double optionsLength = questionOptions.length.toDouble();
+
     questionOptions.forEach((option) {
       Widget image = Container(
         width: 40,
         child: UtilityFunctions.getImageFromString(option.image)
       );
-      double factor = ((option.order/test)*pi*2) - pi;
+      double factor = ((option.order/optionsLength)*pi*2) - pi;
+
       options.add(
         Container(
           alignment: Alignment(cos(factor), sin(factor)),
@@ -64,10 +64,10 @@ class _PolygonQuestion extends State<PolygonQuestion> {
                 child: Radio(
                   value: option,
                   groupValue: currentlySelected,
-                  onChanged: widget.editable ? (value) {
+                  onChanged: widget.data.editable ? (value) {
                     setState(() {
                       currentlySelected = value;
-                      widget.selectAnswer(value.code);
+                      widget.data.selectAnswer(value.value);
                     });
                   } : null,
                 ),
@@ -77,11 +77,12 @@ class _PolygonQuestion extends State<PolygonQuestion> {
         )
       );
     });
+
     return Container(
       padding: EdgeInsets.all(10),
       child: Column(
         children: [
-          Text(widget.question.text, style: Theme.of(context).textTheme.headline6),
+          Text(widget.data.question.text, style: Theme.of(context).textTheme.headline6),
           Container(
             padding: EdgeInsets.all(20),
             height: MediaQuery.of(context).size.width,

@@ -1,18 +1,13 @@
 import 'dart:convert';
-
-import 'package:Personas/widgets/interviewService.dart';
 import 'package:Personas/widgets/questionService.dart';
 import 'package:Personas/widgets/utility.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MultipleSelectQuestion extends StatefulWidget {
-  MultipleSelectQuestion({Key key, this.question, this.selectAnswer, this.startValue, this.editable}) : super(key: key);
+  MultipleSelectQuestion({Key key, this.data}) : super(key: key);
 
-  final Question question;
-  final ValueChanged selectAnswer;
-  final String startValue;
-  final bool editable;
+  final QuestionInputData data;
 
   @override
   _MultipleSelectQuestion createState() => _MultipleSelectQuestion();
@@ -25,8 +20,8 @@ class _MultipleSelectQuestion extends State<MultipleSelectQuestion> {
   @override
   void initState() {
     super.initState();
-    if (widget.startValue != null) {
-      currentlySelected = Map<String, bool>.from(json.decode(widget.startValue));
+    if (widget.data.startValue != null) {
+      currentlySelected = Map<String, bool>.from(json.decode(widget.data.startValue));
     }
   }
 
@@ -34,7 +29,7 @@ class _MultipleSelectQuestion extends State<MultipleSelectQuestion> {
   Widget build(BuildContext context) {
     currentlySelected ??= new Map<String, bool>();
     List<Widget> options = new List<Widget>();
-    List<QuestionOption> questionOptions = widget.question.options;
+    List<QuestionOption> questionOptions = widget.data.question.options;
 
     questionOptions.sort((a, b) => a.order.compareTo(b.order));
     
@@ -43,16 +38,22 @@ class _MultipleSelectQuestion extends State<MultipleSelectQuestion> {
         width: 40,
         child: UtilityFunctions.getImageFromString(option.image)
       );
-      currentlySelected[option.code] ??= false;
+      currentlySelected[option.value] ??= false;
       options.add(
         Row(
           children: [
             Checkbox(
-              value: currentlySelected[option.code],
-              onChanged: widget.editable ? (value) {
+              value: currentlySelected[option.value],
+              onChanged: widget.data.editable ? (value) {
                 setState(() {
-                  currentlySelected[option.code] = !currentlySelected[option.code];
-                  widget.selectAnswer(json.encode(currentlySelected));
+                  currentlySelected[option.value] = !currentlySelected[option.value];
+                  List<dynamic> selectedList = new List<String>();
+                  currentlySelected.forEach((key, value) {
+                    if (value == true) {
+                      selectedList.add(key);
+                    }
+                  });
+                  widget.data.selectAnswer(json.encode(selectedList));
                 });
               } : null,
             ),
@@ -66,7 +67,7 @@ class _MultipleSelectQuestion extends State<MultipleSelectQuestion> {
     padding: EdgeInsets.all(20),
       child: Column(
         children: [
-          Text(widget.question.text, style: Theme.of(context).textTheme.headline6),
+          Text(widget.data.question.text, style: Theme.of(context).textTheme.headline6),
           ...options
         ],
       )
