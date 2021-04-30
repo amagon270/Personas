@@ -73,5 +73,12 @@
         "action" : {
             "questionId" : "004"
         }
+    },{
+        "id" : "name",
+        "triggerType" : "Always",
+        "tests" : [],
+        "action" : {
+            "questionId" : "personaName"
+        }
     }
 ]

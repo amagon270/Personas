@@ -61,13 +61,13 @@ class QuestionInputData {
 }
 
 class Question {
-  Question(this.id, this.code, this.text, this.type, this.fact, this.options, {this.min, this.max, this.labels});
+  Question(this.id, this.code, this.text, this.type, this.factSubject, this.options, {this.min, this.max, this.labels});
 
   String id;
   String code;
   String text;
   QuestionType type;
-  String fact;
+  String factSubject;
   List<QuestionOption> options;
   int min;
   int max;
@@ -80,26 +80,26 @@ class Question {
 
     switch (type) {
       case QuestionType.MultipleChoice:
-        return MultipleChoiceQuestion(data: inputData);
+        return MultipleChoiceQuestion(data: inputData, key: UniqueKey());
       case QuestionType.MultipleSelect:
-        return MultipleSelectQuestion(data: inputData);
+        return MultipleSelectQuestion(data: inputData, key: UniqueKey());
       case QuestionType.Slider:
         return SliderQuestion(data: inputData, key: UniqueKey(),);
       case QuestionType.MiddleSlider:
         return MiddleSliderQuestion(data: inputData, key: UniqueKey(),);
       case QuestionType.Polygon:
-        return PolygonQuestion(data: inputData);
+        return PolygonQuestion(data: inputData, key: UniqueKey());
       case QuestionType.MultiPolygon:
-        return MultiPolygonQuestion(data: inputData);
+        return MultiPolygonQuestion(data: inputData, key: UniqueKey());
       case QuestionType.Circle:
         // TODO: Handle this case.
         break;
       case QuestionType.ColourPicker:
-        return ColourPickerQuestion(data: inputData);
+        return ColourPickerQuestion(data: inputData, key: UniqueKey());
       case QuestionType.TextInput:
-        return TextInputQuestion(data: inputData);
+        return TextInputQuestion(data: inputData, key: UniqueKey());
       default:
-       return MultipleChoiceQuestion(data: inputData);
+       return MultipleChoiceQuestion(data: inputData, key: UniqueKey());
     }
   }
 }
@@ -133,7 +133,7 @@ class QuestionService {
       var code = question["code"];
       var type = question["type"].toString().toEnum(QuestionType.values);
       var text = question["text"];
-      var subject = question["subject"];
+      var subject = question["factSubject"];
       var min = question["min"];
       var max = question["max"];
       var labels = (question["labels"] as List<dynamic>).map((e) => e as String).toList();

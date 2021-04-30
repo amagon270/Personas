@@ -258,7 +258,7 @@ class InterviewService {
     if (rule.action.questionId != null) {
       QuestionResponse answer = currentSession.answers.firstWhere((answer) => answer.question.id == rule.action.questionId, orElse: () => null,);
       if (answer != null) {
-        removeFactFromList(Fact(answer.question.fact, answer.choice), currentSession.facts);
+        removeFactFromList(Fact(answer.question.factSubject, answer.choice), currentSession.facts);
         currentSession.answers.remove(answer);
         return answer;
       } else {
@@ -276,8 +276,8 @@ class InterviewService {
       QuestionResponse questionResponse = new QuestionResponse(question, response);
       if (!PersonaService.specialQuestionIds.contains(questionId)) {
         currentSession.answers.add(questionResponse);
-        addFactToList(Fact(question.fact, response), currentSession.facts);
-        currentSession.individualFacts.add(Fact(question.fact, response));
+        addFactToList(Fact(question.factSubject, response), currentSession.facts);
+        currentSession.individualFacts.add(Fact(question.factSubject, response));
       }
     }
   }
