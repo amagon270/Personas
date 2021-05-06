@@ -17,12 +17,10 @@ class _MiddleSliderQuestion extends State<MiddleSliderQuestion> {
   @override
   void initState() {
     super.initState();
-    _currentSliderValue = widget.data.question.min?.toDouble() ?? 0;
+    _currentSliderValue = 0;
     if (widget.data.startValue != null) {
       _currentSliderValue = widget.data.startValue;
     }
-    print(_currentSliderValue);
-    //widget.data.selectAnswer(widget.data.question.min?.toDouble() ?? 0);
   }
 
   @override
@@ -41,7 +39,7 @@ class _MiddleSliderQuestion extends State<MiddleSliderQuestion> {
           Text(widget.data.question.text, style: Theme.of(context).textTheme.headline6),
           Slider(
             value: _currentSliderValue,
-            min: widget.data.question.min?.toDouble() ?? 0,
+            min: 0,
             max: labelLength.toDouble(),
             divisions: labelLength,
             onChanged: widget.data.editable ? (value) {
@@ -67,4 +65,4 @@ class _MiddleSliderQuestion extends State<MiddleSliderQuestion> {
       )
     );
   }
-}
+} 

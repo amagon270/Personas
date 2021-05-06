@@ -35,6 +35,7 @@ class Session {
   DateTime dateCompleted;
   List<Question> questions;
   List<QuestionResponse> answers; 
+  List<Rule> processedRules;
   List<Fact> facts;
 
   //I need this to store memory of facts for the back button
@@ -44,15 +45,17 @@ class Session {
     dateStarted = DateTime.now();
     questions = new List<Question>();
     answers = new List<QuestionResponse>();
+    processedRules = new List<Rule>();
     facts = new List<Fact>();
     individualFacts = new List<Fact>();
   }
 }
 
 class Rule {
-  Rule(this.id, this.triggerType, this.tests, this.action);
+  Rule(this.id, this.priority, this.triggerType, this.tests, this.action);
 
   String id;
+  int priority;
   TriggerType triggerType;
   List<RuleTest> tests;
   RuleAction action;
@@ -96,7 +99,6 @@ class InterviewService {
   List<Question> allQuestions;
   List<Rule> allRules;
   int currentRuleIndex;
-  int currentIndex;
   Session currentSession;
 
   static final Question endQuestion = Question("end", "", "", QuestionType.MultipleChoice, "", []);
@@ -104,7 +106,6 @@ class InterviewService {
 
   Future<Session> startSession() async {
     if (currentSession == null) {
-      currentIndex = 0;
       currentRuleIndex = 0;
       currentSession = new Session(await UtilityFunctions.generateId());
       allQuestions =  await QuestionService.loadQuestions();
@@ -173,6 +174,7 @@ class InterviewService {
           }
           break;
         case Operator.Contains:
+          print(factValue);
           if (factValue is List) {
             if (actionComparison == factValue.contains(test.parameter)) {
               action = actionChange;
@@ -188,77 +190,79 @@ class InterviewService {
   }
 
   Question nextQuestion() {
+    //failsafe if we run out of rules
     if (currentRuleIndex >= allRules.length) {
       PersonaService().save("Test", currentSession);
       return endQuestion;
     }
-    Rule rule = allRules[currentRuleIndex];
-    currentRuleIndex++;
 
-    bool action = _checkRule(rule);
-
-    if (action) {
-      //if both fact and question exist in the rule do both
-      print("rule: ${rule.action.fact?.subject}, question ${rule.action.questionId}");
-      if (rule.action.fact != null && rule.action.questionId != null) {
-        addFactToList(rule.action.fact, currentSession.facts);
-        currentSession.individualFacts.add(rule.action.fact);
-        Question question = QuestionService().getQuestionById(rule.action.questionId);
-        if (question != null) {
-          currentSession.questions.add(question);
-          return question;
-        } else {
-          return blankQuestion;
-        }
-
-      //if only the fact exist in the rule add the fact then ask the next question
-      } else if (rule.action.fact != null) {
-        addFactToList(rule.action.fact, currentSession.facts);
-        currentSession.individualFacts.add(rule.action.fact);
-        return nextQuestion();
-
-      //if only the question exists then return the question
-      } else if (rule.action.questionId != null) {
-        Question question = QuestionService().getQuestionById(rule.action.questionId);
-        if (question != null) {
-          currentSession.questions.add(question);
-          return question;
-        } else {
-          return blankQuestion;
-        }
+    List<Rule> possibleRules = new List<Rule>();
+    allRules.forEach((newRule) { 
+      if (!currentSession.processedRules.contains(newRule) && _checkRule(newRule)) {
+        possibleRules.add(newRule);
       }
-      //if no action was specified then as a failsafe return the blank question
-      return blankQuestion;
-    } else {
-      return nextQuestion();
+    });
+    if (possibleRules.length == 0) {
+      PersonaService().save("Test", currentSession);
+      return endQuestion;
     }
+    possibleRules.sort((a, b) => b.priority.compareTo(a.priority));
+    Rule rule = possibleRules.first;
+    currentSession.processedRules.add(rule);
+
+    //if both fact and question exist in the rule do both
+    if (rule.action.fact != null && rule.action.questionId != null) {
+      addFactToList(rule.action.fact, currentSession.facts);
+      currentSession.individualFacts.add(rule.action.fact);
+      Question question = QuestionService().getQuestionById(rule.action.questionId);
+      if (question != null) {
+        currentSession.questions.add(question);
+        return question;
+      } else {
+        return blankQuestion;
+      }
+
+    //if only the fact exist in the rule add the fact then ask the next question
+    } else if (rule.action.fact != null) {
+      addFactToList(rule.action.fact, currentSession.facts);
+      currentSession.individualFacts.add(rule.action.fact);
+      return nextQuestion();
+
+    //if only the question exists then return the question
+    } else if (rule.action.questionId != null) {
+      Question question = QuestionService().getQuestionById(rule.action.questionId);
+      if (question != null) {
+        currentSession.questions.add(question);
+        return question;
+      } else {
+        return blankQuestion;
+      }
+    }
+    //if no action was specified then as a failsafe return the blank question
+    return blankQuestion;
   }
 
   QuestionResponse previousQuestion() {
     Rule rule;
+    //remove the last fact added so the user should be at the same state as when they first reached this rule
     if (currentSession.individualFacts.length > 0) {
       removeFactFromList(currentSession.individualFacts.last, currentSession.facts);
       currentSession.individualFacts.removeLast();
     }
 
-    do {
-      //The currentRuleIndex is always 1 ahead of the current rule.  Maybe i should change it but i think its fine
-      currentRuleIndex -= 2;
-      rule = allRules[currentRuleIndex];
-      currentRuleIndex++;
-    } while (_checkRule(rule) == false);
-
-    currentSession.questions.removeLast();
-
-    //remove any facts added by rules
-    if (rule.action.fact != null) {
-      removeFactFromList(rule.action.fact, currentSession.facts);
+    currentSession.processedRules.removeLast();
+    rule = currentSession.processedRules.last;
+    
+    //this situation means that 2 facts were added from 1 rule and so needs another removed
+    if (rule.action.fact != null && rule.action.questionId != null) {
+      removeFactFromList(currentSession.individualFacts.last, currentSession.facts);
+      currentSession.individualFacts.removeLast();
     }
-    //remove any facts added by questions
+    //if the rule has a question
     if (rule.action.questionId != null) {
+      currentSession.questions.removeLast();
       QuestionResponse answer = currentSession.answers.firstWhere((answer) => answer.question.id == rule.action.questionId, orElse: () => null,);
       if (answer != null) {
-        removeFactFromList(Fact(answer.question.factSubject, answer.choice), currentSession.facts);
         currentSession.answers.remove(answer);
         return answer;
       } else {
@@ -285,6 +289,7 @@ class InterviewService {
   void addFactToList(Fact newFact, List<Fact> list) {
     Fact existingFact = list.firstWhere((fact) => fact == newFact, orElse: () {return null;},);
     if (existingFact != null) {
+      print("existing fact add: ${existingFact.value}");
       if (newFact.value is int) {
         existingFact.value += newFact.value;
       } else {
@@ -298,6 +303,7 @@ class InterviewService {
   void removeFactFromList(Fact newFact, List<Fact> list) {
     Fact existingFact = list.firstWhere((fact) => fact == newFact, orElse: () {return null;},);
     if (existingFact != null) {
+    print("existing fact subtract: ${existingFact.value}");
       if (newFact.value is int) {
           existingFact.value -= newFact.value;
       } else if (newFact.value is String) {
@@ -328,6 +334,7 @@ class InterviewService {
 
     decodedData.forEach((rule) {
       String id = rule["id"] ?? "";
+      int priority = rule["priority"] ?? 1;
       var triggerType = rule["triggerType"].toString().toEnum(TriggerType.values);
 
       List<RuleTest> newTests = new List<RuleTest>();
@@ -347,7 +354,7 @@ class InterviewService {
         newAction.questionId = action["questionId"];
       }
 
-      Rule newRule = Rule(id, triggerType, newTests, newAction);
+      Rule newRule = Rule(id, priority, triggerType, newTests, newAction);
       
       newRules.add(newRule);
     });

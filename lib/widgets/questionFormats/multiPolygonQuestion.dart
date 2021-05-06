@@ -23,7 +23,12 @@ class _MultiPolygonQuestion extends State<MultiPolygonQuestion> {
   void initState() {
     super.initState();
     if (widget.data.startValue != null) {
-      currentlySelected = Map<String, bool>.from(json.decode(widget.data.startValue));
+      currentlySelected = Map<String, bool>();
+
+      (widget.data.startValue as List<String>).forEach((e) { 
+        currentlySelected[e] = true;
+      });
+      //currentlySelected = Map<String, bool>.from(json.decode(widget.data.startValue));
     }
   }
 
@@ -72,8 +77,15 @@ class _MultiPolygonQuestion extends State<MultiPolygonQuestion> {
                   onChanged: widget.data.editable ? (value) {
                     setState(() {
                       currentlySelected[option.value] = !currentlySelected[option.value];
-                      widget.data.selectAnswer(json.encode(currentlySelected));
                     });
+                    List<String> returnData = new List<String>();
+                    currentlySelected.forEach((key, value) { 
+                      if (value == true) {
+                        returnData.add(key);
+                      }
+                    });
+                    widget.data.selectAnswer(returnData);
+                    //widget.data.selectAnswer(json.encode(currentlySelected));
                   } : null,
                 ),
               )

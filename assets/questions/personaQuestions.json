@@ -84,6 +84,132 @@
         "max" : 0,
         "labels" : [] 
     },{
+        "id" : "personaRigidity",
+        "code" : "Rigidity",
+        "type" : "MultipleChoice",
+        "text" : "Does this persona feel more rigid or flexible?", 
+        "factSubject" : "rigidity",
+        "options" : [
+            {
+                "code" : "rigid",
+                "value" : "rigid",
+                "text": "Rigid",
+                "image" : "",
+                "order" : 1
+            },{
+                "code" : "flexible",
+                "value" : "flexible",
+                "text": "Flexible",
+                "image" : "",
+                "order" : 2
+            },{
+                "code" : "neither",
+                "value" : "neither",
+                "text": "Neither",
+                "image" : "",
+                "order" : 3
+            }
+        ],
+        "min" : 0,
+        "max" : 0,
+        "labels" : [] 
+    },{
+        "id" : "personaType",
+        "code" : "Type",
+        "type" : "MultiPolygon",
+        "text" : "Select one or more options that best describe this persona", 
+        "factSubject" : "type",
+        "options" : [
+            {
+                "code" : "voiceThought",
+                "value" : "voiceThought",
+                "text": "Voice Thought",
+                "image" : "",
+                "order" : 1
+            },{
+                "code" : "warrior",
+                "value" : "warrior",
+                "text": "Warrior",
+                "image" : "",
+                "order" : 2
+            },{
+                "code" : "confident",
+                "value" : "confident",
+                "text": "Confident",
+                "image" : "",
+                "order" : 3
+            },{
+                "code" : "destructive",
+                "value" : "destructive",
+                "text": "Destructive",
+                "image" : "",
+                "order" : 4
+            },{
+                "code" : "constructive",
+                "value" : "constructive",
+                "text": "Constructive",
+                "image" : "",
+                "order" : 5
+            },{
+                "code" : "emotion",
+                "value" : "emotion",
+                "text": "Emotion",
+                "image" : "",
+                "order" : 6
+            }
+        ],
+        "min" : 0,
+        "max" : 0,
+        "labels" : [] 
+    },{
+        "id" : "emotionType",
+        "code" : "emotionType",
+        "type" : "MultiPolygon",
+        "text" : "", 
+        "factSubject" : "emotionType",
+        "options" : [
+            {
+                "code" : "surpriseShock",
+                "value" : "surpriseShock",
+                "text": "Surprise Shock",
+                "image" : "",
+                "order" : 1
+            },{
+                "code" : "anxiousRelaxed",
+                "value" : "anxiousRelaxed",
+                "text": "Anxious Relaxed",
+                "image" : "",
+                "order" : 2
+            },{
+                "code" : "angryPeaceful",
+                "value" : "angryPeaceful",
+                "text": "Angry Peaceful",
+                "image" : "",
+                "order" : 3
+            },{
+                "code" : "envyGenerous",
+                "value" : "envyGenerous",
+                "text": "Envy Generous",
+                "image" : "",
+                "order" : 4
+            },{
+                "code" : "happySad",
+                "value" : "happySad",
+                "text": "Happy Sad",
+                "image" : "",
+                "order" : 5
+            },{
+                "code" : "loveDisgust",
+                "value" : "loveDisgust",
+                "text": "Love Disgust",
+                "image" : "",
+                "order" : 6
+            }
+        ],
+        "min" : 0,
+        "max" : 0,
+        "labels" : [] 
+    },{
         "id" : "003",
         "code" : "Polygon",
         "type" : "Polygon",
@@ -190,10 +316,10 @@
         "max" : 10,
         "labels" : ["low", "medium", "high"] 
     },{
-        "id" : "LabelSliderTest",
-        "code" : "LabelSlider",
+        "id" : "happySadSlider",
+        "code" : "Happy Sad Slider",
         "type" : "MiddleSlider",
-        "text" : "This is a slider question", 
+        "text" : "", 
         "factSubject" : "happiness",
         "options" : [],
         "min" : 0,

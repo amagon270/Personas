@@ -1,6 +1,7 @@
 [
     {
         "id" : "start",
+        "priority" : 999,
         "triggerType" : "Always",
         "tests" : [],
         "action" : {
@@ -8,6 +9,7 @@
         }
     },{
         "id" : "color",
+        "priority" : 998,
         "triggerType" : "Always",
         "tests" : [],
         "action" : {
@@ -15,6 +17,7 @@
         }
     },{
         "id" : "energy",
+        "priority" : 997,
         "triggerType" : "Always",
         "tests" : [],
         "action" : {
@@ -22,59 +25,59 @@
         }
     },{
         "id" : "roundness",
+        "priority" : 996,
         "triggerType" : "Always",
         "tests" : [],
         "action" : {
             "questionId" : "personaRoundness"
         }
     },{
-        "id" : "TriggerTypeAllTest",
+        "id" : "rigidity",
+        "priority" : 995,
+        "triggerType" : "Always",
+        "tests" : [],
+        "action" : {
+            "questionId" : "personaRigidity"
+        }
+    },{
+        "id" : "types",
+        "priority" : 994,
+        "triggerType" : "Always",
+        "tests" : [],
+        "action" : {
+            "questionId" : "personaType"
+        }
+    },{
+        "id" : "emotion",
+        "priority" : 1,
         "triggerType" : "All",
         "tests" : [
             {
-                "factId" : "energy",
-                "operation" : "EqualTo",
-                "parameter" : "low"
-            },{
-                "factId" : "roundness",
-                "operation" : "EqualTo",
-                "parameter" : "round"
+                "factId" : "type",
+                "operation" : "Contains",
+                "parameter" : "emotion"
             }
         ],
         "action" : {
-            "questionId" : "003"
+            "questionId" : "emotionType"
         }
     },{
-        "id" : "Test1FactTest",
+        "id" : "happySad",
+        "priority" : 1,
         "triggerType" : "All",
         "tests" : [
             {
-                "factId" : "test1",
-                "operation" : "GreaterThan",
-                "parameter" : 3
+                "factId" : "emotionType",
+                "operation" : "Contains",
+                "parameter" : "happySad"
             }
         ],
         "action" : {
-            "questionId" : "LabelSliderTest"
-        }
-    },{
-        "id" : "TriggerTypeAnyTest",
-        "triggerType" : "Any",
-        "tests" : [
-            {
-                "factId" : "energy",
-                "operation" : "EqualTo",
-                "parameter" : "low"
-            },{
-                "factId" : "roundness",
-                "operation" : "EqualTo",
-                "parameter" : "round"
-            }],
-        "action" : {
-            "questionId" : "004"
+            "questionId" : "happySadSlider"
         }
     },{
         "id" : "name",
+        "priority" : -1,
         "triggerType" : "Always",
         "tests" : [],
         "action" : {
