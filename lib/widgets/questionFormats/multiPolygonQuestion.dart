@@ -24,7 +24,6 @@ class _MultiPolygonQuestion extends State<MultiPolygonQuestion> {
     super.initState();
     if (widget.data.startValue != null) {
       currentlySelected = Map<String, bool>();
-
       (widget.data.startValue as List<String>).forEach((e) { 
         currentlySelected[e] = true;
       });

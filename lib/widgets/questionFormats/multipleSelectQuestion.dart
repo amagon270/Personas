@@ -21,7 +21,10 @@ class _MultipleSelectQuestion extends State<MultipleSelectQuestion> {
   void initState() {
     super.initState();
     if (widget.data.startValue != null) {
-      currentlySelected = Map<String, bool>.from(json.decode(widget.data.startValue));
+      currentlySelected = Map<String, bool>();
+      (widget.data.startValue as List<String>).forEach((e) { 
+        currentlySelected[e] = true;
+      });
     }
   }
 
@@ -47,14 +50,14 @@ class _MultipleSelectQuestion extends State<MultipleSelectQuestion> {
               onChanged: widget.data.editable ? (value) {
                 setState(() {
                   currentlySelected[option.value] = !currentlySelected[option.value];
-                  List<dynamic> selectedList = new List<String>();
-                  currentlySelected.forEach((key, value) {
-                    if (value == true) {
-                      selectedList.add(key);
-                    }
-                  });
-                  widget.data.selectAnswer(json.encode(selectedList));
                 });
+                List<String> returnData = new List<String>();
+                currentlySelected.forEach((key, value) { 
+                  if (value == true) {
+                    returnData.add(key);
+                  }
+                });
+                widget.data.selectAnswer(returnData);
               } : null,
             ),
             Text(option.text, style: Theme.of(context).textTheme.bodyText1),

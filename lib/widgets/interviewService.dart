@@ -174,7 +174,6 @@ class InterviewService {
           }
           break;
         case Operator.Contains:
-          print(factValue);
           if (factValue is List) {
             if (actionComparison == factValue.contains(test.parameter)) {
               action = actionChange;
