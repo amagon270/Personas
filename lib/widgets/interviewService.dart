@@ -1,9 +1,12 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:Personas/widgets/personaService.dart';
 import 'package:Personas/widgets/questionService.dart';
 import 'package:Personas/widgets/utility.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 
 enum TriggerType {
   Any,
@@ -98,7 +101,6 @@ class Fact {
 class InterviewService {
   List<Question> allQuestions;
   List<Rule> allRules;
-  int currentRuleIndex;
   Session currentSession;
 
   static final Question endQuestion = Question("end", "", "", QuestionType.MultipleChoice, "", []);
@@ -106,10 +108,9 @@ class InterviewService {
 
   Future<Session> startSession() async {
     if (currentSession == null) {
-      currentRuleIndex = 0;
-      currentSession = new Session(await UtilityFunctions.generateId());
       allQuestions =  await QuestionService.loadQuestions();
       allRules = await loadRules();
+      currentSession = await loadUnfinishedSession();
     }
     return currentSession;
   }
@@ -189,12 +190,7 @@ class InterviewService {
   }
 
   Question nextQuestion() {
-    //failsafe if we run out of rules
-    if (currentRuleIndex >= allRules.length) {
-      PersonaService().save("Test", currentSession);
-      return endQuestion;
-    }
-
+    saveUnfinishedSession(currentSession);
     List<Rule> possibleRules = new List<Rule>();
     allRules.forEach((newRule) { 
       if (!currentSession.processedRules.contains(newRule) && _checkRule(newRule)) {
@@ -202,6 +198,7 @@ class InterviewService {
       }
     });
     if (possibleRules.length == 0) {
+      clearUnfinishedSession();
       PersonaService().save("Test", currentSession);
       return endQuestion;
     }
@@ -326,6 +323,13 @@ class InterviewService {
     return currentSession.answers.firstWhere((e) => (e.question.id == questionId), orElse: () => null);
   }
 
+  Color getCurrentColor() {
+    QuestionResponse question = currentSession.answers.firstWhere((e) => e.question.id == "personaColor", orElse: () => null);
+    //4294967295 is white
+    int colorString = question?.choice ?? 4294967295;
+    return Color(colorString);
+  }
+
   static Future<List<Rule>> loadRules() async {
     final data = await rootBundle.loadString("assets/questions/rules.json");
     List<dynamic> decodedData = json.decode(data);
@@ -358,5 +362,82 @@ class InterviewService {
       newRules.add(newRule);
     });
     return newRules;
+  }
+
+  Future<bool> clearUnfinishedSession() async {
+    Map sessionData = {};
+    final directory = await getApplicationDocumentsDirectory();
+    final file = File('${directory.path}/unfinishedSession.json');
+    await file.writeAsString(json.encode(sessionData));
+    return true;
+  }
+
+  void saveUnfinishedSession(Session session) async {
+    Map sessionData = {};
+    List<String> questions = new List<String>();
+    List<String> processedRules= new List<String>();
+    sessionData["id"] = session.id;
+    sessionData["answers"] ??= {};
+    sessionData["facts"] ??= {};
+    session.questions?.forEach((question) {
+      questions.add(question.id);
+    });
+    sessionData["questions"] = questions;
+    session.answers?.forEach((answer) {
+      print("answers when saving ${answer.choice}");
+      sessionData["answers"][answer.question.id] = answer.choice;
+    });
+    session.processedRules?.forEach((rule) {
+      processedRules.add(rule.id);
+    });
+    sessionData["rules"] = processedRules;
+    session.facts?.forEach((fact) {
+      sessionData["facts"][fact.subject] = fact.value;
+    });
+
+    final directory = await getApplicationDocumentsDirectory();
+    final file = File('${directory.path}/unfinishedSession.json');
+    await file.writeAsString(json.encode(sessionData));
+  }
+
+  Future<Session> loadUnfinishedSession() async {
+    final directory = await getApplicationDocumentsDirectory();
+    final file = File('${directory.path}/unfinishedSession.json');
+    String userAnswers = "{}";
+    try{
+      userAnswers = await file.readAsString();
+    } catch (e) {
+      print("Couldn't find file, creating new file");
+      userAnswers = '{"" : {}}';
+    }
+    Map userData = json.decode(userAnswers);
+
+    if (userData["id"] != null  && userData["id"] != "") {
+      Session newSession = Session(userData["id"]);
+      List<Question> questions = new List<Question>();
+      List<QuestionResponse> answers = new List<QuestionResponse>(); 
+      List<Rule> processedRules = new List<Rule>();
+      List<Fact> facts = new List<Fact>();
+
+      (userData["questions"] as List<dynamic>)?.forEach((questionId) {
+        questions.add(allQuestions.firstWhere((e) => e.id == questionId.toString(), orElse: () => null,));
+      });
+      (userData["answers"] as Map<dynamic, dynamic>)?.forEach((questionId, response) {
+        Question question = allQuestions.firstWhere((e) => e.id == questionId.toString(), orElse: () => null);
+        answers.add(QuestionResponse(question, response));
+      });
+      (userData["rules"] as List<dynamic>)?.forEach((ruleId) {
+        processedRules.add(allRules.firstWhere((e) => e.id == ruleId.toString(), orElse: () => null,));
+      });
+      (userData["facts"] as Map<dynamic, dynamic>)?.forEach((factId, value) {
+        facts.add(Fact(factId.toString(), value));
+      });
+      newSession.questions = questions;
+      newSession.answers = answers;
+      newSession.processedRules = processedRules;
+      newSession.facts = facts;
+      return newSession;
+    }
+    return new Session(await UtilityFunctions.generateId());
   }
 }

@@ -55,7 +55,19 @@ class _CreatePersona extends State<CreatePersona> {
         textTheme: TextTheme(button: TextStyle(color: Colors.black))
       ),
       child: Scaffold(
-        appBar: AppBar(title: Text("Create New Persona"),),
+        appBar: AppBar(
+          title: Text("Create New Persona"),
+          actions: [
+            FlatButton(
+              child: Text("Reset"),
+              onPressed: () async {
+                await interviewService.clearUnfinishedSession();
+                Navigator.pushReplacementNamed(context, "/createPersona");
+              }, 
+              
+            )
+          ],
+        ),
         body: SafeArea(
           child: FutureBuilder(
             future: interviewService.startSession(),
@@ -69,6 +81,7 @@ class _CreatePersona extends State<CreatePersona> {
                   currentQuestion = interviewService.nextQuestion();
                   currentQuestionResponse = new QuestionResponse(currentQuestion, null);
                   currentQuestionWidget = currentQuestion?.generateQuestionWidget(selectAnswer: _selectAnswer) ?? Text("Loading");
+                  currentColor = interviewService.getCurrentColor();
                 }
                 return Container(
                   width: MediaQuery.of(context).size.width,
