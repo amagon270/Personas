@@ -61,7 +61,7 @@ class QuestionInputData {
 }
 
 class Question {
-  Question(this.id, this.code, this.text, this.type, this.factSubject, this.options, {this.min, this.max, this.labels});
+  Question(this.id, this.code, this.text, this.type, this.factSubject, this.options, {this.min, this.max, this.labels, this.timer = 10});
 
   String id;
   String code;
@@ -72,6 +72,7 @@ class Question {
   int min;
   int max;
   List<String> labels;
+  int timer;
 
   Widget generateQuestionWidget({ValueChanged selectAnswer, dynamic startValue, bool editable = true}) {
 
@@ -136,13 +137,14 @@ class QuestionService {
       var subject = question["factSubject"];
       var min = question["min"];
       var max = question["max"];
+      var timer = question["timer"] ?? 10;
       var labels = (question["labels"] as List<dynamic>).map((e) => e as String).toList();
       List<QuestionOption> newOptions = new List<QuestionOption>();
       (question['options'] as List)?.forEach((option) {
         newOptions.add(QuestionOption(option["code"], option["value"], option["text"], image: option["image"], order: option["order"]));
       });
 
-      Question newQuestion = Question(id, code, text, type, subject, newOptions ?? [], min: min ?? 0, max: max ?? 0, labels: labels ?? []);
+      Question newQuestion = Question(id, code, text, type, subject, newOptions ?? [], min: min ?? 0, max: max ?? 0, labels: labels ?? [], timer: timer);
       
       newQuestions.add(newQuestion);
     });

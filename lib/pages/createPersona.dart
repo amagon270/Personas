@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:Personas/widgets/interviewService.dart';
+import 'package:Personas/widgets/personaService.dart';
 import 'package:Personas/widgets/questionService.dart';
 import 'package:Personas/widgets/user.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +25,8 @@ class _CreatePersona extends State<CreatePersona>
   Color currentColor = Colors.white;
   bool canTapNext;
   Widget currentQuestionWidget;
+  Session currentSession;
+  Timer questionSkipTimer;
 
   @override
   void initState() {
@@ -62,6 +67,66 @@ class _CreatePersona extends State<CreatePersona>
     }
   }
 
+  Widget _resetButton() {
+    return FlatButton(
+      child: Text("Reset"),
+      onPressed: () async {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              content: Text("Are you sure you want to discard progress on this persona and reset?"),
+              actions: [
+                FlatButton(
+                  child: Text("Reset"),
+                  onPressed: () async {
+                    await interviewService.clearUnfinishedSession();
+                    Navigator.pushReplacementNamed(context, "/createPersona");
+                  },
+                ),
+                FlatButton(
+                  child: Text("Cancel"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  }, 
+                )
+              ],
+            );
+          },
+        );
+      }, 
+    );
+  }
+
+  void startTimer(Question question) {
+    questionSkipTimer?.cancel();
+    if (question.timer > 0) {
+      Duration length = Duration(seconds: question.timer);
+      questionSkipTimer = Timer(length, _nextQuestion);
+    }
+  }
+
+  void _nextQuestion() {
+    interviewService.answerQuestion(currentQuestion.id, currentSession.id, currentQuestionResponse.choice, context.read<User>().id);
+    setState(() {
+      _controller.reset();
+      _controller.forward();
+      currentQuestion = interviewService.nextQuestion();
+      //TODO - I think i might add a text only question to avoid things like this
+      if (currentQuestion != InterviewService.blankQuestion) {
+        canTapNext = false;
+      }
+      currentQuestionResponse = new QuestionResponse(currentQuestion, null);
+      currentQuestionWidget = currentQuestion?.generateQuestionWidget(selectAnswer: _selectAnswer) ?? Text("Loading");
+    });
+    if (currentQuestion == InterviewService.endQuestion) {
+      Navigator.pop(context);
+    }
+    if (!PersonaService.specialQuestionIds.contains(currentQuestion.id)) {
+      startTimer(currentQuestion);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -75,14 +140,7 @@ class _CreatePersona extends State<CreatePersona>
         appBar: AppBar(
           title: Text("Create New Persona"),
           actions: [
-            FlatButton(
-              child: Text("Reset"),
-              onPressed: () async {
-                await interviewService.clearUnfinishedSession();
-                Navigator.pushReplacementNamed(context, "/createPersona");
-              }, 
-              
-            )
+            //_resetButton()
           ],
         ),
         body: Container(
@@ -97,6 +155,7 @@ class _CreatePersona extends State<CreatePersona>
                   if (snapshot.data == null) {
                     return Text("Loading");
                   } else {
+                    currentSession = snapshot.data;
                     //initilizing on the first question
                     if (currentQuestion == null) {
                       currentQuestion = interviewService.nextQuestion();
@@ -124,29 +183,14 @@ class _CreatePersona extends State<CreatePersona>
                                     currentQuestionResponse = interviewService.previousQuestion();
                                     currentQuestion = currentQuestionResponse.question;
                                     currentQuestionWidget = currentQuestion?.generateQuestionWidget(selectAnswer: _selectAnswer, startValue: currentQuestionResponse.choice) ?? Text("Loading");
+                                    startTimer(currentQuestion);
                                   });
                                 }
                               ) : null,
                               RaisedButton(
                                 child: Text("Next", style: Theme.of(context).textTheme.button),
                                 //next button can't be tapped unless the user has selected an answer
-                                onPressed: canTapNext ? () {
-                                  interviewService.answerQuestion(currentQuestion.id, snapshot.data.id, currentQuestionResponse.choice, context.read<User>().id);
-                                  setState(() {
-                                    _controller.reset();
-                                    _controller.forward();
-                                    currentQuestion = interviewService.nextQuestion();
-                                    //TODO - I think i might add a text only question to avoid things like this
-                                    if (currentQuestion != InterviewService.blankQuestion) {
-                                      canTapNext = false;
-                                    }
-                                    currentQuestionResponse = new QuestionResponse(currentQuestion, null);
-                                    currentQuestionWidget = currentQuestion?.generateQuestionWidget(selectAnswer: _selectAnswer) ?? Text("Loading");
-                                  });
-                                  if (currentQuestion == InterviewService.endQuestion) {
-                                    Navigator.pop(context);
-                                  }
-                                } : null,
+                                onPressed: canTapNext ? () {_nextQuestion();} : null,
                               ),
                             ].where((o) => o != null).toList() //null protection
                           ),

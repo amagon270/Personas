@@ -118,7 +118,7 @@
         "code" : "Type",
         "type" : "MultiPolygon",
         "text" : "Select one or more options that best describe this persona", 
-        "factSubject" : "type",
+        "factSubject" : "personaType",
         "options" : [
             {
                 "code" : "voiceThought",
@@ -165,7 +165,7 @@
         "id" : "emotionType",
         "code" : "emotionType",
         "type" : "MultiPolygon",
-        "text" : "", 
+        "text" : "which emotions apply to this persona", 
         "factSubject" : "emotionType",
         "options" : [
             {
@@ -210,94 +210,46 @@
         "max" : 0,
         "labels" : [] 
     },{
-        "id" : "003",
-        "code" : "Polygon",
-        "type" : "Polygon",
-        "text" : "Polygon example question", 
-        "factSubject" : "test1",
-        "options" : [
-            {
-                "code" : "1",
-                "value" : 1,
-                "text": "Answer 1",
-                "image" : "",
-                "order" : 1
-            },{
-                "code" : "2",
-                "value" : 2,
-                "text": "Answer 2",
-                "image" : "",
-                "order" : 2
-            },{
-                "code" : "3",
-                "value" : 3,
-                "text": "Answer 3",
-                "image" : "",
-                "order" : 3
-            },{
-                "code" : "4",
-                "value" : 4,
-                "text": "Answer 4",
-                "image" : "",
-                "order" : 4
-            },{
-                "code" : "5",
-                "value" : 5,
-                "text": "Answer 5",
-                "image" : "",
-                "order" : 5
-            },{
-                "code" : "6",
-                "value" : 6,
-                "text": "Answer 6",
-                "image" : "",
-                "order" : 6
-            }
-        ],
-        "min" : 0,
-        "max" : 0,
-        "labels" : [] 
-    },{
-        "id" : "multiPolygonTest",
-        "code" : "PolygonTest",
+        "id" : "destructiveWords",
+        "code" : "destructiveWords",
         "type" : "MultiPolygon",
-        "text" : "Multiple Select Polygon example question", 
-        "factSubject" : "test2",
+        "text" : "Which destructive words apply to this persona", 
+        "factSubject" : "destructiveWords",
         "options" : [
             {
-                "code" : "1",
-                "value" : 1,
-                "text": "Answer 1",
+                "code" : "selfHarm",
+                "value" : "selfHarm",
+                "text": "Self Harm",
                 "image" : "",
                 "order" : 1
             },{
-                "code" : "2",
-                "value" : 2,
-                "text": "Answer 2",
+                "code" : "selfSabatage",
+                "value" : "selfSabatage",
+                "text": "Self Sabatage",
                 "image" : "",
                 "order" : 2
             },{
-                "code" : "3",
-                "value" : 3,
-                "text": "Answer 3",
+                "code" : "withdawn",
+                "value" : "withdawn",
+                "text": "Withdawn",
                 "image" : "",
                 "order" : 3
             },{
-                "code" : "4",
-                "value" : 4,
-                "text": "Answer 4",
+                "code" : "selfRisk",
+                "value" : "selfRisk",
+                "text": "Puts Self at Risk",
                 "image" : "",
                 "order" : 4
             },{
-                "code" : "5",
-                "value" : 5,
-                "text": "Answer 5",
+                "code" : "alienatesSelf",
+                "value" : "alienatesSelf",
+                "text": "Alienates Self",
                 "image" : "",
                 "order" : 5
             },{
-                "code" : "6",
-                "value" : 6,
-                "text": "Answer 6",
+                "code" : "suicidal",
+                "value" : "suicidal",
+                "text": "Suicidal",
                 "image" : "",
                 "order" : 6
             }
@@ -326,54 +278,6 @@
         "max" : 0,
         "labels" : ["Ecstatic", "Joyfull\nTest1\nTest2", "Happy\nTest1\nTest2", "Indifferent\nTest1\nTest2", "sad", "Sorrowful", "Depressed"] 
     },{
-        "id" : "005",
-        "code" : "MultipleSelect",
-        "type" : "MultipleSelect",
-        "text" : "Select every option that applies", 
-        "factSubject" : "test4",
-        "options" : [
-            {
-                "code" : "1",
-                "value" : 1,
-                "text": "Answer 1",
-                "image" : "",
-                "order" : 1
-            },{
-                "code" : "2",
-                "value" : 2,
-                "text": "Answer 2",
-                "image" : "",
-                "order" : 2
-            },{
-                "code" : "3",
-                "value" : 3,
-                "text": "Answer 3",
-                "image" : "",
-                "order" : 3
-            },{
-                "code" : "4",
-                "value" : 4,
-                "text": "Answer 4",
-                "image" : "",
-                "order" : 4
-            },{
-                "code" : "5",
-                "value" : 5,
-                "text": "Answer 5",
-                "image" : "",
-                "order" : 5
-            },{
-                "code" : "6",
-                "value" : 6,
-                "text": "Answer 6",
-                "image" : "",
-                "order" : 6
-            }
-        ],
-        "min" : 0,
-        "max" : 0,
-        "labels" : []
-    },{
         "id" : "personaName",
         "code" : "Persona Name",
         "type" : "TextInput",
@@ -382,6 +286,7 @@
         "options" : [],
         "min" : 0,
         "max" : 0,
-        "labels" : [] 
+        "labels" : [],
+        "timer" : -1
     }
 ]

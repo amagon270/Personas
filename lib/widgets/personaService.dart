@@ -6,12 +6,15 @@ import 'package:Personas/widgets/questionService.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'factService.dart';
+
 class Persona {
   String id;
   String name;
   Color color;
   List<Fact> facts;
   List<QuestionResponse> answers;
+  int order;
 }
 
 class PersonaService {
@@ -42,6 +45,7 @@ class PersonaService {
     persona.name = nameResponse?.choice ?? "";
     persona.answers = session.answers;
     persona.facts = session.facts;
+    persona.order = allPersonas.length;
     savePersona(persona, userId);
   }
 
@@ -85,10 +89,11 @@ class PersonaService {
       _persona.name = persona["name"] ?? "";
       int colorInt = persona["color"] ?? 0;
       _persona.color = new Color(colorInt);
+      _persona.order = persona["order"];
 
       List<Fact> _facts = new List<Fact>();
-      persona["facts"]?.forEach((subject, value) async {
-        _facts.add(Fact(subject, value));
+      persona["facts"]?.forEach((id, value) async {
+        _facts.add(FactService().getFactById(id, value: value));
       });
       _persona.facts = _facts;
 
@@ -101,31 +106,49 @@ class PersonaService {
 
       allPersonas.add(_persona);
     });
+    
+    allPersonas.sort((a, b) => a.order.compareTo(b.order));
     this.allPersonas = allPersonas;
     return allPersonas;
   }
 
-  void savePersona(Persona persona, String userId) async {
-    Map decodedData = await readPersonaFile();
-    decodedData[userId] ??= {};
-    decodedData[userId][persona.id] ??= {};
-    decodedData[userId][persona.id]["answers"] ??= {};
-    decodedData[userId][persona.id]["facts"] ??= {};
+  Map savablePersonaMap(Persona persona, String userId, Map existingMap) {
+    existingMap[userId] ??= {};
+    existingMap[userId][persona.id] ??= {};
+    existingMap[userId][persona.id]["answers"] ??= {};
+    existingMap[userId][persona.id]["facts"] ??= {};
 
-    decodedData[userId][persona.id]["name"] = persona.name;
-    decodedData[userId][persona.id]["color"] = persona.color.value;
+    existingMap[userId][persona.id]["name"] = persona.name;
+    existingMap[userId][persona.id]["color"] = persona.color.value;
+    existingMap[userId][persona.id]["order"] = persona.order;
 
     persona.facts?.forEach((fact) {
-      print(fact.subject);
-      print(decodedData[userId][persona.id]["facts"]);
-      decodedData[userId][persona.id]["facts"][fact.subject] = fact.value;
+      existingMap[userId][persona.id]["facts"][fact.id] = fact.value;
     });
+    print(existingMap[userId][persona.id]["facts"]);
     persona.answers?.forEach((answer) {
-      decodedData[userId][persona.id]["answers"][answer.question.id] = answer.choice;
+      existingMap[userId][persona.id]["answers"][answer.question.id] = answer.choice;
     });
+    
+    return existingMap;
+  }
+
+  void savePersona(Persona persona, String userId) async {
+    Map decodedData = await readPersonaFile();
+    decodedData = savablePersonaMap(persona, userId, decodedData);
     
     String newUserAnswers = json.encode(decodedData);
     writePersonaFile(newUserAnswers);
+  }
+
+  void setPersonaOrder(List<Persona> personas, String userId) async {
+    await writePersonaFile("");
+    personas.sort((a, b) => a.order.compareTo(b.order));
+    Map completePersonaMap = new Map();
+    personas.forEach((persona) {
+      completePersonaMap = savablePersonaMap(persona, userId, completePersonaMap);
+    });
+    await writePersonaFile(json.encode(completePersonaMap));
   }
 
   Future<Map> readPersonaFile() async {

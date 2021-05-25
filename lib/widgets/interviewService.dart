@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:Personas/widgets/factService.dart';
 import 'package:Personas/widgets/personaService.dart';
 import 'package:Personas/widgets/questionService.dart';
 import 'package:Personas/widgets/utility.dart';
@@ -79,25 +80,6 @@ class RuleTest {
   dynamic parameter;
 }
 
-class Fact {
-  Fact(this.subject, this.value);
-
-  final String subject;
-  dynamic value;
-
-  @override 
-  bool operator ==(Object other) => 
-    identical(this, other) || 
-    other is Fact &&
-    runtimeType == other.runtimeType &&
-    subject == other.subject;
-
-  @override
-  int get hashCode => subject.hashCode;
-
-
-}
-
 class InterviewService {
   List<Question> allQuestions;
   List<Rule> allRules;
@@ -110,7 +92,7 @@ class InterviewService {
     if (currentSession == null) {
       allQuestions =  await QuestionService.loadQuestions();
       allRules = await loadRules();
-      currentSession = await loadUnfinishedSession();
+      currentSession = new Session(await UtilityFunctions.generateId());
     }
     return currentSession;
   }
@@ -137,12 +119,12 @@ class InterviewService {
     rule.tests?.forEach((test) {
       //setting up blank facts if they don't exist.  In this case just assume a minimal value 
       //unless we are checking that it exists then skip this part
-      if (currentSession.facts.where((fact) => fact.subject == test.fact).length == 0 && test.operation != Operator.Exists) {
+      if (currentSession.facts.where((fact) => fact.id == test.fact).length == 0 && test.operation != Operator.Exists) {
         //can't use a switch here because of the comparison i'm doing
         if (test.parameter is int) {
-          currentSession.facts.add(Fact(test.fact, 0));
+          currentSession.facts.add(FactService().getFactById(test.fact, value: 0));
         } else if (test.parameter is String) {
-          currentSession.facts.add(Fact(test.fact, ""));
+          currentSession.facts.add(FactService().getFactById(test.fact, value: ""));
         }
       }
       //This goes against clarity but also saves about 20+ lines of repeating code so I'm sticking with it
@@ -152,7 +134,7 @@ class InterviewService {
       //action = false; 
       //all future tests can only set action to false again so it will never become true after 1 test fails
       //oposite done with Any Type; Action starts false and can only be changed to true
-      dynamic factValue = currentSession.facts.firstWhere((fact) => fact.subject == test.fact, orElse: () => null,)?.value;
+      dynamic factValue = currentSession.facts.firstWhere((fact) => fact.id == test.fact, orElse: () => null,)?.value;
       switch (test.operation) {
         case Operator.GreaterThan:
           if (actionComparison == (factValue > test.parameter)) {
@@ -170,7 +152,7 @@ class InterviewService {
           }
           break;
         case Operator.Exists:
-          if (actionComparison == (currentSession.facts.where((fact) => fact.subject == test.fact).length != 0)) {
+          if (actionComparison == (currentSession.facts.where((fact) => fact.id == test.fact).length != 0)) {
             action = actionChange;
           }
           break;
@@ -276,8 +258,9 @@ class InterviewService {
       QuestionResponse questionResponse = new QuestionResponse(question, response);
       if (!PersonaService.specialQuestionIds.contains(questionId)) {
         currentSession.answers.add(questionResponse);
-        addFactToList(Fact(question.factSubject, response), currentSession.facts);
-        currentSession.individualFacts.add(Fact(question.factSubject, response));
+        Fact _fact = FactService().getFactById(question.factSubject, value: response);
+        addFactToList(_fact, currentSession.facts);
+        currentSession.individualFacts.add(_fact);
       }
     }
   }
@@ -305,7 +288,7 @@ class InterviewService {
       } else if (newFact.value is String) {
         existingFact.value = "";
       } else {
-        list.removeWhere((fact) => fact.subject == newFact.subject);
+        list.removeWhere((fact) => fact.id == newFact.id);
       }
     }
   }
@@ -350,7 +333,7 @@ class InterviewService {
       Map action = rule["action"];
       RuleAction newAction = RuleAction();
       if (action["fact"] != null) {
-        Fact fact = Fact(action["fact"]["subject"], action["fact"]["value"]);
+        Fact fact = FactService().getFactById(action["fact"]["subject"], value: action["fact"]["value"]);
         newAction.fact = fact;
       } 
       if (action["questionId"] != null) {
@@ -392,7 +375,7 @@ class InterviewService {
     });
     sessionData["rules"] = processedRules;
     session.facts?.forEach((fact) {
-      sessionData["facts"][fact.subject] = fact.value;
+      sessionData["facts"][fact.id] = fact.value;
     });
 
     final directory = await getApplicationDocumentsDirectory();
@@ -404,7 +387,7 @@ class InterviewService {
     final directory = await getApplicationDocumentsDirectory();
     final file = File('${directory.path}/unfinishedSession.json');
     String userAnswers = "{}";
-    try{
+    try{   
       userAnswers = await file.readAsString();
     } catch (e) {
       print("Couldn't find file, creating new file");
@@ -430,7 +413,8 @@ class InterviewService {
         processedRules.add(allRules.firstWhere((e) => e.id == ruleId.toString(), orElse: () => null,));
       });
       (userData["facts"] as Map<dynamic, dynamic>)?.forEach((factId, value) {
-        facts.add(Fact(factId.toString(), value));
+        Fact fact = FactService().getFactById(factId.toString(), value: value);
+        facts.add(fact);
       });
       newSession.questions = questions;
       newSession.answers = answers;

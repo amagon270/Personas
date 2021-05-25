@@ -5,6 +5,7 @@ import 'package:Personas/pages/login.dart';
 import 'package:Personas/pages/menu.dart';
 import 'package:Personas/pages/viewPersona.dart';
 import 'package:Personas/pages/viewPersonas.dart';
+import 'package:Personas/widgets/factService.dart';
 import 'package:Personas/widgets/interviewService.dart';
 import 'package:Personas/widgets/personaService.dart';
 import 'package:Personas/widgets/questionService.dart';
@@ -108,6 +109,7 @@ class HomePage extends StatelessWidget {
     QuestionService();
     PersonaService();
     InterviewService();
+    FactService();
     
     String userId = context.watch<User>().id;
     bool watchedIntro = context.watch<User>().hasWatchedIntro;

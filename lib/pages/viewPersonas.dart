@@ -1,29 +1,48 @@
 import 'package:Personas/widgets/personaService.dart';
 import 'package:flutter/material.dart';
 
-class ViewPersonas extends StatelessWidget {
+class ViewPersonas extends StatefulWidget {
+  ViewPersonas({Key key}): super(key: key);
+
+  _ViewPersonas createState() => _ViewPersonas();
+}
+
+class _ViewPersonas extends State<ViewPersonas> {
+
+  List<Widget> _allPersonas;
+
+  @override
+  initState() {
+    super.initState();
+    _allPersonas = null;
+  }
 
   List<Widget> createPersonaList(List<Persona> personas, BuildContext context) {
     List<Widget> widgets = new List<Widget>();
     personas.forEach((persona) {
-      widgets.add(Container(
+      widgets.add(
+        Container(
+          key: ValueKey(persona.id),
+          width: MediaQuery.of(context).size.width,
+          margin: EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: persona.color,
             border: Border.all(width: 1, color: Colors.black12),
-  
           ),
-        child: FlatButton(
-        color: persona.color,
-        child: Container(
-          child: Text(
-            persona.name,
-            style: TextStyle(color: persona.color.computeLuminance() > 0.35 ? Colors.black : Colors.white),
+          child: FlatButton(
+            color: persona.color,
+            child: Container(
+              child: Text(
+                persona.name,
+                style: TextStyle(color: persona.color.computeLuminance() > 0.35 ? Colors.black : Colors.white),
+              )
+            ),
+            onPressed: () {
+              Navigator.of(context).pushNamed("/viewPersona", arguments: persona);
+            }
           )
-        ),
-        onPressed: () {
-          Navigator.of(context).pushNamed("/viewPersona", arguments: persona);
-        })
-      ));
+        )
+      );
     });
     return widgets;
   }
@@ -39,15 +58,21 @@ class ViewPersonas extends StatelessWidget {
             if (!snapshot.hasData) {
               return Text("Getting Results");
             } else {
-              List<Widget> allPersonas = createPersonaList(snapshot.data, context);
-              return ListView.builder(
-                itemCount: snapshot.data.length,
-                itemBuilder: (BuildContext context, int index) { 
-                  return Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 13),
-                    child:  allPersonas[index]
-                  );
-                },
+              _allPersonas ??= createPersonaList(snapshot.data, context);
+              return ReorderableListView(
+                header: Container(
+                  //padding: EdgeInsets.all(20),
+                ),
+                children: _allPersonas,
+                onReorder: (oldIndex, newIndex) {
+                  setState(() {
+                    if (newIndex > oldIndex) {
+                      newIndex -= 1;
+                    }
+                    var item = _allPersonas.removeAt(oldIndex);
+                    _allPersonas.insert(newIndex, item);
+                  });
+                }
               );
             }
           }
@@ -55,5 +80,4 @@ class ViewPersonas extends StatelessWidget {
       )
     );
   }
-  
 }

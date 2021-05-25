@@ -1,0 +1,48 @@
+[
+    {
+        "id" : "name",
+        "text" : "${value}",
+        "tags" : [],
+        "value" : ""
+    },{
+        "id" : "color",
+        "text" : "${value}",
+        "tags" : [],
+        "value" : ""
+    },{
+        "id" : "energy",
+        "text" : "${value} Energy",
+        "tags" : ["energy"],
+        "value" : ""
+    },{
+        "id" : "roundness",
+        "text" : "${value}",
+        "tags" : [],
+        "value" : ""
+    },{
+        "id" : "rigidity",
+        "text" : "${value}",
+        "tags" : [],
+        "value" : ""
+    },{
+        "id" : "personaType",
+        "text" : "${value}",
+        "tags" : [],
+        "value" : ""
+    },{
+        "id" : "emotionType",
+        "text" : "${value}",
+        "tags" : [],
+        "value" : ""
+    },{
+        "id" : "destructiveWords",
+        "text" : "${value}",
+        "tags" : [],
+        "value" : ""
+    },{
+        "id" : "happiness",
+        "text" : "${value}",
+        "tags" : [],
+        "value" : ""
+    }
+]
