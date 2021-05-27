@@ -14,7 +14,6 @@ class Persona {
   Color color;
   List<Fact> facts;
   List<QuestionResponse> answers;
-  int order;
 }
 
 class PersonaService {
@@ -23,10 +22,13 @@ class PersonaService {
 
   List<Persona> allPersonas;
   String userId;
+  String currentOrdering;
 
   static final List<String> specialQuestionIds = ["", "intro", "end", "blank"];
 
-  PersonaService._internal();
+  PersonaService._internal() {
+    currentOrdering = "default";
+  }
 
   void save(String name, Session session) {
     Persona persona = new Persona();
@@ -45,7 +47,6 @@ class PersonaService {
     persona.name = nameResponse?.choice ?? "";
     persona.answers = session.answers;
     persona.facts = session.facts;
-    persona.order = allPersonas.length;
     savePersona(persona, userId);
   }
 
@@ -89,7 +90,6 @@ class PersonaService {
       _persona.name = persona["name"] ?? "";
       int colorInt = persona["color"] ?? 0;
       _persona.color = new Color(colorInt);
-      _persona.order = persona["order"];
 
       List<Fact> _facts = new List<Fact>();
       persona["facts"]?.forEach((id, value) async {
@@ -106,12 +106,14 @@ class PersonaService {
 
       allPersonas.add(_persona);
     });
-    
-    allPersonas.sort((a, b) => a.order.compareTo(b.order));
-    this.allPersonas = allPersonas;
-    return allPersonas;
+    List<Persona> orderedPersonas = await getPersonaOrder(allPersonas, currentOrdering ?? "default");
+    setPersonaOrder(orderedPersonas, currentOrdering ?? "default");
+
+    this.allPersonas = orderedPersonas;
+    return orderedPersonas;
   }
 
+  //used to turn a persona object into a json savable map
   Map savablePersonaMap(Persona persona, String userId, Map existingMap) {
     existingMap[userId] ??= {};
     existingMap[userId][persona.id] ??= {};
@@ -120,12 +122,10 @@ class PersonaService {
 
     existingMap[userId][persona.id]["name"] = persona.name;
     existingMap[userId][persona.id]["color"] = persona.color.value;
-    existingMap[userId][persona.id]["order"] = persona.order;
 
     persona.facts?.forEach((fact) {
       existingMap[userId][persona.id]["facts"][fact.id] = fact.value;
     });
-    print(existingMap[userId][persona.id]["facts"]);
     persona.answers?.forEach((answer) {
       existingMap[userId][persona.id]["answers"][answer.question.id] = answer.choice;
     });
@@ -139,16 +139,30 @@ class PersonaService {
     
     String newUserAnswers = json.encode(decodedData);
     writePersonaFile(newUserAnswers);
+    allPersonas.add(persona);
+    setPersonaOrder(allPersonas, currentOrdering ?? "default");
   }
 
-  void setPersonaOrder(List<Persona> personas, String userId) async {
-    await writePersonaFile("");
-    personas.sort((a, b) => a.order.compareTo(b.order));
-    Map completePersonaMap = new Map();
-    personas.forEach((persona) {
-      completePersonaMap = savablePersonaMap(persona, userId, completePersonaMap);
-    });
-    await writePersonaFile(json.encode(completePersonaMap));
+  void setPersonaOrder(List<Persona> personas, String orderName) async {
+    Map personaOrderMap = await readPersonaOrderFile();
+    personaOrderMap[userId] ??= {};
+    personaOrderMap[userId][orderName] = {};
+
+    for (int i = 0; i < personas.length; i++) {
+      personaOrderMap[userId][orderName][personas[i].id] = i;
+    }
+
+    await writePersonaOrderFile(json.encode(personaOrderMap));
+  }
+
+  Future<List<Persona>> getPersonaOrder(List<Persona> personas, String orderName) async {
+    Map personaOrderMap = await readPersonaOrderFile();
+    //null safety
+    personaOrderMap[userId] ??= {};
+    personaOrderMap[userId][orderName] ??= {};
+    var order = personaOrderMap[userId][orderName] as Map<dynamic, dynamic>;
+    personas.sort((a, b) => (order[a.id] ?? 0).compareTo((order[b.id]) ?? 0));
+    return personas;
   }
 
   Future<Map> readPersonaFile() async {
@@ -167,6 +181,27 @@ class PersonaService {
   Future<bool> writePersonaFile(String fileData) async {
     final directory = await getApplicationDocumentsDirectory();
     final file = File('${directory.path}/personas.json');
+    await file.writeAsString(fileData);
+    return true;
+  }
+
+    Future<Map> readPersonaOrderFile() async {
+    final directory = await getApplicationDocumentsDirectory();
+    final file = File('${directory.path}/personaOrder.json');
+    String userAnswers = "{}";
+    try{
+      userAnswers = await file.readAsString();
+    } catch (e) {
+      print("Couldn't find file, creating new file");
+      userAnswers = '{"" : {}}';
+    }
+    return json.decode(userAnswers);
+  }
+
+  Future<bool> writePersonaOrderFile(String fileData) async {
+    final directory = await getApplicationDocumentsDirectory();
+    print(fileData);
+    final file = File('${directory.path}/personaOrder.json');
     await file.writeAsString(fileData);
     return true;
   }

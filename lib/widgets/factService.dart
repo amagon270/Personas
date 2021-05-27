@@ -38,7 +38,6 @@ class FactService {
   List<Fact> get allFacts => _allFacts;
 
   Fact getFactById(String id, {dynamic value}) {
-    print(id);
     Fact newFact = _allFacts.firstWhere((e) => e.id == id, orElse: () {throw ("There has been an error with the $id fact");});
     newFact.value = value;
     return newFact;

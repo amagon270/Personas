@@ -9,7 +9,8 @@ class ViewPersonas extends StatefulWidget {
 
 class _ViewPersonas extends State<ViewPersonas> {
 
-  List<Widget> _allPersonas;
+  List<Persona> _allPersonas;
+  PersonaService personaService;
 
   @override
   initState() {
@@ -49,6 +50,7 @@ class _ViewPersonas extends State<ViewPersonas> {
   
   @override
   Widget build(BuildContext context) {
+    personaService = PersonaService();
     return Scaffold(
       appBar: AppBar(title: Text("Personas"),),
       body: SafeArea(
@@ -58,12 +60,12 @@ class _ViewPersonas extends State<ViewPersonas> {
             if (!snapshot.hasData) {
               return Text("Getting Results");
             } else {
-              _allPersonas ??= createPersonaList(snapshot.data, context);
+              _allPersonas ??= snapshot.data;
               return ReorderableListView(
                 header: Container(
                   //padding: EdgeInsets.all(20),
                 ),
-                children: _allPersonas,
+                children: createPersonaList(_allPersonas, context),
                 onReorder: (oldIndex, newIndex) {
                   setState(() {
                     if (newIndex > oldIndex) {
@@ -72,6 +74,7 @@ class _ViewPersonas extends State<ViewPersonas> {
                     var item = _allPersonas.removeAt(oldIndex);
                     _allPersonas.insert(newIndex, item);
                   });
+                  personaService.setPersonaOrder(_allPersonas, personaService.currentOrdering);
                 }
               );
             }
