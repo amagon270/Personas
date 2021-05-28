@@ -7,6 +7,7 @@ import 'package:Personas/widgets/questionFormats/multipleSelectQuestion.dart';
 import 'package:Personas/widgets/questionFormats/polygonQuestion.dart';
 import 'package:Personas/widgets/questionFormats/sliderQuestion.dart';
 import 'package:Personas/widgets/questionFormats/textInputQuestion.dart';
+import 'package:Personas/widgets/questionFormats/textOnlyQuestion.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,7 +21,8 @@ enum QuestionType {
   Circle,
   ColourPicker,
   MultipleSelect,
-  TextInput
+  TextInput,
+  TextOnly
 }
 
 //allows calling string.toEnum({Enum}.values) to turn a string into an Enum e.g. "Slider".toEnum(QuestionType.values)
@@ -99,6 +101,8 @@ class Question {
         return ColourPickerQuestion(data: inputData, key: UniqueKey());
       case QuestionType.TextInput:
         return TextInputQuestion(data: inputData, key: UniqueKey());
+      case QuestionType.TextOnly:
+        return TextOnlyQuestion(data: inputData, key: UniqueKey());
       default:
        return MultipleChoiceQuestion(data: inputData, key: UniqueKey());
     }
