@@ -2,7 +2,7 @@
     {
         "id" : "intro",
         "code" : "Intro",
-        "type" : "MultipleChoice",
+        "type" : "TextOnly",
         "text" : "OK, Think of a persona.", 
         "factSubject" : "",
         "options" : [],
@@ -12,7 +12,17 @@
     },{
         "id" : "end",
         "code" : "",
-        "type" : "MultipleChoice",
+        "type" : "TextOnly",
+        "text" : "", 
+        "factSubject" : "",
+        "options" : [],
+        "min" : 0,
+        "max" : 0,
+        "labels" : [] 
+    },{
+        "id" : "blank",
+        "code" : "",
+        "type" : "TextOnly",
         "text" : "", 
         "factSubject" : "",
         "options" : [],

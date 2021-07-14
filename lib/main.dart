@@ -70,33 +70,12 @@ class Personas extends StatelessWidget {
         var curve = Curves.easeInOut;
 
         var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-        var tweenscale = Tween(begin: 0.1, end: 1.0); 
         var offsetAnimation = animation.drive(tween); 
-
 
         return SlideTransition(
           position: offsetAnimation,
           child: child,
         );
-        return SlideTransition(
-          position: offsetAnimation,
-          child: ScaleTransition(
-            scale: animation.drive(tweenscale),
-            child: child
-          )
-        );
-        return ScaleTransition(
-          scale: animation.drive(tweenscale),
-          child: SlideTransition(
-            position: offsetAnimation,
-            child: child,
-          )
-        );
-        return ScaleTransition(
-          scale: animation.drive(tweenscale),
-          child: child
-        );
-        
       },
     );
   }

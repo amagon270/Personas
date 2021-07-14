@@ -30,7 +30,7 @@ class PersonaService {
     currentOrdering = "default";
   }
 
-  void save(String name, Session session) {
+  void save(Session session) {
     Persona persona = new Persona();
     persona.id = session.id;
 

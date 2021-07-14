@@ -85,8 +85,8 @@ class InterviewService {
   List<Rule> allRules;
   Session currentSession;
 
-  static final Question endQuestion = Question("end", "", "", QuestionType.MultipleChoice, "", []);
-  static final Question blankQuestion = Question("blank", "", "Something went wrong with the question", QuestionType.MultipleChoice, "", []);
+  static final Question endQuestion = Question("end", "", "", QuestionType.TextOnly, "", []);
+  static final Question blankQuestion = Question("blank", "", "Something went wrong with the question", QuestionType.TextOnly, "", []);
 
   Future<Session> startSession() async {
     if (currentSession == null) {
@@ -172,42 +172,32 @@ class InterviewService {
   }
 
   Question nextQuestion() {
-    saveUnfinishedSession(currentSession);
+    //saveUnfinishedSession(currentSession);
+
     List<Rule> possibleRules = new List<Rule>();
     allRules.forEach((newRule) { 
       if (!currentSession.processedRules.contains(newRule) && _checkRule(newRule)) {
         possibleRules.add(newRule);
       }
     });
+
+    //out of rules end the session
     if (possibleRules.length == 0) {
       clearUnfinishedSession();
-      PersonaService().save("Test", currentSession);
+      PersonaService().save(currentSession);
       return endQuestion;
     }
+
     possibleRules.sort((a, b) => b.priority.compareTo(a.priority));
     Rule rule = possibleRules.first;
     currentSession.processedRules.add(rule);
 
-    //if both fact and question exist in the rule do both
-    if (rule.action.fact != null && rule.action.questionId != null) {
+    if (rule.action.fact != null) {
       addFactToList(rule.action.fact, currentSession.facts);
       currentSession.individualFacts.add(rule.action.fact);
-      Question question = QuestionService().getQuestionById(rule.action.questionId);
-      if (question != null) {
-        currentSession.questions.add(question);
-        return question;
-      } else {
-        return blankQuestion;
-      }
-
-    //if only the fact exist in the rule add the fact then ask the next question
-    } else if (rule.action.fact != null) {
-      addFactToList(rule.action.fact, currentSession.facts);
-      currentSession.individualFacts.add(rule.action.fact);
-      return nextQuestion();
-
-    //if only the question exists then return the question
-    } else if (rule.action.questionId != null) {
+    } 
+    
+    if (rule.action.questionId != null) {
       Question question = QuestionService().getQuestionById(rule.action.questionId);
       if (question != null) {
         currentSession.questions.add(question);
@@ -216,8 +206,8 @@ class InterviewService {
         return blankQuestion;
       }
     }
-    //if no action was specified then as a failsafe return the blank question
-    return blankQuestion;
+
+    return nextQuestion();
   }
 
   QuestionResponse previousQuestion() {
