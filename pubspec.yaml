@@ -43,6 +43,7 @@ flutter:
     - assets/questions/
     - assets/images/
     - assets/user.json
+    - assets/export.json
 
 
 

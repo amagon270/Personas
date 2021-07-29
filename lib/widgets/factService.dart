@@ -48,11 +48,11 @@ class FactService {
   }
 
   static Future<List<Fact>> loadFacts() async {
-    final data = await rootBundle.loadString("assets/questions/facts.json");
-    List<dynamic> decodedData = json.decode(data);
+    final data = await rootBundle.loadString("assets/export.json");
+    List<dynamic> decodedData = json.decode(data)["facts"];
     List<Fact> newFacts = new List<Fact>();
     decodedData.forEach((fact) {
-      var id = fact["id"] ?? "";
+      var id = fact["id"].toString() ?? "";
       var text = fact["text"];
       var tags = (fact["tags"] as List<dynamic>).map((e) => e as String).toList();
       Fact newFact = Fact(id, text, tags);

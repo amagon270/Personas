@@ -29,18 +29,23 @@ enum QuestionType {
 extension EnumParser on String {
   T toEnum<T>(List<T> values) {
     return values.firstWhere(
-      (e) => e.toString().toLowerCase().split(".").last == '$this'.toLowerCase(), orElse: () => null,);
+      (e) =>
+          e.toString().toLowerCase().split(".").last == '$this'.toLowerCase(),
+      orElse: () => null,
+    );
   }
 }
 
 class QuestionOption {
-  QuestionOption(this.code, this.value, this.text, {this.image, this.order});
+  QuestionOption(this.code, this.value, this.text,
+      {this.image, this.order, this.fact});
 
   String code;
   dynamic value;
   String text;
   String image;
   int order;
+  String fact;
 
   Map getAsMap() {
     Map newMap = Map();
@@ -49,12 +54,14 @@ class QuestionOption {
     newMap["text"] = text;
     newMap["image"] = image ?? "";
     newMap["order"] = order;
+    newMap["fact"] = fact;
     return newMap;
   }
 }
 
 class QuestionInputData {
-  QuestionInputData(this.question, this.selectAnswer, {this.startValue, this.editable = true});
+  QuestionInputData(this.question, this.selectAnswer,
+      {this.startValue, this.editable = true});
 
   Question question;
   ValueChanged selectAnswer;
@@ -63,7 +70,9 @@ class QuestionInputData {
 }
 
 class Question {
-  Question(this.id, this.code, this.text, this.type, this.factSubject, this.options, {this.min, this.max, this.labels, this.timer = 10});
+  Question(
+      this.id, this.code, this.text, this.type, this.factSubject, this.options,
+      {this.min, this.max, this.labels, this.timer = 10});
 
   String id;
   String code;
@@ -76,10 +85,11 @@ class Question {
   List<String> labels;
   int timer;
 
-  Widget generateQuestionWidget({ValueChanged selectAnswer, dynamic startValue, bool editable = true}) {
-
+  Widget generateQuestionWidget(
+      {ValueChanged selectAnswer, dynamic startValue, bool editable = true}) {
     selectAnswer ??= (value) {};
-    QuestionInputData inputData = QuestionInputData(this, selectAnswer, startValue: startValue, editable: editable);
+    QuestionInputData inputData = QuestionInputData(this, selectAnswer,
+        startValue: startValue, editable: editable);
 
     switch (type) {
       case QuestionType.MultipleChoice:
@@ -87,9 +97,15 @@ class Question {
       case QuestionType.MultipleSelect:
         return MultipleSelectQuestion(data: inputData, key: UniqueKey());
       case QuestionType.Slider:
-        return SliderQuestion(data: inputData, key: UniqueKey(),);
+        return SliderQuestion(
+          data: inputData,
+          key: UniqueKey(),
+        );
       case QuestionType.MiddleSlider:
-        return MiddleSliderQuestion(data: inputData, key: UniqueKey(),);
+        return MiddleSliderQuestion(
+          data: inputData,
+          key: UniqueKey(),
+        );
       case QuestionType.Polygon:
         return PolygonQuestion(data: inputData, key: UniqueKey());
       case QuestionType.MultiPolygon:
@@ -104,7 +120,7 @@ class Question {
       case QuestionType.TextOnly:
         return TextOnlyQuestion(data: inputData, key: UniqueKey());
       default:
-       return MultipleChoiceQuestion(data: inputData, key: UniqueKey());
+        return MultipleChoiceQuestion(data: inputData, key: UniqueKey());
     }
   }
 }
@@ -126,15 +142,17 @@ class QuestionService {
   List<Question> get allQuestions => _allQuestions;
 
   Question getQuestionById(String id) {
-    return _allQuestions?.firstWhere((e) => (e.id == id), orElse: () {return null;});
+    return _allQuestions?.firstWhere((e) => (e.id == id), orElse: () {
+      return null;
+    });
   }
 
   static Future<List<Question>> loadQuestions() async {
-    final data = await rootBundle.loadString("assets/questions/personaQuestions.json");
-    List<dynamic> decodedData = json.decode(data);
+    final data = await rootBundle.loadString("assets/export.json");
+    List<dynamic> decodedData = json.decode(data)["questions"];
     List<Question> newQuestions = new List<Question>();
     decodedData.forEach((question) {
-      var id = question["id"] ?? "";
+      var id = question["id"]?.toString() ?? "";
       var code = question["code"];
       var type = question["type"].toString().toEnum(QuestionType.values);
       var text = question["text"];
@@ -142,14 +160,24 @@ class QuestionService {
       var min = question["min"];
       var max = question["max"];
       var timer = question["timer"] ?? 10;
-      var labels = (question["labels"] as List<dynamic>).map((e) => e as String).toList();
+      var labels = (question["labels"] as List<dynamic>)
+          ?.map((e) => e as String)
+          ?.toList();
       List<QuestionOption> newOptions = new List<QuestionOption>();
       (question['options'] as List)?.forEach((option) {
-        newOptions.add(QuestionOption(option["code"], option["value"], option["text"], image: option["image"], order: option["order"]));
+        print(option);
+        if (option["code"] != "") {
+          newOptions.add(QuestionOption(
+              option["code"], option["value"], option["text"],
+              image: option["image"], order: option["order"],
+              fact: option["factId"].toString()));
+        }
       });
 
-      Question newQuestion = Question(id, code, text, type, subject, newOptions ?? [], min: min ?? 0, max: max ?? 0, labels: labels ?? [], timer: timer);
-      
+      Question newQuestion = Question(
+          id, code, text, type, subject, newOptions ?? [],
+          min: min ?? 0, max: max ?? 0, labels: labels ?? [], timer: timer);
+
       newQuestions.add(newQuestion);
     });
     return newQuestions;

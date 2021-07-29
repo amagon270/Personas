@@ -28,25 +28,38 @@ class PersonaService {
 
   PersonaService._internal() {
     currentOrdering = "default";
+    getPersonas();
   }
 
   void save(Session session) {
+    print("about to save persona" + session.answers.length.toString());
     Persona persona = new Persona();
     persona.id = session.id;
 
     //specifically find the color response and remove it from normal questions
-    QuestionResponse colorResponse = session.answers.firstWhere((e) => (e.question.id == "personaColor"), orElse: () {return null;},);
+    QuestionResponse colorResponse = session.answers.firstWhere(
+      (e) => (e.question.code == "personaColor"),
+      orElse: () {
+        return null;
+      },
+    );
     int colorString = colorResponse?.choice ?? 0;
-    session.answers.removeWhere((e) => (e.question.id == "personaColor"));
+    session.answers.removeWhere((e) => (e.question.code == "personaColor"));
 
     //specifically find the name of the persona and remove it from normal questions
-    QuestionResponse nameResponse = session.answers.firstWhere((e) => (e.question.id == "personaName"), orElse: () {return null;},);
-    session.answers.removeWhere((e) => (e.question.id == "personaName"));
+    QuestionResponse nameResponse = session.answers.firstWhere(
+      (e) => (e.question.code == "personaName"),
+      orElse: () {
+        return null;
+      },
+    );
+    session.answers.removeWhere((e) => (e.question.code == "personaName"));
 
     persona.color = Color(colorString) ?? Colors.white;
     persona.name = nameResponse?.choice ?? "";
     persona.answers = session.answers;
     persona.facts = session.facts;
+    print(persona.color);
     savePersona(persona, userId);
   }
 
@@ -55,11 +68,21 @@ class PersonaService {
   }
 
   Persona get(String personaId) {
-    return allPersonas.firstWhere((e) => (e.id == personaId), orElse: () {return null;},);
+    return allPersonas.firstWhere(
+      (e) => (e.id == personaId),
+      orElse: () {
+        return null;
+      },
+    );
   }
 
   Future<bool> delete(String personaId) async {
-    Persona _persona = allPersonas.firstWhere((e) => (e.id == personaId), orElse: () {return null;},);
+    Persona _persona = allPersonas.firstWhere(
+      (e) => (e.id == personaId),
+      orElse: () {
+        return null;
+      },
+    );
     allPersonas.remove(_persona);
 
     Map decodedData = await readPersonaFile();
@@ -99,14 +122,21 @@ class PersonaService {
 
       List<QuestionResponse> _personaAnswers = new List<QuestionResponse>();
       persona["answers"]?.forEach((question, answer) async {
-        Question questionObject = allQuestions.firstWhere((e) => (e.id == question), orElse: () {return null;},);
-        if (questionObject != null) _personaAnswers.add(new QuestionResponse(questionObject, answer));
+        Question questionObject = allQuestions.firstWhere(
+          (e) => (e.id == question),
+          orElse: () {
+            return null;
+          },
+        );
+        if (questionObject != null)
+          _personaAnswers.add(new QuestionResponse(questionObject, answer));
       });
       _persona.answers = _personaAnswers;
 
       allPersonas.add(_persona);
     });
-    List<Persona> orderedPersonas = await getPersonaOrder(allPersonas, currentOrdering ?? "default");
+    List<Persona> orderedPersonas =
+        await getPersonaOrder(allPersonas, currentOrdering ?? "default");
     setPersonaOrder(orderedPersonas, currentOrdering ?? "default");
 
     this.allPersonas = orderedPersonas;
@@ -127,16 +157,17 @@ class PersonaService {
       existingMap[userId][persona.id]["facts"][fact.id] = fact.value;
     });
     persona.answers?.forEach((answer) {
-      existingMap[userId][persona.id]["answers"][answer.question.id] = answer.choice;
+      existingMap[userId][persona.id]["answers"][answer.question.id] =
+          answer.choice;
     });
-    
+
     return existingMap;
   }
 
   void savePersona(Persona persona, String userId) async {
     Map decodedData = await readPersonaFile();
     decodedData = savablePersonaMap(persona, userId, decodedData);
-    
+
     String newUserAnswers = json.encode(decodedData);
     writePersonaFile(newUserAnswers);
     allPersonas.add(persona);
@@ -155,7 +186,8 @@ class PersonaService {
     await writePersonaOrderFile(json.encode(personaOrderMap));
   }
 
-  Future<List<Persona>> getPersonaOrder(List<Persona> personas, String orderName) async {
+  Future<List<Persona>> getPersonaOrder(
+      List<Persona> personas, String orderName) async {
     Map personaOrderMap = await readPersonaOrderFile();
     //null safety
     personaOrderMap[userId] ??= {};
@@ -169,7 +201,7 @@ class PersonaService {
     final directory = await getApplicationDocumentsDirectory();
     final file = File('${directory.path}/personas.json');
     String userAnswers = "{}";
-    try{
+    try {
       userAnswers = await file.readAsString();
     } catch (e) {
       print("Couldn't find file, creating new file");
@@ -185,11 +217,11 @@ class PersonaService {
     return true;
   }
 
-    Future<Map> readPersonaOrderFile() async {
+  Future<Map> readPersonaOrderFile() async {
     final directory = await getApplicationDocumentsDirectory();
     final file = File('${directory.path}/personaOrder.json');
     String userAnswers = "{}";
-    try{
+    try {
       userAnswers = await file.readAsString();
     } catch (e) {
       print("Couldn't find file, creating new file");
