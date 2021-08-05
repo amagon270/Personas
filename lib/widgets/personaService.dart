@@ -24,7 +24,7 @@ class PersonaService {
   String userId;
   String currentOrdering;
 
-  static final List<String> specialQuestionIds = ["", "intro", "end", "blank"];
+  static final List<String> specialQuestionIds = ["", "intro", "blank"];
 
   PersonaService._internal() {
     currentOrdering = "default";
@@ -32,16 +32,13 @@ class PersonaService {
   }
 
   void save(Session session) {
-    print("about to save persona" + session.answers.length.toString());
     Persona persona = new Persona();
     persona.id = session.id;
 
     //specifically find the color response and remove it from normal questions
     QuestionResponse colorResponse = session.answers.firstWhere(
       (e) => (e.question.code == "personaColor"),
-      orElse: () {
-        return null;
-      },
+      orElse: () {return null;},
     );
     int colorString = colorResponse?.choice ?? 0;
     session.answers.removeWhere((e) => (e.question.code == "personaColor"));
@@ -49,9 +46,7 @@ class PersonaService {
     //specifically find the name of the persona and remove it from normal questions
     QuestionResponse nameResponse = session.answers.firstWhere(
       (e) => (e.question.code == "personaName"),
-      orElse: () {
-        return null;
-      },
+      orElse: () {return null;},
     );
     session.answers.removeWhere((e) => (e.question.code == "personaName"));
 
@@ -59,7 +54,6 @@ class PersonaService {
     persona.name = nameResponse?.choice ?? "";
     persona.answers = session.answers;
     persona.facts = session.facts;
-    print(persona.color);
     savePersona(persona, userId);
   }
 
@@ -124,9 +118,7 @@ class PersonaService {
       persona["answers"]?.forEach((question, answer) async {
         Question questionObject = allQuestions.firstWhere(
           (e) => (e.id == question),
-          orElse: () {
-            return null;
-          },
+          orElse: () {return null;},
         );
         if (questionObject != null)
           _personaAnswers.add(new QuestionResponse(questionObject, answer));
@@ -135,8 +127,7 @@ class PersonaService {
 
       allPersonas.add(_persona);
     });
-    List<Persona> orderedPersonas =
-        await getPersonaOrder(allPersonas, currentOrdering ?? "default");
+    List<Persona> orderedPersonas = await getPersonaOrder(allPersonas, currentOrdering ?? "default");
     setPersonaOrder(orderedPersonas, currentOrdering ?? "default");
 
     this.allPersonas = orderedPersonas;
@@ -154,7 +145,7 @@ class PersonaService {
     existingMap[userId][persona.id]["color"] = persona.color.value;
 
     persona.facts?.forEach((fact) {
-      existingMap[userId][persona.id]["facts"][fact.id] = fact.value;
+      existingMap[userId][persona.id]["facts"][fact?.id] = fact?.value;
     });
     persona.answers?.forEach((answer) {
       existingMap[userId][persona.id]["answers"][answer.question.id] =
@@ -232,7 +223,6 @@ class PersonaService {
 
   Future<bool> writePersonaOrderFile(String fileData) async {
     final directory = await getApplicationDocumentsDirectory();
-    print(fileData);
     final file = File('${directory.path}/personaOrder.json');
     await file.writeAsString(fileData);
     return true;

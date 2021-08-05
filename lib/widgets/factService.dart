@@ -9,12 +9,10 @@ class Fact {
   List<String> tags;
   dynamic value;
 
-  @override 
-  bool operator ==(Object other) => 
-    identical(this, other) || 
-    other is Fact &&
-    runtimeType == other.runtimeType &&
-    id == other.id;
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Fact && runtimeType == other.runtimeType && id == other.id;
 
   @override
   int get hashCode => id.hashCode;
@@ -38,8 +36,13 @@ class FactService {
   List<Fact> get allFacts => _allFacts;
 
   Fact getFactById(String id, {dynamic value}) {
-    Fact newFact = _allFacts.firstWhere((e) => e.id == id, orElse: () {throw ("There has been an error with the $id fact");});
-    newFact.value = value;
+    Fact newFact = _allFacts.firstWhere((e) => e.id == id, orElse: () {
+      if (id != "" && id != null) {
+        throw ("There has been an error with the $id fact");
+      }
+      return null;
+    });
+    newFact?.value = value;
     return newFact;
   }
 
@@ -54,7 +57,8 @@ class FactService {
     decodedData.forEach((fact) {
       var id = fact["id"].toString() ?? "";
       var text = fact["text"];
-      var tags = (fact["tags"] as List<dynamic>).map((e) => e as String).toList();
+      var tags =
+          (fact["tags"] as List<dynamic>).map((e) => e as String).toList();
       Fact newFact = Fact(id, text, tags);
       newFacts.add(newFact);
     });

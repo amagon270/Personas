@@ -29,8 +29,7 @@ enum QuestionType {
 extension EnumParser on String {
   T toEnum<T>(List<T> values) {
     return values.firstWhere(
-      (e) =>
-          e.toString().toLowerCase().split(".").last == '$this'.toLowerCase(),
+      (e) => e.toString().toLowerCase().split(".").last == '$this'.toLowerCase(),
       orElse: () => null,
     );
   }
@@ -38,7 +37,7 @@ extension EnumParser on String {
 
 class QuestionOption {
   QuestionOption(this.code, this.value, this.text,
-      {this.image, this.order, this.fact});
+    {this.image, this.order, this.fact});
 
   String code;
   dynamic value;
@@ -61,7 +60,7 @@ class QuestionOption {
 
 class QuestionInputData {
   QuestionInputData(this.question, this.selectAnswer,
-      {this.startValue, this.editable = true});
+    {this.startValue, this.editable = true});
 
   Question question;
   ValueChanged selectAnswer;
@@ -70,9 +69,8 @@ class QuestionInputData {
 }
 
 class Question {
-  Question(
-      this.id, this.code, this.text, this.type, this.factSubject, this.options,
-      {this.min, this.max, this.labels, this.timer = 10});
+  Question(this.id, this.code, this.text, this.type, this.factSubject, this.options,
+    {this.min, this.max, this.labels, this.timer = 10});
 
   String id;
   String code;
@@ -85,11 +83,12 @@ class Question {
   List<String> labels;
   int timer;
 
-  Widget generateQuestionWidget(
-      {ValueChanged selectAnswer, dynamic startValue, bool editable = true}) {
+  Widget generateQuestionWidget({ValueChanged selectAnswer, dynamic startValue, bool editable = true}) {
+
     selectAnswer ??= (value) {};
-    QuestionInputData inputData = QuestionInputData(this, selectAnswer,
-        startValue: startValue, editable: editable);
+    QuestionInputData inputData = QuestionInputData(
+      this, selectAnswer,startValue: startValue, editable: editable
+    );
 
     switch (type) {
       case QuestionType.MultipleChoice:
@@ -161,22 +160,22 @@ class QuestionService {
       var max = question["max"];
       var timer = question["timer"] ?? 10;
       var labels = (question["labels"] as List<dynamic>)
-          ?.map((e) => e as String)
-          ?.toList();
+        ?.map((e) => e as String)?.toList();
       List<QuestionOption> newOptions = new List<QuestionOption>();
       (question['options'] as List)?.forEach((option) {
-        print(option);
         if (option["code"] != "") {
           newOptions.add(QuestionOption(
-              option["code"], option["value"], option["text"],
-              image: option["image"], order: option["order"],
-              fact: option["factId"].toString()));
+            option["code"], option["value"], option["text"],
+            image: option["image"], order: option["order"],
+            fact: option["factId"].toString())
+          );
         }
       });
 
       Question newQuestion = Question(
-          id, code, text, type, subject, newOptions ?? [],
-          min: min ?? 0, max: max ?? 0, labels: labels ?? [], timer: timer);
+        id, code, text, type, subject, newOptions ?? [],
+        min: min ?? 0, max: max ?? 0, labels: labels ?? [], timer: timer
+      );
 
       newQuestions.add(newQuestion);
     });

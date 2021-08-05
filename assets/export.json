@@ -1,6 +1,12 @@
 {
   "facts": [
     {
+      "id": 0,
+      "text": "blank",
+      "tags": [],
+      "value": ""
+    },
+    {
       "id": 20,
       "text": "name",
       "tags": [],

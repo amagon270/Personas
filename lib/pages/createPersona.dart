@@ -13,8 +13,7 @@ class CreatePersona extends StatefulWidget {
   _CreatePersona createState() => _CreatePersona();
 }
 
-class _CreatePersona extends State<CreatePersona>
-    with SingleTickerProviderStateMixin {
+class _CreatePersona extends State<CreatePersona> with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation<Offset> _offsetAnimation;
 
@@ -26,12 +25,14 @@ class _CreatePersona extends State<CreatePersona>
   Widget currentQuestionWidget;
   Session currentSession;
   Timer questionSkipTimer;
+  String userId;
 
   @override
   void initState() {
     super.initState();
     interviewService = new InterviewService();
     canTapNext = true;
+    userId = context.read<User>().id;
 
     _controller = AnimationController(
       duration: const Duration(milliseconds: 300),
@@ -50,6 +51,7 @@ class _CreatePersona extends State<CreatePersona>
   void dispose() {
     super.dispose();
     _controller.dispose();
+    questionSkipTimer?.cancel();
   }
 
   _selectAnswer(dynamic answer) {
@@ -74,9 +76,18 @@ class _CreatePersona extends State<CreatePersona>
     }
   }
 
+  void _submit() {
+    print(currentQuestionResponse.question.code);
+    interviewService.answerQuestion(currentQuestionResponse, userId);
+    if (currentQuestion == InterviewService.endQuestion) {
+      PersonaService().save(currentSession);
+      Navigator.pop(context);
+    } else {
+      _nextQuestion();
+    }
+  }
+
   void _nextQuestion() {
-    interviewService.answerQuestion(
-        currentQuestionResponse, context.read<User>().id);
     setState(() {
       _controller.reset();
       _controller.forward();
@@ -84,13 +95,9 @@ class _CreatePersona extends State<CreatePersona>
       canTapNext = false;
       currentQuestionResponse = new QuestionResponse(currentQuestion, null);
       currentQuestionWidget = currentQuestion?.generateQuestionWidget(
-              selectAnswer: _selectAnswer) ??
-          Text("Loading");
+        selectAnswer: _selectAnswer) ?? Text("Loading");
     });
     print("current question id: " + currentQuestion.id);
-    if (currentQuestion == InterviewService.endQuestion) {
-      Navigator.pop(context);
-    }
     if (!PersonaService.specialQuestionIds.contains(currentQuestion.id)) {
       startTimer(currentQuestion);
     }
@@ -98,102 +105,94 @@ class _CreatePersona extends State<CreatePersona>
 
   Widget questionUI() {
     return Container(
-        decoration: BoxDecoration(color: currentColor),
-        child: SlideTransition(
-            position: _offsetAnimation,
-            child: SafeArea(
-                child: FutureBuilder(
-              future: interviewService.startSession(),
-              initialData: null,
-              builder: (context, snapshot) {
-                if (snapshot.data == null) {
-                  return Text("Loading");
-                } else {
-                  currentSession = snapshot.data;
-                  //initilizing on the first question
-                  if (currentQuestion == null) {
-                    currentQuestion = interviewService.nextQuestion();
-                    currentQuestionResponse =
-                        new QuestionResponse(currentQuestion, null);
-                    currentQuestionWidget =
-                        currentQuestion?.generateQuestionWidget(
-                                selectAnswer: _selectAnswer) ??
-                            Text("Loading");
-                    currentColor = interviewService.getCurrentColor();
-                  }
-                  return Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(color: currentColor),
-                      child: Column(children: [
-                        currentQuestionWidget,
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              //Back button doesn't appear on the first question
-                              currentQuestion.code != "intro"
-                                  ? RaisedButton(
-                                      child: Text("Back",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .button),
-                                      onPressed: () {
-                                        setState(() {
-                                          _controller.reset();
-                                          _controller.forward();
-                                          canTapNext = true;
-                                          currentQuestionResponse =
-                                              interviewService
-                                                  .previousQuestion();
-                                          currentQuestion =
-                                              currentQuestionResponse.question;
-                                          currentQuestionWidget = currentQuestion
-                                                  ?.generateQuestionWidget(
-                                                      selectAnswer:
-                                                          _selectAnswer,
-                                                      startValue:
-                                                          currentQuestionResponse
-                                                              .choice) ??
-                                              Text("Loading");
-                                          startTimer(currentQuestion);
-                                        });
-                                      })
-                                  : null,
-                              RaisedButton(
-                                child: Text("Next",
-                                    style: Theme.of(context).textTheme.button),
-                                //next button can't be tapped unless the user has selected an answer
-                                onPressed: canTapNext
-                                    ? () {
-                                        _nextQuestion();
-                                      }
-                                    : null,
-                              ),
-                            ].where((o) => o != null).toList() //null protection
-                            ),
-                      ]));
+      decoration: BoxDecoration(color: currentColor),
+      child: SlideTransition(
+        position: _offsetAnimation,
+        child: SafeArea(
+          child: FutureBuilder(
+            future: interviewService.startSession(),
+            initialData: null,
+            builder: (context, snapshot) {
+              if (snapshot.data == null) {
+                return Text("Loading");
+              } else {
+                currentSession = snapshot.data;
+                //initilizing on the first question
+                if (currentQuestion == null) {
+                  currentQuestion = interviewService.nextQuestion();
+                  currentQuestionResponse = new QuestionResponse(currentQuestion, null);
+                  currentQuestionWidget = currentQuestion?.generateQuestionWidget(
+                    selectAnswer: _selectAnswer) ?? Text("Loading");
+                  currentColor = interviewService.getCurrentColor();
                 }
-              },
-            ))));
+                return Container(
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(color: currentColor),
+                  child: Column(children: [
+                    currentQuestionWidget,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        //Back button doesn't appear on the first question
+                        currentQuestion.code != "intro"
+                        ? RaisedButton(
+                          child: Text("Back",
+                            style: Theme.of(context).textTheme.button),
+                          onPressed: () {
+                            setState(() {
+                              _controller.reset();
+                              _controller.forward();
+                              canTapNext = true;
+                              currentQuestionResponse = interviewService.previousQuestion();
+                              currentQuestion = currentQuestionResponse.question;
+                              currentQuestionWidget = currentQuestion?.generateQuestionWidget(
+                                selectAnswer: _selectAnswer,
+                                startValue: currentQuestionResponse.choice) 
+                                ?? Text("Loading");
+                              startTimer(currentQuestion);
+                            });
+                          }) : null,
+                        RaisedButton(
+                          child: Text("Next",
+                            style: Theme.of(context).textTheme.button),
+                          //next button can't be tapped unless the user has selected an answer
+                          onPressed: canTapNext ? () {
+                            _submit();
+                          } : null,
+                        ),
+                      ].where((o) => o != null).toList() //null protection
+                    ),
+                  ])
+                );
+              }
+            },
+          )
+        )
+      )
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Theme(
-        data: ThemeData(
-            brightness: currentColor.computeLuminance() > 0.25
-                ? Brightness.light
-                : Brightness.dark,
-            primaryColor: Colors.blue,
-            buttonColor: Colors.grey[400],
-            textTheme: TextTheme(button: TextStyle(color: Colors.black))),
-        child: Scaffold(
-            appBar: AppBar(
-              title: Text("Create New Persona"),
-              actions: [
-                //_resetButton()
-              ],
-            ),
-            body: questionUI()));
+      data: ThemeData(
+        brightness: currentColor.computeLuminance() > 0.25
+          ? Brightness.light
+          : Brightness.dark,
+        primaryColor: Colors.blue,
+        buttonColor: Colors.grey[400],
+        textTheme: TextTheme(button: TextStyle(color: Colors.black))
+      ),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Create New Persona"),
+          actions: [
+            //_resetButton()
+          ],
+        ),
+        body: questionUI()
+      )
+    );
   }
 
   //Because personas should be created in one sitting this is no longer needed
