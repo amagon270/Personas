@@ -37,11 +37,11 @@ class Session {
 
   Session(this.id) {
     dateStarted = DateTime.now();
-    questions = new List<Question>();
-    answers = new List<QuestionResponse>();
-    processedRules = new List<Rule>();
-    facts = new List<Fact>();
-    individualFacts = new List<Fact>();
+    questions = [];
+    answers = [];
+    processedRules = [];
+    facts = [];
+    individualFacts = [];
   }
 }
 
@@ -168,7 +168,7 @@ class InterviewService {
   Question nextQuestion() {
     //saveUnfinishedSession(currentSession);
 
-    List<Rule> possibleRules = new List<Rule>();
+    List<Rule> possibleRules = [];
     allRules.forEach((newRule) {
       if (!currentSession.processedRules.contains(newRule) && _checkRule(newRule)) {
         possibleRules.add(newRule);
@@ -331,14 +331,14 @@ class InterviewService {
   static Future<List<Rule>> loadRules() async {
     final data = await rootBundle.loadString("assets/export.json");
     List<dynamic> decodedData = json.decode(data)["rules"];
-    List<Rule> newRules = new List<Rule>();
+    List<Rule> newRules = [];
 
     decodedData.forEach((rule) {
       String id = rule["id"].toString() ?? "";
       int priority = rule["priority"] ?? 1;
       var triggerType = rule["triggerType"].toString().toEnum(TriggerType.values);
 
-      List<RuleTest> newTests = new List<RuleTest>();
+      List<RuleTest> newTests = [];
       (rule['tests'] as List)?.forEach((test) {
         RuleTest _newTest = RuleTest(
           test["factId"].toString(),
@@ -378,8 +378,8 @@ class InterviewService {
 
   void saveUnfinishedSession(Session session) async {
     Map sessionData = {};
-    List<String> questions = new List<String>();
-    List<String> processedRules = new List<String>();
+    List<String> questions = [];
+    List<String> processedRules = [];
     sessionData["id"] = session.id;
     sessionData["answers"] ??= {};
     sessionData["facts"] ??= {};
@@ -422,10 +422,10 @@ class InterviewService {
 
     if (userData["id"] != null && userData["id"] != "") {
       Session newSession = Session(userData["id"]);
-      List<Question> questions = new List<Question>();
-      List<QuestionResponse> answers = new List<QuestionResponse>();
-      List<Rule> processedRules = new List<Rule>();
-      List<Fact> facts = new List<Fact>();
+      List<Question> questions = [];
+      List<QuestionResponse> answers = [];
+      List<Rule> processedRules = [];
+      List<Fact> facts = [];
 
       (userData["questions"] as List<dynamic>)?.forEach((questionId) {
         questions.add(allQuestions.firstWhere(

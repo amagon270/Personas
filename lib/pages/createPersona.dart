@@ -135,7 +135,7 @@ class _CreatePersona extends State<CreatePersona> with SingleTickerProviderState
                       children: [
                         //Back button doesn't appear on the first question
                         currentQuestion.code != "intro"
-                        ? RaisedButton(
+                        ? ElevatedButton(
                           child: Text("Back",
                             style: Theme.of(context).textTheme.button),
                           onPressed: () {
@@ -152,7 +152,7 @@ class _CreatePersona extends State<CreatePersona> with SingleTickerProviderState
                               startTimer(currentQuestion);
                             });
                           }) : null,
-                        RaisedButton(
+                        ElevatedButton(
                           child: Text("Next",
                             style: Theme.of(context).textTheme.button),
                           //next button can't be tapped unless the user has selected an answer

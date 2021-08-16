@@ -26,7 +26,7 @@ class _ViewPersona extends State<ViewPersona> {
         appBar: AppBar(
           title: Text(widget.persona.name),
           actions: [
-            FlatButton(
+            TextButton(
               child: Text("Delete"),
               onPressed: () {
                 showDialog(
@@ -35,14 +35,14 @@ class _ViewPersona extends State<ViewPersona> {
                     return AlertDialog(
                       content: Text("Are you sure you want to delete this persona?"),
                       actions: [
-                        FlatButton(
+                        TextButton(
                           child: Text("Delete"),
                           onPressed: () async {
                             await PersonaService().delete(widget.persona.id);
                             Navigator.of(context).pushNamedAndRemoveUntil("/viewPersonas", ModalRoute.withName("/"));
                           },
                         ),
-                        FlatButton(
+                        TextButton(
                           child: Text("Cancel"),
                           onPressed: () {
                             Navigator.of(context).pop();
@@ -55,7 +55,7 @@ class _ViewPersona extends State<ViewPersona> {
               },
             ),
             _editable 
-            ? FlatButton(
+            ? TextButton(
               child: Text("Save"),
               onPressed: () {
                 setState(() {
@@ -64,7 +64,7 @@ class _ViewPersona extends State<ViewPersona> {
                 });
               },
             )
-            : FlatButton(
+            : TextButton(
               child: Text("Edit"),
               onPressed: () {
                 setState(() {

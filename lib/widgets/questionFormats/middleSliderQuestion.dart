@@ -28,7 +28,7 @@ class _MiddleSliderQuestion extends State<MiddleSliderQuestion> {
     //print(_currentSliderValue);
     int labelLength = widget.data.question.labels.length - 1;
 
-    List<Widget> labels = new List<Widget>();
+    List<Widget> labels = [];
     widget.data.question.labels.forEach((label) {
       labels.add(Text(label));
     });

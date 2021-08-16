@@ -38,7 +38,7 @@ class _IntroducitonPage extends State<IntroducitonPage> {
         child: ListView( 
           children: [
             Center(
-              child: _controller.value.initialized
+              child: _controller.value.isInitialized
                 ? Stack(
                   alignment: Alignment.center,
                   children: [
@@ -46,7 +46,7 @@ class _IntroducitonPage extends State<IntroducitonPage> {
                       aspectRatio: _controller.value.aspectRatio,
                       child: VideoPlayer(_controller),
                     ),
-                    FlatButton(
+                    TextButton(
                       child: AspectRatio(
                       aspectRatio: _controller.value.aspectRatio,
                       child: Container(
@@ -79,7 +79,7 @@ class _IntroducitonPage extends State<IntroducitonPage> {
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sagittis, elit sed tincidunt imperdiet, dolor nisl tempor lorem, vel vehicula magna quam vitae leo. Vestibulum euismod, enim a sagittis mattis, eros tortor congue eros, at consequat arcu velit eget nulla. Quisque condimentum sem et neque tempor convallis. Nulla egestas pellentesque consequat. Curabitur sed molestie erat. Integer at nunc aliquet, luctus ex id, mattis dolor. Quisque blandit tellus vitae nisi fringilla consequat. Donec finibus pulvinar turpis vitae semper. In rutrum id odio in pellentesque. Fusce blandit est a dolor vestibulum, vel consequat libero dapibus. Sed pulvinar eros non libero consectetur, nec molestie odio dignissim. Nullam et nisl orci. Phasellus ac viverra libero. Curabitur ultrices dolor sed elit placerat, nec aliquam lectus sagittis. Morbi eu tincidunt diam, eu congue est. Proin volutpat nec justo quis volutpat. Cras volutpat turpis non mi eleifend pretium. In condimentum, lacus nec aliquet malesuada, lacus sem feugiat."
               )
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text("Continue"),
               onPressed: () {
                 context.read<User>().watchIntro();

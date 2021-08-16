@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 class DevMenuPage extends StatelessWidget {
 
   List<Widget> createMenu(BuildContext context) {
-    List<Widget> items = new List<Widget>();
+    List<Widget> items = [];
     items.add(
       Container(
         padding: EdgeInsets.all(20),
@@ -15,7 +15,7 @@ class DevMenuPage extends StatelessWidget {
       )
     );
     items.add(
-      RaisedButton(
+      ElevatedButton(
         child: Text("Menu"),
         onPressed: () {
           Navigator.pop(context);
@@ -23,7 +23,7 @@ class DevMenuPage extends StatelessWidget {
       )
     );
     items.add(
-      RaisedButton(
+      ElevatedButton(
         child: Text("Delete All Personas"),
         onPressed: () {
           PersonaService().deleteAllPersonas();
@@ -31,7 +31,7 @@ class DevMenuPage extends StatelessWidget {
       )
     );
     items.add(
-      RaisedButton(
+      ElevatedButton(
         child: Text("Delete User"),
         onPressed: () async {
           context.read<User>().setUserData("{}");

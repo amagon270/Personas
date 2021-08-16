@@ -24,7 +24,7 @@ class _MultipleChoiceQuestion extends State<MultipleChoiceQuestion> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> options = new List<Widget>();
+    List<Widget> options = [];
     List<QuestionOption> questionOptions = widget.data.question.options;
 
     questionOptions.sort((a, b) => a.order.compareTo(b.order));

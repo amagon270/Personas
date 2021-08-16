@@ -98,7 +98,7 @@ class PersonaService {
     Map decodedData = await readPersonaFile();
 
     List<Question> allQuestions = QuestionService().allQuestions;
-    List<Persona> allPersonas = new List<Persona>();
+    List<Persona> allPersonas = [];
 
     decodedData[userId]?.forEach((id, persona) {
       persona ??= {};
@@ -108,13 +108,13 @@ class PersonaService {
       int colorInt = persona["color"] ?? 0;
       _persona.color = new Color(colorInt);
 
-      List<Fact> _facts = new List<Fact>();
+      List<Fact> _facts = [];
       persona["facts"]?.forEach((id, value) async {
         _facts.add(FactService().getFactById(id, value: value));
       });
       _persona.facts = _facts;
 
-      List<QuestionResponse> _personaAnswers = new List<QuestionResponse>();
+      List<QuestionResponse> _personaAnswers = [];
       persona["answers"]?.forEach((question, answer) async {
         Question questionObject = allQuestions.firstWhere(
           (e) => (e.id == question),
@@ -214,6 +214,8 @@ class PersonaService {
     String userAnswers = "{}";
     try {
       userAnswers = await file.readAsString();
+      if (userAnswers == "") 
+        userAnswers = '{"" : {}}';
     } catch (e) {
       print("Couldn't find file, creating new file");
       userAnswers = '{"" : {}}';

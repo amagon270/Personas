@@ -28,7 +28,7 @@ class _SliderQuestion extends State<SliderQuestion> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> labels = new List<Widget>();
+    List<Widget> labels = [];
     widget.data.question.labels.forEach((label) {
       labels.add(Text(label));
     });

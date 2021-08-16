@@ -144,7 +144,7 @@ class _LoginPage extends State<LoginPage> {
       padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
       child: SizedBox(
         height: 40.0,
-        child: FlatButton(
+        child: TextButton(
           key: Key("loginPrimaryButton"),
           child: new Text('signup', style: new TextStyle(fontSize: 20.0, color: Colors.black)),
           onPressed: validateAndSubmit,

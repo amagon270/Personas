@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'dart:math';
-
 import 'package:Personas/widgets/questionService.dart';
 import 'package:Personas/widgets/utility.dart';
 import 'package:flutter/cupertino.dart';
@@ -34,7 +32,7 @@ class _MultiPolygonQuestion extends State<MultiPolygonQuestion> {
   @override
   Widget build(BuildContext context) {
     currentlySelected ??= new Map<String, bool>();
-    List<Widget> options = new List<Widget>();
+    List<Widget> options = [];
     List<QuestionOption> questionOptions = widget.data.question.options;
 
     questionOptions.sort((a, b) => a.order.compareTo(b.order));
@@ -53,7 +51,7 @@ class _MultiPolygonQuestion extends State<MultiPolygonQuestion> {
         Container(
           alignment: Alignment(cos(factor), sin(factor)),
           child: Stack(
-            overflow: Overflow.visible,
+            clipBehavior: Clip.none,
             alignment: AlignmentDirectional.topCenter,
             children:[
               Positioned(
@@ -77,7 +75,7 @@ class _MultiPolygonQuestion extends State<MultiPolygonQuestion> {
                     setState(() {
                       currentlySelected[option.value] = !currentlySelected[option.value];
                     });
-                    List<String> returnData = new List<String>();
+                    List<String> returnData = [];
                     currentlySelected.forEach((key, value) { 
                       if (value == true) {
                         returnData.add(key);

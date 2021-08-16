@@ -1,6 +1,6 @@
 import 'package:Personas/widgets/personaService.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_reorderable_list/flutter_reorderable_list.dart';
+import 'package:flutter_reorderable_list/flutter_reorderable_list.dart' as ReOrder;
 
 class ViewPersonas extends StatefulWidget {
   ViewPersonas({Key key}): super(key: key);
@@ -49,15 +49,15 @@ class _ViewPersonas extends State<ViewPersonas> {
   }
 
   List<Widget> createPersonaList(List<Persona> personas, BuildContext context) {
-    List<Widget> widgets = new List<Widget>();
+    List<Widget> widgets = [];
     personas.forEach((persona) {
       Color textColor = persona.color.computeLuminance() > 0.35 ? Colors.black : Colors.white;
       widgets.add(
-        ReorderableItem(
+        ReOrder.ReorderableItem(
           key: ValueKey(persona.id),
           childBuilder: (context, state) {
             return Opacity(
-              opacity: state == ReorderableItemState.placeholder ? 0.0 :1.0,
+              opacity: state == ReOrder.ReorderableItemState.placeholder ? 0.0 :1.0,
               child: Container(
                 decoration: BoxDecoration(
                   color: persona.color,
@@ -81,7 +81,7 @@ class _ViewPersonas extends State<ViewPersonas> {
                             )
                           )
                         ),
-                        ReorderableListener(
+                        ReOrder.ReorderableListener(
                           child: Container(
                             padding: EdgeInsets.only(right: 18.0, left: 18.0),
                             color: Color(0x08000000),
@@ -117,7 +117,7 @@ class _ViewPersonas extends State<ViewPersonas> {
             } else {
               _allPersonas ??= snapshot.data;
               _items = createPersonaList(_allPersonas, context);
-              return ReorderableList(
+              return ReOrder.ReorderableList(
                 onReorder: _reorderCallback,
                 onReorderDone: _reorderDone,
                 child: ListView(

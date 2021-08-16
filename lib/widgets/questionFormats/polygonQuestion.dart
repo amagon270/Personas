@@ -26,7 +26,7 @@ class _PolygonQuestion extends State<PolygonQuestion> {
   @override
   Widget build(BuildContext context) {
 
-    List<Widget> options = new List<Widget>();
+    List<Widget> options = [];
     List<QuestionOption> questionOptions = widget.data.question.options;
 
     questionOptions.sort((a, b) => a.order.compareTo(b.order));
@@ -43,7 +43,7 @@ class _PolygonQuestion extends State<PolygonQuestion> {
         Container(
           alignment: Alignment(cos(factor), sin(factor)),
           child: Stack(
-            overflow: Overflow.visible,
+            clipBehavior: Clip.none,
             alignment: AlignmentDirectional.topCenter,
             children:[
               Positioned(

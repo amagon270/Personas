@@ -2,12 +2,13 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 class Fact {
-  Fact(this.id, this.text, this.tags, {this.value});
+  Fact(this.id, this.text, this.tags, {this.value, this.negatedFacts});
 
   final String id;
   String text;
   List<String> tags;
   dynamic value;
+  List<String> negatedFacts;
 
   @override
   bool operator ==(Object other) =>
@@ -53,13 +54,13 @@ class FactService {
   static Future<List<Fact>> loadFacts() async {
     final data = await rootBundle.loadString("assets/export.json");
     List<dynamic> decodedData = json.decode(data)["facts"];
-    List<Fact> newFacts = new List<Fact>();
+    List<Fact> newFacts = [];
     decodedData.forEach((fact) {
       var id = fact["id"].toString() ?? "";
       var text = fact["text"];
-      var tags =
-          (fact["tags"] as List<dynamic>).map((e) => e as String).toList();
-      Fact newFact = Fact(id, text, tags);
+      var tags = (fact["tags"] as List<dynamic>).map((e) => e as String).toList();
+      List<String> negatedFacts = (fact["negatedFacts"] as List)?.map((e) => e.toString())?.toList();
+      Fact newFact = Fact(id, text, tags, negatedFacts: negatedFacts);
       newFacts.add(newFact);
     });
     return newFacts;

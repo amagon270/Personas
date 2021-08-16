@@ -3,16 +3,16 @@ import 'package:Personas/widgets/utility.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class MultipleSelectQuestion extends StatefulWidget {
-  MultipleSelectQuestion({Key key, this.data}) : super(key: key);
+class ThemeQuestion extends StatefulWidget {
+  ThemeQuestion({Key key, this.data}) : super(key: key);
 
   final QuestionInputData data;
 
   @override
-  _MultipleSelectQuestion createState() => _MultipleSelectQuestion();
+  _ThemeQuestion createState() => _ThemeQuestion();
 }
 
-class _MultipleSelectQuestion extends State<MultipleSelectQuestion> {
+class _ThemeQuestion extends State<ThemeQuestion> {
   
   Map<String, bool> currentlySelected;
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class MenuPage extends StatelessWidget {
 
   List<Widget> createMenu(BuildContext context) {
-    List<Widget> items = new List<Widget>();
+    List<Widget> items = [];
     items.add(
       Container(
         padding: EdgeInsets.all(20),
@@ -12,7 +12,7 @@ class MenuPage extends StatelessWidget {
       )
     );
     items.add(
-      RaisedButton(
+      ElevatedButton(
         child: Text("Create Persona"),
         onPressed: () {
           Navigator.pushNamed(context, "/createPersona");
@@ -20,7 +20,7 @@ class MenuPage extends StatelessWidget {
       )
     );
     items.add(
-      RaisedButton(
+      ElevatedButton(
         child: Text("View Personas"),
         onPressed: () {
           Navigator.pushNamed(context, "/viewPersonas");
@@ -28,7 +28,7 @@ class MenuPage extends StatelessWidget {
       )
     );
     items.add(
-      RaisedButton(
+      ElevatedButton(
         child: Text("View Intro"),
         onPressed: () {
           Navigator.pushNamed(context, "/intro");
@@ -36,7 +36,7 @@ class MenuPage extends StatelessWidget {
       )
     );
     items.add(
-      RaisedButton(
+      ElevatedButton(
         child: Text("Dev Menu"),
         onPressed: () {
           Navigator.pushNamed(context, "/devMenu");

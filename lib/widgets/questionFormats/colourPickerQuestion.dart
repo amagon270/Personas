@@ -31,8 +31,7 @@ class _ColourPickerQuestion extends State<ColourPickerQuestion> {
               child: Text(widget.data.question.text, style: Theme.of(context).textTheme.headline6,)
             ),
             Center(
-              child: RaisedButton(
-                elevation: 3.0,
+              child: ElevatedButton(
                 onPressed: () {
                   showDialog(
                     context: context,
@@ -55,7 +54,7 @@ class _ColourPickerQuestion extends State<ColourPickerQuestion> {
                           ),
                         ),
                         actions: <Widget>[
-                          FlatButton(
+                          TextButton(
                             child: const Text('Done'),
                             onPressed: () {
                               Navigator.of(context).pop();

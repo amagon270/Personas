@@ -8,6 +8,7 @@ import 'package:Personas/widgets/questionFormats/polygonQuestion.dart';
 import 'package:Personas/widgets/questionFormats/sliderQuestion.dart';
 import 'package:Personas/widgets/questionFormats/textInputQuestion.dart';
 import 'package:Personas/widgets/questionFormats/textOnlyQuestion.dart';
+import 'package:Personas/widgets/questionFormats/themeQuestion.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,7 +23,8 @@ enum QuestionType {
   ColourPicker,
   MultipleSelect,
   TextInput,
-  TextOnly
+  TextOnly,
+  Theme
 }
 
 //allows calling string.toEnum({Enum}.values) to turn a string into an Enum e.g. "Slider".toEnum(QuestionType.values)
@@ -87,7 +89,7 @@ class Question {
 
     selectAnswer ??= (value) {};
     QuestionInputData inputData = QuestionInputData(
-      this, selectAnswer,startValue: startValue, editable: editable
+      this, selectAnswer, startValue: startValue, editable: editable
     );
 
     switch (type) {
@@ -110,7 +112,6 @@ class Question {
       case QuestionType.MultiPolygon:
         return MultiPolygonQuestion(data: inputData, key: UniqueKey());
       case QuestionType.Circle:
-        // TODO: Handle this case.
         break;
       case QuestionType.ColourPicker:
         return ColourPickerQuestion(data: inputData, key: UniqueKey());
@@ -118,9 +119,12 @@ class Question {
         return TextInputQuestion(data: inputData, key: UniqueKey());
       case QuestionType.TextOnly:
         return TextOnlyQuestion(data: inputData, key: UniqueKey());
+      case QuestionType.Theme:
+        return ThemeQuestion(data: inputData, key: UniqueKey());
       default:
         return MultipleChoiceQuestion(data: inputData, key: UniqueKey());
     }
+    return MultipleChoiceQuestion(data: inputData, key: UniqueKey());
   }
 }
 
@@ -149,7 +153,7 @@ class QuestionService {
   static Future<List<Question>> loadQuestions() async {
     final data = await rootBundle.loadString("assets/export.json");
     List<dynamic> decodedData = json.decode(data)["questions"];
-    List<Question> newQuestions = new List<Question>();
+    List<Question> newQuestions = [];
     decodedData.forEach((question) {
       var id = question["id"]?.toString() ?? "";
       var code = question["code"];
@@ -161,11 +165,11 @@ class QuestionService {
       var timer = question["timer"] ?? 10;
       var labels = (question["labels"] as List<dynamic>)
         ?.map((e) => e as String)?.toList();
-      List<QuestionOption> newOptions = new List<QuestionOption>();
+      List<QuestionOption> newOptions = [];
       (question['options'] as List)?.forEach((option) {
         if (option["code"] != "") {
           newOptions.add(QuestionOption(
-            option["code"], option["value"], option["text"],
+            option["code"].toString(), option["value"], option["text"],
             image: option["image"], order: option["order"],
             fact: option["factId"].toString())
           );
@@ -178,7 +182,8 @@ class QuestionService {
       );
 
       newQuestions.add(newQuestion);
-    });
+    });  
+
     return newQuestions;
   }
 }

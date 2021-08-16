@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nanoid/async/nanoid.dart';
+import 'package:nanoid/async.dart';
 
 class UtilityFunctions {
   static Future<String> generateId() async {
