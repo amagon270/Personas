@@ -37,11 +37,11 @@ class PersonaService {
 
     //specifically find the color response and remove it from normal questions
     QuestionResponse colorResponse = session.answers.firstWhere(
-      (e) => (e.question.code == "personaColor"),
+      (e) => (e.question.type == QuestionType.ColourPicker),
       orElse: () {return null;},
     );
     int colorString = colorResponse?.choice ?? 0;
-    session.answers.removeWhere((e) => (e.question.code == "personaColor"));
+    session.answers.removeWhere((e) => (e.question.type == QuestionType.ColourPicker));
 
     //specifically find the name of the persona and remove it from normal questions
     QuestionResponse nameResponse = session.answers.firstWhere(
