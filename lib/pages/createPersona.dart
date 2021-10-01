@@ -61,7 +61,7 @@ class _CreatePersona extends State<CreatePersona> with SingleTickerProviderState
         canTapNext = true;
       });
     }
-    if (currentQuestionResponse.question.code == "personaColor") {
+    if (currentQuestionResponse.question.type == QuestionType.ColourPicker) {
       setState(() {
         currentColor = new Color(answer);
       });
@@ -77,7 +77,6 @@ class _CreatePersona extends State<CreatePersona> with SingleTickerProviderState
   }
 
   void _submit() {
-    print(currentQuestionResponse.question.code);
     interviewService.answerQuestion(currentQuestionResponse, userId);
     if (currentQuestion == InterviewService.endQuestion) {
       PersonaService().save(currentSession);

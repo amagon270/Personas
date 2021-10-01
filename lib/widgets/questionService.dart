@@ -16,7 +16,7 @@ import 'package:flutter/services.dart';
 enum QuestionType {
   MultipleChoice,
   Slider,
-  MiddleSlider,
+  TextSlider,
   Polygon,
   MultiPolygon,
   Circle,
@@ -58,6 +58,11 @@ class QuestionOption {
     newMap["fact"] = fact;
     return newMap;
   }
+
+  @override
+  String toString() {
+    return "QuestionOption { code: ${code}, value: ${value}, text: ${text}, image: $image, order: $order, fact: $fact }";
+  }
 }
 
 class QuestionInputData {
@@ -98,15 +103,9 @@ class Question {
       case QuestionType.MultipleSelect:
         return MultipleSelectQuestion(data: inputData, key: UniqueKey());
       case QuestionType.Slider:
-        return SliderQuestion(
-          data: inputData,
-          key: UniqueKey(),
-        );
-      case QuestionType.MiddleSlider:
-        return MiddleSliderQuestion(
-          data: inputData,
-          key: UniqueKey(),
-        );
+        return SliderQuestion(data: inputData, key: UniqueKey(),);
+      case QuestionType.TextSlider:
+        return MiddleSliderQuestion(data: inputData, key: UniqueKey(),);
       case QuestionType.Polygon:
         return PolygonQuestion(data: inputData, key: UniqueKey());
       case QuestionType.MultiPolygon:

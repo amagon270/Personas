@@ -1,1 +1,7792 @@
-{"facts":[{"id":0,"text":"blank","tags":[],"value":""},{"id":20,"text":"name","tags":[],"value":"","negatedFacts":[]},{"id":21,"text":"color","tags":[],"value":"","negatedFacts":[]},{"id":22,"text":"energy","tags":[],"value":"","negatedFacts":[]},{"id":23,"text":"roundness","tags":[],"value":"","negatedFacts":[]},{"id":24,"text":"rigidity","tags":[],"value":"","negatedFacts":[]},{"id":25,"text":"personaType","tags":[],"value":"","negatedFacts":[]},{"id":26,"text":"emotionType","tags":[],"value":"","negatedFacts":[]},{"id":27,"text":"destructiveWords","tags":[],"value":"","negatedFacts":[]},{"id":28,"text":"happiness","tags":[],"value":"","negatedFacts":[]},{"id":30,"text":"pong","tags":[],"value":"","negatedFacts":[]},{"id":31,"text":"Leek","tags":[],"value":"","negatedFacts":[]},{"id":32,"text":"NegateTest","tags":[],"value":"","negatedFacts":[29,25]},{"id":33,"text":"String","tags":[],"value":"","negatedFacts":[21]},{"id":34,"text":"theming","tags":[],"value":"","negatedFacts":[]},{"id":35,"text":"Theming2","tags":[],"value":"","negatedFacts":[20,22,25]},{"id":29,"text":"jazz","tags":[],"value":"","negatedFacts":[]},{"id":36,"text":"ThemeTest1","tags":[],"value":"","negatedFacts":[]},{"id":37,"text":"ThemeTest2","tags":[],"value":"","negatedFacts":[36]},{"id":38,"text":"ThemeTest3","tags":[],"value":"","negatedFacts":[]}],"questions":[{"id":3,"code":"intro","type":"TextOnly","text":"Ok, Think of a persona.","factSubject":"20","options":[{"code":"","value":"","text":"","image":null,"order":0,"factId":null},{"code":"","value":"","text":"","image":null,"order":1,"factId":null},{"code":"","value":"","text":"","image":null,"order":2,"factId":null},{"code":"","value":"","text":"","image":null,"order":3,"factId":null},{"code":"","value":"","text":"","image":null,"order":4,"factId":null},{"code":"","value":"","text":"","image":null,"order":5,"factId":null}],"min":0,"max":0,"labels":[]},{"id":4,"code":"personaColor","type":"ColourPicker","text":" Now think of a colour that feels right for this persona, and select it from the colour palette.","factSubject":"21","options":[],"min":0,"max":0,"labels":[]},{"id":5,"code":"personaEnergy","type":"MultipleChoice","text":" How much energy does this persona have?","factSubject":"22","options":[{"code":"low","value":"low","text":"low","image":null,"order":0,"factId":null},{"code":"medium","value":"medium","text":"medium","image":null,"order":1,"factId":null},{"code":"high","value":"high","text":"high","image":null,"order":2,"factId":null},{"code":"","value":"","text":"","image":null,"order":3,"factId":null},{"code":"","value":"","text":"","image":null,"order":4,"factId":null},{"code":"","value":"","text":"","image":null,"order":5,"factId":null}],"min":0,"max":0,"labels":[]},{"id":6,"code":"roundness","type":"MultipleChoice","text":"Does this persona feel more round or square?","factSubject":"23","options":[{"code":"round","value":"round","text":"","image":null,"order":0,"factId":null},{"code":"square","value":"square","text":"","image":null,"order":1,"factId":null},{"code":"","value":"","text":"","image":null,"order":2,"factId":null},{"code":"","value":"","text":"","image":null,"order":3,"factId":null},{"code":"","value":"","text":"","image":null,"order":4,"factId":null},{"code":"","value":"","text":"","image":null,"order":5,"factId":null}],"min":0,"max":0,"labels":[]},{"id":7,"code":"Rigidity","type":"MultipleChoice","text":"Does this persona feel more rigid or flexible?","factSubject":"24","options":[{"code":"rigid","value":"rigid","text":"Rigid","image":null,"order":0,"factId":null},{"code":"flexible","value":"flexible","text":"Flexible","image":null,"order":1,"factId":null},{"code":"neither","value":"neither","text":"Neither","image":null,"order":2,"factId":null},{"code":"","value":"","text":"","image":null,"order":3,"factId":null},{"code":"","value":"","text":"","image":null,"order":4,"factId":null},{"code":"","value":"","text":"","image":null,"order":5,"factId":null}],"min":0,"max":0,"labels":[]},{"id":8,"code":"Type","type":"MultiPolygon","text":"Select one or more options that best describe this persona.","factSubject":"25","options":[{"code":"voiceThought","value":"voiceThought","text":"Voice Thought","image":null,"order":0,"factId":null},{"code":"warrior","value":"warrior","text":"Warrior","image":null,"order":1,"factId":null},{"code":"confident","value":"confident","text":"Confident","image":null,"order":2,"factId":null},{"code":"destructive","value":"destructive","text":"Destructive","image":null,"order":3,"factId":null},{"code":"constructive","value":"constructive","text":"Constructive","image":null,"order":4,"factId":null},{"code":"emotion","value":"emotion","text":"Emotion","image":null,"order":5,"factId":null}],"min":0,"max":0,"labels":[]},{"id":9,"code":"Emotion Type","type":"MultiPolygon","text":"Which emotions apply to this persona.","factSubject":"26","options":[{"code":"surpriseShock","value":"surpriseShock","text":"Surprise Shock","image":null,"order":0,"factId":null},{"code":"anxiousRelaxed","value":"anxiousRelaxed","text":"Anxious Relaxed","image":null,"order":1,"factId":null},{"code":"angryPeaceful","value":"angryPeaceful","text":"Angry Peaceful","image":null,"order":2,"factId":null},{"code":"happySad","value":"happySad","text":"Happy Sad","image":null,"order":3,"factId":null},{"code":"envyGenerous","value":"envyGenerous","text":"Envy Generous","image":null,"order":4,"factId":null},{"code":"loveDisgust","value":"loveDisgust","text":"Love Disgust","image":null,"order":5,"factId":null}],"min":0,"max":0,"labels":[]},{"id":10,"code":"Destructive Words","type":"MultiPolygon","text":"Which destructive words apply to this persona.","factSubject":"27","options":[{"code":"selfHarm","value":"selfHarm","text":"Self Harm","image":null,"order":0,"factId":null},{"code":"selfSabatage","value":"selfSabatage","text":"Self Sabatage","image":null,"order":1,"factId":null},{"code":"withdawn","value":"withdawn","text":"Withdawn","image":null,"order":2,"factId":null},{"code":"selfRisk","value":"selfRisk","text":"Self Risk","image":null,"order":3,"factId":null},{"code":"alienatesSelf","value":"alienatesSelf","text":"Alienates Self","image":null,"order":4,"factId":null},{"code":"suicidal","value":"suicidal","text":"Suicidal","image":null,"order":5,"factId":null}],"min":0,"max":0,"labels":[]},{"id":11,"code":"Persona Name","type":"TextInput","text":"Give a name to this persona","factSubject":"20","options":[],"min":0,"max":0,"labels":[]},{"id":12,"code":"happy sad slider","type":"TextSlider","text":" ","factSubject":"28","options":[],"min":0,"max":0,"labels":["Ecstatic","Joyfull\nLine2\nLine3","Happy\nLine2\nLine3","Indifferent\nLine2\nLine3","sad\nLine2\nLine3","Sorrowful\nLine2\nLine3","Depressed\nLine2\nLine3"]},{"id":13,"code":"Test Option Fact1","type":"MultipleChoice","text":"boo","factSubject":"0","options":[{"code":"ghj","value":"jh","text":"ghj","image":null,"order":0,"factId":21},{"code":"","value":"","text":"","image":null,"order":1,"factId":null},{"code":"","value":"","text":"","image":null,"order":2,"factId":null},{"code":"","value":"","text":"","image":null,"order":3,"factId":null},{"code":"","value":"","text":"","image":null,"order":4,"factId":null},{"code":"","value":"","text":"","image":null,"order":5,"factId":null}],"min":0,"max":0,"labels":[]},{"id":14,"code":"ThemeTest","type":"Theme","text":"This is a theme question","factSubject":"0","options":[{"code":35,"value":true,"text":"Theming2","order":0,"factId":35},{"code":36,"value":true,"text":"ThemeTest1","order":1,"factId":36},{"code":37,"value":true,"text":"ThemeTest2","order":2,"factId":37},{"code":38,"value":true,"text":"ThemeTest3","order":3,"factId":38}],"min":0,"max":0,"labels":[]}],"rules":[{"id":2,"priority":999,"triggerType":"Always","tests":[],"questionId":3,"factId":null,"factAction":null},{"id":3,"priority":998,"triggerType":"Always","tests":[],"questionId":4,"factId":null,"factAction":null},{"id":4,"priority":997,"triggerType":"Always","tests":[],"questionId":5,"factId":26,"factAction":null},{"id":11,"priority":996,"triggerType":"Always","tests":[],"questionId":6,"factId":null,"factAction":null},{"id":12,"priority":995,"triggerType":"Always","tests":[],"questionId":7,"factId":null,"factAction":null},{"id":13,"priority":994,"triggerType":"Always","tests":[],"questionId":8,"factId":null,"factAction":null},{"id":15,"priority":1,"triggerType":"All","tests":[{"factId":26,"operation":"Contains","parameter":"happySad"}],"questionId":12,"factId":null,"factAction":null},{"id":16,"priority":1,"triggerType":"All","tests":[{"factId":25,"operation":"Contains","parameter":"destructive"}],"questionId":10,"factId":null,"factAction":null},{"id":17,"priority":-1,"triggerType":"Always","tests":[{"factId":20,"operation":"GreaterThan","parameter":""}],"questionId":11,"factId":null,"factAction":null},{"id":14,"priority":1,"triggerType":"All","tests":[{"factId":25,"operation":"Contains","parameter":"emotion"}],"questionId":9,"factId":null,"factAction":null}]}
+{
+  "facts": [
+    {
+      "id": 0,
+      "text": "blank",
+      "tags": [],
+      "value": ""
+    },
+    {
+      "id": 127,
+      "text": "Intoxicated",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 41,
+      "text": "colour",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 42,
+      "text": "energy",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 43,
+      "text": "flow",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 44,
+      "text": "friendliness",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 45,
+      "text": "helpfulness",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 46,
+      "text": "outgoingness",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 47,
+      "text": "integrity",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 48,
+      "text": "key-personas",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 49,
+      "text": "movement",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 54,
+      "text": "Social Role",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 55,
+      "text": "Family Role",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 56,
+      "text": "happy-sad",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 57,
+      "text": "angry-calm",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 58,
+      "text": "love-hate",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 59,
+      "text": "Official Role",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 60,
+      "text": "A Private Role",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 61,
+      "text": "Peacemaker",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 62,
+      "text": "A Mask",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 63,
+      "text": "Scared",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 64,
+      "text": "Mistrust",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 65,
+      "text": "Won't Commit",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 66,
+      "text": "Jealous",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 68,
+      "text": "Feeling Decieved",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 69,
+      "text": "Ignoring",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 70,
+      "text": "Hiding",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 67,
+      "text": "Overwhelmed Anxious",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 72,
+      "text": "Something Hidden",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 73,
+      "text": "Critical",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 74,
+      "text": "Depleted",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 75,
+      "text": "Exhausted",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 76,
+      "text": "Beaten",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 77,
+      "text": "Fragile",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 78,
+      "text": "Confused",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 79,
+      "text": "Indecisive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 80,
+      "text": "Freeze",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 81,
+      "text": "Helpless",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 82,
+      "text": "Powerless",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 83,
+      "text": "Inexperienced",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 84,
+      "text": "Unsure",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 85,
+      "text": "Less Confident",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 86,
+      "text": "Lost",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 87,
+      "text": "Raw",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 88,
+      "text": "Exposed",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 89,
+      "text": "In-Shock",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 90,
+      "text": "Disbelief",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 92,
+      "text": "Not Well",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 93,
+      "text": "Sad",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 94,
+      "text": "Depressed",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 95,
+      "text": "Mental-Emotional Issues",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 96,
+      "text": "Lonely",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 97,
+      "text": "Isolated",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 98,
+      "text": "Contracting",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 99,
+      "text": "Disconnected",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 100,
+      "text": "Alone",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 101,
+      "text": "Grieving",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 102,
+      "text": "Despair",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 103,
+      "text": "Numb",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 104,
+      "text": "Suicidal",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 105,
+      "text": "Invisible",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 106,
+      "text": "Blocked",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 107,
+      "text": "Disabled",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 108,
+      "text": "Victim",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 109,
+      "text": "Needy",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 110,
+      "text": "Weak",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 111,
+      "text": "Feels Bad About Self",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 112,
+      "text": "Ashamed",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 113,
+      "text": "Embarrassed",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 114,
+      "text": "Feels Guilt",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 115,
+      "text": "Regretfull",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 116,
+      "text": "Pessimistic",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 117,
+      "text": "More Reluctant",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 118,
+      "text": "Unconfident",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 119,
+      "text": "Less Clarity",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 120,
+      "text": "Insecure",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 121,
+      "text": "Worried",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 122,
+      "text": "Tense",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 123,
+      "text": "Lacks Responsibility",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 124,
+      "text": "Unhelpful Thinking",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 125,
+      "text": "Less Rational",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 126,
+      "text": "Emotional Issues",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 128,
+      "text": "Illogical",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 129,
+      "text": "Dishonest",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 130,
+      "text": "Michievous",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 131,
+      "text": "Stealthy",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 132,
+      "text": "False Self",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 133,
+      "text": "Decetful",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 134,
+      "text": "Fake",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 135,
+      "text": "Rough",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 136,
+      "text": "Arrogant",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 137,
+      "text": "Abrupt",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 138,
+      "text": "Disregarding Others",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 139,
+      "text": "Judgemental",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 140,
+      "text": "Stern",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 141,
+      "text": "Innocent",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 143,
+      "text": "Harmless",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 144,
+      "text": "Asleep",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 145,
+      "text": "Asleep",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 146,
+      "text": "Unempathic",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 148,
+      "text": "Bored",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 149,
+      "text": "Disinterested",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 150,
+      "text": "Wasting Away",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 151,
+      "text": "Brooding",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 152,
+      "text": "Wounded",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 153,
+      "text": "Resting",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 154,
+      "text": "Never Enough",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 155,
+      "text": "Incompetent",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 156,
+      "text": "Lacks Ability",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 157,
+      "text": "Overwhelmed",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 158,
+      "text": "Lacks Authority",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 159,
+      "text": "Ordinary",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 160,
+      "text": "Unfinished",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 161,
+      "text": "Unresolved",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 142,
+      "text": "Inexperienced Naïve",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 147,
+      "text": "Unassertive Naïve",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 91,
+      "text": "Mental Emotional Issues Sensitive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 162,
+      "text": "Unfulfilled",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 163,
+      "text": "Unstatisfied",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 164,
+      "text": "Hollow",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 165,
+      "text": "Limited",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 166,
+      "text": "Self-Focused",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 167,
+      "text": "Situation-Focused",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 168,
+      "text": "Object-Others Focused",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 169,
+      "text": "Public Focus",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 170,
+      "text": "Private Focus",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 171,
+      "text": "Public & Private Focus",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 172,
+      "text": "External Influences",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 173,
+      "text": "My Choices",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 174,
+      "text": "Both External Influences & My Choices",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 175,
+      "text": "Being Unaware",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 176,
+      "text": "Not In Tune",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 177,
+      "text": "Unrealistic Expectations",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 178,
+      "text": "Cheerful",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 180,
+      "text": "Exuberant",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 181,
+      "text": "Spontaneous",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 184,
+      "text": "Enthusiastic",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 185,
+      "text": "Impulsive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 179,
+      "text": "Joyful Happy",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 186,
+      "text": "Joyful",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 187,
+      "text": "Intense",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 188,
+      "text": "Busy",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 189,
+      "text": "Under Pressure",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 190,
+      "text": "Highly Emotional",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 192,
+      "text": "Extreme Sport",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 193,
+      "text": "Fighting",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 194,
+      "text": "Mental Issuer",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 195,
+      "text": "Harmful",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 196,
+      "text": "Controlling",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 197,
+      "text": "Exudes Presence",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 198,
+      "text": "Feels Good About Self",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 199,
+      "text": "Self-Satisfied",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 200,
+      "text": "High Self-Esteem",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 201,
+      "text": "Positive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 202,
+      "text": "Reaches Out",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 203,
+      "text": "Convincing",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 204,
+      "text": "More Direct",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 206,
+      "text": "Persuasive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 207,
+      "text": "Decisive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 208,
+      "text": "Intervening",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 209,
+      "text": "Undermining / Gas Lighting",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 210,
+      "text": "Conspiring",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 211,
+      "text": "Organised",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 212,
+      "text": "Taking Over",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 213,
+      "text": "Uninvited",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 214,
+      "text": "Invasive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 215,
+      "text": "Single Minded",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 216,
+      "text": "Preoccupied",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 217,
+      "text": "Purposeful",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 218,
+      "text": "Persistent",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 219,
+      "text": "Compulsive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 220,
+      "text": "Obsessive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 221,
+      "text": "Reliable",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 222,
+      "text": "Accountable",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 223,
+      "text": "In Charge",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 224,
+      "text": "Teacher",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 225,
+      "text": "Judge",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 226,
+      "text": "Feels Responsible",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 227,
+      "text": "Advisor",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 228,
+      "text": "Counsellor",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 229,
+      "text": "Leader",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 230,
+      "text": "Honest",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 231,
+      "text": "Sincere",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 232,
+      "text": "Doing My Duty",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 233,
+      "text": "Principled",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 235,
+      "text": "Guardian",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 236,
+      "text": "Logical",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 237,
+      "text": "Sensible",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 238,
+      "text": "Self-Controlled",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 239,
+      "text": "Less Emotional",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 240,
+      "text": "Balanced",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 241,
+      "text": "Practical",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 242,
+      "text": "Contemplating",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 243,
+      "text": "Planning",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 244,
+      "text": "Analytical",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 245,
+      "text": "Studious",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 246,
+      "text": "Deep Thinking",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 247,
+      "text": "More Serious",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 248,
+      "text": "Simplifies Concepts",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 249,
+      "text": "Reductionist Thinking",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 250,
+      "text": "Reduce to Essentials",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 251,
+      "text": "Avoids Complexity",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 252,
+      "text": "Minimises Issues",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 253,
+      "text": "Oversimplifies",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 254,
+      "text": "Clever",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 255,
+      "text": "Refined Thinking",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 256,
+      "text": "Inquisitive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 257,
+      "text": "Creative",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 258,
+      "text": "Imaginative",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 259,
+      "text": "Stimulating",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 260,
+      "text": "Visionary",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 261,
+      "text": "Perceptive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 262,
+      "text": "Wise",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 263,
+      "text": "More Enlightened",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 264,
+      "text": "Logical & Intuitive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 265,
+      "text": "The Unconscious Mind",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 266,
+      "text": "More Sensitive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 267,
+      "text": "Empathic",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 268,
+      "text": "Being Aware",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 269,
+      "text": "Psychic",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 270,
+      "text": "Clairvoyant",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 271,
+      "text": "Knowing",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 272,
+      "text": "Spiritual Experience",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 273,
+      "text": "Merged",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 274,
+      "text": "Religious",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 275,
+      "text": "Idealistic",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 276,
+      "text": "Mystical",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 394,
+      "text": "Quiet",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 183,
+      "text": "Intoxicated Happy",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 234,
+      "text": "True To Myself Trustworthy",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 182,
+      "text": "Not Serious",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 277,
+      "text": "Similar To Others",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 278,
+      "text": "In Synchrony",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 279,
+      "text": "Symbiotic",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 280,
+      "text": "Conforming",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 281,
+      "text": "In Partnership",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 282,
+      "text": "Average",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 283,
+      "text": "Peaceful",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 284,
+      "text": "Content",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 285,
+      "text": "Satisfied",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 286,
+      "text": "Easy Going",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 287,
+      "text": "Self Adapting",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 288,
+      "text": "Undermanding",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 289,
+      "text": "Giving",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 290,
+      "text": "Accommodating",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 291,
+      "text": "Hospitable",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 293,
+      "text": "Cooperative",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 294,
+      "text": "Supportive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 295,
+      "text": "Passive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 296,
+      "text": "Stagnant",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 297,
+      "text": "Praying",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 298,
+      "text": "Meditating",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 299,
+      "text": "At Peace",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 300,
+      "text": "Serene",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 301,
+      "text": "Open",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 302,
+      "text": "More Comfortable",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 303,
+      "text": "Mellow",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 304,
+      "text": "Day Dreamer",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 305,
+      "text": "Avoids Conflice",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 306,
+      "text": "Unassertive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 307,
+      "text": "Inviting",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 308,
+      "text": "Charming",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 309,
+      "text": "Receptive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 310,
+      "text": "Diplomatic",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 311,
+      "text": "Communicative",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 312,
+      "text": "Pleasant",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 313,
+      "text": "Avoids Conflict",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 314,
+      "text": "Playful",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 315,
+      "text": "Humorous",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 316,
+      "text": "Clown",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 317,
+      "text": "Party Persona",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 318,
+      "text": "Prankster",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 319,
+      "text": "Superficial",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 320,
+      "text": "Gentle",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 321,
+      "text": "Nuturing",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 322,
+      "text": "Comforting",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 323,
+      "text": "Considerate",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 324,
+      "text": "Assisting",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 325,
+      "text": "A Healer",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 326,
+      "text": "Adapting",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 327,
+      "text": "Healing",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 328,
+      "text": "Dying",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 330,
+      "text": "Exploring",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 331,
+      "text": "Preparing To Leave",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 332,
+      "text": "Adventurous",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 333,
+      "text": "Moving Backwards",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 334,
+      "text": "Forwards Indirectly",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 335,
+      "text": "Going Around",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 336,
+      "text": "Going Sideways",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 337,
+      "text": "Forwards Slowly",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 338,
+      "text": "Flowing",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 339,
+      "text": "A Point Of Change",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 340,
+      "text": "A Birth",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 341,
+      "text": "A Gain",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 342,
+      "text": "A Loss",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 343,
+      "text": "A Death",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 344,
+      "text": "Expanding",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 345,
+      "text": "Hypervigilant",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 346,
+      "text": "Careful",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 347,
+      "text": "Wary",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 348,
+      "text": "Self-Preservating",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 349,
+      "text": "Surviving",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 350,
+      "text": "Recovering",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 351,
+      "text": "Self-Actualising",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 352,
+      "text": "Natural Self",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 353,
+      "text": "True To Myself",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 354,
+      "text": "Centred",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 355,
+      "text": "Complete",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 356,
+      "text": "More Distinct",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 357,
+      "text": "More Sensual",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 358,
+      "text": "Primitive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 359,
+      "text": "Animal",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 360,
+      "text": "Vigourous",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 361,
+      "text": "Tactile",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 362,
+      "text": "Sexual",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 363,
+      "text": "Desire",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 364,
+      "text": "Seductive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 365,
+      "text": "Passionate",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 366,
+      "text": "Lustful",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 367,
+      "text": "Erotic",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 368,
+      "text": "Aroused",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 369,
+      "text": "Self-Conflict",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 370,
+      "text": "Opposing",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 371,
+      "text": "Rejecting",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 372,
+      "text": "Irritated",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 373,
+      "text": "Dissatisfied",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 374,
+      "text": "Pent Up Emotions",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 375,
+      "text": "Antagonistic",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 376,
+      "text": "Disruptive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 377,
+      "text": "Unco-operative",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 378,
+      "text": "Upset",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 379,
+      "text": "Angry Rage",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 381,
+      "text": "Competitive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 382,
+      "text": "More Empowered",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 383,
+      "text": "Strong",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 384,
+      "text": "Focused",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 385,
+      "text": "Patient",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 386,
+      "text": "Enduring",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 388,
+      "text": "Psychologically Harmful",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 389,
+      "text": "Violent",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 390,
+      "text": "Potentially Dangerous",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 391,
+      "text": "Harmful To People",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 392,
+      "text": "Harmful To Things",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 393,
+      "text": "Harmful To Self",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 380,
+      "text": "Fighting Hostile",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 292,
+      "text": "Patient Kind",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 329,
+      "text": "Spiritual Experience Transforming",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 395,
+      "text": "Vulnerable",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 396,
+      "text": "Tired",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 397,
+      "text": "Unsociable",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 398,
+      "text": "Anxious",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 401,
+      "text": "Incomplete",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 403,
+      "text": "Lacking Something",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 406,
+      "text": "Fun Loving",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 407,
+      "text": "Devious",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 408,
+      "text": "Something Hidden",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 409,
+      "text": "Feels Bad",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 410,
+      "text": "Sensitive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 50,
+      "text": "emotions",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 400,
+      "text": "Jealous JI",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 399,
+      "text": "Cautious QV",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 387,
+      "text": "Centred Warrior",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 402,
+      "text": "Competitive JI",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 405,
+      "text": "Desire JI",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 205,
+      "text": "Enthusiastic Influential",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 71,
+      "text": "Cautious",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 404,
+      "text": "Never Enough JI",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 411,
+      "text": "Unsociable FD",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    }
+  ],
+  "questions": [
+    {
+      "id": 54,
+      "code": "Focused",
+      "type": "Theme",
+      "text": "Where is this persona focused?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "166",
+          "value": true,
+          "text": "Self-Focused",
+          "order": 0,
+          "factId": 166
+        },
+        {
+          "code": "167",
+          "value": true,
+          "text": "Situation-Focused",
+          "order": 1,
+          "factId": 167
+        },
+        {
+          "code": "168",
+          "value": true,
+          "text": "Object-Others Focused",
+          "order": 2,
+          "factId": 168
+        },
+        {
+          "code": "169",
+          "value": true,
+          "text": "Public Focus",
+          "order": 3,
+          "factId": 169
+        },
+        {
+          "code": "170",
+          "value": true,
+          "text": "Private Focus",
+          "order": 4,
+          "factId": 170
+        },
+        {
+          "code": "171",
+          "value": true,
+          "text": "Public & Private Focus",
+          "order": 5,
+          "factId": 171
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 55,
+      "code": "Causal Influence",
+      "type": "Theme",
+      "text": "Which options contributed to this situation?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "172",
+          "value": true,
+          "text": "External Influences",
+          "order": 0,
+          "factId": 172
+        },
+        {
+          "code": "173",
+          "value": true,
+          "text": "My Choices",
+          "order": 1,
+          "factId": 173
+        },
+        {
+          "code": "174",
+          "value": true,
+          "text": "Both External Influences & My Choices",
+          "order": 2,
+          "factId": 174
+        },
+        {
+          "code": "175",
+          "value": true,
+          "text": "Being Unaware",
+          "order": 3,
+          "factId": 175
+        },
+        {
+          "code": "176",
+          "value": true,
+          "text": "Not In Tune",
+          "order": 4,
+          "factId": 176
+        },
+        {
+          "code": "177",
+          "value": true,
+          "text": "Unrealistic Expectations",
+          "order": 5,
+          "factId": 177
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 56,
+      "code": "Happy",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "178",
+          "value": true,
+          "text": "Cheerful",
+          "order": 0,
+          "factId": 178
+        },
+        {
+          "code": "180",
+          "value": true,
+          "text": "Exuberant",
+          "order": 1,
+          "factId": 180
+        },
+        {
+          "code": "181",
+          "value": true,
+          "text": "Spontaneous",
+          "order": 2,
+          "factId": 181
+        },
+        {
+          "code": "179",
+          "value": true,
+          "text": "Joyful Happy",
+          "order": 3,
+          "factId": 179
+        },
+        {
+          "code": "183",
+          "value": true,
+          "text": "Intoxicated Happy",
+          "order": 4,
+          "factId": 183
+        },
+        {
+          "code": "182",
+          "value": true,
+          "text": "Not Serious",
+          "order": 5,
+          "factId": 182
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 57,
+      "code": "Excited",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "184",
+          "value": true,
+          "text": "Enthusiastic",
+          "order": 0,
+          "factId": 184
+        },
+        {
+          "code": "185",
+          "value": true,
+          "text": "Impulsive",
+          "order": 1,
+          "factId": 185
+        },
+        {
+          "code": "186",
+          "value": true,
+          "text": "Joyful",
+          "order": 2,
+          "factId": 186
+        },
+        {
+          "code": "187",
+          "value": true,
+          "text": "Intense",
+          "order": 3,
+          "factId": 187
+        },
+        {
+          "code": "188",
+          "value": true,
+          "text": "Busy",
+          "order": 4,
+          "factId": 188
+        },
+        {
+          "code": "189",
+          "value": true,
+          "text": "Under Pressure",
+          "order": 5,
+          "factId": 189
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 58,
+      "code": "Extreme Behaviour-Activity",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "190",
+          "value": true,
+          "text": "Highly Emotional",
+          "order": 0,
+          "factId": 190
+        },
+        {
+          "code": "192",
+          "value": true,
+          "text": "Extreme Sport",
+          "order": 1,
+          "factId": 192
+        },
+        {
+          "code": "193",
+          "value": true,
+          "text": "Fighting",
+          "order": 2,
+          "factId": 193
+        },
+        {
+          "code": "194",
+          "value": true,
+          "text": "Mental Issuer",
+          "order": 3,
+          "factId": 194
+        },
+        {
+          "code": "195",
+          "value": true,
+          "text": "Harmful",
+          "order": 4,
+          "factId": 195
+        },
+        {
+          "code": "196",
+          "value": true,
+          "text": "Controlling",
+          "order": 5,
+          "factId": 196
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 59,
+      "code": "More Confident",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "197",
+          "value": true,
+          "text": "Exudes Presence",
+          "order": 0,
+          "factId": 197
+        },
+        {
+          "code": "198",
+          "value": true,
+          "text": "Feels Good About Self",
+          "order": 1,
+          "factId": 198
+        },
+        {
+          "code": "199",
+          "value": true,
+          "text": "Self-Satisfied",
+          "order": 2,
+          "factId": 199
+        },
+        {
+          "code": "200",
+          "value": true,
+          "text": "High Self-Esteem",
+          "order": 3,
+          "factId": 200
+        },
+        {
+          "code": "201",
+          "value": true,
+          "text": "Positive",
+          "order": 4,
+          "factId": 201
+        },
+        {
+          "code": "202",
+          "value": true,
+          "text": "Reaches Out",
+          "order": 5,
+          "factId": 202
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 60,
+      "code": "Influential",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "203",
+          "value": true,
+          "text": "Convincing",
+          "order": 0,
+          "factId": 203
+        },
+        {
+          "code": "204",
+          "value": true,
+          "text": "More Direct",
+          "order": 1,
+          "factId": 204
+        },
+        {
+          "code": "206",
+          "value": true,
+          "text": "Persuasive",
+          "order": 2,
+          "factId": 206
+        },
+        {
+          "code": "207",
+          "value": true,
+          "text": "Decisive",
+          "order": 3,
+          "factId": 207
+        },
+        {
+          "code": "208",
+          "value": true,
+          "text": "Intervening",
+          "order": 4,
+          "factId": 208
+        },
+        {
+          "code": "205",
+          "value": true,
+          "text": "Enthusiastic Influential",
+          "order": 5,
+          "factId": 205
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 61,
+      "code": "Controlling",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "209",
+          "value": true,
+          "text": "Undermining / Gas Lighting",
+          "order": 0,
+          "factId": 209
+        },
+        {
+          "code": "210",
+          "value": true,
+          "text": "Conspiring",
+          "order": 1,
+          "factId": 210
+        },
+        {
+          "code": "211",
+          "value": true,
+          "text": "Organised",
+          "order": 2,
+          "factId": 211
+        },
+        {
+          "code": "212",
+          "value": true,
+          "text": "Taking Over",
+          "order": 3,
+          "factId": 212
+        },
+        {
+          "code": "213",
+          "value": true,
+          "text": "Uninvited",
+          "order": 4,
+          "factId": 213
+        },
+        {
+          "code": "214",
+          "value": true,
+          "text": "Invasive",
+          "order": 5,
+          "factId": 214
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 62,
+      "code": "Goal Focused",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "215",
+          "value": true,
+          "text": "Single Minded",
+          "order": 0,
+          "factId": 215
+        },
+        {
+          "code": "216",
+          "value": true,
+          "text": "Preoccupied",
+          "order": 1,
+          "factId": 216
+        },
+        {
+          "code": "217",
+          "value": true,
+          "text": "Purposeful",
+          "order": 2,
+          "factId": 217
+        },
+        {
+          "code": "218",
+          "value": true,
+          "text": "Persistent",
+          "order": 3,
+          "factId": 218
+        },
+        {
+          "code": "219",
+          "value": true,
+          "text": "Compulsive",
+          "order": 4,
+          "factId": 219
+        },
+        {
+          "code": "220",
+          "value": true,
+          "text": "Obsessive",
+          "order": 5,
+          "factId": 220
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 63,
+      "code": "Responsible",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "221",
+          "value": true,
+          "text": "Reliable",
+          "order": 0,
+          "factId": 221
+        },
+        {
+          "code": "222",
+          "value": true,
+          "text": "Accountable",
+          "order": 1,
+          "factId": 222
+        },
+        {
+          "code": "223",
+          "value": true,
+          "text": "In Charge",
+          "order": 2,
+          "factId": 223
+        },
+        {
+          "code": "224",
+          "value": true,
+          "text": "Teacher",
+          "order": 3,
+          "factId": 224
+        },
+        {
+          "code": "225",
+          "value": true,
+          "text": "Judge",
+          "order": 4,
+          "factId": 225
+        },
+        {
+          "code": "226",
+          "value": true,
+          "text": "Feels Responsible",
+          "order": 5,
+          "factId": 226
+        },
+        {
+          "code": "227",
+          "value": true,
+          "text": "Advisor",
+          "order": 6,
+          "factId": 227
+        },
+        {
+          "code": "228",
+          "value": true,
+          "text": "Counsellor",
+          "order": 7,
+          "factId": 228
+        },
+        {
+          "code": "229",
+          "value": true,
+          "text": "Leader",
+          "order": 8,
+          "factId": 229
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 64,
+      "code": "Trustworthy",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "230",
+          "value": true,
+          "text": "Honest",
+          "order": 0,
+          "factId": 230
+        },
+        {
+          "code": "231",
+          "value": true,
+          "text": "Sincere",
+          "order": 1,
+          "factId": 231
+        },
+        {
+          "code": "232",
+          "value": true,
+          "text": "Doing My Duty",
+          "order": 2,
+          "factId": 232
+        },
+        {
+          "code": "233",
+          "value": true,
+          "text": "Principled",
+          "order": 3,
+          "factId": 233
+        },
+        {
+          "code": "235",
+          "value": true,
+          "text": "Guardian",
+          "order": 4,
+          "factId": 235
+        },
+        {
+          "code": "234",
+          "value": true,
+          "text": "True To Myself Trustworthy",
+          "order": 5,
+          "factId": 234
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 22,
+      "code": "Colour",
+      "type": "ColourPicker",
+      "text": "Now think of a colour that feels right for this persona, and select it from the colour palette.",
+      "factSubject": "41",
+      "options": [],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 23,
+      "code": "Energy",
+      "type": "MultipleChoice",
+      "text": "How much energy does this persona have?",
+      "factSubject": "42",
+      "options": [
+        {
+          "code": "High",
+          "value": "high",
+          "text": "High",
+          "image": null,
+          "order": 0,
+          "factId": null
+        },
+        {
+          "code": "Medium",
+          "value": "medium",
+          "text": "Medium",
+          "image": null,
+          "order": 1,
+          "factId": null
+        },
+        {
+          "code": "Low",
+          "value": "low",
+          "text": "Low",
+          "image": null,
+          "order": 2,
+          "factId": null
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 3,
+          "factId": null
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 4,
+          "factId": null
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 5,
+          "factId": null
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 24,
+      "code": "Flow",
+      "type": "MultipleChoice",
+      "text": "Does this persona feel more round or square?",
+      "factSubject": "43",
+      "options": [
+        {
+          "code": "Round",
+          "value": "round",
+          "text": "Round",
+          "image": null,
+          "order": 0,
+          "factId": null
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 1,
+          "factId": null
+        },
+        {
+          "code": "Square",
+          "value": "square",
+          "text": "Square",
+          "image": null,
+          "order": 2,
+          "factId": null
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 3,
+          "factId": null
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 4,
+          "factId": null
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 5,
+          "factId": null
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 25,
+      "code": "Friendliness",
+      "type": "MultipleChoice",
+      "text": "How friendly is this persona?",
+      "factSubject": "44",
+      "options": [
+        {
+          "code": "More friendly",
+          "value": "more friendly",
+          "text": "More friendly",
+          "image": null,
+          "order": 0,
+          "factId": null
+        },
+        {
+          "code": "Less friendly",
+          "value": "less friendly",
+          "text": "Less friendly",
+          "image": null,
+          "order": 1,
+          "factId": null
+        },
+        {
+          "code": "Aggressive",
+          "value": "aggressive",
+          "text": "Aggressive",
+          "image": null,
+          "order": 2,
+          "factId": null
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 3,
+          "factId": null
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 4,
+          "factId": null
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 5,
+          "factId": null
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 26,
+      "code": "Helpfullness",
+      "type": "TextSlider",
+      "text": "How Helpful is this persona to you?",
+      "factSubject": "44",
+      "options": [],
+      "min": 0,
+      "max": 3,
+      "labels": [
+        "Most Helpful",
+        "Less Helpful",
+        "Destructive"
+      ]
+    },
+    {
+      "id": 27,
+      "code": "Outgoingness",
+      "type": "TextSlider",
+      "text": "Is this persona more introverted or Extroverted",
+      "factSubject": "46",
+      "options": [],
+      "min": 1,
+      "max": 3,
+      "labels": [
+        "Introvert",
+        "Ambivert",
+        "Extroverted"
+      ]
+    },
+    {
+      "id": 28,
+      "code": "Integrity",
+      "type": "MultipleChoice",
+      "text": "Which option best describes this persona?",
+      "factSubject": "47",
+      "options": [
+        {
+          "code": "More Honourable",
+          "value": "more honourable",
+          "text": "More Honourable",
+          "image": null,
+          "order": 0,
+          "factId": null
+        },
+        {
+          "code": "Less Honourable",
+          "value": "less honourable",
+          "text": "Less Honourable",
+          "image": null,
+          "order": 1,
+          "factId": null
+        },
+        {
+          "code": "Move-On",
+          "value": "move-on",
+          "text": "Move-On",
+          "image": null,
+          "order": 2,
+          "factId": null
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 3,
+          "factId": null
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 4,
+          "factId": null
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 5,
+          "factId": null
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 29,
+      "code": "Key Personas",
+      "type": "Polygon",
+      "text": "Which option if any is like this Persona?",
+      "factSubject": "48",
+      "options": [
+        {
+          "code": "An Emotion",
+          "value": "an emotion",
+          "text": "An Emotion",
+          "image": null,
+          "order": 1,
+          "factId": null
+        },
+        {
+          "code": "A Warrior",
+          "value": "a warrior",
+          "text": "A Warrior",
+          "image": null,
+          "order": 2,
+          "factId": null
+        },
+        {
+          "code": "A Role",
+          "value": "a role",
+          "text": "A Role",
+          "image": null,
+          "order": 3,
+          "factId": null
+        },
+        {
+          "code": "Spiritual",
+          "value": "spiritual",
+          "text": "Spiritual",
+          "image": null,
+          "order": 4,
+          "factId": null
+        },
+        {
+          "code": "Intuitive",
+          "value": "intuitive",
+          "text": "Intuitive",
+          "image": null,
+          "order": 5,
+          "factId": null
+        },
+        {
+          "code": "A Voice Thought",
+          "value": "a voice thought",
+          "text": "A Voice Thought",
+          "image": null,
+          "order": 0,
+          "factId": null
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 30,
+      "code": "Movement",
+      "type": "TextSlider",
+      "text": "Which options along the slide bar best describe your persona?",
+      "factSubject": "49",
+      "options": [],
+      "min": 1,
+      "max": 12,
+      "labels": [
+        "\nNo-Movement",
+        "Stopped",
+        "Stuck",
+        "Trapped",
+        "A Block Inside",
+        "Withdrawn",
+        "In Transition",
+        "Moving",
+        "Emerging",
+        "Moving \"on the spot\"",
+        "Moving fast",
+        "Extreme \nMovement-Behaviour"
+      ]
+    },
+    {
+      "id": 31,
+      "code": "Emotions",
+      "type": "Polygon",
+      "text": "Select the one option that best describes the theme of this persona.",
+      "factSubject": "50",
+      "options": [
+        {
+          "code": "Happy-Sad",
+          "value": "happy-sad",
+          "text": "Happy-Sad",
+          "image": null,
+          "order": 0,
+          "factId": null
+        },
+        {
+          "code": "Angry-Calm",
+          "value": "angry-calm",
+          "text": "Angry-Calm",
+          "image": null,
+          "order": 1,
+          "factId": null
+        },
+        {
+          "code": "Love-Hate",
+          "value": "love-hate",
+          "text": "Love-Hate",
+          "image": null,
+          "order": 2,
+          "factId": null
+        },
+        {
+          "code": "Vulnerable",
+          "value": "vulnerable",
+          "text": "Vulnerable",
+          "image": null,
+          "order": 3,
+          "factId": null
+        },
+        {
+          "code": "Anxious",
+          "value": "anxious",
+          "text": "Anxious",
+          "image": null,
+          "order": 4,
+          "factId": null
+        },
+        {
+          "code": "Envious",
+          "value": "envious",
+          "text": "Envious",
+          "image": null,
+          "order": 5,
+          "factId": null
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 32,
+      "code": "Happy-Sad",
+      "type": "Slider",
+      "text": "Happy-Sad",
+      "factSubject": "56",
+      "options": [],
+      "min": 0,
+      "max": 1,
+      "labels": [
+        "More Happy",
+        "Fun Loving",
+        "Harmony",
+        "Melancholy",
+        "Feeling Empty",
+        "Extremely Sad"
+      ]
+    },
+    {
+      "id": 33,
+      "code": "Angry-Calm",
+      "type": "Slider",
+      "text": "Angry-Calm",
+      "factSubject": "57",
+      "options": [],
+      "min": 0,
+      "max": 1,
+      "labels": [
+        "Angry",
+        "Harmony",
+        "Calm"
+      ]
+    },
+    {
+      "id": 34,
+      "code": "Love-Hate",
+      "type": "Slider",
+      "text": "Love-Hate",
+      "factSubject": "58",
+      "options": [],
+      "min": 0,
+      "max": 1,
+      "labels": [
+        "Love",
+        "Harmony",
+        "Hate"
+      ]
+    },
+    {
+      "id": 35,
+      "code": "A Role",
+      "type": "Theme",
+      "text": "What kind of \"Role\" does this persona have?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "54",
+          "value": true,
+          "text": "Social Role",
+          "order": 0,
+          "factId": 54
+        },
+        {
+          "code": "55",
+          "value": true,
+          "text": "Family Role",
+          "order": 1,
+          "factId": 55
+        },
+        {
+          "code": "59",
+          "value": true,
+          "text": "Official Role",
+          "order": 2,
+          "factId": 59
+        },
+        {
+          "code": "60",
+          "value": true,
+          "text": "A Private Role",
+          "order": 3,
+          "factId": 60
+        },
+        {
+          "code": "61",
+          "value": true,
+          "text": "Peacemaker",
+          "order": 4,
+          "factId": 61
+        },
+        {
+          "code": "62",
+          "value": true,
+          "text": "A Mask",
+          "order": 5,
+          "factId": 62
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 36,
+      "code": "Anxious",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "63",
+          "value": true,
+          "text": "Scared",
+          "order": 0,
+          "factId": 63
+        },
+        {
+          "code": "64",
+          "value": true,
+          "text": "Mistrust",
+          "order": 1,
+          "factId": 64
+        },
+        {
+          "code": "65",
+          "value": true,
+          "text": "Won't Commit",
+          "order": 2,
+          "factId": 65
+        },
+        {
+          "code": "66",
+          "value": true,
+          "text": "Jealous",
+          "order": 3,
+          "factId": 66
+        },
+        {
+          "code": "68",
+          "value": true,
+          "text": "Feeling Decieved",
+          "order": 4,
+          "factId": 68
+        },
+        {
+          "code": "67",
+          "value": true,
+          "text": "Overwhelmed Anxious",
+          "order": 5,
+          "factId": 67
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 37,
+      "code": "Unsociable",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "69",
+          "value": true,
+          "text": "Ignoring",
+          "order": 0,
+          "factId": 69
+        },
+        {
+          "code": "70",
+          "value": true,
+          "text": "Hiding",
+          "order": 1,
+          "factId": 70
+        },
+        {
+          "code": "72",
+          "value": true,
+          "text": "Something Hidden",
+          "order": 2,
+          "factId": 72
+        },
+        {
+          "code": "73",
+          "value": true,
+          "text": "Critical",
+          "order": 3,
+          "factId": 73
+        },
+        {
+          "code": "71",
+          "value": true,
+          "text": "Cautious",
+          "order": 4,
+          "factId": 71
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 38,
+      "code": "Tired",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "74",
+          "value": true,
+          "text": "Depleted",
+          "order": 0,
+          "factId": 74
+        },
+        {
+          "code": "75",
+          "value": true,
+          "text": "Exhausted",
+          "order": 1,
+          "factId": 75
+        },
+        {
+          "code": "76",
+          "value": true,
+          "text": "Beaten",
+          "order": 2,
+          "factId": 76
+        },
+        {
+          "code": "77",
+          "value": true,
+          "text": "Fragile",
+          "order": 3,
+          "factId": 77
+        },
+        {
+          "code": "78",
+          "value": true,
+          "text": "Confused",
+          "order": 4,
+          "factId": 78
+        },
+        {
+          "code": "79",
+          "value": true,
+          "text": "Indecisive",
+          "order": 5,
+          "factId": 79
+        },
+        {
+          "code": "80",
+          "value": true,
+          "text": "Freeze",
+          "order": 6,
+          "factId": 80
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 39,
+      "code": "Vulnerable",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "81",
+          "value": true,
+          "text": "Helpless",
+          "order": 0,
+          "factId": 81
+        },
+        {
+          "code": "82",
+          "value": true,
+          "text": "Powerless",
+          "order": 1,
+          "factId": 82
+        },
+        {
+          "code": "83",
+          "value": true,
+          "text": "Inexperienced",
+          "order": 2,
+          "factId": 83
+        },
+        {
+          "code": "84",
+          "value": true,
+          "text": "Unsure",
+          "order": 3,
+          "factId": 84
+        },
+        {
+          "code": "85",
+          "value": true,
+          "text": "Less Confident",
+          "order": 4,
+          "factId": 85
+        },
+        {
+          "code": "86",
+          "value": true,
+          "text": "Lost",
+          "order": 5,
+          "factId": 86
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 40,
+      "code": "Sensitive",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "87",
+          "value": true,
+          "text": "Raw",
+          "order": 0,
+          "factId": 87
+        },
+        {
+          "code": "88",
+          "value": true,
+          "text": "Exposed",
+          "order": 1,
+          "factId": 88
+        },
+        {
+          "code": "89",
+          "value": true,
+          "text": "In-Shock",
+          "order": 2,
+          "factId": 89
+        },
+        {
+          "code": "90",
+          "value": true,
+          "text": "Disbelief",
+          "order": 3,
+          "factId": 90
+        },
+        {
+          "code": "92",
+          "value": true,
+          "text": "Not Well",
+          "order": 4,
+          "factId": 92
+        },
+        {
+          "code": "91",
+          "value": true,
+          "text": "Mental Emotional Issues Sensitive",
+          "order": 5,
+          "factId": 91
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 42,
+      "code": "Feeling Empty",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "99",
+          "value": true,
+          "text": "Disconnected",
+          "order": 0,
+          "factId": 99
+        },
+        {
+          "code": "100",
+          "value": true,
+          "text": "Alone",
+          "order": 1,
+          "factId": 100
+        },
+        {
+          "code": "101",
+          "value": true,
+          "text": "Grieving",
+          "order": 2,
+          "factId": 101
+        },
+        {
+          "code": "102",
+          "value": true,
+          "text": "Despair",
+          "order": 3,
+          "factId": 102
+        },
+        {
+          "code": "103",
+          "value": true,
+          "text": "Numb",
+          "order": 4,
+          "factId": 103
+        },
+        {
+          "code": "104",
+          "value": true,
+          "text": "Suicidal",
+          "order": 5,
+          "factId": 104
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 43,
+      "code": "Less Empowered",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "105",
+          "value": true,
+          "text": "Invisible",
+          "order": 0,
+          "factId": 105
+        },
+        {
+          "code": "106",
+          "value": true,
+          "text": "Blocked",
+          "order": 1,
+          "factId": 106
+        },
+        {
+          "code": "107",
+          "value": true,
+          "text": "Disabled",
+          "order": 2,
+          "factId": 107
+        },
+        {
+          "code": "108",
+          "value": true,
+          "text": "Victim",
+          "order": 3,
+          "factId": 108
+        },
+        {
+          "code": "109",
+          "value": true,
+          "text": "Needy",
+          "order": 4,
+          "factId": 109
+        },
+        {
+          "code": "110",
+          "value": true,
+          "text": "Weak",
+          "order": 5,
+          "factId": 110
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 44,
+      "code": "Feels Bad",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "111",
+          "value": true,
+          "text": "Feels Bad About Self",
+          "order": 0,
+          "factId": 111
+        },
+        {
+          "code": "112",
+          "value": true,
+          "text": "Ashamed",
+          "order": 1,
+          "factId": 112
+        },
+        {
+          "code": "113",
+          "value": true,
+          "text": "Embarrassed",
+          "order": 2,
+          "factId": 113
+        },
+        {
+          "code": "114",
+          "value": true,
+          "text": "Feels Guilt",
+          "order": 3,
+          "factId": 114
+        },
+        {
+          "code": "115",
+          "value": true,
+          "text": "Regretfull",
+          "order": 4,
+          "factId": 115
+        },
+        {
+          "code": "116",
+          "value": true,
+          "text": "Pessimistic",
+          "order": 5,
+          "factId": 116
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 45,
+      "code": "Unconfident",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "117",
+          "value": true,
+          "text": "More Reluctant",
+          "order": 0,
+          "factId": 117
+        },
+        {
+          "code": "118",
+          "value": true,
+          "text": "Unconfident",
+          "order": 1,
+          "factId": 118
+        },
+        {
+          "code": "119",
+          "value": true,
+          "text": "Less Clarity",
+          "order": 2,
+          "factId": 119
+        },
+        {
+          "code": "120",
+          "value": true,
+          "text": "Insecure",
+          "order": 3,
+          "factId": 120
+        },
+        {
+          "code": "121",
+          "value": true,
+          "text": "Worried",
+          "order": 4,
+          "factId": 121
+        },
+        {
+          "code": "122",
+          "value": true,
+          "text": "Tense",
+          "order": 5,
+          "factId": 122
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 46,
+      "code": "Less Responsible",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "127",
+          "value": true,
+          "text": "Intoxicated",
+          "order": 0,
+          "factId": 127
+        },
+        {
+          "code": "123",
+          "value": true,
+          "text": "Lacks Responsibility",
+          "order": 1,
+          "factId": 123
+        },
+        {
+          "code": "124",
+          "value": true,
+          "text": "Unhelpful Thinking",
+          "order": 2,
+          "factId": 124
+        },
+        {
+          "code": "125",
+          "value": true,
+          "text": "Less Rational",
+          "order": 3,
+          "factId": 125
+        },
+        {
+          "code": "126",
+          "value": true,
+          "text": "Emotional Issues",
+          "order": 4,
+          "factId": 126
+        },
+        {
+          "code": "128",
+          "value": true,
+          "text": "Illogical",
+          "order": 5,
+          "factId": 128
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 47,
+      "code": "Devious",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "129",
+          "value": true,
+          "text": "Dishonest",
+          "order": 0,
+          "factId": 129
+        },
+        {
+          "code": "130",
+          "value": true,
+          "text": "Michievous",
+          "order": 1,
+          "factId": 130
+        },
+        {
+          "code": "131",
+          "value": true,
+          "text": "Stealthy",
+          "order": 2,
+          "factId": 131
+        },
+        {
+          "code": "132",
+          "value": true,
+          "text": "False Self",
+          "order": 3,
+          "factId": 132
+        },
+        {
+          "code": "133",
+          "value": true,
+          "text": "Decetful",
+          "order": 4,
+          "factId": 133
+        },
+        {
+          "code": "134",
+          "value": true,
+          "text": "Fake",
+          "order": 5,
+          "factId": 134
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 48,
+      "code": "Insensitive",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "135",
+          "value": true,
+          "text": "Rough",
+          "order": 0,
+          "factId": 135
+        },
+        {
+          "code": "136",
+          "value": true,
+          "text": "Arrogant",
+          "order": 1,
+          "factId": 136
+        },
+        {
+          "code": "137",
+          "value": true,
+          "text": "Abrupt",
+          "order": 2,
+          "factId": 137
+        },
+        {
+          "code": "138",
+          "value": true,
+          "text": "Disregarding Others",
+          "order": 3,
+          "factId": 138
+        },
+        {
+          "code": "139",
+          "value": true,
+          "text": "Judgemental",
+          "order": 4,
+          "factId": 139
+        },
+        {
+          "code": "140",
+          "value": true,
+          "text": "Stern",
+          "order": 5,
+          "factId": 140
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 49,
+      "code": "Naïve",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "141",
+          "value": true,
+          "text": "Innocent",
+          "order": 0,
+          "factId": 141
+        },
+        {
+          "code": "143",
+          "value": true,
+          "text": "Harmless",
+          "order": 1,
+          "factId": 143
+        },
+        {
+          "code": "144",
+          "value": true,
+          "text": "Asleep",
+          "order": 2,
+          "factId": 144
+        },
+        {
+          "code": "145",
+          "value": true,
+          "text": "Asleep",
+          "order": 3,
+          "factId": 145
+        },
+        {
+          "code": "146",
+          "value": true,
+          "text": "Unempathic",
+          "order": 4,
+          "factId": 146
+        },
+        {
+          "code": "142",
+          "value": true,
+          "text": "Inexperienced Naïve",
+          "order": 5,
+          "factId": 142
+        },
+        {
+          "code": "147",
+          "value": true,
+          "text": "Unassertive Naïve",
+          "order": 6,
+          "factId": 147
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 51,
+      "code": "Unmotivated",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "148",
+          "value": true,
+          "text": "Bored",
+          "order": 0,
+          "factId": 148
+        },
+        {
+          "code": "149",
+          "value": true,
+          "text": "Disinterested",
+          "order": 1,
+          "factId": 149
+        },
+        {
+          "code": "150",
+          "value": true,
+          "text": "Wasting Away",
+          "order": 2,
+          "factId": 150
+        },
+        {
+          "code": "151",
+          "value": true,
+          "text": "Brooding",
+          "order": 3,
+          "factId": 151
+        },
+        {
+          "code": "152",
+          "value": true,
+          "text": "Wounded",
+          "order": 4,
+          "factId": 152
+        },
+        {
+          "code": "153",
+          "value": true,
+          "text": "Resting",
+          "order": 5,
+          "factId": 153
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 52,
+      "code": "Inadequate",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "154",
+          "value": true,
+          "text": "Never Enough",
+          "order": 0,
+          "factId": 154
+        },
+        {
+          "code": "155",
+          "value": true,
+          "text": "Incompetent",
+          "order": 1,
+          "factId": 155
+        },
+        {
+          "code": "156",
+          "value": true,
+          "text": "Lacks Ability",
+          "order": 2,
+          "factId": 156
+        },
+        {
+          "code": "157",
+          "value": true,
+          "text": "Overwhelmed",
+          "order": 3,
+          "factId": 157
+        },
+        {
+          "code": "158",
+          "value": true,
+          "text": "Lacks Authority",
+          "order": 4,
+          "factId": 158
+        },
+        {
+          "code": "159",
+          "value": true,
+          "text": "Ordinary",
+          "order": 5,
+          "factId": 159
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 53,
+      "code": "Incomplete",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "160",
+          "value": true,
+          "text": "Unfinished",
+          "order": 0,
+          "factId": 160
+        },
+        {
+          "code": "161",
+          "value": true,
+          "text": "Unresolved",
+          "order": 1,
+          "factId": 161
+        },
+        {
+          "code": "162",
+          "value": true,
+          "text": "Unfulfilled",
+          "order": 2,
+          "factId": 162
+        },
+        {
+          "code": "163",
+          "value": true,
+          "text": "Unstatisfied",
+          "order": 3,
+          "factId": 163
+        },
+        {
+          "code": "164",
+          "value": true,
+          "text": "Hollow",
+          "order": 4,
+          "factId": 164
+        },
+        {
+          "code": "165",
+          "value": true,
+          "text": "Limited",
+          "order": 5,
+          "factId": 165
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 65,
+      "code": "More Rational",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "236",
+          "value": true,
+          "text": "Logical",
+          "order": 0,
+          "factId": 236
+        },
+        {
+          "code": "237",
+          "value": true,
+          "text": "Sensible",
+          "order": 1,
+          "factId": 237
+        },
+        {
+          "code": "238",
+          "value": true,
+          "text": "Self-Controlled",
+          "order": 2,
+          "factId": 238
+        },
+        {
+          "code": "239",
+          "value": true,
+          "text": "Less Emotional",
+          "order": 3,
+          "factId": 239
+        },
+        {
+          "code": "240",
+          "value": true,
+          "text": "Balanced",
+          "order": 4,
+          "factId": 240
+        },
+        {
+          "code": "241",
+          "value": true,
+          "text": "Practical",
+          "order": 5,
+          "factId": 241
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 66,
+      "code": "Thinking",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "242",
+          "value": true,
+          "text": "Contemplating",
+          "order": 0,
+          "factId": 242
+        },
+        {
+          "code": "243",
+          "value": true,
+          "text": "Planning",
+          "order": 1,
+          "factId": 243
+        },
+        {
+          "code": "244",
+          "value": true,
+          "text": "Analytical",
+          "order": 2,
+          "factId": 244
+        },
+        {
+          "code": "245",
+          "value": true,
+          "text": "Studious",
+          "order": 3,
+          "factId": 245
+        },
+        {
+          "code": "246",
+          "value": true,
+          "text": "Deep Thinking",
+          "order": 4,
+          "factId": 246
+        },
+        {
+          "code": "247",
+          "value": true,
+          "text": "More Serious",
+          "order": 5,
+          "factId": 247
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 67,
+      "code": "Reductionist Thinking",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "248",
+          "value": true,
+          "text": "Simplifies Concepts",
+          "order": 0,
+          "factId": 248
+        },
+        {
+          "code": "249",
+          "value": true,
+          "text": "Reductionist Thinking",
+          "order": 1,
+          "factId": 249
+        },
+        {
+          "code": "250",
+          "value": true,
+          "text": "Reduce to Essentials",
+          "order": 2,
+          "factId": 250
+        },
+        {
+          "code": "251",
+          "value": true,
+          "text": "Avoids Complexity",
+          "order": 3,
+          "factId": 251
+        },
+        {
+          "code": "252",
+          "value": true,
+          "text": "Minimises Issues",
+          "order": 4,
+          "factId": 252
+        },
+        {
+          "code": "253",
+          "value": true,
+          "text": "Oversimplifies",
+          "order": 5,
+          "factId": 253
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 68,
+      "code": "Intelligent",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "254",
+          "value": true,
+          "text": "Clever",
+          "order": 0,
+          "factId": 254
+        },
+        {
+          "code": "255",
+          "value": true,
+          "text": "Refined Thinking",
+          "order": 1,
+          "factId": 255
+        },
+        {
+          "code": "256",
+          "value": true,
+          "text": "Inquisitive",
+          "order": 2,
+          "factId": 256
+        },
+        {
+          "code": "257",
+          "value": true,
+          "text": "Creative",
+          "order": 3,
+          "factId": 257
+        },
+        {
+          "code": "258",
+          "value": true,
+          "text": "Imaginative",
+          "order": 4,
+          "factId": 258
+        },
+        {
+          "code": "259",
+          "value": true,
+          "text": "Stimulating",
+          "order": 5,
+          "factId": 259
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 69,
+      "code": "Clarity",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "260",
+          "value": true,
+          "text": "Visionary",
+          "order": 0,
+          "factId": 260
+        },
+        {
+          "code": "261",
+          "value": true,
+          "text": "Perceptive",
+          "order": 1,
+          "factId": 261
+        },
+        {
+          "code": "262",
+          "value": true,
+          "text": "Wise",
+          "order": 2,
+          "factId": 262
+        },
+        {
+          "code": "263",
+          "value": true,
+          "text": "More Enlightened",
+          "order": 3,
+          "factId": 263
+        },
+        {
+          "code": "264",
+          "value": true,
+          "text": "Logical & Intuitive",
+          "order": 4,
+          "factId": 264
+        },
+        {
+          "code": "265",
+          "value": true,
+          "text": "The Unconscious Mind",
+          "order": 5,
+          "factId": 265
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 70,
+      "code": "Intuitive",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "266",
+          "value": true,
+          "text": "More Sensitive",
+          "order": 0,
+          "factId": 266
+        },
+        {
+          "code": "267",
+          "value": true,
+          "text": "Empathic",
+          "order": 1,
+          "factId": 267
+        },
+        {
+          "code": "268",
+          "value": true,
+          "text": "Being Aware",
+          "order": 2,
+          "factId": 268
+        },
+        {
+          "code": "269",
+          "value": true,
+          "text": "Psychic",
+          "order": 3,
+          "factId": 269
+        },
+        {
+          "code": "270",
+          "value": true,
+          "text": "Clairvoyant",
+          "order": 4,
+          "factId": 270
+        },
+        {
+          "code": "271",
+          "value": true,
+          "text": "Knowing",
+          "order": 5,
+          "factId": 271
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 71,
+      "code": "Spiritual",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "272",
+          "value": true,
+          "text": "Spiritual Experience",
+          "order": 0,
+          "factId": 272
+        },
+        {
+          "code": "273",
+          "value": true,
+          "text": "Merged",
+          "order": 1,
+          "factId": 273
+        },
+        {
+          "code": "274",
+          "value": true,
+          "text": "Religious",
+          "order": 2,
+          "factId": 274
+        },
+        {
+          "code": "275",
+          "value": true,
+          "text": "Idealistic",
+          "order": 3,
+          "factId": 275
+        },
+        {
+          "code": "276",
+          "value": true,
+          "text": "Mystical",
+          "order": 4,
+          "factId": 276
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 72,
+      "code": "Like Minded",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "277",
+          "value": true,
+          "text": "Similar To Others",
+          "order": 0,
+          "factId": 277
+        },
+        {
+          "code": "278",
+          "value": true,
+          "text": "In Synchrony",
+          "order": 1,
+          "factId": 278
+        },
+        {
+          "code": "279",
+          "value": true,
+          "text": "Symbiotic",
+          "order": 2,
+          "factId": 279
+        },
+        {
+          "code": "280",
+          "value": true,
+          "text": "Conforming",
+          "order": 3,
+          "factId": 280
+        },
+        {
+          "code": "281",
+          "value": true,
+          "text": "In Partnership",
+          "order": 4,
+          "factId": 281
+        },
+        {
+          "code": "282",
+          "value": true,
+          "text": "Average",
+          "order": 5,
+          "factId": 282
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 73,
+      "code": "Harmonious",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "283",
+          "value": true,
+          "text": "Peaceful",
+          "order": 0,
+          "factId": 283
+        },
+        {
+          "code": "284",
+          "value": true,
+          "text": "Content",
+          "order": 1,
+          "factId": 284
+        },
+        {
+          "code": "285",
+          "value": true,
+          "text": "Satisfied",
+          "order": 2,
+          "factId": 285
+        },
+        {
+          "code": "286",
+          "value": true,
+          "text": "Easy Going",
+          "order": 3,
+          "factId": 286
+        },
+        {
+          "code": "287",
+          "value": true,
+          "text": "Self Adapting",
+          "order": 4,
+          "factId": 287
+        },
+        {
+          "code": "288",
+          "value": true,
+          "text": "Undermanding",
+          "order": 5,
+          "factId": 288
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 74,
+      "code": "Kind",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "289",
+          "value": true,
+          "text": "Giving",
+          "order": 0,
+          "factId": 289
+        },
+        {
+          "code": "290",
+          "value": true,
+          "text": "Accommodating",
+          "order": 1,
+          "factId": 290
+        },
+        {
+          "code": "291",
+          "value": true,
+          "text": "Hospitable",
+          "order": 2,
+          "factId": 291
+        },
+        {
+          "code": "293",
+          "value": true,
+          "text": "Cooperative",
+          "order": 3,
+          "factId": 293
+        },
+        {
+          "code": "294",
+          "value": true,
+          "text": "Supportive",
+          "order": 4,
+          "factId": 294
+        },
+        {
+          "code": "292",
+          "value": true,
+          "text": "Patient Kind",
+          "order": 5,
+          "factId": 292
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 75,
+      "code": "Quiet",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "295",
+          "value": true,
+          "text": "Passive",
+          "order": 0,
+          "factId": 295
+        },
+        {
+          "code": "296",
+          "value": true,
+          "text": "Stagnant",
+          "order": 1,
+          "factId": 296
+        },
+        {
+          "code": "297",
+          "value": true,
+          "text": "Praying",
+          "order": 2,
+          "factId": 297
+        },
+        {
+          "code": "298",
+          "value": true,
+          "text": "Meditating",
+          "order": 3,
+          "factId": 298
+        },
+        {
+          "code": "299",
+          "value": true,
+          "text": "At Peace",
+          "order": 4,
+          "factId": 299
+        },
+        {
+          "code": "300",
+          "value": true,
+          "text": "Serene",
+          "order": 5,
+          "factId": 300
+        },
+        {
+          "code": "301",
+          "value": true,
+          "text": "Open",
+          "order": 6,
+          "factId": 301
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 76,
+      "code": "Relaxed",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "302",
+          "value": true,
+          "text": "More Comfortable",
+          "order": 0,
+          "factId": 302
+        },
+        {
+          "code": "303",
+          "value": true,
+          "text": "Mellow",
+          "order": 1,
+          "factId": 303
+        },
+        {
+          "code": "304",
+          "value": true,
+          "text": "Day Dreamer",
+          "order": 2,
+          "factId": 304
+        },
+        {
+          "code": "305",
+          "value": true,
+          "text": "Avoids Conflice",
+          "order": 3,
+          "factId": 305
+        },
+        {
+          "code": "306",
+          "value": true,
+          "text": "Unassertive",
+          "order": 4,
+          "factId": 306
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 77,
+      "code": "Sociable",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "307",
+          "value": true,
+          "text": "Inviting",
+          "order": 0,
+          "factId": 307
+        },
+        {
+          "code": "308",
+          "value": true,
+          "text": "Charming",
+          "order": 1,
+          "factId": 308
+        },
+        {
+          "code": "309",
+          "value": true,
+          "text": "Receptive",
+          "order": 2,
+          "factId": 309
+        },
+        {
+          "code": "310",
+          "value": true,
+          "text": "Diplomatic",
+          "order": 3,
+          "factId": 310
+        },
+        {
+          "code": "311",
+          "value": true,
+          "text": "Communicative",
+          "order": 4,
+          "factId": 311
+        },
+        {
+          "code": "312",
+          "value": true,
+          "text": "Pleasant",
+          "order": 5,
+          "factId": 312
+        },
+        {
+          "code": "313",
+          "value": true,
+          "text": "Avoids Conflict",
+          "order": 6,
+          "factId": 313
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 78,
+      "code": "Fun Loving",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "314",
+          "value": true,
+          "text": "Playful",
+          "order": 0,
+          "factId": 314
+        },
+        {
+          "code": "315",
+          "value": true,
+          "text": "Humorous",
+          "order": 1,
+          "factId": 315
+        },
+        {
+          "code": "316",
+          "value": true,
+          "text": "Clown",
+          "order": 2,
+          "factId": 316
+        },
+        {
+          "code": "317",
+          "value": true,
+          "text": "Party Persona",
+          "order": 3,
+          "factId": 317
+        },
+        {
+          "code": "318",
+          "value": true,
+          "text": "Prankster",
+          "order": 4,
+          "factId": 318
+        },
+        {
+          "code": "319",
+          "value": true,
+          "text": "Superficial",
+          "order": 5,
+          "factId": 319
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 79,
+      "code": "Caring",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "320",
+          "value": true,
+          "text": "Gentle",
+          "order": 0,
+          "factId": 320
+        },
+        {
+          "code": "321",
+          "value": true,
+          "text": "Nuturing",
+          "order": 1,
+          "factId": 321
+        },
+        {
+          "code": "322",
+          "value": true,
+          "text": "Comforting",
+          "order": 2,
+          "factId": 322
+        },
+        {
+          "code": "323",
+          "value": true,
+          "text": "Considerate",
+          "order": 3,
+          "factId": 323
+        },
+        {
+          "code": "324",
+          "value": true,
+          "text": "Assisting",
+          "order": 4,
+          "factId": 324
+        },
+        {
+          "code": "325",
+          "value": true,
+          "text": "A Healer",
+          "order": 5,
+          "factId": 325
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 80,
+      "code": "Transforming",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "326",
+          "value": true,
+          "text": "Adapting",
+          "order": 0,
+          "factId": 326
+        },
+        {
+          "code": "327",
+          "value": true,
+          "text": "Healing",
+          "order": 1,
+          "factId": 327
+        },
+        {
+          "code": "328",
+          "value": true,
+          "text": "Dying",
+          "order": 2,
+          "factId": 328
+        },
+        {
+          "code": "330",
+          "value": true,
+          "text": "Exploring",
+          "order": 3,
+          "factId": 330
+        },
+        {
+          "code": "331",
+          "value": true,
+          "text": "Preparing To Leave",
+          "order": 4,
+          "factId": 331
+        },
+        {
+          "code": "332",
+          "value": true,
+          "text": "Adventurous",
+          "order": 5,
+          "factId": 332
+        },
+        {
+          "code": "329",
+          "value": true,
+          "text": "Spiritual Experience Transforming",
+          "order": 6,
+          "factId": 329
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 82,
+      "code": "New Development",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "339",
+          "value": true,
+          "text": "A Point Of Change",
+          "order": 0,
+          "factId": 339
+        },
+        {
+          "code": "340",
+          "value": true,
+          "text": "A Birth",
+          "order": 1,
+          "factId": 340
+        },
+        {
+          "code": "341",
+          "value": true,
+          "text": "A Gain",
+          "order": 2,
+          "factId": 341
+        },
+        {
+          "code": "342",
+          "value": true,
+          "text": "A Loss",
+          "order": 3,
+          "factId": 342
+        },
+        {
+          "code": "343",
+          "value": true,
+          "text": "A Death",
+          "order": 4,
+          "factId": 343
+        },
+        {
+          "code": "344",
+          "value": true,
+          "text": "Expanding",
+          "order": 5,
+          "factId": 344
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 83,
+      "code": "Cautious",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "345",
+          "value": true,
+          "text": "Hypervigilant",
+          "order": 0,
+          "factId": 345
+        },
+        {
+          "code": "346",
+          "value": true,
+          "text": "Careful",
+          "order": 1,
+          "factId": 346
+        },
+        {
+          "code": "347",
+          "value": true,
+          "text": "Wary",
+          "order": 2,
+          "factId": 347
+        },
+        {
+          "code": "348",
+          "value": true,
+          "text": "Self-Preservating",
+          "order": 3,
+          "factId": 348
+        },
+        {
+          "code": "349",
+          "value": true,
+          "text": "Surviving",
+          "order": 4,
+          "factId": 349
+        },
+        {
+          "code": "350",
+          "value": true,
+          "text": "Recovering",
+          "order": 5,
+          "factId": 350
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 84,
+      "code": "More Individual",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "351",
+          "value": true,
+          "text": "Self-Actualising",
+          "order": 0,
+          "factId": 351
+        },
+        {
+          "code": "352",
+          "value": true,
+          "text": "Natural Self",
+          "order": 1,
+          "factId": 352
+        },
+        {
+          "code": "353",
+          "value": true,
+          "text": "True To Myself",
+          "order": 2,
+          "factId": 353
+        },
+        {
+          "code": "354",
+          "value": true,
+          "text": "Centred",
+          "order": 3,
+          "factId": 354
+        },
+        {
+          "code": "355",
+          "value": true,
+          "text": "Complete",
+          "order": 4,
+          "factId": 355
+        },
+        {
+          "code": "356",
+          "value": true,
+          "text": "More Distinct",
+          "order": 5,
+          "factId": 356
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 85,
+      "code": "More Physical",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "357",
+          "value": true,
+          "text": "More Sensual",
+          "order": 0,
+          "factId": 357
+        },
+        {
+          "code": "358",
+          "value": true,
+          "text": "Primitive",
+          "order": 1,
+          "factId": 358
+        },
+        {
+          "code": "359",
+          "value": true,
+          "text": "Animal",
+          "order": 2,
+          "factId": 359
+        },
+        {
+          "code": "360",
+          "value": true,
+          "text": "Vigourous",
+          "order": 3,
+          "factId": 360
+        },
+        {
+          "code": "361",
+          "value": true,
+          "text": "Tactile",
+          "order": 4,
+          "factId": 361
+        },
+        {
+          "code": "362",
+          "value": true,
+          "text": "Sexual",
+          "order": 5,
+          "factId": 362
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 86,
+      "code": "Flirtatious",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "363",
+          "value": true,
+          "text": "Desire",
+          "order": 0,
+          "factId": 363
+        },
+        {
+          "code": "364",
+          "value": true,
+          "text": "Seductive",
+          "order": 1,
+          "factId": 364
+        },
+        {
+          "code": "365",
+          "value": true,
+          "text": "Passionate",
+          "order": 2,
+          "factId": 365
+        },
+        {
+          "code": "366",
+          "value": true,
+          "text": "Lustful",
+          "order": 3,
+          "factId": 366
+        },
+        {
+          "code": "367",
+          "value": true,
+          "text": "Erotic",
+          "order": 4,
+          "factId": 367
+        },
+        {
+          "code": "368",
+          "value": true,
+          "text": "Aroused",
+          "order": 5,
+          "factId": 368
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 87,
+      "code": "In Conflict",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "369",
+          "value": true,
+          "text": "Self-Conflict",
+          "order": 0,
+          "factId": 369
+        },
+        {
+          "code": "370",
+          "value": true,
+          "text": "Opposing",
+          "order": 1,
+          "factId": 370
+        },
+        {
+          "code": "371",
+          "value": true,
+          "text": "Rejecting",
+          "order": 2,
+          "factId": 371
+        },
+        {
+          "code": "372",
+          "value": true,
+          "text": "Irritated",
+          "order": 3,
+          "factId": 372
+        },
+        {
+          "code": "373",
+          "value": true,
+          "text": "Dissatisfied",
+          "order": 4,
+          "factId": 373
+        },
+        {
+          "code": "374",
+          "value": true,
+          "text": "Pent Up Emotions",
+          "order": 5,
+          "factId": 374
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 88,
+      "code": "Hostile",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "375",
+          "value": true,
+          "text": "Antagonistic",
+          "order": 0,
+          "factId": 375
+        },
+        {
+          "code": "376",
+          "value": true,
+          "text": "Disruptive",
+          "order": 1,
+          "factId": 376
+        },
+        {
+          "code": "377",
+          "value": true,
+          "text": "Unco-operative",
+          "order": 2,
+          "factId": 377
+        },
+        {
+          "code": "378",
+          "value": true,
+          "text": "Upset",
+          "order": 3,
+          "factId": 378
+        },
+        {
+          "code": "379",
+          "value": true,
+          "text": "Angry Rage",
+          "order": 4,
+          "factId": 379
+        },
+        {
+          "code": "380",
+          "value": true,
+          "text": "Fighting Hostile",
+          "order": 5,
+          "factId": 380
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 89,
+      "code": "Combative",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "381",
+          "value": true,
+          "text": "Competitive",
+          "order": 0,
+          "factId": 381
+        },
+        {
+          "code": "382",
+          "value": true,
+          "text": "More Empowered",
+          "order": 1,
+          "factId": 382
+        },
+        {
+          "code": "383",
+          "value": true,
+          "text": "Strong",
+          "order": 2,
+          "factId": 383
+        },
+        {
+          "code": "384",
+          "value": true,
+          "text": "Focused",
+          "order": 3,
+          "factId": 384
+        },
+        {
+          "code": "385",
+          "value": true,
+          "text": "Patient",
+          "order": 4,
+          "factId": 385
+        },
+        {
+          "code": "386",
+          "value": true,
+          "text": "Enduring",
+          "order": 5,
+          "factId": 386
+        },
+        {
+          "code": "387",
+          "value": true,
+          "text": "Centred Warrior",
+          "order": 6,
+          "factId": 387
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 90,
+      "code": "Harmful",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "388",
+          "value": true,
+          "text": "Psychologically Harmful",
+          "order": 0,
+          "factId": 388
+        },
+        {
+          "code": "389",
+          "value": true,
+          "text": "Violent",
+          "order": 1,
+          "factId": 389
+        },
+        {
+          "code": "390",
+          "value": true,
+          "text": "Potentially Dangerous",
+          "order": 2,
+          "factId": 390
+        },
+        {
+          "code": "391",
+          "value": true,
+          "text": "Harmful To People",
+          "order": 3,
+          "factId": 391
+        },
+        {
+          "code": "392",
+          "value": true,
+          "text": "Harmful To Things",
+          "order": 4,
+          "factId": 392
+        },
+        {
+          "code": "393",
+          "value": true,
+          "text": "Harmful To Self",
+          "order": 5,
+          "factId": 393
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 91,
+      "code": "Q V Options",
+      "type": "Theme",
+      "text": "Select up to 3 options which best describe this persona ?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "394",
+          "value": true,
+          "text": "Quiet",
+          "order": 0,
+          "factId": 394
+        },
+        {
+          "code": "395",
+          "value": true,
+          "text": "Vulnerable",
+          "order": 1,
+          "factId": 395
+        },
+        {
+          "code": "396",
+          "value": true,
+          "text": "Tired",
+          "order": 2,
+          "factId": 396
+        },
+        {
+          "code": "397",
+          "value": true,
+          "text": "Unsociable",
+          "order": 3,
+          "factId": 397
+        },
+        {
+          "code": "398",
+          "value": true,
+          "text": "Anxious",
+          "order": 4,
+          "factId": 398
+        },
+        {
+          "code": "399",
+          "value": true,
+          "text": "Cautious QV",
+          "order": 5,
+          "factId": 399
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 92,
+      "code": "J I Options",
+      "type": "Theme",
+      "text": "Select up to 3 options which best describe this persona ?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "401",
+          "value": true,
+          "text": "Incomplete",
+          "order": 0,
+          "factId": 401
+        },
+        {
+          "code": "403",
+          "value": true,
+          "text": "Lacking Something",
+          "order": 1,
+          "factId": 403
+        },
+        {
+          "code": "400",
+          "value": true,
+          "text": "Jealous JI",
+          "order": 2,
+          "factId": 400
+        },
+        {
+          "code": "402",
+          "value": true,
+          "text": "Competitive JI",
+          "order": 3,
+          "factId": 402
+        },
+        {
+          "code": "405",
+          "value": true,
+          "text": "Desire JI",
+          "order": 4,
+          "factId": 405
+        },
+        {
+          "code": "404",
+          "value": true,
+          "text": "Never Enough JI",
+          "order": 5,
+          "factId": 404
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 93,
+      "code": "F D Options",
+      "type": "Theme",
+      "text": "Select up to 3 options which best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "406",
+          "value": true,
+          "text": "Fun Loving",
+          "order": 0,
+          "factId": 406
+        },
+        {
+          "code": "407",
+          "value": true,
+          "text": "Devious",
+          "order": 1,
+          "factId": 407
+        },
+        {
+          "code": "408",
+          "value": true,
+          "text": "Something Hidden",
+          "order": 2,
+          "factId": 408
+        },
+        {
+          "code": "409",
+          "value": true,
+          "text": "Feels Bad",
+          "order": 3,
+          "factId": 409
+        },
+        {
+          "code": "410",
+          "value": true,
+          "text": "Sensitive",
+          "order": 4,
+          "factId": 410
+        },
+        {
+          "code": "411",
+          "value": true,
+          "text": "Unsociable FD",
+          "order": 5,
+          "factId": 411
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 81,
+      "code": "Movement theme",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "49",
+          "value": true,
+          "text": "movement",
+          "order": 0,
+          "factId": 49
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 41,
+      "code": "Melancholy",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "93",
+          "value": true,
+          "text": "Sad",
+          "order": 0,
+          "factId": 93
+        },
+        {
+          "code": "94",
+          "value": true,
+          "text": "Depressed",
+          "order": 1,
+          "factId": 94
+        },
+        {
+          "code": "95",
+          "value": true,
+          "text": "Mental-Emotional Issues",
+          "order": 2,
+          "factId": 95
+        },
+        {
+          "code": "96",
+          "value": true,
+          "text": "Lonely",
+          "order": 3,
+          "factId": 96
+        },
+        {
+          "code": "97",
+          "value": true,
+          "text": "Isolated",
+          "order": 4,
+          "factId": 97
+        },
+        {
+          "code": "98",
+          "value": true,
+          "text": "Contracting",
+          "order": 5,
+          "factId": 98
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    }
+  ],
+  "rules": [
+    {
+      "id": 96,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 174,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 83,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 97,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 175,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 49,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 98,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 182,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 78,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 99,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 190,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 31,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 18,
+      "priority": 999,
+      "triggerType": "Always",
+      "tests": [],
+      "questionId": 22,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 19,
+      "priority": 998,
+      "triggerType": "Always",
+      "tests": [],
+      "questionId": 23,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 20,
+      "priority": 997,
+      "triggerType": "Always",
+      "tests": [],
+      "questionId": 24,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 21,
+      "priority": 996,
+      "triggerType": "Always",
+      "tests": [],
+      "questionId": 25,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 22,
+      "priority": 995,
+      "triggerType": "Always",
+      "tests": [],
+      "questionId": 26,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 23,
+      "priority": 994,
+      "triggerType": "Always",
+      "tests": [],
+      "questionId": 27,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 25,
+      "priority": 992,
+      "triggerType": "Always",
+      "tests": [],
+      "questionId": 29,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 27,
+      "priority": 990,
+      "triggerType": "Always",
+      "tests": [],
+      "questionId": 31,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 100,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 195,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 90,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 101,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 235,
+          "operation": "Exists",
+          "parameter": ""
+        },
+        {
+          "factId": 48,
+          "operation": "Contains",
+          "parameter": "a voice thought"
+        }
+      ],
+      "questionId": 70,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 102,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 235,
+          "operation": "Exists",
+          "parameter": ""
+        },
+        {
+          "factId": 48,
+          "operation": "Contains",
+          "parameter": "a voice thought"
+        }
+      ],
+      "questionId": 71,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 38,
+      "priority": 500,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 50,
+          "operation": "Contains",
+          "parameter": "anxious"
+        }
+      ],
+      "questionId": 36,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 36,
+      "priority": 500,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 50,
+          "operation": "Contains",
+          "parameter": "vulnerable"
+        }
+      ],
+      "questionId": 39,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 35,
+      "priority": 500,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 50,
+          "operation": "Contains",
+          "parameter": "love-hate"
+        }
+      ],
+      "questionId": 34,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 34,
+      "priority": 500,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 50,
+          "operation": "Contains",
+          "parameter": "angry-calm"
+        }
+      ],
+      "questionId": 33,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 33,
+      "priority": 500,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 50,
+          "operation": "Contains",
+          "parameter": "happy-sad"
+        }
+      ],
+      "questionId": 32,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 37,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 81,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 40,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 39,
+      "priority": 500,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 50,
+          "operation": "Contains",
+          "parameter": "envious"
+        }
+      ],
+      "questionId": 92,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 40,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 63,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 37,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 103,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 255,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 67,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 26,
+      "priority": 991,
+      "triggerType": "Any",
+      "tests": [
+        {
+          "factId": 48,
+          "operation": "Contains",
+          "parameter": "a voice thought"
+        },
+        {
+          "factId": 48,
+          "operation": "Contains",
+          "parameter": "an warrior"
+        },
+        {
+          "factId": 48,
+          "operation": "Contains",
+          "parameter": "a role"
+        },
+        {
+          "factId": 48,
+          "operation": "Contains",
+          "parameter": "spiritual"
+        },
+        {
+          "factId": 48,
+          "operation": "Contains",
+          "parameter": "intuitive"
+        }
+      ],
+      "questionId": 30,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 41,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 48,
+          "operation": "Contains",
+          "parameter": "a warrior"
+        }
+      ],
+      "questionId": 89,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 42,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 48,
+          "operation": "Contains",
+          "parameter": "a role"
+        }
+      ],
+      "questionId": 35,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 43,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 48,
+          "operation": "Contains",
+          "parameter": "spiritual"
+        }
+      ],
+      "questionId": 71,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 44,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 48,
+          "operation": "Contains",
+          "parameter": "intuitive"
+        }
+      ],
+      "questionId": 70,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 45,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 49,
+          "operation": "Contains",
+          "parameter": "No-Movement"
+        }
+      ],
+      "questionId": 51,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 46,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 49,
+          "operation": "Contains",
+          "parameter": "Stopped"
+        }
+      ],
+      "questionId": 38,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 47,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 49,
+          "operation": "Contains",
+          "parameter": "Stuck"
+        }
+      ],
+      "questionId": 41,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 48,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 49,
+          "operation": "Contains",
+          "parameter": "A Block Inside"
+        }
+      ],
+      "questionId": 46,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 49,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 49,
+          "operation": "Contains",
+          "parameter": "Withdrawn"
+        }
+      ],
+      "questionId": 37,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 50,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 49,
+          "operation": "Contains",
+          "parameter": "In Transition"
+        }
+      ],
+      "questionId": 81,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 51,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 49,
+          "operation": "Contains",
+          "parameter": "In Transition"
+        }
+      ],
+      "questionId": 82,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 52,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 49,
+          "operation": "Contains",
+          "parameter": "Moving"
+        }
+      ],
+      "questionId": 82,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 53,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 49,
+          "operation": "Contains",
+          "parameter": "Emerging"
+        }
+      ],
+      "questionId": 82,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 54,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 49,
+          "operation": "Contains",
+          "parameter": "Moving \"on the spot\""
+        }
+      ],
+      "questionId": 81,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 55,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 49,
+          "operation": "Contains",
+          "parameter": "Flowing"
+        }
+      ],
+      "questionId": 73,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 56,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 49,
+          "operation": "Contains",
+          "parameter": "Moving Fast"
+        }
+      ],
+      "questionId": 57,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 57,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 49,
+          "operation": "Contains",
+          "parameter": "Extreme Movement-Behaviour"
+        }
+      ],
+      "questionId": 58,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 58,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 44,
+          "operation": "Contains",
+          "parameter": "more friendly"
+        }
+      ],
+      "questionId": 77,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 59,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 44,
+          "operation": "Contains",
+          "parameter": "more friendly"
+        }
+      ],
+      "questionId": 74,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 60,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 44,
+          "operation": "Contains",
+          "parameter": "less friendly"
+        }
+      ],
+      "questionId": 91,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 61,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 44,
+          "operation": "Contains",
+          "parameter": "aggressive"
+        }
+      ],
+      "questionId": 88,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 62,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 45,
+          "operation": "Contains",
+          "parameter": "most helpful"
+        }
+      ],
+      "questionId": 79,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 63,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 45,
+          "operation": "Contains",
+          "parameter": "more helpful"
+        }
+      ],
+      "questionId": 74,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 64,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 45,
+          "operation": "Contains",
+          "parameter": "less helpful"
+        }
+      ],
+      "questionId": 43,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 65,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 45,
+          "operation": "Contains",
+          "parameter": "destructive"
+        }
+      ],
+      "questionId": 90,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 66,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 45,
+          "operation": "Contains",
+          "parameter": "destructive"
+        }
+      ],
+      "questionId": 55,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 67,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 44,
+          "operation": "Contains",
+          "parameter": "aggressive"
+        },
+        {
+          "factId": 45,
+          "operation": "Contains",
+          "parameter": "less helpful"
+        }
+      ],
+      "questionId": 87,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 68,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 47,
+          "operation": "Contains",
+          "parameter": "more honourable"
+        }
+      ],
+      "questionId": 64,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 69,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 47,
+          "operation": "Contains",
+          "parameter": "more honourable"
+        }
+      ],
+      "questionId": 63,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 70,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 47,
+          "operation": "Contains",
+          "parameter": "less honourable"
+        }
+      ],
+      "questionId": 47,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 71,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 62,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 93,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 72,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 63,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 37,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 73,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 64,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 37,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 75,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 67,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 38,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 77,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 71,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 83,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 78,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 72,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 44,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 79,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 77,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 41,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 80,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 81,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 40,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 81,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 81,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 40,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 82,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 91,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 46,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 83,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 92,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 80,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 84,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 94,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 42,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 85,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 96,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 42,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 86,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 106,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 55,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 87,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 110,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 40,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 88,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 111,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 41,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 89,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 126,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 41,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 90,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 150,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 40,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 91,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 152,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 40,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 92,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 157,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 38,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 93,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 173,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 49,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 94,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 173,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 83,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 95,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 174,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 49,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 104,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 295,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 45,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 105,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 296,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 51,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 106,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 326,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 82,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 107,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 334,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 80,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 108,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 335,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 37,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 109,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 335,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 80,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 110,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 336,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 37,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 111,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 336,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 80,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 112,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 337,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 83,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 113,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 337,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 80,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 114,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 362,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 86,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 116,
+      "priority": 600,
+      "triggerType": "Any",
+      "tests": [
+        {
+          "factId": 370,
+          "operation": "Exists",
+          "parameter": ""
+        },
+        {
+          "factId": 371,
+          "operation": "Exists",
+          "parameter": ""
+        },
+        {
+          "factId": 372,
+          "operation": "Exists",
+          "parameter": ""
+        },
+        {
+          "factId": 373,
+          "operation": "Exists",
+          "parameter": ""
+        },
+        {
+          "factId": 374,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 88,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 117,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 374,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 88,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 118,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 379,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 90,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 119,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 384,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 62,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 120,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 389,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 55,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 121,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 394,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 75,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 122,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 395,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 39,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 123,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 396,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 38,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 124,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 397,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 37,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 125,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 398,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 36,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 126,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 399,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 83,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 127,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 401,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 53,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 128,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 406,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 78,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 129,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 407,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 47,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 130,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 409,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 44,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 131,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 410,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 40,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 132,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 411,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 37,
+      "factId": null,
+      "factAction": null
+    }
+  ]
+}

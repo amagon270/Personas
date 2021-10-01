@@ -15,6 +15,7 @@ enum Operator { GreaterThan, LessThan, EqualTo, Exists, Contains }
 
 class QuestionResponse {
   Question question;
+  bool factFromQuestion = true;
   dynamic choice;
   DateTime timestamp;
 
@@ -68,6 +69,11 @@ class RuleTest {
   String fact;
   Operator operation;
   dynamic parameter;
+
+  @override
+  String toString() {
+    return 'Test: {fact: ${fact}, operation: ${operation}, parameter: ${parameter}}';
+  }
 }
 
 class InterviewService {
@@ -151,6 +157,7 @@ class InterviewService {
           }
           break;
         case Operator.Contains:
+          
           if (factValue is List) {
             if (actionComparison == factValue.contains(test.parameter)) {
               action = actionChange;
@@ -190,13 +197,22 @@ class InterviewService {
       currentSession.individualFacts.add(rule.action.fact);
     }
 
+
     if (rule.action.questionId != null) {
-      Question question = QuestionService().getQuestionById(rule.action.questionId);
-      if (question != null) {
-        currentSession.questions.add(question);
-        return question;
-      } else {
-        return blankQuestion;
+      var questionAlreadyAsked = false;
+      currentSession.questions.forEach((e) {
+        if (e.id == rule.action.questionId) {
+          questionAlreadyAsked = true;
+        }
+      });
+      if (!questionAlreadyAsked) {
+        Question question = QuestionService().getQuestionById(rule.action.questionId);
+        if (question != null) {
+          currentSession.questions.add(question);
+          return question;
+        } else {
+          return blankQuestion;
+        }
       }
     }
 
@@ -238,9 +254,18 @@ class InterviewService {
   }
 
   void answerQuestion(QuestionResponse response, String userId) {
-    print("answering question: " + response.question.code);
+    print("answering question: ${response.question.code} : ${response.choice}");
     //I have a few null question things that i didn't want answered here so i just skip them
-    if (response.question.code != null && response.question.code != "") {
+    if (response.question.type == QuestionType.Theme) {
+      print("test: ${response.choice}");
+      var facts = json.decode(response.choice);
+      facts.forEach((fact, state) {
+        currentSession.answers.add(response);
+        Fact _fact = FactService().getFactById(fact, value: true);
+        addFactToList(_fact, currentSession.facts);
+        currentSession.individualFacts.add(_fact);
+      });
+    } else if (response.question.code != null && response.question.code != "") {
       if (!PersonaService.specialQuestionIds.contains(response.question.code)) {
         String factId;
         if (response.question.options.length > 0) {
