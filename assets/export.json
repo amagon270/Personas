@@ -1778,13 +1778,6 @@
       "negatedFacts": []
     },
     {
-      "id": 301,
-      "text": "Open",
-      "tags": [],
-      "value": "",
-      "negatedFacts": []
-    },
-    {
       "id": 302,
       "text": "More Comfortable",
       "tags": [],
@@ -1857,13 +1850,6 @@
     {
       "id": 312,
       "text": "Pleasant",
-      "tags": [],
-      "value": "",
-      "negatedFacts": []
-    },
-    {
-      "id": 313,
-      "text": "Avoids Conflict",
       "tags": [],
       "value": "",
       "negatedFacts": []
@@ -2422,13 +2408,6 @@
       "negatedFacts": []
     },
     {
-      "id": 329,
-      "text": "Spiritual Experience Transforming",
-      "tags": [],
-      "value": "",
-      "negatedFacts": []
-    },
-    {
       "id": 395,
       "text": "Vulnerable",
       "tags": [],
@@ -2571,6 +2550,139 @@
     {
       "id": 411,
       "text": "Unsociable FD",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 412,
+      "text": "Avoiding",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 413,
+      "text": "High Energy",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 414,
+      "text": "Medium Energy",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 415,
+      "text": "Low Energy",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 416,
+      "text": "Round",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 417,
+      "text": "Square",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 418,
+      "text": "More Friendly",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 419,
+      "text": "Less Friendly",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 420,
+      "text": "Aggressive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 421,
+      "text": "More Honourable",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 422,
+      "text": "Less Honourable",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 423,
+      "text": "A Voice Thought",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 424,
+      "text": "An Emotion",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 425,
+      "text": "A Warrior",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 427,
+      "text": "Intuitive",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 428,
+      "text": "Spiritual",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 429,
+      "text": "A Role",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 426,
+      "text": "Sexual",
+      "tags": [],
+      "value": "",
+      "negatedFacts": []
+    },
+    {
+      "id": 329,
+      "text": "Spiritual Experience",
       "tags": [],
       "value": "",
       "negatedFacts": []
@@ -3204,336 +3316,6 @@
       "labels": []
     },
     {
-      "id": 23,
-      "code": "Energy",
-      "type": "MultipleChoice",
-      "text": "How much energy does this persona have?",
-      "factSubject": "42",
-      "options": [
-        {
-          "code": "High",
-          "value": "high",
-          "text": "High",
-          "image": null,
-          "order": 0,
-          "factId": null
-        },
-        {
-          "code": "Medium",
-          "value": "medium",
-          "text": "Medium",
-          "image": null,
-          "order": 1,
-          "factId": null
-        },
-        {
-          "code": "Low",
-          "value": "low",
-          "text": "Low",
-          "image": null,
-          "order": 2,
-          "factId": null
-        },
-        {
-          "code": "",
-          "value": "",
-          "text": "",
-          "image": null,
-          "order": 3,
-          "factId": null
-        },
-        {
-          "code": "",
-          "value": "",
-          "text": "",
-          "image": null,
-          "order": 4,
-          "factId": null
-        },
-        {
-          "code": "",
-          "value": "",
-          "text": "",
-          "image": null,
-          "order": 5,
-          "factId": null
-        }
-      ],
-      "min": 0,
-      "max": 0,
-      "labels": []
-    },
-    {
-      "id": 24,
-      "code": "Flow",
-      "type": "MultipleChoice",
-      "text": "Does this persona feel more round or square?",
-      "factSubject": "43",
-      "options": [
-        {
-          "code": "Round",
-          "value": "round",
-          "text": "Round",
-          "image": null,
-          "order": 0,
-          "factId": null
-        },
-        {
-          "code": "",
-          "value": "",
-          "text": "",
-          "image": null,
-          "order": 1,
-          "factId": null
-        },
-        {
-          "code": "Square",
-          "value": "square",
-          "text": "Square",
-          "image": null,
-          "order": 2,
-          "factId": null
-        },
-        {
-          "code": "",
-          "value": "",
-          "text": "",
-          "image": null,
-          "order": 3,
-          "factId": null
-        },
-        {
-          "code": "",
-          "value": "",
-          "text": "",
-          "image": null,
-          "order": 4,
-          "factId": null
-        },
-        {
-          "code": "",
-          "value": "",
-          "text": "",
-          "image": null,
-          "order": 5,
-          "factId": null
-        }
-      ],
-      "min": 0,
-      "max": 0,
-      "labels": []
-    },
-    {
-      "id": 25,
-      "code": "Friendliness",
-      "type": "MultipleChoice",
-      "text": "How friendly is this persona?",
-      "factSubject": "44",
-      "options": [
-        {
-          "code": "More friendly",
-          "value": "more friendly",
-          "text": "More friendly",
-          "image": null,
-          "order": 0,
-          "factId": null
-        },
-        {
-          "code": "Less friendly",
-          "value": "less friendly",
-          "text": "Less friendly",
-          "image": null,
-          "order": 1,
-          "factId": null
-        },
-        {
-          "code": "Aggressive",
-          "value": "aggressive",
-          "text": "Aggressive",
-          "image": null,
-          "order": 2,
-          "factId": null
-        },
-        {
-          "code": "",
-          "value": "",
-          "text": "",
-          "image": null,
-          "order": 3,
-          "factId": null
-        },
-        {
-          "code": "",
-          "value": "",
-          "text": "",
-          "image": null,
-          "order": 4,
-          "factId": null
-        },
-        {
-          "code": "",
-          "value": "",
-          "text": "",
-          "image": null,
-          "order": 5,
-          "factId": null
-        }
-      ],
-      "min": 0,
-      "max": 0,
-      "labels": []
-    },
-    {
-      "id": 26,
-      "code": "Helpfullness",
-      "type": "TextSlider",
-      "text": "How Helpful is this persona to you?",
-      "factSubject": "44",
-      "options": [],
-      "min": 0,
-      "max": 3,
-      "labels": [
-        "Most Helpful",
-        "Less Helpful",
-        "Destructive"
-      ]
-    },
-    {
-      "id": 27,
-      "code": "Outgoingness",
-      "type": "TextSlider",
-      "text": "Is this persona more introverted or Extroverted",
-      "factSubject": "46",
-      "options": [],
-      "min": 1,
-      "max": 3,
-      "labels": [
-        "Introvert",
-        "Ambivert",
-        "Extroverted"
-      ]
-    },
-    {
-      "id": 28,
-      "code": "Integrity",
-      "type": "MultipleChoice",
-      "text": "Which option best describes this persona?",
-      "factSubject": "47",
-      "options": [
-        {
-          "code": "More Honourable",
-          "value": "more honourable",
-          "text": "More Honourable",
-          "image": null,
-          "order": 0,
-          "factId": null
-        },
-        {
-          "code": "Less Honourable",
-          "value": "less honourable",
-          "text": "Less Honourable",
-          "image": null,
-          "order": 1,
-          "factId": null
-        },
-        {
-          "code": "Move-On",
-          "value": "move-on",
-          "text": "Move-On",
-          "image": null,
-          "order": 2,
-          "factId": null
-        },
-        {
-          "code": "",
-          "value": "",
-          "text": "",
-          "image": null,
-          "order": 3,
-          "factId": null
-        },
-        {
-          "code": "",
-          "value": "",
-          "text": "",
-          "image": null,
-          "order": 4,
-          "factId": null
-        },
-        {
-          "code": "",
-          "value": "",
-          "text": "",
-          "image": null,
-          "order": 5,
-          "factId": null
-        }
-      ],
-      "min": 0,
-      "max": 0,
-      "labels": []
-    },
-    {
-      "id": 29,
-      "code": "Key Personas",
-      "type": "Polygon",
-      "text": "Which option if any is like this Persona?",
-      "factSubject": "48",
-      "options": [
-        {
-          "code": "An Emotion",
-          "value": "an emotion",
-          "text": "An Emotion",
-          "image": null,
-          "order": 1,
-          "factId": null
-        },
-        {
-          "code": "A Warrior",
-          "value": "a warrior",
-          "text": "A Warrior",
-          "image": null,
-          "order": 2,
-          "factId": null
-        },
-        {
-          "code": "A Role",
-          "value": "a role",
-          "text": "A Role",
-          "image": null,
-          "order": 3,
-          "factId": null
-        },
-        {
-          "code": "Spiritual",
-          "value": "spiritual",
-          "text": "Spiritual",
-          "image": null,
-          "order": 4,
-          "factId": null
-        },
-        {
-          "code": "Intuitive",
-          "value": "intuitive",
-          "text": "Intuitive",
-          "image": null,
-          "order": 5,
-          "factId": null
-        },
-        {
-          "code": "A Voice Thought",
-          "value": "a voice thought",
-          "text": "A Voice Thought",
-          "image": null,
-          "order": 0,
-          "factId": null
-        }
-      ],
-      "min": 0,
-      "max": 0,
-      "labels": []
-    },
-    {
       "id": 30,
       "code": "Movement",
       "type": "TextSlider",
@@ -3543,7 +3325,7 @@
       "min": 1,
       "max": 12,
       "labels": [
-        "\nNo-Movement",
+        "No-Movement",
         "Stopped",
         "Stuck",
         "Trapped",
@@ -3554,7 +3336,7 @@
         "Emerging",
         "Moving \"on the spot\"",
         "Moving fast",
-        "Extreme \nMovement-Behaviour"
+        "Extreme Movement-Behaviour"
       ]
     },
     {
@@ -3814,6 +3596,13 @@
           "text": "Cautious",
           "order": 4,
           "factId": 71
+        },
+        {
+          "code": "412",
+          "value": true,
+          "text": "Avoiding",
+          "order": 5,
+          "factId": 412
         }
       ],
       "min": 0,
@@ -5171,13 +4960,6 @@
           "text": "Serene",
           "order": 5,
           "factId": 300
-        },
-        {
-          "code": "301",
-          "value": true,
-          "text": "Open",
-          "order": 6,
-          "factId": 301
         }
       ],
       "min": 0,
@@ -5279,13 +5061,6 @@
           "text": "Pleasant",
           "order": 5,
           "factId": 312
-        },
-        {
-          "code": "313",
-          "value": true,
-          "text": "Avoids Conflict",
-          "order": 6,
-          "factId": 313
         }
       ],
       "min": 0,
@@ -5452,7 +5227,7 @@
         {
           "code": "329",
           "value": true,
-          "text": "Spiritual Experience Transforming",
+          "text": "Spiritual Experience",
           "order": 6,
           "factId": 329
         }
@@ -5840,67 +5615,6 @@
       "labels": []
     },
     {
-      "id": 89,
-      "code": "Combative",
-      "type": "Theme",
-      "text": "Which options best describe this persona?",
-      "factSubject": "0",
-      "options": [
-        {
-          "code": "381",
-          "value": true,
-          "text": "Competitive",
-          "order": 0,
-          "factId": 381
-        },
-        {
-          "code": "382",
-          "value": true,
-          "text": "More Empowered",
-          "order": 1,
-          "factId": 382
-        },
-        {
-          "code": "383",
-          "value": true,
-          "text": "Strong",
-          "order": 2,
-          "factId": 383
-        },
-        {
-          "code": "384",
-          "value": true,
-          "text": "Focused",
-          "order": 3,
-          "factId": 384
-        },
-        {
-          "code": "385",
-          "value": true,
-          "text": "Patient",
-          "order": 4,
-          "factId": 385
-        },
-        {
-          "code": "386",
-          "value": true,
-          "text": "Enduring",
-          "order": 5,
-          "factId": 386
-        },
-        {
-          "code": "387",
-          "value": true,
-          "text": "Centred Warrior",
-          "order": 6,
-          "factId": 387
-        }
-      ],
-      "min": 0,
-      "max": 0,
-      "labels": []
-    },
-    {
       "id": 90,
       "code": "Harmful",
       "type": "Theme",
@@ -6188,24 +5902,400 @@
       "min": 0,
       "max": 0,
       "labels": []
+    },
+    {
+      "id": 89,
+      "code": "More Empowered",
+      "type": "Theme",
+      "text": "Which options best describe this persona?",
+      "factSubject": "0",
+      "options": [
+        {
+          "code": "381",
+          "value": true,
+          "text": "Competitive",
+          "order": 0,
+          "factId": 381
+        },
+        {
+          "code": "382",
+          "value": true,
+          "text": "More Empowered",
+          "order": 1,
+          "factId": 382
+        },
+        {
+          "code": "383",
+          "value": true,
+          "text": "Strong",
+          "order": 2,
+          "factId": 383
+        },
+        {
+          "code": "384",
+          "value": true,
+          "text": "Focused",
+          "order": 3,
+          "factId": 384
+        },
+        {
+          "code": "385",
+          "value": true,
+          "text": "Patient",
+          "order": 4,
+          "factId": 385
+        },
+        {
+          "code": "386",
+          "value": true,
+          "text": "Enduring",
+          "order": 5,
+          "factId": 386
+        },
+        {
+          "code": "387",
+          "value": true,
+          "text": "Centred Warrior",
+          "order": 6,
+          "factId": 387
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 26,
+      "code": "Helpfullness",
+      "type": "Slider",
+      "text": "How Helpful is this persona to you?",
+      "factSubject": "45",
+      "options": [],
+      "min": 0,
+      "max": 1,
+      "labels": [
+        "Most Helpful",
+        "Less Helpful",
+        "Destructive"
+      ]
+    },
+    {
+      "id": 23,
+      "code": "Energy",
+      "type": "MultipleChoice",
+      "text": "How much energy does this persona have?",
+      "factSubject": "42",
+      "options": [
+        {
+          "code": "High",
+          "value": "true",
+          "text": "High",
+          "image": null,
+          "order": 0,
+          "factId": 413
+        },
+        {
+          "code": "Medium",
+          "value": "true",
+          "text": "Medium",
+          "image": null,
+          "order": 1,
+          "factId": 414
+        },
+        {
+          "code": "Low",
+          "value": "true",
+          "text": "Low",
+          "image": null,
+          "order": 2,
+          "factId": 415
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 3,
+          "factId": null
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 4,
+          "factId": null
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 5,
+          "factId": null
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 25,
+      "code": "Friendliness",
+      "type": "MultipleChoice",
+      "text": "How friendly is this persona?",
+      "factSubject": "44",
+      "options": [
+        {
+          "code": "More friendly",
+          "value": "true",
+          "text": "More friendly",
+          "image": null,
+          "order": 0,
+          "factId": 418
+        },
+        {
+          "code": "Less friendly",
+          "value": "true",
+          "text": "Less friendly",
+          "image": null,
+          "order": 1,
+          "factId": 419
+        },
+        {
+          "code": "Aggressive",
+          "value": "true",
+          "text": "Aggressive",
+          "image": null,
+          "order": 2,
+          "factId": 420
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 3,
+          "factId": null
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 4,
+          "factId": null
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 5,
+          "factId": null
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 27,
+      "code": "Outgoingness",
+      "type": "Slider",
+      "text": "Is this persona more introverted or Extroverted",
+      "factSubject": "46",
+      "options": [],
+      "min": 0,
+      "max": 1,
+      "labels": [
+        "Introvert",
+        "Ambivert",
+        "Extroverted"
+      ]
+    },
+    {
+      "id": 29,
+      "code": "Key Personas",
+      "type": "Polygon",
+      "text": "Which option if any is like this Persona?",
+      "factSubject": "48",
+      "options": [
+        {
+          "code": "A Voice Thought",
+          "value": "true",
+          "text": "A Voice Thought",
+          "image": null,
+          "order": 0,
+          "factId": 423
+        },
+        {
+          "code": "An Emotion",
+          "value": "true",
+          "text": "An Emotion",
+          "image": null,
+          "order": 1,
+          "factId": 424
+        },
+        {
+          "code": "A Warrior",
+          "value": "true",
+          "text": "A Warrior",
+          "image": null,
+          "order": 2,
+          "factId": 425
+        },
+        {
+          "code": "Sexual",
+          "value": "true",
+          "text": "Sexual",
+          "image": null,
+          "order": 3,
+          "factId": 429
+        },
+        {
+          "code": "Spiritual",
+          "value": "true",
+          "text": "Spiritual",
+          "image": null,
+          "order": 4,
+          "factId": 428
+        },
+        {
+          "code": "Intuitive",
+          "value": "true",
+          "text": "Intuitive",
+          "image": null,
+          "order": 5,
+          "factId": 427
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 24,
+      "code": "Flow",
+      "type": "MultipleChoice",
+      "text": "Does this persona feel more round or square?",
+      "factSubject": "43",
+      "options": [
+        {
+          "code": "Round",
+          "value": "true",
+          "text": "Round",
+          "image": null,
+          "order": 0,
+          "factId": 416
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 1,
+          "factId": null
+        },
+        {
+          "code": "Square",
+          "value": "true",
+          "text": "Square",
+          "image": null,
+          "order": 2,
+          "factId": 417
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 3,
+          "factId": null
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 4,
+          "factId": null
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 5,
+          "factId": null
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
+    },
+    {
+      "id": 28,
+      "code": "Integrity",
+      "type": "MultipleChoice",
+      "text": "Which option best describes this persona?",
+      "factSubject": "47",
+      "options": [
+        {
+          "code": "More Honourable",
+          "value": "true",
+          "text": "More Honourable",
+          "image": null,
+          "order": 0,
+          "factId": 421
+        },
+        {
+          "code": "Less Honourable",
+          "value": "true",
+          "text": "Less Honourable",
+          "image": null,
+          "order": 1,
+          "factId": 422
+        },
+        {
+          "code": "Move-On",
+          "value": "move-on",
+          "text": "Move-On",
+          "image": null,
+          "order": 2,
+          "factId": null
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 3,
+          "factId": null
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 4,
+          "factId": null
+        },
+        {
+          "code": "",
+          "value": "",
+          "text": "",
+          "image": null,
+          "order": 5,
+          "factId": null
+        }
+      ],
+      "min": 0,
+      "max": 0,
+      "labels": []
     }
   ],
   "rules": [
-    {
-      "id": 96,
-      "priority": 600,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 174,
-          "operation": "Exists",
-          "parameter": ""
-        }
-      ],
-      "questionId": 83,
-      "factId": null,
-      "factAction": null
-    },
     {
       "id": 97,
       "priority": 600,
@@ -6252,78 +6342,6 @@
       "factAction": null
     },
     {
-      "id": 18,
-      "priority": 999,
-      "triggerType": "Always",
-      "tests": [],
-      "questionId": 22,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 19,
-      "priority": 998,
-      "triggerType": "Always",
-      "tests": [],
-      "questionId": 23,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 20,
-      "priority": 997,
-      "triggerType": "Always",
-      "tests": [],
-      "questionId": 24,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 21,
-      "priority": 996,
-      "triggerType": "Always",
-      "tests": [],
-      "questionId": 25,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 22,
-      "priority": 995,
-      "triggerType": "Always",
-      "tests": [],
-      "questionId": 26,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 23,
-      "priority": 994,
-      "triggerType": "Always",
-      "tests": [],
-      "questionId": 27,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 25,
-      "priority": 992,
-      "triggerType": "Always",
-      "tests": [],
-      "questionId": 29,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 27,
-      "priority": 990,
-      "triggerType": "Always",
-      "tests": [],
-      "questionId": 31,
-      "factId": null,
-      "factAction": null
-    },
-    {
       "id": 100,
       "priority": 600,
       "triggerType": "All",
@@ -6335,26 +6353,6 @@
         }
       ],
       "questionId": 90,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 101,
-      "priority": 600,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 235,
-          "operation": "Exists",
-          "parameter": ""
-        },
-        {
-          "factId": 48,
-          "operation": "Contains",
-          "parameter": "a voice thought"
-        }
-      ],
-      "questionId": 70,
       "factId": null,
       "factAction": null
     },
@@ -6379,81 +6377,6 @@
       "factAction": null
     },
     {
-      "id": 38,
-      "priority": 500,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 50,
-          "operation": "Contains",
-          "parameter": "anxious"
-        }
-      ],
-      "questionId": 36,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 36,
-      "priority": 500,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 50,
-          "operation": "Contains",
-          "parameter": "vulnerable"
-        }
-      ],
-      "questionId": 39,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 35,
-      "priority": 500,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 50,
-          "operation": "Contains",
-          "parameter": "love-hate"
-        }
-      ],
-      "questionId": 34,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 34,
-      "priority": 500,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 50,
-          "operation": "Contains",
-          "parameter": "angry-calm"
-        }
-      ],
-      "questionId": 33,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 33,
-      "priority": 500,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 50,
-          "operation": "Contains",
-          "parameter": "happy-sad"
-        }
-      ],
-      "questionId": 32,
-      "factId": null,
-      "factAction": null
-    },
-    {
       "id": 37,
       "priority": 600,
       "triggerType": "All",
@@ -6465,21 +6388,6 @@
         }
       ],
       "questionId": 40,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 39,
-      "priority": 500,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 50,
-          "operation": "Contains",
-          "parameter": "envious"
-        }
-      ],
-      "questionId": 92,
       "factId": null,
       "factAction": null
     },
@@ -6510,101 +6418,6 @@
         }
       ],
       "questionId": 67,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 26,
-      "priority": 991,
-      "triggerType": "Any",
-      "tests": [
-        {
-          "factId": 48,
-          "operation": "Contains",
-          "parameter": "a voice thought"
-        },
-        {
-          "factId": 48,
-          "operation": "Contains",
-          "parameter": "an warrior"
-        },
-        {
-          "factId": 48,
-          "operation": "Contains",
-          "parameter": "a role"
-        },
-        {
-          "factId": 48,
-          "operation": "Contains",
-          "parameter": "spiritual"
-        },
-        {
-          "factId": 48,
-          "operation": "Contains",
-          "parameter": "intuitive"
-        }
-      ],
-      "questionId": 30,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 41,
-      "priority": 600,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 48,
-          "operation": "Contains",
-          "parameter": "a warrior"
-        }
-      ],
-      "questionId": 89,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 42,
-      "priority": 600,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 48,
-          "operation": "Contains",
-          "parameter": "a role"
-        }
-      ],
-      "questionId": 35,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 43,
-      "priority": 600,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 48,
-          "operation": "Contains",
-          "parameter": "spiritual"
-        }
-      ],
-      "questionId": 71,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 44,
-      "priority": 600,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 48,
-          "operation": "Contains",
-          "parameter": "intuitive"
-        }
-      ],
-      "questionId": 70,
       "factId": null,
       "factAction": null
     },
@@ -6804,176 +6617,6 @@
       "factAction": null
     },
     {
-      "id": 58,
-      "priority": 600,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 44,
-          "operation": "Contains",
-          "parameter": "more friendly"
-        }
-      ],
-      "questionId": 77,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 59,
-      "priority": 600,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 44,
-          "operation": "Contains",
-          "parameter": "more friendly"
-        }
-      ],
-      "questionId": 74,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 60,
-      "priority": 600,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 44,
-          "operation": "Contains",
-          "parameter": "less friendly"
-        }
-      ],
-      "questionId": 91,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 61,
-      "priority": 600,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 44,
-          "operation": "Contains",
-          "parameter": "aggressive"
-        }
-      ],
-      "questionId": 88,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 62,
-      "priority": 600,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 45,
-          "operation": "Contains",
-          "parameter": "most helpful"
-        }
-      ],
-      "questionId": 79,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 63,
-      "priority": 600,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 45,
-          "operation": "Contains",
-          "parameter": "more helpful"
-        }
-      ],
-      "questionId": 74,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 64,
-      "priority": 600,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 45,
-          "operation": "Contains",
-          "parameter": "less helpful"
-        }
-      ],
-      "questionId": 43,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 65,
-      "priority": 600,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 45,
-          "operation": "Contains",
-          "parameter": "destructive"
-        }
-      ],
-      "questionId": 90,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 66,
-      "priority": 600,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 45,
-          "operation": "Contains",
-          "parameter": "destructive"
-        }
-      ],
-      "questionId": 55,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 67,
-      "priority": 600,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 44,
-          "operation": "Contains",
-          "parameter": "aggressive"
-        },
-        {
-          "factId": 45,
-          "operation": "Contains",
-          "parameter": "less helpful"
-        }
-      ],
-      "questionId": 87,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 68,
-      "priority": 600,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 47,
-          "operation": "Contains",
-          "parameter": "more honourable"
-        }
-      ],
-      "questionId": 64,
-      "factId": null,
-      "factAction": null
-    },
-    {
       "id": 69,
       "priority": 600,
       "triggerType": "All",
@@ -6985,21 +6628,6 @@
         }
       ],
       "questionId": 63,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 70,
-      "priority": 600,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 47,
-          "operation": "Contains",
-          "parameter": "less honourable"
-        }
-      ],
-      "questionId": 47,
       "factId": null,
       "factAction": null
     },
@@ -7105,36 +6733,6 @@
         }
       ],
       "questionId": 41,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 80,
-      "priority": 600,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 81,
-          "operation": "Exists",
-          "parameter": ""
-        }
-      ],
-      "questionId": 40,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 81,
-      "priority": 600,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 81,
-          "operation": "Exists",
-          "parameter": ""
-        }
-      ],
-      "questionId": 40,
       "factId": null,
       "factAction": null
     },
@@ -7499,21 +7097,6 @@
       "factAction": null
     },
     {
-      "id": 114,
-      "priority": 600,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 362,
-          "operation": "Exists",
-          "parameter": ""
-        }
-      ],
-      "questionId": 86,
-      "factId": null,
-      "factAction": null
-    },
-    {
       "id": 116,
       "priority": 600,
       "triggerType": "Any",
@@ -7575,21 +7158,6 @@
         }
       ],
       "questionId": 90,
-      "factId": null,
-      "factAction": null
-    },
-    {
-      "id": 119,
-      "priority": 600,
-      "triggerType": "All",
-      "tests": [
-        {
-          "factId": 384,
-          "operation": "Exists",
-          "parameter": ""
-        }
-      ],
-      "questionId": 62,
       "factId": null,
       "factAction": null
     },
@@ -7785,6 +7353,587 @@
         }
       ],
       "questionId": 37,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 23,
+      "priority": 94,
+      "triggerType": "Always",
+      "tests": [],
+      "questionId": 27,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 62,
+      "priority": 1100,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 45,
+          "operation": "LessThan",
+          "parameter": "0.33"
+        },
+        {
+          "factId": 45,
+          "operation": "GreaterThan",
+          "parameter": "0"
+        }
+      ],
+      "questionId": 79,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 96,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 174,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 83,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 119,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 384,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 62,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 65,
+      "priority": 1100,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 45,
+          "operation": "GreaterThan",
+          "parameter": "0.67"
+        }
+      ],
+      "questionId": 90,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 64,
+      "priority": 1000,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 45,
+          "operation": "GreaterThan",
+          "parameter": "0.33"
+        },
+        {
+          "factId": 45,
+          "operation": "LessThan",
+          "parameter": "0.67"
+        }
+      ],
+      "questionId": 43,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 59,
+      "priority": 1000,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 418,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 74,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 101,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 235,
+          "operation": "Exists",
+          "parameter": ""
+        },
+        {
+          "factId": 423,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 70,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 80,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 81,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 40,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 68,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 421,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 64,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 61,
+      "priority": 1000,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 420,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 88,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 81,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 81,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 40,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 63,
+      "priority": 1000,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 45,
+          "operation": "LessThan",
+          "parameter": "0.33"
+        },
+        {
+          "factId": 45,
+          "operation": "GreaterThan",
+          "parameter": "0"
+        }
+      ],
+      "questionId": 74,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 70,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 422,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 47,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 114,
+      "priority": 600,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 362,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 86,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 42,
+      "priority": 1000,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 426,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 86,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 44,
+      "priority": 1000,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 427,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 70,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 33,
+      "priority": 1000,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 50,
+          "operation": "Contains",
+          "parameter": "happy-sad"
+        }
+      ],
+      "questionId": 32,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 41,
+      "priority": 1000,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 425,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 89,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 34,
+      "priority": 1000,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 50,
+          "operation": "Contains",
+          "parameter": "angry-calm"
+        }
+      ],
+      "questionId": 33,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 36,
+      "priority": 1000,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 50,
+          "operation": "Contains",
+          "parameter": "vulnerable"
+        }
+      ],
+      "questionId": 39,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 38,
+      "priority": 1000,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 50,
+          "operation": "Contains",
+          "parameter": "anxious"
+        }
+      ],
+      "questionId": 36,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 18,
+      "priority": 99,
+      "triggerType": "Always",
+      "tests": [],
+      "questionId": 22,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 19,
+      "priority": 98,
+      "triggerType": "Always",
+      "tests": [],
+      "questionId": 23,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 20,
+      "priority": 97,
+      "triggerType": "Always",
+      "tests": [],
+      "questionId": 24,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 21,
+      "priority": 96,
+      "triggerType": "Always",
+      "tests": [],
+      "questionId": 25,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 22,
+      "priority": 95,
+      "triggerType": "Always",
+      "tests": [],
+      "questionId": 26,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 25,
+      "priority": 92,
+      "triggerType": "Always",
+      "tests": [],
+      "questionId": 29,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 26,
+      "priority": 91,
+      "triggerType": "Any",
+      "tests": [
+        {
+          "factId": 48,
+          "operation": "Contains",
+          "parameter": "a voice thought"
+        },
+        {
+          "factId": 48,
+          "operation": "Contains",
+          "parameter": "an warrior"
+        },
+        {
+          "factId": 48,
+          "operation": "Contains",
+          "parameter": "a role"
+        },
+        {
+          "factId": 48,
+          "operation": "Contains",
+          "parameter": "spiritual"
+        },
+        {
+          "factId": 48,
+          "operation": "Contains",
+          "parameter": "intuitive"
+        }
+      ],
+      "questionId": 30,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 27,
+      "priority": 90,
+      "triggerType": "Always",
+      "tests": [],
+      "questionId": 31,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 60,
+      "priority": 1000,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 419,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 91,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 58,
+      "priority": 1100,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 418,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 77,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 133,
+      "priority": 1100,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 420,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 89,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 66,
+      "priority": 1000,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 45,
+          "operation": "GreaterThan",
+          "parameter": "0.67"
+        }
+      ],
+      "questionId": 55,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 67,
+      "priority": 1000,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 45,
+          "operation": "LessThan",
+          "parameter": "0.66"
+        },
+        {
+          "factId": 420,
+          "operation": "Exists",
+          "parameter": ""
+        },
+        {
+          "factId": 45,
+          "operation": "GreaterThan",
+          "parameter": "0.34"
+        }
+      ],
+      "questionId": 87,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 43,
+      "priority": 1000,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 428,
+          "operation": "Exists",
+          "parameter": ""
+        }
+      ],
+      "questionId": 71,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 35,
+      "priority": 1000,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 50,
+          "operation": "Contains",
+          "parameter": "love-hate"
+        }
+      ],
+      "questionId": 34,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 39,
+      "priority": 1000,
+      "triggerType": "All",
+      "tests": [
+        {
+          "factId": 50,
+          "operation": "Contains",
+          "parameter": "envious"
+        }
+      ],
+      "questionId": 92,
+      "factId": null,
+      "factAction": null
+    },
+    {
+      "id": 134,
+      "priority": 93,
+      "triggerType": "Always",
+      "tests": [],
+      "questionId": 28,
       "factId": null,
       "factAction": null
     }

@@ -21,11 +21,8 @@ class _ThemeQuestion extends State<ThemeQuestion> {
   @override
   void initState() {
     super.initState();
-    if (widget.data.startValue != null) {
-      currentlySelected = Map<String, bool>();
-      (widget.data.startValue as List<String>).forEach((e) { 
-        currentlySelected[e] = true;
-      });
+    if (widget.data.startValue != null && widget.data.startValue != "") {
+      currentlySelected = Map<String, bool>.from(json.decode(widget.data.startValue)); 
     }
   }
 
@@ -34,10 +31,11 @@ class _ThemeQuestion extends State<ThemeQuestion> {
     currentlySelected ??= new Map<String, bool>();
     List<Widget> options = [];
     List<QuestionOption> questionOptions = widget.data.question.options;
-    print(questionOptions);
 
     questionOptions.sort((a, b) => a.order.compareTo(b.order));
+    questionOptions = questionOptions.sublist(0, 6);
     double _questionsLength = questionOptions.length.toDouble();
+    
 
     questionOptions.forEach((option) {
       Widget image = Container(
@@ -56,9 +54,10 @@ class _ThemeQuestion extends State<ThemeQuestion> {
             alignment: AlignmentDirectional.topCenter,
             children:[
               Positioned(
-                top: -3,
+                bottom: 40,
                 child: Container(
-                  child: Text(option.text)
+                  width: 110,
+                  child: Text(option.text, textAlign: TextAlign.center,)
                 )
               ),
               Positioned(

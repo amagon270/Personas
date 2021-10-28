@@ -56,6 +56,9 @@ class _CreatePersona extends State<CreatePersona> with SingleTickerProviderState
 
   _selectAnswer(dynamic answer) {
     currentQuestionResponse.choice = answer;
+    if (currentQuestionResponse.choice == "true") {
+      currentQuestionResponse.choice = true;
+    } 
     if (canTapNext == false) {
       setState(() {
         canTapNext = true;
@@ -96,7 +99,6 @@ class _CreatePersona extends State<CreatePersona> with SingleTickerProviderState
       currentQuestionWidget = currentQuestion?.generateQuestionWidget(
         selectAnswer: _selectAnswer) ?? Text("Loading");
     });
-    print("current question id: " + currentQuestion.id);
     if (!PersonaService.specialQuestionIds.contains(currentQuestion.id)) {
       startTimer(currentQuestion);
     }

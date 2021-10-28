@@ -17,6 +17,11 @@ class Fact {
 
   @override
   int get hashCode => id.hashCode;
+
+  @override
+  String toString() {
+    return "Fact { id: ${id}, text: ${text}, tags: ${tags}, value: $value, negatedFacts: $negatedFacts}\n";
+  }
 }
 
 class FactException implements Exception {
@@ -43,8 +48,7 @@ class FactService {
       }
       return null;
     });
-    newFact?.value = value;
-    return newFact;
+    return new Fact(newFact.id, newFact.text, newFact.tags, value: value);
   }
 
   void assignFacts() async {

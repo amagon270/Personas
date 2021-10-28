@@ -14,6 +14,11 @@ class Persona {
   Color color;
   List<Fact> facts;
   List<QuestionResponse> answers;
+
+  @override
+  String toString() {
+    return "$facts";
+  }
 }
 
 class PersonaService {
@@ -49,11 +54,12 @@ class PersonaService {
       orElse: () {return null;},
     );
     session.answers.removeWhere((e) => (e.question.code == "personaName"));
+    session.facts.removeWhere((e) => e.text == "blank");
 
     persona.color = Color(colorString) ?? Colors.white;
     persona.name = nameResponse?.choice ?? "";
-    persona.answers = session.answers;
-    persona.facts = session.facts;
+    persona.answers = [...session.answers];
+    persona.facts = [...session.facts];
     savePersona(persona, userId);
   }
 
@@ -96,7 +102,6 @@ class PersonaService {
   Future<List<Persona>> getPersonas({String userId}) async {
     userId ??= this.userId;
     Map decodedData = await readPersonaFile();
-
     List<Question> allQuestions = QuestionService().allQuestions;
     List<Persona> allPersonas = [];
 
@@ -158,7 +163,7 @@ class PersonaService {
   void savePersona(Persona persona, String userId) async {
     Map decodedData = await readPersonaFile();
     decodedData = savablePersonaMap(persona, userId, decodedData);
-
+    
     String newUserAnswers = json.encode(decodedData);
     writePersonaFile(newUserAnswers);
     allPersonas.add(persona);

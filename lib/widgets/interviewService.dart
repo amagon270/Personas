@@ -22,6 +22,11 @@ class QuestionResponse {
   QuestionResponse(this.question, this.choice) {
     timestamp = DateTime.now();
   }
+
+  @override
+  String toString() {
+    return choice.toString();
+  }
 }
 
 class Session {
@@ -81,7 +86,7 @@ class InterviewService {
   List<Rule> allRules;
   Session currentSession;
 
-  static final Question endQuestion = Question("end", "personaName", "Give a name to this persona", QuestionType.TextInput, "0", []);
+  static final Question endQuestion = Question("end", "personaName", "Give a name to this persona", QuestionType.TextInput, "0", [], timer: -1);
   static final Question blankQuestion = Question("blank", "", "Something went wrong with the question", QuestionType.TextOnly, "", []);
 
   Future<Session> startSession() async {
@@ -117,12 +122,18 @@ class InterviewService {
       //unless we are checking that it exists then skip this part
       if (currentSession.facts.where((fact) => fact.id == test.fact).length == 0 &&
           test.operation != Operator.Exists) {
+        var tempValue = double.tryParse(test.parameter) 
+          ?? int.tryParse(test.parameter)
+          ?? test.parameter;
+
         //can't use a switch here because of the comparison i'm doing
-        if (test.parameter is int) {
+        if (tempValue is double) {
+          currentSession.facts.add(FactService().getFactById(test.fact, value: 0.0));
+        } else if (tempValue is int) {
           currentSession.facts.add(FactService().getFactById(test.fact, value: 0));
-        } else if (test.parameter is String) {
+        } else if (tempValue is String) {
           currentSession.facts.add(FactService().getFactById(test.fact, value: ""));
-        }
+        } 
       }
       //This goes against clarity but also saves about 20+ lines of repeating code so I'm sticking with it
       //e.g. GreaterThan with All Type; test.parameter is 3 and fact.value is 1
@@ -137,22 +148,26 @@ class InterviewService {
       )?.value;
       switch (test.operation) {
         case Operator.GreaterThan:
-          if (actionComparison == (factValue > test.parameter)) {
-            action = actionChange;
+          if (factValue is double) {
+            if (actionComparison == (factValue > double.parse(test.parameter))) {
+              action = actionChange;
+            }
           }
           break;
         case Operator.LessThan:
-          if (actionComparison == (factValue < test.parameter)) {
-            action = actionChange;
+          if (factValue is double) {
+            if (actionComparison == (factValue < double.parse(test.parameter))) {
+              action = actionChange;
+            }
           }
           break;
         case Operator.EqualTo:
-          if (actionComparison == (factValue == test.parameter)) {
+          if (actionComparison == (factValue == double.parse(test.parameter))) {
             action = actionChange;
           }
           break;
         case Operator.Exists:
-          if (actionComparison == (currentSession.facts.where((fact) => fact.id == test.fact).length != 0)) {
+          if (actionComparison == (currentSession.facts.where((fact) => fact.id == test.fact && fact.value != false).length != 0)) {
             action = actionChange;
           }
           break;
@@ -221,20 +236,18 @@ class InterviewService {
 
   QuestionResponse previousQuestion() {
     Rule rule;
-    //remove the last fact added so the user should be at the same state as when they first reached this rule
-    if (currentSession.individualFacts.length > 0) {
-      removeFactFromList(currentSession.individualFacts.last, currentSession.facts);
-      currentSession.individualFacts.removeLast();
-    }
 
     currentSession.processedRules.removeLast();
     rule = currentSession.processedRules.last;
 
-    //this situation means that 2 facts were added from 1 rule and so needs another removed
-    if (rule.action.fact != null && rule.action.questionId != null) {
-      removeFactFromList(currentSession.individualFacts.last, currentSession.facts);
-      currentSession.individualFacts.removeLast();
+    if (rule.action.fact != null) {
+      //remove the last fact added so the user should be at the same state as when they first reached this rule
+      if (currentSession.individualFacts.length > 0) {
+        removeFactFromList(currentSession.individualFacts.last, currentSession.facts);
+        currentSession.individualFacts.removeLast();
+      }
     }
+
     //if the rule has a question
     if (rule.action.questionId != null) {
       currentSession.questions.removeLast();
@@ -243,6 +256,15 @@ class InterviewService {
         orElse: () => null,
       );
       if (answer != null) {
+        if (answer.question.type == QuestionType.Theme) {
+          answer.question.options.forEach((option) { 
+            removeFactFromList(currentSession.individualFacts.last, currentSession.facts);
+            currentSession.individualFacts.removeLast();
+          });
+        } else {
+          removeFactFromList(currentSession.individualFacts.last, currentSession.facts);
+          currentSession.individualFacts.removeLast();
+        }
         currentSession.answers.remove(answer);
         return answer;
       } else {
@@ -254,14 +276,12 @@ class InterviewService {
   }
 
   void answerQuestion(QuestionResponse response, String userId) {
-    print("answering question: ${response.question.code} : ${response.choice}");
     //I have a few null question things that i didn't want answered here so i just skip them
     if (response.question.type == QuestionType.Theme) {
-      print("test: ${response.choice}");
       var facts = json.decode(response.choice);
+      currentSession.answers.add(response);
       facts.forEach((fact, state) {
-        currentSession.answers.add(response);
-        Fact _fact = FactService().getFactById(fact, value: true);
+        Fact _fact = FactService().getFactById(fact, value: state);
         addFactToList(_fact, currentSession.facts);
         currentSession.individualFacts.add(_fact);
       });
@@ -294,13 +314,14 @@ class InterviewService {
       },
     );
     if (existingFact != null) {
-      print("existing fact add: ${existingFact.value}");
+      print("existing fact add: ${existingFact.text}: ${existingFact.value}");
       if (newFact.value is int) {
         existingFact.value += newFact.value;
       } else {
         existingFact.value = newFact.value;
       }
     } else {
+      print("new fact add: ${newFact.text}: ${newFact.value}");
       list.add(newFact);
     }
   }
@@ -313,7 +334,7 @@ class InterviewService {
       },
     );
     if (existingFact != null) {
-      print("existing fact subtract: ${existingFact.value}");
+      print("existing fact subtract: ${existingFact.text}: ${existingFact.value}");
       if (newFact.value is int) {
         existingFact.value -= newFact.value;
       } else if (newFact.value is String) {
@@ -370,7 +391,6 @@ class InterviewService {
           test["operation"].toString().toEnum(Operator.values),
           parameter: test["parameter"]
         );
-        // print("Adding tests to rule: factId ${_newTest.fact}, operation ${_newTest.operation}, parameter ${_newTest.parameter}");
         newTests.add(_newTest);
       });
 
@@ -415,7 +435,6 @@ class InterviewService {
     sessionData["questions"] = questions;
 
     session.answers?.forEach((answer) {
-      print("answers when saving ${answer.choice}");
       sessionData["answers"][answer.question.id] = answer.choice;
     });
 
