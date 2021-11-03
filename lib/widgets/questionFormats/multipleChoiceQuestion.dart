@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:Personas/widgets/questionService.dart';
 import 'package:Personas/widgets/utility.dart';
 import 'package:flutter/cupertino.dart';
@@ -42,7 +44,11 @@ class _MultipleChoiceQuestion extends State<MultipleChoiceQuestion> {
             onChanged: widget.data.editable ? (value) {
               setState(() {
                 currentlySelected = value;
-                widget.data.selectAnswer(value.value);
+                if (option.fact == "null") {
+                  widget.data.selectAnswer(value.value);
+                } else {
+                  widget.data.selectAnswer(json.encode({option.fact.toString(): value.value}));
+                }
               });
             } : null,
           ),

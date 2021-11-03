@@ -276,32 +276,34 @@ class InterviewService {
   }
 
   void answerQuestion(QuestionResponse response, String userId) {
-    //I have a few null question things that i didn't want answered here so i just skip them
-    if (response.question.type == QuestionType.Theme) {
+    try {
       var facts = json.decode(response.choice);
       currentSession.answers.add(response);
       facts.forEach((fact, state) {
-        Fact _fact = FactService().getFactById(fact, value: state);
+        var _state = state == "true" ? true : state;
+        Fact _fact = FactService().getFactById(fact, value: _state);
         addFactToList(_fact, currentSession.facts);
         currentSession.individualFacts.add(_fact);
       });
-    } else if (response.question.code != null && response.question.code != "") {
-      if (!PersonaService.specialQuestionIds.contains(response.question.code)) {
-        String factId;
-        if (response.question.options.length > 0) {
-          factId = response.question?.options
-          ?.firstWhere(
-            (option) => option?.value == response?.choice, 
-            orElse: () {return null;})?.fact 
-            ?? response.question.factSubject;
+    } catch (e) {
+      if (response.question.code != null && response.question.code != "") {
+        if (!PersonaService.specialQuestionIds.contains(response.question.code)) {
+          String factId;
+          if (response.question.options.length > 0) {
+            factId = response.question?.options
+            ?.firstWhere(
+              (option) => option?.value == response?.choice, 
+              orElse: () {return null;})?.fact 
+              ?? response.question.factSubject;
+          }
+          if (factId == "null" || factId == null) {
+            factId = response.question.factSubject;
+          }
+          currentSession.answers.add(response);
+          Fact _fact = FactService().getFactById(factId, value: response.choice);
+          addFactToList(_fact, currentSession.facts);
+          currentSession.individualFacts.add(_fact);
         }
-        if (factId == "null" || factId == null) {
-          factId = response.question.factSubject;
-        }
-        currentSession.answers.add(response);
-        Fact _fact = FactService().getFactById(factId, value: response.choice);
-        addFactToList(_fact, currentSession.facts);
-        currentSession.individualFacts.add(_fact);
       }
     }
   }

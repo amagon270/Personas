@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:Personas/widgets/questionService.dart';
@@ -67,7 +68,11 @@ class _PolygonQuestion extends State<PolygonQuestion> {
                   onChanged: widget.data.editable ? (value) {
                     setState(() {
                       currentlySelected = value;
-                      widget.data.selectAnswer(value.value);
+                      if (option.fact == "null") {
+                        widget.data.selectAnswer(value.value);
+                      } else {
+                        widget.data.selectAnswer(json.encode({option.fact: value.value}));
+                      }
                     });
                   } : null,
                 ),
