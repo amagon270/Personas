@@ -9,6 +9,7 @@ import 'package:Personas/widgets/questionFormats/sliderQuestion.dart';
 import 'package:Personas/widgets/questionFormats/textInputQuestion.dart';
 import 'package:Personas/widgets/questionFormats/textOnlyQuestion.dart';
 import 'package:Personas/widgets/questionFormats/themeQuestion.dart';
+import 'package:Personas/widgets/supaBaseService.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -61,7 +62,7 @@ class QuestionOption {
 
   @override
   String toString() {
-    return "QuestionOption { code: ${code}, value: ${value}, text: ${text}, image: $image, order: $order, fact: $fact }";
+    return "QuestionOption { code: $code, value: $value, text: $text, image: $image, order: $order, fact: $fact }";
   }
 }
 
@@ -132,7 +133,7 @@ class QuestionService {
   factory QuestionService() => _instance;
 
   QuestionService._internal() {
-    assignQuestions();
+    //assignQuestions();
   }
 
   List<Question> _allQuestions;
@@ -150,7 +151,8 @@ class QuestionService {
   }
 
   static Future<List<Question>> loadQuestions() async {
-    final data = await rootBundle.loadString("assets/export.json");
+    //final data = await rootBundle.loadString("assets/export.json");
+    final data = SupaBaseService().qMatrix;
     List<dynamic> decodedData = json.decode(data)["questions"];
     List<Question> newQuestions = [];
     decodedData.forEach((question) {

@@ -5,15 +5,15 @@ import 'package:Personas/pages/login.dart';
 import 'package:Personas/pages/menu.dart';
 import 'package:Personas/pages/viewPersona.dart';
 import 'package:Personas/pages/viewPersonas.dart';
-import 'package:Personas/widgets/factService.dart';
-import 'package:Personas/widgets/interviewService.dart';
-import 'package:Personas/widgets/personaService.dart';
-import 'package:Personas/widgets/questionService.dart';
+import 'package:Personas/widgets/supaBaseService.dart';
 import 'package:Personas/widgets/user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SupaBaseService();
+  
   runApp(
     MultiProvider(
       providers: [
@@ -84,12 +84,6 @@ class Personas extends StatelessWidget {
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //just initialising these early so they can finish all the file calls they need
-    QuestionService();
-    PersonaService();
-    InterviewService();
-    FactService();
-    
     String userId = context.watch<User>().id;
     bool watchedIntro = context.watch<User>().hasWatchedIntro;
 

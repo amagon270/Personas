@@ -33,7 +33,7 @@ class PersonaService {
 
   PersonaService._internal() {
     currentOrdering = "default";
-    getPersonas();
+    //getPersonas();
   }
 
   void save(Session session) {

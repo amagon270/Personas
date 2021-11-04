@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:Personas/widgets/supaBaseService.dart';
 import 'package:flutter/services.dart';
 
 class Fact {
@@ -20,7 +21,7 @@ class Fact {
 
   @override
   String toString() {
-    return "Fact { id: ${id}, text: ${text}, tags: ${tags}, value: $value, negatedFacts: $negatedFacts}\n";
+    return "Fact { id: $id, text: $text, tags: $tags, value: $value, negatedFacts: $negatedFacts}\n";
   }
 }
 
@@ -34,7 +35,7 @@ class FactService {
   factory FactService() => _instance;
 
   FactService._internal() {
-    assignFacts();
+    //assignFacts();
   }
 
   List<Fact> _allFacts;
@@ -56,7 +57,8 @@ class FactService {
   }
 
   static Future<List<Fact>> loadFacts() async {
-    final data = await rootBundle.loadString("assets/export.json");
+    //final data = await rootBundle.loadString("assets/export.json");
+    final data = SupaBaseService().qMatrix;
     List<dynamic> decodedData = json.decode(data)["facts"];
     List<Fact> newFacts = [];
     decodedData.forEach((fact) {

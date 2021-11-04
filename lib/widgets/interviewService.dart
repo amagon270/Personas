@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:Personas/widgets/factService.dart';
 import 'package:Personas/widgets/personaService.dart';
 import 'package:Personas/widgets/questionService.dart';
+import 'package:Personas/widgets/supaBaseService.dart';
 import 'package:Personas/widgets/utility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -77,7 +78,7 @@ class RuleTest {
 
   @override
   String toString() {
-    return 'Test: {fact: ${fact}, operation: ${operation}, parameter: ${parameter}}';
+    return 'Test: {fact: $fact, operation: $operation, parameter: $parameter}';
   }
 }
 
@@ -377,7 +378,8 @@ class InterviewService {
   }
 
   static Future<List<Rule>> loadRules() async {
-    final data = await rootBundle.loadString("assets/export.json");
+    //final data = await rootBundle.loadString("assets/export.json");
+    final data = SupaBaseService().qMatrix;
     List<dynamic> decodedData = json.decode(data)["rules"];
     List<Rule> newRules = [];
 

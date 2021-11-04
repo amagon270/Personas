@@ -5,8 +5,7 @@ import 'package:Personas/widgets/personaService.dart';
 import 'package:Personas/widgets/utility.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:password_hash/pbkdf2.dart';
-import 'package:password_hash/salt.dart';
+import 'package:conduit_password_hash/conduit_password_hash.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'auth.dart';
@@ -26,7 +25,6 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
 
   void checkExistingUser() async {
     Map userData = await getUserData();
-    print("get user data $userData");
     if (userData != null) {
       assignUserData(userData);
     } else {
@@ -83,8 +81,6 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
       final data = await file.readAsString();
       return json.decode(data);
     } catch (e) {
-      print(e.toString());
-      print("test print on return null in getUserData");
       return null;
     }
   }
