@@ -97,7 +97,7 @@ class _ViewPersona extends State<ViewPersona> {
               itemBuilder: (BuildContext context, int index) { 
                 Fact fact = widget.persona.facts[index];
                 Widget tile;
-                if (fact.value == false || fact.value.toString() == "") {
+                if (fact.value == false || fact.value.toString() == "" || fact.value == null) {
                   return Container(); 
                 }
                 if (fact.value is double) {

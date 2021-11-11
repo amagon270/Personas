@@ -12,7 +12,6 @@ import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SupaBaseService();
   
   runApp(
     MultiProvider(
@@ -28,15 +27,41 @@ void main() {
 
 class Personas extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Personas App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: HomePage(),
-      onGenerateRoute: (settings) => routeHandler(settings),
+  Widget build(BuildContext context){
+    final supabase = SupaBaseService();
+
+    return FutureBuilder(
+      future: supabase.getQMatrix(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return MaterialApp(
+            title: "Getting Results",
+            home: Scaffold(
+              body: Container(
+                alignment: Alignment.center,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(),
+                    Text("Loading Question Matrix")
+                  ]
+                )
+              )
+            )
+          );
+        } else {
+          return MaterialApp(
+            title: 'Personas App',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+            ),
+            home: HomePage(),
+            onGenerateRoute: (settings) => routeHandler(settings),
+          );
+        }
+      }
     );
   }
 

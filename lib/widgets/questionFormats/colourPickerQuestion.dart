@@ -57,6 +57,7 @@ class _ColourPickerQuestion extends State<ColourPickerQuestion> {
                           TextButton(
                             child: const Text('Done'),
                             onPressed: () {
+                              widget.data.selectAnswer("done");
                               Navigator.of(context).pop();
                             },
                           ),

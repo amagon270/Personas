@@ -16,6 +16,7 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
   String lastName;
   String email;
   DateTime dateCreated;
+  bool enableTimer;
 
   bool hasWatchedIntro;
 
@@ -32,6 +33,7 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
       assignUserData(data);
       setUserData(json.encode(data));
     }
+
     notifyListeners();
   }
 
@@ -68,6 +70,7 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
     email = userData["email"] ?? "";
     dateCreated = userData["created"] != null ? DateTime.fromMillisecondsSinceEpoch(userData["created"]) : DateTime.now();
     hasWatchedIntro = userData["watchedIntro"] ?? false;
+    enableTimer = true;
 
     //TODO - Work out a better system for this
     PersonaService().userId = id;
@@ -94,5 +97,9 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
     } catch (e) {
       print(e);
     }
+  }
+
+  void toggleTimer() {
+    enableTimer = !enableTimer;
   }
 }

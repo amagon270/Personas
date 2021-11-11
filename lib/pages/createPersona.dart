@@ -55,27 +55,33 @@ class _CreatePersona extends State<CreatePersona> with SingleTickerProviderState
   }
 
   _selectAnswer(dynamic answer) {
+    print(answer);
     currentQuestionResponse.choice = answer;
     if (currentQuestionResponse.choice == "true") {
       currentQuestionResponse.choice = true;
     } 
-    if (canTapNext == false) {
-      setState(() {
-        canTapNext = true;
-      });
+    if ([QuestionType.MultipleChoice, QuestionType.Polygon].contains(currentQuestionResponse.question.type)) {
+      _submit();
     }
     if (currentQuestionResponse.question.type == QuestionType.ColourPicker) {
-      setState(() {
-        currentColor = new Color(answer);
-      });
+      if (answer == "done") {
+        currentQuestionResponse.choice = currentColor.value;
+        _submit();
+      } else {
+        setState(() {
+          currentColor = new Color(answer);
+        });
+      }
     }
   }
 
   void startTimer(Question question) {
-    questionSkipTimer?.cancel();
-    if (question.timer > 0) {
-      Duration length = Duration(seconds: question.timer);
-      questionSkipTimer = Timer(length, _nextQuestion);
+    if (context.read<User>().enableTimer) {
+      questionSkipTimer?.cancel();
+      if (question.timer > 0) {
+        Duration length = Duration(seconds: question.timer);
+        questionSkipTimer = Timer(length, _nextQuestion);
+      }
     }
   }
 
@@ -94,14 +100,37 @@ class _CreatePersona extends State<CreatePersona> with SingleTickerProviderState
       _controller.reset();
       _controller.forward();
       currentQuestion = interviewService.nextQuestion();
-      canTapNext = false;
+      //canTapNext = false;
       currentQuestionResponse = new QuestionResponse(currentQuestion, null);
       currentQuestionWidget = currentQuestion?.generateQuestionWidget(
-        selectAnswer: _selectAnswer) ?? Text("Loading");
+        selectAnswer: _selectAnswer,
+        backgroundColour: currentColor) ?? Text("Loading");
     });
     if (!PersonaService.specialQuestionIds.contains(currentQuestion.id)) {
       startTimer(currentQuestion);
     }
+  }
+
+  Widget backButton() {
+    return ElevatedButton(
+      child: Text("Back",
+        style: Theme.of(context).textTheme.button),
+      onPressed: () {
+        setState(() {
+          _controller.reset();
+          _controller.forward();
+          canTapNext = true;
+          currentQuestionResponse = interviewService.previousQuestion();
+          currentQuestion = currentQuestionResponse.question;
+          currentQuestionWidget = currentQuestion?.generateQuestionWidget(
+            selectAnswer: _selectAnswer,
+            startValue: currentQuestionResponse.choice,
+            backgroundColour: currentColor,
+            ) 
+            ?? Text("Loading");
+          startTimer(currentQuestion);
+        });
+      });
   }
 
   Widget questionUI() {
@@ -123,7 +152,8 @@ class _CreatePersona extends State<CreatePersona> with SingleTickerProviderState
                   currentQuestion = interviewService.nextQuestion();
                   currentQuestionResponse = new QuestionResponse(currentQuestion, null);
                   currentQuestionWidget = currentQuestion?.generateQuestionWidget(
-                    selectAnswer: _selectAnswer) ?? Text("Loading");
+                    selectAnswer: _selectAnswer,
+                    backgroundColour: currentColor) ?? Text("Loading");
                   currentColor = interviewService.getCurrentColor();
                 }
                 return Container(
@@ -135,26 +165,9 @@ class _CreatePersona extends State<CreatePersona> with SingleTickerProviderState
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         //Back button doesn't appear on the first question
-                        currentQuestion.code != "intro"
-                        ? ElevatedButton(
-                          child: Text("Back",
-                            style: Theme.of(context).textTheme.button),
-                          onPressed: () {
-                            setState(() {
-                              _controller.reset();
-                              _controller.forward();
-                              canTapNext = true;
-                              currentQuestionResponse = interviewService.previousQuestion();
-                              currentQuestion = currentQuestionResponse.question;
-                              currentQuestionWidget = currentQuestion?.generateQuestionWidget(
-                                selectAnswer: _selectAnswer,
-                                startValue: currentQuestionResponse.choice) 
-                                ?? Text("Loading");
-                              startTimer(currentQuestion);
-                            });
-                          }) : null,
+                        currentQuestion.code != "intro" ? backButton() : null,
                         ElevatedButton(
-                          child: Text("Next",
+                          child: Text("Move on",
                             style: Theme.of(context).textTheme.button),
                           //next button can't be tapped unless the user has selected an answer
                           onPressed: canTapNext ? () {

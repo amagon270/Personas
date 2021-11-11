@@ -45,6 +45,7 @@ class PersonaService {
       (e) => (e.question.type == QuestionType.ColourPicker),
       orElse: () {return null;},
     );
+    print(colorResponse?.choice);
     int colorString = colorResponse?.choice ?? 0;
     session.answers.removeWhere((e) => (e.question.type == QuestionType.ColourPicker));
 

@@ -54,37 +54,43 @@ class _ThemeQuestion extends State<ThemeQuestion> {
             alignment: AlignmentDirectional.topCenter,
             children:[
               Positioned(
-                bottom: 40,
                 child: Container(
-                  width: 110,
-                  child: Text(option.text, textAlign: TextAlign.center,)
-                )
+                  //color: widget.data.backgroundColour,
+                  child: Checkbox(
+                    hoverColor: widget.data.backgroundColour,
+                    value: currentlySelected[option.fact],
+                    onChanged: widget.data.editable ? (value) {
+                      setState(() {
+                        currentlySelected[option.fact] = !currentlySelected[option.fact];
+                      });
+                      List<String> returnData = [];
+                      currentlySelected.forEach((key, value) { 
+                        if (value == true) {
+                          returnData.add(key);
+                        }
+                      });
+                      //widget.data.selectAnswer(returnData);
+                      widget.data.selectAnswer(json.encode(currentlySelected));
+                    } : null,
+                  )
+                ),
               ),
               Positioned(
                 top: -33,
                 child: Container(
+                  //color: widget.data.backgroundColour,
                   height: 30,
                   width: 30,
                   child: image
                 )
               ),
               Positioned(
-                child: Checkbox(
-                  value: currentlySelected[option.fact],
-                  onChanged: widget.data.editable ? (value) {
-                    setState(() {
-                      currentlySelected[option.fact] = !currentlySelected[option.fact];
-                    });
-                    List<String> returnData = [];
-                    currentlySelected.forEach((key, value) { 
-                      if (value == true) {
-                        returnData.add(key);
-                      }
-                    });
-                    //widget.data.selectAnswer(returnData);
-                    widget.data.selectAnswer(json.encode(currentlySelected));
-                  } : null,
-                ),
+                bottom: 40,
+                child: Container(
+                  //color: widget.data.backgroundColour,
+                  width: 110,
+                  child: Text(option.text, textAlign: TextAlign.center,)
+                )
               )
             ]
           ),
@@ -102,7 +108,27 @@ class _ThemeQuestion extends State<ThemeQuestion> {
             width: MediaQuery.of(context).size.width,
             child: Stack(
               children: [
-                ...options
+                Container(
+                  alignment: Alignment.center,
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return Image(
+                        image: AssetImage(
+                          Theme.of(context).brightness == Brightness.dark 
+                          ? "assets/images/BlackHexagon.png"
+                          : "assets/images/WhiteHexagon.png"),
+                        fit: BoxFit.fill,
+                        width: constraints.maxWidth*0.88,
+                        height: constraints.maxHeight*0.77,
+                      );
+                    }
+                  )
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  child: Text(widget.data.question.code, textAlign: TextAlign.center,)
+                ),
+                ...options,
               ]
             )
           ),

@@ -68,12 +68,13 @@ class QuestionOption {
 
 class QuestionInputData {
   QuestionInputData(this.question, this.selectAnswer,
-    {this.startValue, this.editable = true});
+    {this.startValue, this.editable = true, this.backgroundColour = Colors.white});
 
   Question question;
   ValueChanged selectAnswer;
   dynamic startValue;
   bool editable;
+  Color backgroundColour;
 }
 
 class Question {
@@ -91,11 +92,11 @@ class Question {
   List<String> labels;
   int timer;
 
-  Widget generateQuestionWidget({ValueChanged selectAnswer, dynamic startValue, bool editable = true}) {
+  Widget generateQuestionWidget({ValueChanged selectAnswer, dynamic startValue, bool editable = true, Color backgroundColour}) {
 
     selectAnswer ??= (value) {};
     QuestionInputData inputData = QuestionInputData(
-      this, selectAnswer, startValue: startValue, editable: editable
+      this, selectAnswer, startValue: startValue, editable: editable, backgroundColour: backgroundColour
     );
 
     switch (type) {
