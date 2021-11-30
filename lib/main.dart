@@ -1,4 +1,5 @@
 import 'package:Personas/dev/devMenu.dart';
+import 'package:Personas/pages/editQuestions.dart';
 import 'package:Personas/pages/createPersona.dart';
 import 'package:Personas/pages/introduction.dart';
 import 'package:Personas/pages/login.dart';
@@ -79,6 +80,9 @@ class Personas extends StatelessWidget {
         break;
       case "/devMenu":
         newPage = DevMenuPage();
+        break;
+      case "/editQuestions":
+        newPage = EditQuestions();
         break;
       case "/intro":
         newPage = IntroducitonPage();

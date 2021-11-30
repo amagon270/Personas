@@ -44,6 +44,14 @@ class MenuPage extends StatelessWidget {
       )
     );
     items.add(
+      ElevatedButton(
+        child: Text("Edit Questions"),
+        onPressed: () {
+          Navigator.pushNamed(context, "/editQuestions");
+        },
+      )
+    );
+    items.add(
       MenuTile()
     );
     

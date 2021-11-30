@@ -79,7 +79,7 @@ class QuestionInputData {
 
 class Question {
   Question(this.id, this.code, this.text, this.type, this.factSubject, this.options,
-    {this.min, this.max, this.labels, this.timer = 10});
+    {this.min, this.max, this.labels, this.timer = 10, this.enabled = true});
 
   String id;
   String code;
@@ -91,6 +91,7 @@ class Question {
   int max;
   List<String> labels;
   int timer;
+  bool enabled = true;
 
   Widget generateQuestionWidget({ValueChanged selectAnswer, dynamic startValue, bool editable = true, Color backgroundColour}) {
 
