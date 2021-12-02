@@ -27,12 +27,15 @@ class _CreatePersona extends State<CreatePersona> with SingleTickerProviderState
   Timer questionSkipTimer;
   String userId;
 
+  bool nextText;
+
   @override
   void initState() {
     super.initState();
     interviewService = new InterviewService();
     canTapNext = true;
     userId = context.read<User>().id;
+    nextText = false;
 
     _controller = AnimationController(
       duration: const Duration(milliseconds: 300),
@@ -73,6 +76,11 @@ class _CreatePersona extends State<CreatePersona> with SingleTickerProviderState
         });
       }
     }
+    if ([QuestionType.Theme, QuestionType.Slider].contains(currentQuestionResponse.question.type)) {
+      setState(() {
+        nextText = true;
+      });
+    }
   }
 
   void startTimer(Question question) {
@@ -97,6 +105,7 @@ class _CreatePersona extends State<CreatePersona> with SingleTickerProviderState
 
   void _nextQuestion() {
     setState(() {
+      nextText = false;
       _controller.reset();
       _controller.forward();
       currentQuestion = interviewService.nextQuestion();
@@ -117,6 +126,7 @@ class _CreatePersona extends State<CreatePersona> with SingleTickerProviderState
         style: Theme.of(context).textTheme.button),
       onPressed: () {
         setState(() {
+          nextText = false;
           _controller.reset();
           _controller.forward();
           canTapNext = true;
@@ -167,7 +177,7 @@ class _CreatePersona extends State<CreatePersona> with SingleTickerProviderState
                         //Back button doesn't appear on the first question
                         currentQuestion.code != "intro" ? backButton() : null,
                         ElevatedButton(
-                          child: Text("Move on",
+                          child: Text(nextText ? "Submit" : "Move on",
                             style: Theme.of(context).textTheme.button),
                           //next button can't be tapped unless the user has selected an answer
                           onPressed: canTapNext ? () {

@@ -1,4 +1,4 @@
-import 'package:Personas/widgets/MenuTile.dart';
+import 'package:Personas/widgets/TimerMenuTile.dart';
 import 'package:flutter/material.dart';
 
 class MenuPage extends StatelessWidget {
@@ -52,7 +52,7 @@ class MenuPage extends StatelessWidget {
       )
     );
     items.add(
-      MenuTile()
+      TimerMenuTile()
     );
     
     return items;

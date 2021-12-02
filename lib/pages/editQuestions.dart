@@ -1,4 +1,4 @@
-import 'package:Personas/widgets/MenuTile.dart';
+import 'package:Personas/widgets/EditQuestionEnabledTile.dart';
 import 'package:Personas/widgets/questionService.dart';
 import 'package:flutter/material.dart';
 
@@ -8,16 +8,9 @@ class EditQuestions extends StatelessWidget {
     List<Question> questions = QuestionService().allQuestions;
     questions.forEach((question) {
       items.add(
-        Container(
-          padding: EdgeInsets.all(20),
-          alignment: Alignment.center,
-          child: ElevatedButton(
-            onPressed: () {
-              question.enabled = !question.enabled;
-            },
-            child: Text("${question.code}: ${question.enabled}", style: TextStyle(fontSize: 20),)
-          )
-        )
+        EditQuestionEnabledTile(
+          question: question,
+        ),
       );
     });
     return items;
@@ -27,6 +20,9 @@ class EditQuestions extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> menuItems = createMenu(context);
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Edit Questions'),
+      ),
       body: SafeArea(
         child: ListView.builder(
           itemCount: menuItems.length,

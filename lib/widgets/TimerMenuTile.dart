@@ -2,15 +2,15 @@ import 'package:Personas/widgets/user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class MenuTile extends StatefulWidget {
+class TimerMenuTile extends StatefulWidget {
 
-  MenuTile();
+  TimerMenuTile();
 
   @override
-  _MenuTileState createState() => _MenuTileState();
+  _TimerMenuTileState createState() => _TimerMenuTileState();
 }
 
-class _MenuTileState extends State<MenuTile> {
+class _TimerMenuTileState extends State<TimerMenuTile> {
 
   bool timerStatus;
 

@@ -152,6 +152,13 @@ class QuestionService {
     });
   }
 
+  void switchQuestionEnabled(String id) {
+    Question question = getQuestionById(id);
+    if (question != null) {
+      question.enabled = !question.enabled;
+    }
+  }
+
   static Future<List<Question>> loadQuestions() async {
     //final data = await rootBundle.loadString("assets/export.json");
     final data = SupaBaseService().qMatrix;
