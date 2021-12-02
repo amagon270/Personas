@@ -217,7 +217,7 @@ class InterviewService {
     if (rule.action.questionId != null) {
       var questionAlreadyAsked = false;
       currentSession.questions.forEach((e) {
-        if (e.id == rule.action.questionId) {
+        if (e.id == rule.action.questionId || !e.enabled) {
           questionAlreadyAsked = true;
         }
       });
