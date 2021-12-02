@@ -28,12 +28,15 @@ class _ThemeQuestion extends State<ThemeQuestion> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.data.question.code);
     currentlySelected ??= new Map<String, bool>();
     List<Widget> options = [];
     List<QuestionOption> questionOptions = widget.data.question.options;
 
     questionOptions.sort((a, b) => a.order.compareTo(b.order));
-    questionOptions = questionOptions.sublist(0, 6);
+    if (questionOptions.length >= 6) {
+      questionOptions = questionOptions.sublist(0, 6);
+    }
     double _questionsLength = questionOptions.length.toDouble();
     
 

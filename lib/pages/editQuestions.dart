@@ -6,6 +6,7 @@ class EditQuestions extends StatelessWidget {
   List<Widget> createMenu(BuildContext context) {
     List<Widget> items = [];
     List<Question> questions = QuestionService().allQuestions;
+    questions.sort((a, b) => a.id.compareTo(b.id));
     questions.forEach((question) {
       items.add(
         EditQuestionEnabledTile(

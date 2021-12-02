@@ -217,7 +217,7 @@ class InterviewService {
     if (rule.action.questionId != null) {
       var questionAlreadyAsked = false;
       currentSession.questions.forEach((e) {
-        if (e.id == rule.action.questionId || !e.enabled) {
+        if (e.id == rule.action.questionId) {
           questionAlreadyAsked = true;
         }
       });
@@ -225,7 +225,9 @@ class InterviewService {
         Question question = QuestionService().getQuestionById(rule.action.questionId);
         if (question != null) {
           currentSession.questions.add(question);
-          return question;
+          if (question.enabled) {
+            return question;
+          }
         } else {
           return blankQuestion;
         }
