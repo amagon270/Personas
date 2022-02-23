@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:Personas/widgets/factService.dart';
-import 'package:Personas/widgets/personaService.dart';
-import 'package:Personas/widgets/questionService.dart';
-import 'package:Personas/widgets/supaBaseService.dart';
-import 'package:Personas/widgets/utility.dart';
+import 'package:flutter/foundation.dart';
+import 'package:personas/services/factService.dart';
+import 'package:personas/services/personaService.dart';
+import 'package:personas/services/questionService.dart';
+import 'package:personas/services/supaBaseService.dart';
+import 'package:personas/widgets/utility.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
 enum TriggerType { Any, All, Always }
@@ -420,11 +420,14 @@ class InterviewService {
   }
 
   Future<bool> clearUnfinishedSession() async {
-    Map sessionData = {};
-    final directory = await getApplicationDocumentsDirectory();
-    final file = File('${directory.path}/unfinishedSession.json');
-    await file.writeAsString(json.encode(sessionData));
-    return true;
+    if (!kIsWeb) {
+      Map sessionData = {};
+      final directory = await getApplicationDocumentsDirectory();
+      final file = File('${directory.path}/unfinishedSession.json');
+      await file.writeAsString(json.encode(sessionData));
+      return true;
+    }
+    return false;
   }
 
   void saveUnfinishedSession(Session session) async {
@@ -453,21 +456,28 @@ class InterviewService {
       sessionData["facts"][fact.id] = fact.value;
     });
 
-    final directory = await getApplicationDocumentsDirectory();
-    final file = File('${directory.path}/unfinishedSession.json');
-    await file.writeAsString(json.encode(sessionData));
+
+    if (!kIsWeb) {
+      final directory = await getApplicationDocumentsDirectory();
+      final file = File('${directory.path}/unfinishedSession.json');
+      await file.writeAsString(json.encode(sessionData));
+    }
   }
 
   Future<Session> loadUnfinishedSession() async {
-    final directory = await getApplicationDocumentsDirectory();
-    final file = File('${directory.path}/unfinishedSession.json');
     String userAnswers = "{}";
-    try {
-      userAnswers = await file.readAsString();
-    } catch (e) {
-      print("Couldn't find file, creating new file");
-      userAnswers = '{"" : {}}';
+    
+    if (!kIsWeb) {
+      final directory = await getApplicationDocumentsDirectory();
+      final file = File('${directory.path}/unfinishedSession.json');
+      try {
+        userAnswers = await file.readAsString();
+      } catch (e) {
+        print("Couldn't find file, creating new file");
+        userAnswers = '{"" : {}}';
+      }
     }
+
     Map userData = json.decode(userAnswers);
 
     if (userData["id"] != null && userData["id"] != "") {

@@ -5,12 +5,26 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Personas",
+      "name": "Attach to Chrome",
+      "port": 40701,
+      "request": "attach",
+      "type": "pwa-chrome",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Launch Chrome",
+      "request": "launch",
+      "type": "pwa-chrome",
+      "url": "http://localhost:8080",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "personas",
       "request": "launch",
       "type": "dart"
     },
     {
-      "name": "Personas (profile mode)",
+      "name": "personas (profile mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile"

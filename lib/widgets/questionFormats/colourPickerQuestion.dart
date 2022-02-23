@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:Personas/widgets/questionService.dart';
+import 'package:personas/services/questionService.dart';
 
 
 class ColourPickerQuestion extends StatefulWidget {

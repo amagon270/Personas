@@ -1,4 +1,4 @@
-import 'package:Personas/widgets/personaService.dart';
+import 'package:personas/services/personaService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_reorderable_list/flutter_reorderable_list.dart' as ReOrder;
 

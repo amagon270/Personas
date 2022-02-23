@@ -1,5 +1,5 @@
-import 'package:Personas/widgets/factService.dart';
-import 'package:Personas/widgets/personaService.dart';
+import 'package:personas/services/factService.dart';
+import 'package:personas/services/personaService.dart';
 import 'package:flutter/material.dart';
 
 class ViewPersona extends StatefulWidget {

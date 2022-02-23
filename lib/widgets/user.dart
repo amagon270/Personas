@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:Personas/widgets/personaService.dart';
-import 'package:Personas/widgets/utility.dart';
+import 'package:personas/services/personaService.dart';
+import 'package:personas/widgets/utility.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:conduit_password_hash/conduit_password_hash.dart';

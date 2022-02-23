@@ -1,5 +1,5 @@
-import 'package:Personas/widgets/questionService.dart';
-import 'package:Personas/widgets/utility.dart';
+import 'package:personas/services/questionService.dart';
+import 'package:personas/widgets/utility.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

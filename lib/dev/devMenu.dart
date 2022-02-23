@@ -1,5 +1,5 @@
-import 'package:Personas/widgets/personaService.dart';
-import 'package:Personas/widgets/user.dart';
+import 'package:personas/services/personaService.dart';
+import 'package:personas/widgets/user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

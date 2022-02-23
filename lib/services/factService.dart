@@ -1,6 +1,5 @@
 import 'dart:convert';
-import 'package:Personas/widgets/supaBaseService.dart';
-import 'package:flutter/services.dart';
+import 'package:personas/services/supaBaseService.dart';
 
 class Fact {
   Fact(this.id, this.text, this.tags, {this.value, this.negatedFacts});

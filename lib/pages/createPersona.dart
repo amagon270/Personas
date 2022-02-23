@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:Personas/widgets/interviewService.dart';
-import 'package:Personas/widgets/personaService.dart';
-import 'package:Personas/widgets/questionService.dart';
-import 'package:Personas/widgets/user.dart';
+import 'package:personas/services/interviewService.dart';
+import 'package:personas/services/personaService.dart';
+import 'package:personas/services/questionService.dart';
+import 'package:personas/widgets/user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -204,7 +204,6 @@ class _CreatePersona extends State<CreatePersona> with SingleTickerProviderState
           ? Brightness.light
           : Brightness.dark,
         primaryColor: Colors.blue,
-        buttonColor: Colors.grey[400],
         textTheme: TextTheme(button: TextStyle(color: Colors.black))
       ),
       child: Scaffold(

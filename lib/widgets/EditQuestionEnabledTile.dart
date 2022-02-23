@@ -1,4 +1,4 @@
-import 'package:Personas/widgets/questionService.dart';
+import 'package:personas/services/questionService.dart';
 import 'package:flutter/material.dart';
 
 class EditQuestionEnabledTile extends StatefulWidget {

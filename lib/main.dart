@@ -1,13 +1,13 @@
-import 'package:Personas/dev/devMenu.dart';
-import 'package:Personas/pages/editQuestions.dart';
-import 'package:Personas/pages/createPersona.dart';
-import 'package:Personas/pages/introduction.dart';
-import 'package:Personas/pages/login.dart';
-import 'package:Personas/pages/menu.dart';
-import 'package:Personas/pages/viewPersona.dart';
-import 'package:Personas/pages/viewPersonas.dart';
-import 'package:Personas/widgets/supaBaseService.dart';
-import 'package:Personas/widgets/user.dart';
+import 'package:personas/dev/devMenu.dart';
+import 'package:personas/pages/editQuestions.dart';
+import 'package:personas/pages/createPersona.dart';
+import 'package:personas/pages/introduction.dart';
+import 'package:personas/pages/login.dart';
+import 'package:personas/pages/menu.dart';
+import 'package:personas/pages/viewPersona.dart';
+import 'package:personas/pages/viewPersonas.dart';
+import 'package:personas/services/supaBaseService.dart';
+import 'package:personas/widgets/user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

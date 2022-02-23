@@ -1,4 +1,4 @@
-import 'package:Personas/widgets/TimerMenuTile.dart';
+import 'package:personas/widgets/TimerMenuTile.dart';
 import 'package:flutter/material.dart';
 
 class MenuPage extends StatelessWidget {

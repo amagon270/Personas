@@ -1,5 +1,5 @@
-import 'package:Personas/widgets/EditQuestionEnabledTile.dart';
-import 'package:Personas/widgets/questionService.dart';
+import 'package:personas/widgets/EditQuestionEnabledTile.dart';
+import 'package:personas/services/questionService.dart';
 import 'package:flutter/material.dart';
 
 class EditQuestions extends StatelessWidget {
