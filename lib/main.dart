@@ -118,11 +118,11 @@ class HomePage extends StatelessWidget {
 
     if (userId == null) {
       return Center(child: CircularProgressIndicator());
-    } else if (watchedIntro == false) {
-      return IntroducitonPage();
     } else if (userId == "") {
       return LoginPage();
-    } else {
+    } else if (watchedIntro == false) {
+      return IntroducitonPage();
+    }  else {
       return MenuPage();
     }
   }

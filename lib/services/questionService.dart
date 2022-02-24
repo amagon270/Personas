@@ -160,7 +160,7 @@ class QuestionService {
   static Future<List<Question>> loadQuestions() async {
     //final data = await rootBundle.loadString("assets/export.json");
     final data = SupaBaseService().qMatrix;
-    List<dynamic> decodedData = json.decode(data)["questions"];
+    List<dynamic> decodedData = json.decode(data)["questions"] ?? [];
     List<Question> newQuestions = [];
     decodedData.forEach((question) {
       var id = question["id"]?.toString() ?? "";

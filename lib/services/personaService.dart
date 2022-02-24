@@ -7,6 +7,7 @@ import 'package:personas/services/questionService.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:personas/services/factService.dart';
+import 'package:personas/widgets/utility.dart';
 
 class Persona {
   String id;
@@ -134,7 +135,9 @@ class PersonaService {
       allPersonas.add(_persona);
     });
     List<Persona> orderedPersonas = await getPersonaOrder(allPersonas, currentOrdering ?? "default");
-    setPersonaOrder(orderedPersonas, currentOrdering ?? "default");
+    if (allPersonas.length > 0) {
+      setPersonaOrder(orderedPersonas, currentOrdering ?? "default");
+    }
 
     this.allPersonas = orderedPersonas;
     return orderedPersonas;
@@ -194,57 +197,19 @@ class PersonaService {
     return personas;
   }
 
-  Future<Map> readPersonaFile() async {
-    if (!kIsWeb) {
-      final directory = await getApplicationDocumentsDirectory();
-      final file = File('${directory.path}/personas.json');
-      String userAnswers = "{}";
-      try {
-        userAnswers = await file.readAsString();
-      } catch (e) {
-        print("Couldn't find file, creating new file");
-        userAnswers = '{"" : {}}';
-      }
-      return json.decode(userAnswers);
-    }
-    return {};
+  Future<Map<String, dynamic>> readPersonaFile() async {
+    return await UtilityFunctions.getStorage("personas") ?? {"": {}};
   }
 
   Future<bool> writePersonaFile(String fileData) async {
-    if (!kIsWeb) {
-      final directory = await getApplicationDocumentsDirectory();
-      final file = File('${directory.path}/personas.json');
-      await file.writeAsString(fileData);
-      return true;
-    }
-    return false;
+    return await UtilityFunctions.setStorage("personas", fileData);
   }
 
   Future<Map> readPersonaOrderFile() async {
-    if (!kIsWeb) {
-      final directory = await getApplicationDocumentsDirectory();
-      final file = File('${directory.path}/personaOrder.json');
-      String userAnswers = "{}";
-      try {
-        userAnswers = await file.readAsString();
-        if (userAnswers == "") 
-          userAnswers = '{"" : {}}';
-      } catch (e) {
-        print("Couldn't find file, creating new file");
-        userAnswers = '{"" : {}}';
-      }
-      return json.decode(userAnswers);
-    }
-    return {};
+    return await UtilityFunctions.getStorage("personaOrder") ?? {"": {}};
   }
 
   Future<bool> writePersonaOrderFile(String fileData) async {
-    if (!kIsWeb) {
-      final directory = await getApplicationDocumentsDirectory();
-      final file = File('${directory.path}/personaOrder.json');
-      await file.writeAsString(fileData);
-      return true;
-    }
-    return false;
+    return await UtilityFunctions.setStorage("personaOrder", fileData);
   }
 }

@@ -1,12 +1,9 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:personas/services/personaService.dart';
 import 'package:personas/widgets/utility.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:conduit_password_hash/conduit_password_hash.dart';
-import 'package:path_provider/path_provider.dart';
 
 import 'auth.dart';
 
@@ -77,26 +74,12 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
   }
 
   Future<Map> getUserData() async {
-    final directory = await getApplicationDocumentsDirectory();
-    final path = directory.path;
-    try {
-      final file = File('$path/user.json');
-      final data = await file.readAsString();
-      return json.decode(data);
-    } catch (e) {
-      return null;
-    }
+    return await UtilityFunctions.getStorage("user");
+    
   }
 
   void setUserData(String userData) async {
-    final directory = await getApplicationDocumentsDirectory();
-    final path = directory.path;
-    try {
-      final file = File('$path/user.json');
-      file.writeAsString(userData);
-    } catch (e) {
-      print(e);
-    }
+    await UtilityFunctions.setStorage("user", userData);
   }
 
   void toggleTimer() {

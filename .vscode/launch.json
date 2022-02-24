@@ -6,7 +6,7 @@
   "configurations": [
     {
       "name": "Attach to Chrome",
-      "port": 40701,
+      "port": 35163,
       "request": "attach",
       "type": "pwa-chrome",
       "webRoot": "${workspaceFolder}"
