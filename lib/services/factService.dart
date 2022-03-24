@@ -22,6 +22,23 @@ class Fact {
   String toString() {
     return "Fact { id: $id, text: $text, tags: $tags, value: $value, negatedFacts: $negatedFacts}\n";
   }
+
+  Fact.fromJson(Map<String, dynamic> json) :
+    id = json['id'],
+    text = json['text'],
+    tags = json['tags'].cast<String>(),
+    value = json['value'],
+    negatedFacts = json['negatedFacts'].cast<String>();
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id, 
+      'text': text, 
+      'tags': tags, 
+      'value': value, 
+      'negatedFacts': negatedFacts
+    };
+  }
 }
 
 class FactException implements Exception {

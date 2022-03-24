@@ -45,8 +45,17 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
     PersonaService().userId = id;
   }
 
+  void logout() async {
+    id = "";
+    username = "";
+    token = "";
+    hasWatchedIntro = false;
+    enableTimer = true;
+    setUserData();
+  }
+
   void getUserData() async {
-    var userData = await UtilityFunctions.getStorage("user");
+    var userData = await UtilityFunctions.getStorage("user") ?? {};
     id = userData["id"] ?? "";
     username = userData["username"] ?? "";
     enableTimer = userData["enableTimer"] ?? true;

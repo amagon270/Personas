@@ -28,6 +28,21 @@ class QuestionResponse {
   String toString() {
     return choice.toString();
   }
+
+  QuestionResponse.fromJson(Map<String, dynamic> json) : 
+    question = Question.fromJson(json['question']),
+    factFromQuestion = json['factFromQuestion'],
+    choice = json['choice'],
+    timestamp = DateTime.parse(json['timestamp']);
+
+  Map<String, dynamic> toJson() {
+    return {
+      "question": question.toJson(),
+      "choice": choice,
+      "timestamp": timestamp.toIso8601String(),
+      "factFromQuestion": factFromQuestion
+    };
+  }
 }
 
 class Session {
@@ -60,6 +75,16 @@ class Rule {
   TriggerType triggerType;
   List<RuleTest> tests;
   RuleAction action;
+
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "priority": priority,
+      "triggerType": triggerType.toString(),
+      "tests": tests.map((test) => test.toJson()).toList(),
+      "action": action.toJson()
+    };
+  }
 }
 
 class RuleAction {
@@ -67,6 +92,13 @@ class RuleAction {
 
   Fact fact;
   String questionId;
+
+  Map<String, dynamic> toJson() {
+    return {
+      "fact": fact.toJson(),
+      "questionId": questionId
+    };
+  }
 }
 
 class RuleTest {
@@ -79,6 +111,14 @@ class RuleTest {
   @override
   String toString() {
     return 'Test: {fact: $fact, operation: $operation, parameter: $parameter}';
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "fact": fact,
+      "operation": operation.toString(),
+      "parameter": parameter
+    };
   }
 }
 

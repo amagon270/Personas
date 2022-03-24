@@ -7,6 +7,7 @@ import 'package:personas/services/questionService.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:personas/services/factService.dart';
+import 'package:personas/widgets/auth.dart';
 import 'package:personas/widgets/utility.dart';
 
 class Persona {
@@ -19,6 +20,29 @@ class Persona {
   @override
   String toString() {
     return "$facts";
+  }
+
+  Persona();
+
+  Persona.fromJson(Map<String, dynamic> json) : 
+    id = json['id'],
+    name = json["data"]["name"],
+    color = json["data"]["color"],
+    facts = json["data"]["facts"].map<Fact>((json) => Fact.fromJson(json)).toList(),
+    answers = json["data"]["answers"].map<QuestionResponse>((json) => QuestionResponse.fromJson(json)).toList();
+
+  Map<String, dynamic> toJson() {
+    List<Map> _facts = this.facts != null ? this.facts.map((i) => i.toJson()).toList() : null;
+    List<Map> _answers = this.answers != null ? this.answers.map((i) => i.toJson()).toList() : null;
+    return {
+      "id": id,
+      "data": {
+        "name": name,
+        "color": color.value,
+        "facts": _facts,
+        "answers": _answers
+      }
+    };
   }
 }
 
@@ -172,6 +196,7 @@ class PersonaService {
     writePersonaFile(newUserAnswers);
     allPersonas.add(persona);
     setPersonaOrder(allPersonas, currentOrdering ?? "default");
+    await Auth.savePersona(persona);
   }
 
   void setPersonaOrder(List<Persona> personas, String orderName) async {
