@@ -23,7 +23,6 @@ class Auth {
           },
         );
         final decodedUser = json.decode(_user.body);
-        print(decodedUser);
         return UserData(id: decodedUser["id"].toString(), token: token.body, username: _username);
       }
       return null;
