@@ -34,7 +34,7 @@ class DevMenuPage extends StatelessWidget {
       ElevatedButton(
         child: Text("Delete User"),
         onPressed: () async {
-          context.read<User>().setUserData("{}");
+          context.read<User>().setUserData();
         },
       )
     );

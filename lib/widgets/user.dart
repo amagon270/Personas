@@ -1,85 +1,69 @@
 import 'dart:convert';
 
 import 'package:personas/services/personaService.dart';
+import 'package:personas/types/auth.dart';
 import 'package:personas/widgets/utility.dart';
 import 'package:flutter/foundation.dart';
-import 'package:conduit_password_hash/conduit_password_hash.dart';
 
 import 'auth.dart';
 
 class User with ChangeNotifier, DiagnosticableTreeMixin {
   String id;
-  String firstName;
-  String lastName;
-  String email;
-  DateTime dateCreated;
+  String username;
+  String token;
+  bool hasWatchedIntro;
   bool enableTimer;
 
-  bool hasWatchedIntro;
-
   User() {
-    checkExistingUser();
-  }
-
-  void checkExistingUser() async {
-    Map userData = await getUserData();
-    if (userData != null) {
-      assignUserData(userData);
-    } else {
-      Map data = {"id": "", "email": "", "firstName": "", "lastName": "", "password": "", "salt": "", "watchedIntro" : false};
-      assignUserData(data);
-      setUserData(json.encode(data));
-    }
-
-    notifyListeners();
+    getUserData();
   }
 
   void watchIntro() async {
     hasWatchedIntro = true;
-    Map data = await getUserData();
-    data["watchedIntro"] = true;
-    setUserData(json.encode(data));
-    notifyListeners();
+    setUserData();
   }
 
-  void login(String email, String password) {
-    Map newUser = Auth.tempLoginCheck(email, password);
-    id = newUser["id"];
-
-    notifyListeners();
+  void login(String username, String password) async {
+    UserData newUser = await Auth.login(username, password);
+    assignUserData(newUser);
   }
 
-  void signup(String email, String password, String firstName, String lastName) async {
-    var id = await UtilityFunctions.generateId();
-    var salt = Salt.generateAsBase64String(16);
-    var hash = PBKDF2().generateKey(password, salt, 1000, 32);
-    int time = DateTime.now().millisecondsSinceEpoch;
-    Map userData = {"id": id, "email": email, "firstName": firstName, "lastName": lastName, "password": hash, "salt": salt, "created": time, "watchedIntro" : hasWatchedIntro};
-    setUserData(json.encode(userData));
-    assignUserData(userData);
-    notifyListeners();
+  void signup(String userName, String password) async {
+    UserData _newUser = await Auth.signup(userName, password);
+    assignUserData(_newUser);
   }
 
-  void assignUserData(Map userData) {
-    id = userData["id"] ?? "";
-    firstName = userData["firstName"] ?? "";
-    lastName = userData["lastName"] ?? "";
-    email = userData["email"] ?? "";
-    dateCreated = userData["created"] != null ? DateTime.fromMillisecondsSinceEpoch(userData["created"]) : DateTime.now();
-    hasWatchedIntro = userData["watchedIntro"] ?? false;
-    enableTimer = true;
+  void assignUserData(UserData userData) {
+    id = userData.id ?? "";
+    username = userData.username ?? "";
+    token = userData.token ?? "";
+    hasWatchedIntro ??= false;
+    enableTimer ??= true;
+    setUserData();
 
     //TODO - Work out a better system for this
     PersonaService().userId = id;
   }
 
-  Future<Map> getUserData() async {
-    return await UtilityFunctions.getStorage("user");
-    
+  void getUserData() async {
+    var userData = await UtilityFunctions.getStorage("user");
+    id = userData["id"] ?? "";
+    username = userData["username"] ?? "";
+    enableTimer = userData["enableTimer"] ?? true;
+    token = userData["token"] ?? "";
+    hasWatchedIntro = userData["watchedIntro"] ?? false;
+    notifyListeners();
   }
 
-  void setUserData(String userData) async {
-    await UtilityFunctions.setStorage("user", userData);
+  void setUserData() async {
+    await UtilityFunctions.setStorage("user", json.encode({
+      "id": id,
+      "username": username,
+      "token": token,
+      "watchedIntro": hasWatchedIntro,
+      "enableTimer": enableTimer,
+    }));
+    notifyListeners();
   }
 
   void toggleTimer() {
