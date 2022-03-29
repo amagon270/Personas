@@ -150,12 +150,12 @@ class Question {
     id = json['id'],
     code = json['code'],
     text = json['text'],
-    type = json['type'].toEnum(QuestionType.values),
+    type = QuestionType.values.firstWhere((e) => e.toString() == json['type']),
     factSubject = json['factSubject'],
     options = (json['options'] as List).map((e) => QuestionOption.fromJson(e)).toList(),
     min = json['min'],
     max = json['max'],
-    labels = json['labels'],
+    labels = json['labels'].map<String>((json) => json.toString()).toList(),
     timer = json['timer'],
     enabled = json['enabled'];
 

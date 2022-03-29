@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:personas/services/personaService.dart';
+import 'package:personas/services/supaBaseService.dart';
 import 'package:personas/types/auth.dart';
 
 class Auth {
@@ -24,8 +25,13 @@ class Auth {
           },
         );
         final decodedUser = json.decode(_user.body);
-        print(decodedUser);
-        return UserData(id: decodedUser["id"].toString(), token: token.body, username: _username);
+        SupaBaseService().authToken = token.body;
+        return UserData(
+          id: decodedUser["id"].toString(), 
+          token: token.body, 
+          username: _username, 
+          seenIntro: decodedUser["seenIntro"]
+        );
       }
       return null;
     } catch (e) {
@@ -51,7 +57,13 @@ class Auth {
           },
         );
         final decodedUser = json.decode(_user.body);
-        return UserData(id: decodedUser["id"].toString(), token: token.body, username: _username);
+        SupaBaseService().authToken = token.body;
+        return UserData(
+          id: decodedUser["id"].toString(), 
+          token: token.body, 
+          username: _username,
+          seenIntro: decodedUser["seenIntro"]  
+        );
       }
       return null;
     } catch (e) {
@@ -60,13 +72,17 @@ class Auth {
     }
   }
 
-  static Future<void> savePersona(Persona persona) async {
-    print(json.encode(persona));
+  static Future<int> savePersona(Persona persona) async {
+    String token = SupaBaseService().authToken;
     try {
-      await http.post(
+      var _response = await http.post(
         Uri.parse("$apiEndpoint/auth/savePersona"),
+        headers: {
+          "Authorization": "Bearer " + token,
+        },
         body: json.encode(persona),
       );
+      return json.decode(_response.body)["id"];
     } catch (e) {
       print(e);
       throw e;
@@ -74,26 +90,40 @@ class Auth {
   }
 
   static Future<List<Persona>> getPersonas() async {
+    String token = SupaBaseService().authToken;
     try {
       final response = await http.get(
         Uri.parse("$apiEndpoint/auth/getPersonas"),
+        headers: {
+          "Authorization": "Bearer " + token,
+        },
       );
       if (response.statusCode == 200) {
         final decodedPersona = json.decode(response.body);
-        print(decodedPersona);
         List<Persona> personas = [];
         for (var persona in decodedPersona) {
-          Persona _newPersona = new Persona();
-          _newPersona.id = persona["id"];
-          _newPersona.name = persona["data"]["name"];
-          _newPersona.color = persona["data"]["color"];
-          _newPersona.facts = persona["data"]["facts"];
-          _newPersona.answers = persona["data"]["answers"];
+          Persona _newPersona = new Persona.fromJson(persona);
           personas.add(_newPersona);
         }
         return personas;
       }
       return null;
+    } catch (e) {
+      print(e);
+      throw e;
+    }
+  }
+
+    static Future<bool> watchIntro() async {
+    try {
+      String token = SupaBaseService().authToken;
+      final success = await http.post(
+        Uri.parse("$apiEndpoint/auth/watchIntro"),
+        headers: {
+          "Authorization": "Bearer " + token,
+        },
+      );
+      return success.statusCode == 200;
     } catch (e) {
       print(e);
       throw e;

@@ -22,7 +22,10 @@
       "args": [
         "-d",
         "chrome"
-      ]
+      ],
+      "env": {
+        "CHROME_EXECUTABLE": "/opt/google/chrome/chrome"
+      }
     }
   ]
 }

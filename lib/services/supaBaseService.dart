@@ -11,12 +11,16 @@ class SupaBaseService {
   factory SupaBaseService() => _instance;
 
   SupaBaseService._internal() {
-    //getQMatrix();
+    getQMatrix();
   }
 
   String _qMatrix;
   String get qMatrix => _qMatrix;
   bool _isSupabaseInitialized = false;
+
+  String _authToken;
+  String get authToken => _authToken;
+  set authToken(String value) {_authToken = value;}
 
   Future<bool> getQMatrix() async {
     if (_isSupabaseInitialized) {

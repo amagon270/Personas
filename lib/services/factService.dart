@@ -26,9 +26,9 @@ class Fact {
   Fact.fromJson(Map<String, dynamic> json) :
     id = json['id'],
     text = json['text'],
-    tags = json['tags'].cast<String>(),
+    tags = json['tags'].map<String>((json) => json.toString()).toList(),
     value = json['value'],
-    negatedFacts = json['negatedFacts'].cast<String>();
+    negatedFacts = json['negatedFacts']?.map<String>((json) => json.toString())?.toList() ?? [];
 
   Map<String, dynamic> toJson() {
     return {

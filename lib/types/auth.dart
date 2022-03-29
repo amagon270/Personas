@@ -4,5 +4,6 @@ class UserData {
   final String id;
   final String token;
   final String username;
-  UserData({this.id, this.token, this.username});
+  final bool seenIntro;
+  UserData({this.id, this.token, this.username, this.seenIntro});
 }

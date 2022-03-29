@@ -25,9 +25,9 @@ class Persona {
   Persona();
 
   Persona.fromJson(Map<String, dynamic> json) : 
-    id = json['id'],
+    id = json['id'].toString(),
     name = json["data"]["name"],
-    color = json["data"]["color"],
+    color = new Color(json["data"]["color"]),
     facts = json["data"]["facts"].map<Fact>((json) => Fact.fromJson(json)).toList(),
     answers = json["data"]["answers"].map<QuestionResponse>((json) => QuestionResponse.fromJson(json)).toList();
 
@@ -70,7 +70,6 @@ class PersonaService {
       (e) => (e.question.type == QuestionType.ColourPicker),
       orElse: () {return null;},
     );
-    print(colorResponse?.choice);
     int colorString = colorResponse?.choice ?? 0;
     session.answers.removeWhere((e) => (e.question.type == QuestionType.ColourPicker));
 
@@ -129,7 +128,7 @@ class PersonaService {
     userId ??= this.userId;
     Map decodedData = await readPersonaFile();
     List<Question> allQuestions = QuestionService().allQuestions;
-    List<Persona> allPersonas = [];
+    List<Persona> allPersonas = await Auth.getPersonas() ?? [];
 
     decodedData[userId]?.forEach((id, persona) {
       persona ??= {};
@@ -189,6 +188,9 @@ class PersonaService {
   }
 
   void savePersona(Persona persona, String userId) async {
+    int _id = await Auth.savePersona(persona);
+    persona.id = _id.toString();
+    
     Map decodedData = await readPersonaFile();
     decodedData = savablePersonaMap(persona, userId, decodedData);
     
@@ -196,7 +198,6 @@ class PersonaService {
     writePersonaFile(newUserAnswers);
     allPersonas.add(persona);
     setPersonaOrder(allPersonas, currentOrdering ?? "default");
-    await Auth.savePersona(persona);
   }
 
   void setPersonaOrder(List<Persona> personas, String orderName) async {
@@ -218,7 +219,7 @@ class PersonaService {
     personaOrderMap[userId] ??= {};
     personaOrderMap[userId][orderName] ??= {};
     var order = personaOrderMap[userId][orderName] as Map<dynamic, dynamic>;
-    personas.sort((a, b) => (order[a.id] ?? 0).compareTo((order[b.id]) ?? 0));
+    personas?.sort((a, b) => (order[a.id] ?? 0).compareTo((order[b.id]) ?? 0));
     return personas;
   }
 

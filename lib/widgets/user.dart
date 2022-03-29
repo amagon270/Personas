@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:personas/services/personaService.dart';
+import 'package:personas/services/supaBaseService.dart';
 import 'package:personas/types/auth.dart';
 import 'package:personas/widgets/utility.dart';
 import 'package:flutter/foundation.dart';
@@ -20,6 +21,7 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
 
   void watchIntro() async {
     hasWatchedIntro = true;
+    await Auth.watchIntro();
     setUserData();
   }
 
@@ -37,7 +39,7 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
     id = userData.id ?? "";
     username = userData.username ?? "";
     token = userData.token ?? "";
-    hasWatchedIntro ??= false;
+    hasWatchedIntro = userData.seenIntro ?? false;
     enableTimer ??= true;
     setUserData();
 
@@ -61,6 +63,11 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
     enableTimer = userData["enableTimer"] ?? true;
     token = userData["token"] ?? "";
     hasWatchedIntro = userData["watchedIntro"] ?? false;
+
+    //TODO - Work out a better system for this
+    PersonaService().userId = id;
+    SupaBaseService().authToken = token;
+
     notifyListeners();
   }
 
@@ -77,5 +84,9 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
 
   void toggleTimer() {
     enableTimer = !enableTimer;
+  }
+
+  void savePersona(Persona persona) async {
+    await PersonaService().savePersona(persona, token);
   }
 }
