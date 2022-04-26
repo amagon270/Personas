@@ -14,7 +14,7 @@ class UtilityFunctions {
 
   static Widget getImageFromString(String path) {
     Widget image = Container();
-    if (path != null && path != "") {
+    if (path != "") {
       image = Image(
         image: AssetImage(path),
         fit: BoxFit.contain,
@@ -37,7 +37,7 @@ class UtilityFunctions {
       }
     } else {
       try {
-        final data = json.decode(window.localStorage[variable]);
+        final data = json.decode(window.localStorage[variable]!);
         return data;
       } catch (e) {
         print(e);

@@ -14,20 +14,20 @@ class CreatePersona extends StatefulWidget {
 }
 
 class _CreatePersona extends State<CreatePersona> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<Offset> _offsetAnimation;
+  late AnimationController _controller;
+  late Animation<Offset> _offsetAnimation;
 
-  InterviewService interviewService;
-  Question currentQuestion;
-  QuestionResponse currentQuestionResponse;
+  late InterviewService interviewService;
+  late Question currentQuestion;
+  late QuestionResponse currentQuestionResponse;
   Color currentColor = Colors.white;
-  bool canTapNext;
-  Widget currentQuestionWidget;
-  Session currentSession;
-  Timer questionSkipTimer;
-  String userId;
+  late bool canTapNext;
+  late Widget currentQuestionWidget;
+  late Session currentSession;
+  late Timer questionSkipTimer;
+  late String userId;
 
-  bool nextText;
+  late bool nextText;
 
   @override
   void initState() {
@@ -54,7 +54,7 @@ class _CreatePersona extends State<CreatePersona> with SingleTickerProviderState
   void dispose() {
     super.dispose();
     _controller.dispose();
-    questionSkipTimer?.cancel();
+    questionSkipTimer.cancel();
   }
 
   _selectAnswer(dynamic answer) {
@@ -85,7 +85,7 @@ class _CreatePersona extends State<CreatePersona> with SingleTickerProviderState
 
   void startTimer(Question question) {
     if (context.read<User>().enableTimer) {
-      questionSkipTimer?.cancel();
+      questionSkipTimer.cancel();
       if (question.timer > 0) {
         Duration length = Duration(seconds: question.timer);
         questionSkipTimer = Timer(length, _nextQuestion);
@@ -111,9 +111,9 @@ class _CreatePersona extends State<CreatePersona> with SingleTickerProviderState
       currentQuestion = interviewService.nextQuestion();
       //canTapNext = false;
       currentQuestionResponse = new QuestionResponse(currentQuestion, null);
-      currentQuestionWidget = currentQuestion?.generateQuestionWidget(
+      currentQuestionWidget = currentQuestion.generateQuestionWidget(
         selectAnswer: _selectAnswer,
-        backgroundColour: currentColor) ?? Text("Loading");
+        backgroundColour: currentColor);
     });
     if (!PersonaService.specialQuestionIds.contains(currentQuestion.id)) {
       startTimer(currentQuestion);
@@ -132,12 +132,11 @@ class _CreatePersona extends State<CreatePersona> with SingleTickerProviderState
           canTapNext = true;
           currentQuestionResponse = interviewService.previousQuestion();
           currentQuestion = currentQuestionResponse.question;
-          currentQuestionWidget = currentQuestion?.generateQuestionWidget(
+          currentQuestionWidget = currentQuestion.generateQuestionWidget(
             selectAnswer: _selectAnswer,
             startValue: currentQuestionResponse.choice,
             backgroundColour: currentColor,
-            ) 
-            ?? Text("Loading");
+            );
           startTimer(currentQuestion);
         });
       });
@@ -156,14 +155,14 @@ class _CreatePersona extends State<CreatePersona> with SingleTickerProviderState
               if (snapshot.data == null) {
                 return Text("Loading");
               } else {
-                currentSession = snapshot.data;
+                currentSession = snapshot.data as Session;
                 //initilizing on the first question
                 if (currentQuestion == null) {
                   currentQuestion = interviewService.nextQuestion();
                   currentQuestionResponse = new QuestionResponse(currentQuestion, null);
-                  currentQuestionWidget = currentQuestion?.generateQuestionWidget(
+                  currentQuestionWidget = currentQuestion.generateQuestionWidget(
                     selectAnswer: _selectAnswer,
-                    backgroundColour: currentColor) ?? Text("Loading");
+                    backgroundColour: currentColor);
                   currentColor = interviewService.getCurrentColor();
                 }
                 return Container(
@@ -175,7 +174,7 @@ class _CreatePersona extends State<CreatePersona> with SingleTickerProviderState
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         //Back button doesn't appear on the first question
-                        currentQuestion.code != "intro" ? backButton() : null,
+                        currentQuestion.code != "intro" ? backButton() : Container(),
                         ElevatedButton(
                           child: Text(nextText ? "Submit" : "Move on",
                             style: Theme.of(context).textTheme.button),
@@ -184,7 +183,7 @@ class _CreatePersona extends State<CreatePersona> with SingleTickerProviderState
                             _submit();
                           } : null,
                         ),
-                      ].where((o) => o != null).toList() //null protection
+                      ] //null protection
                     ),
                   ])
                 );

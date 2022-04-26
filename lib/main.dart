@@ -3,9 +3,9 @@ import 'package:personas/pages/editQuestions.dart';
 import 'package:personas/pages/createPersona.dart';
 import 'package:personas/pages/introduction.dart';
 import 'package:personas/pages/login.dart';
-import 'package:personas/pages/menu.dart';
 import 'package:personas/pages/viewPersona.dart';
 import 'package:personas/pages/viewPersonas.dart';
+import 'package:personas/services/personaService.dart';
 import 'package:personas/services/supaBaseService.dart';
 import 'package:personas/widgets/user.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +76,7 @@ class Personas extends StatelessWidget {
         newPage = ViewPersonas();
         break;
       case "/viewPersona":
-        newPage = ViewPersona(persona: settings.arguments);
+        newPage = ViewPersona(persona: settings.arguments as Persona);
         break;
       case "/devMenu":
         newPage = DevMenuPage();
@@ -85,7 +85,7 @@ class Personas extends StatelessWidget {
         newPage = EditQuestions();
         break;
       case "/intro":
-        newPage = IntroducitonPage();
+        newPage = IntroductionPage();
         break;
       default:
         newPage = HomePage();
@@ -119,11 +119,11 @@ class HomePage extends StatelessWidget {
     if (userId == null) {
       return Center(child: CircularProgressIndicator());
     } else if (userId == "null" || userId == "") {
-      return LoginPage();
+      return LoginPage(title: '',);
     } else if (watchedIntro == false) {
-      return IntroducitonPage();
+      return IntroductionPage();
     }  else {
-      return MenuPage();
+      return ViewPersonas();
     }
   }
 }

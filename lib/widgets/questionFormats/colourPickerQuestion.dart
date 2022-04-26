@@ -4,7 +4,7 @@ import 'package:personas/services/questionService.dart';
 
 
 class ColourPickerQuestion extends StatefulWidget {
-  ColourPickerQuestion({Key key, this.data}) : super(key: key);
+  ColourPickerQuestion({Key? key, required this.data}) : super(key: key);
 
   final QuestionInputData data;
 

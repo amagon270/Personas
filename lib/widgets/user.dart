@@ -9,13 +9,15 @@ import 'package:flutter/foundation.dart';
 import 'auth.dart';
 
 class User with ChangeNotifier, DiagnosticableTreeMixin {
-  String id;
-  String username;
-  String token;
-  bool hasWatchedIntro;
-  bool enableTimer;
+  late String id;
+  late String username;
+  late String token;
+  late bool hasWatchedIntro;
+  late bool enableTimer;
 
   User() {
+    id = "";
+    hasWatchedIntro = false;
     getUserData();
   }
 
@@ -26,21 +28,21 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
   }
 
   void login(String username, String password) async {
-    UserData newUser = await Auth.login(username, password);
-    assignUserData(newUser);
+    UserData? newUser = await Auth.login(username, password);
+    assignUserData(newUser!);
   }
 
   void signup(String userName, String password) async {
-    UserData _newUser = await Auth.signup(userName, password);
-    assignUserData(_newUser);
+    UserData? _newUser = await Auth.signup(userName, password);
+    assignUserData(_newUser!);
   }
 
   void assignUserData(UserData userData) {
-    id = userData.id ?? "";
-    username = userData.username ?? "";
-    token = userData.token ?? "";
-    hasWatchedIntro = userData.seenIntro ?? false;
-    enableTimer ??= true;
+    id = userData.id;
+    username = userData.username;
+    token = userData.token;
+    hasWatchedIntro = userData.seenIntro;
+    enableTimer;
     setUserData();
 
     //TODO - Work out a better system for this
@@ -86,7 +88,7 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
     enableTimer = !enableTimer;
   }
 
-  void savePersona(Persona persona) async {
-    await PersonaService().savePersona(persona, token);
+  void savePersona(Persona persona) {
+    PersonaService().savePersona(persona, token);
   }
 }

@@ -1,21 +1,18 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'package:personas/services/interviewService.dart';
 import 'package:personas/services/questionService.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:personas/services/factService.dart';
 import 'package:personas/widgets/auth.dart';
 import 'package:personas/widgets/utility.dart';
 
 class Persona {
-  String id;
-  String name;
-  Color color;
-  List<Fact> facts;
-  List<QuestionResponse> answers;
+  late String id;
+  late String name;
+  late Color color;
+  late List<Fact> facts;
+  late List<QuestionResponse> answers;
 
   @override
   String toString() {
@@ -32,8 +29,8 @@ class Persona {
     answers = json["data"]["answers"].map<QuestionResponse>((json) => QuestionResponse.fromJson(json)).toList();
 
   Map<String, dynamic> toJson() {
-    List<Map> _facts = this.facts != null ? this.facts.map((i) => i.toJson()).toList() : null;
-    List<Map> _answers = this.answers != null ? this.answers.map((i) => i.toJson()).toList() : null;
+    List<Map<String, dynamic>>? _facts = this.facts != null ? this.facts.map((i) => i.toJson()).toList() : null;
+    List<Map<String, dynamic>>? _answers = this.answers != null ? this.answers.map((i) => i.toJson()).toList() : null;
     return {
       "id": id,
       "data": {
@@ -50,9 +47,9 @@ class PersonaService {
   static final PersonaService _instance = PersonaService._internal();
   factory PersonaService() => _instance;
 
-  List<Persona> allPersonas;
-  String userId;
-  String currentOrdering;
+  late List<Persona> allPersonas;
+  late String userId;
+  late String currentOrdering;
 
   static final List<String> specialQuestionIds = ["", "intro", "blank"];
 
@@ -68,21 +65,19 @@ class PersonaService {
     //specifically find the color response and remove it from normal questions
     QuestionResponse colorResponse = session.answers.firstWhere(
       (e) => (e.question.type == QuestionType.ColourPicker),
-      orElse: () {return null;},
     );
-    int colorString = colorResponse?.choice ?? 0;
+    int colorString = colorResponse.choice ?? 0;
     session.answers.removeWhere((e) => (e.question.type == QuestionType.ColourPicker));
 
     //specifically find the name of the persona and remove it from normal questions
     QuestionResponse nameResponse = session.answers.firstWhere(
       (e) => (e.question.code == "personaName"),
-      orElse: () {return null;},
     );
     session.answers.removeWhere((e) => (e.question.code == "personaName"));
     session.facts.removeWhere((e) => e.text == "blank");
 
-    persona.color = Color(colorString) ?? Colors.white;
-    persona.name = nameResponse?.choice ?? "";
+    persona.color = Color(colorString);
+    persona.name = nameResponse.choice ?? "";
     persona.answers = [...session.answers];
     persona.facts = [...session.facts];
     savePersona(persona, userId);
@@ -95,18 +90,12 @@ class PersonaService {
   Persona get(String personaId) {
     return allPersonas.firstWhere(
       (e) => (e.id == personaId),
-      orElse: () {
-        return null;
-      },
     );
   }
 
   Future<bool> delete(String personaId) async {
     Persona _persona = allPersonas.firstWhere(
       (e) => (e.id == personaId),
-      orElse: () {
-        return null;
-      },
     );
     allPersonas.remove(_persona);
 
@@ -124,7 +113,7 @@ class PersonaService {
     writePersonaFile(encodedJson);
   }
 
-  Future<List<Persona>> getPersonas({String userId}) async {
+  Future<List<Persona>> getPersonas({String? userId}) async {
     userId ??= this.userId;
     Map decodedData = await readPersonaFile();
     List<Question> allQuestions = QuestionService().allQuestions;
@@ -148,18 +137,16 @@ class PersonaService {
       persona["answers"]?.forEach((question, answer) async {
         Question questionObject = allQuestions.firstWhere(
           (e) => (e.id == question),
-          orElse: () {return null;},
         );
-        if (questionObject != null)
-          _personaAnswers.add(new QuestionResponse(questionObject, answer));
+        _personaAnswers.add(new QuestionResponse(questionObject, answer));
       });
       _persona.answers = _personaAnswers;
 
       allPersonas.add(_persona);
     });
-    List<Persona> orderedPersonas = await getPersonaOrder(allPersonas, currentOrdering ?? "default");
+    List<Persona> orderedPersonas = await getPersonaOrder(allPersonas, currentOrdering);
     if (allPersonas.length > 0) {
-      setPersonaOrder(orderedPersonas, currentOrdering ?? "default");
+      setPersonaOrder(orderedPersonas, currentOrdering);
     }
 
     this.allPersonas = orderedPersonas;
@@ -176,10 +163,10 @@ class PersonaService {
     existingMap[userId][persona.id]["name"] = persona.name;
     existingMap[userId][persona.id]["color"] = persona.color.value;
 
-    persona.facts?.forEach((fact) {
-      existingMap[userId][persona.id]["facts"][fact?.id] = fact?.value;
+    persona.facts.forEach((fact) {
+      existingMap[userId][persona.id]["facts"][fact.id] = fact.value;
     });
-    persona.answers?.forEach((answer) {
+    persona.answers.forEach((answer) {
       existingMap[userId][persona.id]["answers"][answer.question.id] =
           answer.choice;
     });
@@ -197,7 +184,7 @@ class PersonaService {
     String newUserAnswers = json.encode(decodedData);
     writePersonaFile(newUserAnswers);
     allPersonas.add(persona);
-    setPersonaOrder(allPersonas, currentOrdering ?? "default");
+    setPersonaOrder(allPersonas, currentOrdering);
   }
 
   void setPersonaOrder(List<Persona> personas, String orderName) async {
@@ -219,7 +206,7 @@ class PersonaService {
     personaOrderMap[userId] ??= {};
     personaOrderMap[userId][orderName] ??= {};
     var order = personaOrderMap[userId][orderName] as Map<dynamic, dynamic>;
-    personas?.sort((a, b) => (order[a.id] ?? 0).compareTo((order[b.id]) ?? 0));
+    personas.sort((a, b) => (order[a.id] ?? 0).compareTo((order[b.id]) ?? 0));
     return personas;
   }
 

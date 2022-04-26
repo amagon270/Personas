@@ -31,7 +31,6 @@ extension EnumParser on String {
   T toEnum<T>(List<T> values) {
     return values.firstWhere(
       (e) => e.toString().toLowerCase().split(".").last == '$this'.toLowerCase(),
-      orElse: () => null,
     );
   }
 }
@@ -43,9 +42,9 @@ class QuestionOption {
   String code;
   dynamic value;
   String text;
-  String image;
-  int order;
-  String fact;
+  String? image;
+  int? order;
+  String? fact;
 
   Map getAsMap() {
     Map newMap = Map();
@@ -104,13 +103,13 @@ class Question {
   QuestionType type;
   String factSubject;
   List<QuestionOption> options;
-  int min;
-  int max;
-  List<String> labels;
+  int? min;
+  int? max;
+  List<String>? labels;
   int timer;
   bool enabled = true;
 
-  Widget generateQuestionWidget({ValueChanged selectAnswer, dynamic startValue, bool editable = true, Color backgroundColour}) {
+  Widget generateQuestionWidget({ValueChanged? selectAnswer, dynamic startValue, bool editable = true, required Color backgroundColour}) {
 
     selectAnswer ??= (value) {};
     QuestionInputData inputData = QuestionInputData(
@@ -160,7 +159,7 @@ class Question {
     enabled = json['enabled'];
 
   Map<String, dynamic> toJson() {
-    List<Map> _options = this.options != null ? this.options.map((i) => i.toJson()).toList() : null;
+    List<Map<String, dynamic>>? _options = this.options != null ? this.options.map((i) => i.toJson()).toList() : null;
     return {
       "id": id,
       "code": code,
@@ -185,7 +184,7 @@ class QuestionService {
     //assignQuestions();
   }
 
-  List<Question> _allQuestions;
+  late List<Question> _allQuestions;
 
   void assignQuestions() async {
     _allQuestions = await loadQuestions();
@@ -193,14 +192,12 @@ class QuestionService {
 
   List<Question> get allQuestions => _allQuestions;
 
-  Question getQuestionById(String id) {
-    return _allQuestions?.firstWhere((e) => (e.id == id), orElse: () {
-      return null;
-    });
+  Question? getQuestionById(String id) {
+    return _allQuestions.firstWhere((e) => (e.id == id));
   }
 
   void switchQuestionEnabled(String id) {
-    Question question = getQuestionById(id);
+    Question? question = getQuestionById(id);
     if (question != null) {
       question.enabled = !question.enabled;
     }
@@ -221,9 +218,9 @@ class QuestionService {
       var max = question["max"];
       var timer = question["timer"] ?? 10;
       var labels = (question["labels"] as List<dynamic>)
-        ?.map((e) => e as String)?.toList();
+        .map((e) => e as String).toList();
       List<QuestionOption> newOptions = [];
-      (question['options'] as List)?.forEach((option) {
+      (question['options'] as List).forEach((option) {
         if (option["code"] != "") {
           newOptions.add(QuestionOption(
             option["code"].toString(), option["value"], option["text"],
@@ -234,8 +231,8 @@ class QuestionService {
       });
 
       Question newQuestion = Question(
-        id, code, text, type, subject, newOptions ?? [],
-        min: min ?? 0, max: max ?? 0, labels: labels ?? [], timer: timer
+        id, code, text, type, subject, newOptions,
+        min: min ?? 0, max: max ?? 0, labels: labels, timer: timer
       );
 
       newQuestions.add(newQuestion);

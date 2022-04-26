@@ -1,14 +1,11 @@
 import 'dart:convert';
-import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:personas/services/factService.dart';
 import 'package:personas/services/personaService.dart';
 import 'package:personas/services/questionService.dart';
 import 'package:personas/services/supaBaseService.dart';
 import 'package:personas/widgets/utility.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 
 enum TriggerType { Any, All, Always }
 
@@ -18,7 +15,7 @@ class QuestionResponse {
   Question question;
   bool factFromQuestion = true;
   dynamic choice;
-  DateTime timestamp;
+  late DateTime timestamp;
 
   QuestionResponse(this.question, this.choice) {
     timestamp = DateTime.now();
@@ -46,16 +43,16 @@ class QuestionResponse {
 }
 
 class Session {
-  String id;
-  DateTime dateStarted;
-  DateTime dateCompleted;
-  List<Question> questions;
-  List<QuestionResponse> answers;
-  List<Rule> processedRules;
-  List<Fact> facts;
+  late String id;
+  late DateTime dateStarted;
+  late DateTime dateCompleted;
+  late List<Question> questions;
+  late List<QuestionResponse> answers;
+  late List<Rule> processedRules;
+  late List<Fact> facts;
 
   //I need this to store memory of facts for the back button
-  List<Fact> individualFacts;
+  late List<Fact> individualFacts;
 
   Session(this.id) {
     dateStarted = DateTime.now();
@@ -90,12 +87,12 @@ class Rule {
 class RuleAction {
   RuleAction({this.fact, this.questionId});
 
-  Fact fact;
-  String questionId;
+  Fact? fact;
+  String? questionId;
 
   Map<String, dynamic> toJson() {
     return {
-      "fact": fact.toJson(),
+      "fact": fact?.toJson(),
       "questionId": questionId
     };
   }
@@ -123,9 +120,9 @@ class RuleTest {
 }
 
 class InterviewService {
-  List<Question> allQuestions;
-  List<Rule> allRules;
-  Session currentSession;
+  late List<Question> allQuestions;
+  late List<Rule> allRules;
+  late Session currentSession;
 
   static final Question endQuestion = Question("end", "personaName", "Give a name to this persona", QuestionType.TextInput, "0", [], timer: -1);
   static final Question blankQuestion = Question("blank", "", "Something went wrong with the question", QuestionType.TextOnly, "", []);
@@ -140,9 +137,9 @@ class InterviewService {
   }
 
   bool _checkRule(Rule rule) {
-    bool action;
-    bool actionChange;
-    bool actionComparison;
+    late bool action;
+    late bool actionChange;
+    late bool actionComparison;
     //for TriggerType.all start with true and if any test fails set it to false
     if (rule.triggerType == TriggerType.All) {
       action = true;
@@ -158,7 +155,7 @@ class InterviewService {
       actionChange = true;
       actionComparison = true;
     }
-    rule.tests?.forEach((test) {
+    rule.tests.forEach((test) {
       //setting up blank facts if they don't exist.  In this case just assume a minimal value
       //unless we are checking that it exists then skip this part
       if (currentSession.facts.where((fact) => fact.id == test.fact).length == 0 &&
@@ -185,8 +182,7 @@ class InterviewService {
       //oposite done with Any Type; Action starts false and can only be changed to true
       dynamic factValue = currentSession.facts.firstWhere(
         (fact) => fact.id == test.fact,
-        orElse: () => null,
-      )?.value;
+      ).value;
       switch (test.operation) {
         case Operator.GreaterThan:
           if (factValue is double) {
@@ -249,8 +245,8 @@ class InterviewService {
     currentSession.processedRules.add(rule);
 
     if (rule.action.fact != null) {
-      addFactToList(rule.action.fact, currentSession.facts);
-      currentSession.individualFacts.add(rule.action.fact);
+      addFactToList(rule.action.fact!, currentSession.facts);
+      currentSession.individualFacts.add(rule.action.fact!);
     }
 
 
@@ -262,7 +258,7 @@ class InterviewService {
         }
       });
       if (!questionAlreadyAsked) {
-        Question question = QuestionService().getQuestionById(rule.action.questionId);
+        Question? question = QuestionService().getQuestionById(rule.action.questionId!);
         if (question != null) {
           currentSession.questions.add(question);
           if (question.enabled) {
@@ -296,7 +292,6 @@ class InterviewService {
       currentSession.questions.removeLast();
       QuestionResponse answer = currentSession.answers.firstWhere(
         (answer) => answer.question.id == rule.action.questionId,
-        orElse: () => null,
       );
       if (answer != null) {
         if (answer.question.type == QuestionType.Theme) {
@@ -329,17 +324,16 @@ class InterviewService {
         currentSession.individualFacts.add(_fact);
       });
     } catch (e) {
-      if (response.question.code != null && response.question.code != "") {
+      if (response.question.code != "") {
         if (!PersonaService.specialQuestionIds.contains(response.question.code)) {
-          String factId;
+          late String factId;
           if (response.question.options.length > 0) {
-            factId = response.question?.options
-            ?.firstWhere(
-              (option) => option?.value == response?.choice, 
-              orElse: () {return null;})?.fact 
+            factId = response.question.options
+            .firstWhere(
+              (option) => option.value == response.choice).fact 
               ?? response.question.factSubject;
           }
-          if (factId == "null" || factId == null) {
+          if (factId == "null") {
             factId = response.question.factSubject;
           }
           currentSession.answers.add(response);
@@ -354,9 +348,6 @@ class InterviewService {
   void addFactToList(Fact newFact, List<Fact> list) {
     Fact existingFact = list.firstWhere(
       (fact) => fact == newFact,
-      orElse: () {
-        return null;
-      },
     );
     if (existingFact != null) {
       print("existing fact add: ${existingFact.text}: ${existingFact.value}");
@@ -375,19 +366,14 @@ class InterviewService {
   void removeFactFromList(Fact newFact, List<Fact> list) {
     Fact existingFact = list.firstWhere(
       (fact) => fact == newFact,
-      orElse: () {
-        return null;
-      },
     );
-    if (existingFact != null) {
-      print("existing fact subtract: ${existingFact.text}: ${existingFact.value}");
-      if (newFact.value is int) {
-        existingFact.value -= newFact.value;
-      } else if (newFact.value is String) {
-        existingFact.value = "";
-      } else {
-        list.removeWhere((fact) => fact.id == newFact.id);
-      }
+    print("existing fact subtract: ${existingFact.text}: ${existingFact.value}");
+    if (newFact.value is int) {
+      existingFact.value -= newFact.value;
+    } else if (newFact.value is String) {
+      existingFact.value = "";
+    } else {
+      list.removeWhere((fact) => fact.id == newFact.id);
     }
   }
 
@@ -398,25 +384,21 @@ class InterviewService {
   ///searches through every question asked in the given session for one with a matching id
   Question getSessionQuestionById(Session session, String id) {
     return session.questions.firstWhere(
-      (e) => (e.id == id), 
-      orElse: () => null
-    );
+      (e) => (e.id == id));
   }
 
   QuestionResponse getQuestionResponse(String questionId) {
     return currentSession.answers.firstWhere(
       (e) => (e.question.id == questionId), 
-      orElse: () => null
     );
   }
 
   Color getCurrentColor() {
     QuestionResponse question = currentSession.answers.firstWhere(
       (e) => e.question.id == "personaColor",
-      orElse: () => null
     );
     //4294967295 is white
-    int colorString = question?.choice ?? 4294967295;
+    int colorString = question.choice ?? 4294967295;
     return Color(colorString);
   }
 
@@ -427,12 +409,12 @@ class InterviewService {
     List<Rule> newRules = [];
 
     decodedData.forEach((rule) {
-      String id = rule["id"].toString() ?? "";
+      String id = rule["id"].toString();
       int priority = rule["priority"] ?? 1;
       var triggerType = rule["triggerType"].toString().toEnum(TriggerType.values);
 
       List<RuleTest> newTests = [];
-      (rule['tests'] as List)?.forEach((test) {
+      (rule['tests'] as List).forEach((test) {
         RuleTest _newTest = RuleTest(
           test["factId"].toString(),
           test["operation"].toString().toEnum(Operator.values),
@@ -472,21 +454,21 @@ class InterviewService {
     sessionData["answers"] ??= {};
     sessionData["facts"] ??= {};
 
-    session.questions?.forEach((question) {
+    session.questions.forEach((question) {
       questions.add(question.id);
     });
     sessionData["questions"] = questions;
 
-    session.answers?.forEach((answer) {
+    session.answers.forEach((answer) {
       sessionData["answers"][answer.question.id] = answer.choice;
     });
 
-    session.processedRules?.forEach((rule) {
+    session.processedRules.forEach((rule) {
       processedRules.add(rule.id);
     });
     sessionData["rules"] = processedRules;
 
-    session.facts?.forEach((fact) {
+    session.facts.forEach((fact) {
       sessionData["facts"][fact.id] = fact.value;
     });
 
@@ -505,26 +487,24 @@ class InterviewService {
       List<Rule> processedRules = [];
       List<Fact> facts = [];
 
-      (userData["questions"] as List<dynamic>)?.forEach((questionId) {
+      (userData["questions"] as List<dynamic>).forEach((questionId) {
         questions.add(allQuestions.firstWhere(
           (e) => e.id == questionId.toString(),
-          orElse: () => null,
         ));
       });
       (userData["answers"] as Map<dynamic, dynamic>)
-          ?.forEach((questionId, response) {
+          .forEach((questionId, response) {
         Question question = allQuestions.firstWhere(
             (e) => e.id == questionId.toString(),
-            orElse: () => null);
+            );
         answers.add(QuestionResponse(question, response));
       });
-      (userData["rules"] as List<dynamic>)?.forEach((ruleId) {
+      (userData["rules"] as List<dynamic>).forEach((ruleId) {
         processedRules.add(allRules.firstWhere(
           (e) => e.id == ruleId.toString(),
-          orElse: () => null,
         ));
       });
-      (userData["facts"] as Map<dynamic, dynamic>)?.forEach((factId, value) {
+      (userData["facts"] as Map<dynamic, dynamic>).forEach((factId, value) {
         Fact fact = FactService().getFactById(factId.toString(), value: value);
         facts.add(fact);
       });

@@ -12,7 +12,7 @@ class TimerMenuTile extends StatefulWidget {
 
 class _TimerMenuTileState extends State<TimerMenuTile> {
 
-  bool timerStatus;
+  late bool timerStatus;
 
   @override
   void initState() {

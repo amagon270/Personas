@@ -5,5 +5,5 @@ class UserData {
   final String token;
   final String username;
   final bool seenIntro;
-  UserData({this.id, this.token, this.username, this.seenIntro});
+  UserData({required this.id, required this.token, required this.username, required this.seenIntro});
 }

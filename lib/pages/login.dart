@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({this.title});
+  LoginPage({required this.title});
 
   final String title;
   _LoginPage createState() => _LoginPage();
@@ -11,15 +11,15 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPage extends State<LoginPage> {
   final _formKey = new GlobalKey<FormState>();
-  bool _isLoading;
-  String _errorMessage;
-  String _password;
-  String _username;
-  bool _showPassword;
+  late bool _isLoading;
+  late String _errorMessage;
+  late String _password;
+  late String _username;
+  late bool _showPassword;
 
-  bool _isLogin;
+  late bool _isLogin;
 
-  BuildContext context;
+  late BuildContext context;
   
   @override
   void initState() {
@@ -55,8 +55,8 @@ class _LoginPage extends State<LoginPage> {
           hintText: 'First Name',
           icon: Icon(Icons.account_circle),
         ),  
-        validator: (value) => value.isEmpty ? 'Field can\'t be empty' : null,
-        onSaved: (value) => _username = value.trim(),
+        validator: (value) => value != null && value.isEmpty ? 'Field can\'t be empty' : null,
+        onSaved: (value) => _username = value?.trim() ?? "",
         key: Key("loginFirstName")
       ),
     );
@@ -81,15 +81,15 @@ class _LoginPage extends State<LoginPage> {
             },
           ) 
         ),  
-        validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
-        onSaved: (value) => _password = value.trim(),
+        validator: (value) => value != null && value.isEmpty ? 'Password can\'t be empty' : null,
+        onSaved: (value) => _password = value?.trim() ?? "",
         key: Key("loginPassword")
       ),
     );
   }
 
   Widget showErrorMessage() {
-    if (_errorMessage != null && _errorMessage.length > 0) {
+    if (_errorMessage.length > 0) {
       return Container(
         padding: EdgeInsets.only(top: 20),
         child: Text(
@@ -197,13 +197,13 @@ class _LoginPage extends State<LoginPage> {
   }
 
   void validateAndSubmit() async {
-    FormState form = _formKey.currentState;
+    FormState? form = _formKey.currentState;
     setState(() {
       _errorMessage = "";
       _isLoading = true;
     });
     
-    if (form.validate()) {
+    if (form != null && form.validate()) {
       form.save();
       try {
         _isLogin 
@@ -214,7 +214,7 @@ class _LoginPage extends State<LoginPage> {
         setState(() {
           _isLoading = false;
           _errorMessage = e.toString();
-          _formKey.currentState.reset();
+          _formKey.currentState?.reset();
         });
       }
     }

@@ -8,7 +8,7 @@ class Fact {
   String text;
   List<String> tags;
   dynamic value;
-  List<String> negatedFacts;
+  List<String>? negatedFacts;
 
   @override
   bool operator ==(Object other) =>
@@ -54,21 +54,18 @@ class FactService {
     //assignFacts();
   }
 
-  List<Fact> _allFacts;
+  late List<Fact> _allFacts;
 
-  List<Fact> get allFacts => _allFacts;
+  List<Fact>? get allFacts => _allFacts;
 
   Fact getFactById(String id, {dynamic value}) {
-    if (_allFacts != null) {
-      Fact newFact = _allFacts.firstWhere((e) => e.id == id, orElse: () {
-        if (id != "" && id != null) {
-          throw ("There has been an error with the $id fact");
-        }
-        return null;
-      });
-      return new Fact(newFact.id, newFact.text, newFact.tags, value: value);
-    }
-    return null;
+    Fact newFact = _allFacts.firstWhere((e) => e.id == id, orElse: () {
+      if (id != "") {
+        throw ("There has been an error with the $id fact");
+      }
+      throw("There is no fact with the id: $id");
+    });
+    return new Fact(newFact.id, newFact.text, newFact.tags, value: value);
   }
 
   void assignFacts() async {
@@ -77,14 +74,14 @@ class FactService {
 
   static Future<List<Fact>> loadFacts() async {
     //final data = await rootBundle.loadString("assets/export.json");
-    final data = SupaBaseService().qMatrix ?? [];
-    List<dynamic> decodedData = json.decode(data)["facts"] ?? [];
+    final data = SupaBaseService().qMatrix;
+    List<dynamic> decodedData = json.decode(data.toString())["facts"] ?? [];
     List<Fact> newFacts = [];
     decodedData.forEach((fact) {
-      var id = fact["id"].toString() ?? "";
+      var id = fact["id"].toString();
       var text = fact["text"];
-      var tags = (fact["tags"] as List<dynamic>).map((e) => e as String).toList();
-      List<String> negatedFacts = (fact["negatedFacts"] as List)?.map((e) => e.toString())?.toList();
+      var tags = ((fact["tags"] ?? []) as List<dynamic>).map((e) => e as String).toList();
+      List<String> negatedFacts = ((fact["negatedFacts"] ?? []) as List<dynamic>).map((e) => e.toString()).toList();
       Fact newFact = Fact(id, text, tags, negatedFacts: negatedFacts);
       newFacts.add(newFact);
     });

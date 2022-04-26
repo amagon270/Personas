@@ -3,7 +3,7 @@ import 'package:personas/services/personaService.dart';
 import 'package:flutter/material.dart';
 
 class ViewPersona extends StatefulWidget {
-  ViewPersona({Key key, this.persona}): super(key: key);
+  ViewPersona({Key? key, required this.persona}): super(key: key);
 
   final Persona persona;
 
@@ -34,7 +34,6 @@ class _ViewPersona extends State<ViewPersona> {
       data: ThemeData(
         brightness: widget.persona.color.computeLuminance() > 0.35 ? Brightness.light : Brightness.dark,
         primaryColor: Colors.blue,
-        buttonColor: Colors.grey[400],
         textTheme: TextTheme(button: TextStyle(color: Colors.black))
       ),
       child: Scaffold(

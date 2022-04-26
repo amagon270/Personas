@@ -2,11 +2,10 @@ import 'dart:convert';
 
 import 'package:personas/services/questionService.dart';
 import 'package:personas/widgets/utility.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MultipleChoiceQuestion extends StatefulWidget {
-  MultipleChoiceQuestion({Key key, this.data}) : super(key: key);
+  MultipleChoiceQuestion({Key? key, required this.data}) : super(key: key);
 
   final QuestionInputData data;
 
@@ -16,12 +15,12 @@ class MultipleChoiceQuestion extends StatefulWidget {
 
 class _MultipleChoiceQuestion extends State<MultipleChoiceQuestion> {
   
-  QuestionOption currentlySelected;
+  late QuestionOption currentlySelected;
 
   @override
   void initState() {
     super.initState();
-    currentlySelected = widget.data.question.options.firstWhere((e) => e.value == widget.data.startValue, orElse: () {return null;},);
+    currentlySelected = widget.data.question.options.firstWhere((e) => e.value == widget.data.startValue,);
   }
 
   @override
@@ -29,12 +28,12 @@ class _MultipleChoiceQuestion extends State<MultipleChoiceQuestion> {
     List<Widget> options = [];
     List<QuestionOption> questionOptions = widget.data.question.options;
 
-    questionOptions.sort((a, b) => a.order.compareTo(b.order));
+    questionOptions.sort((a, b) => a.order!.compareTo(b.order!));
     
     questionOptions.forEach((option) {
       Widget image = Container(
         width: 40,
-        child: UtilityFunctions.getImageFromString(option.image)
+        child: UtilityFunctions.getImageFromString(option.image!)
       );
       options.add(
         Row(children: [
@@ -43,7 +42,7 @@ class _MultipleChoiceQuestion extends State<MultipleChoiceQuestion> {
             groupValue: currentlySelected,
             onChanged: widget.data.editable ? (value) {
               setState(() {
-                currentlySelected = value;
+                currentlySelected = value as QuestionOption;
                 if (option.fact == "null") {
                   widget.data.selectAnswer(value.value);
                 } else {

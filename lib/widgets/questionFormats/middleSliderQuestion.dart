@@ -2,7 +2,7 @@ import 'package:personas/services/questionService.dart';
 import 'package:flutter/material.dart';
 
 class MiddleSliderQuestion extends StatefulWidget {
-  MiddleSliderQuestion({Key key, this.data}) : super(key: key);
+  MiddleSliderQuestion({Key? key, required this.data}) : super(key: key);
 
   final QuestionInputData data;
 
@@ -12,7 +12,7 @@ class MiddleSliderQuestion extends StatefulWidget {
 
 class _MiddleSliderQuestion extends State<MiddleSliderQuestion> {
   
-  double _currentSliderValue;
+  late double _currentSliderValue;
 
   @override
   void initState() {
@@ -25,10 +25,10 @@ class _MiddleSliderQuestion extends State<MiddleSliderQuestion> {
 
   @override
   Widget build(BuildContext context) {
-    int labelLength = widget.data.question.labels.length - 1;
+    int labelLength = widget.data.question.labels!.length - 1;
 
     List<Widget> labels = [];
-    widget.data.question.labels.forEach((label) {
+    widget.data.question.labels?.forEach((label) {
       labels.add(Text(label));
     });
     return Container(
@@ -43,12 +43,12 @@ class _MiddleSliderQuestion extends State<MiddleSliderQuestion> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  widget.data.question.labels.first, 
+                  widget.data.question.labels!.first, 
                   textAlign: TextAlign.start, 
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  widget.data.question.labels.last, 
+                  widget.data.question.labels!.last, 
                   textAlign: TextAlign.end,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 )
@@ -73,7 +73,7 @@ class _MiddleSliderQuestion extends State<MiddleSliderQuestion> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(widget.data.question.labels[_currentSliderValue.truncate()], textAlign: TextAlign.center,),
+                Text(widget.data.question.labels![_currentSliderValue.truncate()], textAlign: TextAlign.center,),
               ]
             )
           )

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class EditQuestionEnabledTile extends StatefulWidget {
 
-  EditQuestionEnabledTile({this.question});
+  EditQuestionEnabledTile({required this.question});
 
   final Question question;
 
@@ -13,7 +13,7 @@ class EditQuestionEnabledTile extends StatefulWidget {
 
 class _EditQuestionEnabledTileState extends State<EditQuestionEnabledTile> {
 
-  bool questionStatus;
+  late bool questionStatus;
 
   @override
   void initState() {

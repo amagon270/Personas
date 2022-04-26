@@ -6,7 +6,7 @@ import 'package:personas/widgets/utility.dart';
 import 'package:flutter/material.dart';
 
 class ThemeQuestion extends StatefulWidget {
-  ThemeQuestion({Key key, this.data}) : super(key: key);
+  ThemeQuestion({Key? key, required this.data}) : super(key: key);
 
   final QuestionInputData data;
 
@@ -16,7 +16,7 @@ class ThemeQuestion extends StatefulWidget {
 
 class _ThemeQuestion extends State<ThemeQuestion> {
   
-  Map<String, bool> currentlySelected;
+  Map<String, bool>? currentlySelected;
 
   @override
   void initState() {
@@ -33,7 +33,7 @@ class _ThemeQuestion extends State<ThemeQuestion> {
     List<Widget> options = [];
     List<QuestionOption> questionOptions = widget.data.question.options;
 
-    questionOptions.sort((a, b) => a.order.compareTo(b.order));
+    questionOptions.sort((a, b) => a.order!.compareTo(b.order!));
     if (questionOptions.length >= 6) {
       questionOptions = questionOptions.sublist(0, 6);
     }
@@ -41,10 +41,10 @@ class _ThemeQuestion extends State<ThemeQuestion> {
     questionOptions.forEach((option) {
       Widget image = Container(
         width: 40,
-        child: UtilityFunctions.getImageFromString(option.image)
+        child: UtilityFunctions.getImageFromString(option.image!)
       );
 
-      currentlySelected[option.fact] ??= false;
+      currentlySelected![option.fact!] ??= false;
 
       options.add(
         Stack(
@@ -54,13 +54,13 @@ class _ThemeQuestion extends State<ThemeQuestion> {
             Positioned(
               child: Container(
                 child: Checkbox(
-                  value: currentlySelected[option.fact],
+                  value: currentlySelected![option.fact],
                   onChanged: widget.data.editable ? (value) {
                     setState(() {
-                      currentlySelected[option.fact] = !currentlySelected[option.fact];
+                      currentlySelected![option.fact!] = !currentlySelected![option.fact!]!;
                     });
                     List<String> returnData = [];
-                    currentlySelected.forEach((key, value) { 
+                    currentlySelected?.forEach((key, value) { 
                       if (value == true) {
                         returnData.add(key);
                       }
@@ -98,8 +98,8 @@ class _ThemeQuestion extends State<ThemeQuestion> {
           Text(widget.data.question.text, style: Theme.of(context).textTheme.headline6, textAlign: TextAlign.center,),
           Container(
             padding: EdgeInsets.all(20),
-            height: size,
-            width: size,
+            height: size.toDouble(),
+            width: size.toDouble(),
             child: Hexagon(options, widget.data.question.text)
           ),
         ],

@@ -1,9 +1,8 @@
 import 'package:personas/services/questionService.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TextInputQuestion extends StatefulWidget {
-  TextInputQuestion({Key key, this.data}) : super(key: key);
+  TextInputQuestion({Key? key, required this.data}) : super(key: key);
 
   final QuestionInputData data;
 
@@ -13,7 +12,7 @@ class TextInputQuestion extends StatefulWidget {
 
 class _TextInputQuestion extends State<TextInputQuestion> {
   
-  TextEditingController _controller;
+  late TextEditingController _controller;
 
   void initState() {
     super.initState();

@@ -4,15 +4,15 @@ import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 
-class IntroducitonPage extends StatefulWidget {
-  IntroducitonPage({Key key}) : super(key: key);
+class IntroductionPage extends StatefulWidget {
+  IntroductionPage();
 
   @override
   _IntroducitonPage createState() => _IntroducitonPage();
 }
 
-class _IntroducitonPage extends State<IntroducitonPage> {
-  VideoPlayerController _controller;
+class _IntroducitonPage extends State<IntroductionPage> {
+  late VideoPlayerController _controller;
 
   @override
   void initState() {

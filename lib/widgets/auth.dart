@@ -8,7 +8,7 @@ class Auth {
   // static String apiEndpoint = "https://question-matrix-creator-gamma.vercel.app/api";
   static String apiEndpoint = "http://localhost:3000/api";
 
-  static Future<UserData> login(String _username, String _password) async {
+  static Future<UserData?> login(String _username, String _password) async {
     try {
       final token = await http.post(
         Uri.parse("$apiEndpoint/auth/login"),
@@ -40,7 +40,7 @@ class Auth {
     }
   }
 
-  static Future<UserData> signup(String _username, String _password) async {
+  static Future<UserData?> signup(String _username, String _password) async {
     try {
       final token = await http.post(
         Uri.parse("$apiEndpoint/auth/signup"),
@@ -89,7 +89,7 @@ class Auth {
     }
   }
 
-  static Future<List<Persona>> getPersonas() async {
+  static Future<List<Persona>?> getPersonas() async {
     String token = SupaBaseService().authToken;
     try {
       final response = await http.get(

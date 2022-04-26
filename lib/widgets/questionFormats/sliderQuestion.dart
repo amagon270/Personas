@@ -1,9 +1,8 @@
 import 'package:personas/services/questionService.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SliderQuestion extends StatefulWidget {
-  SliderQuestion({Key key, this.data}) : super(key: key);
+  SliderQuestion({Key? key, required this.data}) : super(key: key);
 
   final QuestionInputData data;
 
@@ -13,7 +12,7 @@ class SliderQuestion extends StatefulWidget {
 
 class _SliderQuestion extends State<SliderQuestion> {
   
-  double _currentSliderValue;
+  late double _currentSliderValue;
 
   @override
   void initState() {
@@ -28,11 +27,11 @@ class _SliderQuestion extends State<SliderQuestion> {
   @override
   Widget build(BuildContext context) {
     List<Widget> labels = [];
-    widget.data.question.labels.forEach((label) {
+    widget.data.question.labels?.forEach((label) {
       labels.add(Text(label));
     });
-    int min = widget.data.question.min;
-    int max = widget.data.question.max;
+    int min = widget.data.question.min!;
+    int max = widget.data.question.max!;
     int currentLabel = (((_currentSliderValue - min)/max)*labels.length).floor().clamp(0, labels.length-1);
     return Container(
     padding: EdgeInsets.all(20),
@@ -46,12 +45,12 @@ class _SliderQuestion extends State<SliderQuestion> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  widget.data.question.labels.first, 
+                  widget.data.question.labels!.first, 
                   textAlign: TextAlign.start, 
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  widget.data.question.labels.last, 
+                  widget.data.question.labels!.last, 
                   textAlign: TextAlign.end,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 )
@@ -60,8 +59,8 @@ class _SliderQuestion extends State<SliderQuestion> {
           ),
           Slider(
             value: _currentSliderValue,
-            min: min?.toDouble() ?? 0,
-            max: max?.toDouble() ?? 1,
+            min: min.toDouble(),
+            max: max.toDouble(),
             onChanged: widget.data.editable ? (value) {
               setState(() {
                 _currentSliderValue = value;
@@ -75,7 +74,7 @@ class _SliderQuestion extends State<SliderQuestion> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(widget.data.question.labels[currentLabel], textAlign: TextAlign.center,),
+                Text(widget.data.question.labels![currentLabel], textAlign: TextAlign.center,),
               ]
             )
           )

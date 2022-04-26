@@ -1,9 +1,8 @@
 import 'package:personas/services/questionService.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TextOnlyQuestion extends StatefulWidget {
-  TextOnlyQuestion({Key key, this.data}) : super(key: key);
+  TextOnlyQuestion({Key? key, required this.data}) : super(key: key);
 
   final QuestionInputData data;
 
@@ -13,7 +12,7 @@ class TextOnlyQuestion extends StatefulWidget {
 
 class _TextOnlyQuestion extends State<TextOnlyQuestion> {
   
-  QuestionOption currentlySelected;
+  late QuestionOption currentlySelected;
 
   @override
   void initState() {
