@@ -35,7 +35,7 @@ class _TestPaintPage extends State<TestPaintPage> {
     setState(() {
       roundness = value;
     });
-    painter.points = BlobPainter.EvenlySpacePoints(noOfPoints, splineScale: value);
+    painter.points = BlobPainter.RandomBlob(noOfPoints, splineScale: value, randomness: randomness);
   }
 
    void setRandomness(double value) {
@@ -121,13 +121,21 @@ class _TestPaintPage extends State<TestPaintPage> {
     );
   }
 
-  List<Widget> ButtonRows() {
-    return [
-      ButtonRow(0, "Point 1"),
-      ButtonRow(1, "Point 2"),
-      ButtonRow(2, "Point 3"),
-      ButtonRow(3, "Point 4"),
-    ];
+  Widget ButtonRows() {
+    List<Widget> sliders = [];
+    for (int i = 0; i < painter.points.length; i++) {
+      sliders.add(ButtonRow(i, "Point $i"));
+    }
+    return Container(
+      height: 500,
+      child: ListView.builder(
+        itemCount: sliders.length,
+        padding: const EdgeInsets.all(8),
+        itemBuilder: (BuildContext context, int index) {
+          return (sliders[index]);
+        }
+      )
+    );
   }
 
   @override
@@ -146,7 +154,7 @@ class _TestPaintPage extends State<TestPaintPage> {
             Button("Points -", () { removePoint(); }),
             Button("scale +", () { scalePointUp(); }),
             Button("scale -", () { scalePointDown(); }),
-            ...ButtonRows(),
+            ButtonRows(),
             Center(
               child: CustomPaint(
                 size: Size(400,400), 
