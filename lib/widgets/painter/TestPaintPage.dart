@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:personas/widgets/painter/BlobPainter.dart';
+import 'package:personas/widgets/painter/SuckAnimatedText.dart';
+import 'package:personas/widgets/painter/VectorMaths.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class TestPaintPage extends StatefulWidget {
   TestPaintPage({Key? key}) : super(key: key);
@@ -12,13 +15,14 @@ class _TestPaintPage extends State<TestPaintPage> {
   final painter = BlobPainter();
 
   List<Point> points = [
-    Point(0.25, 0.25, 0.5, 0.5, 0.5, 0.5), 
-    Point(0.75, 0.25, 0.5, 0.5, 0.5, 0.5), 
-    Point(0.75, 0.75, 0.5, 0.5, 0.5, 0.5), 
-    Point(0.25, 0.75, 0.5, 0.5, 0.5, 0.5)
+    Point(Vector(0.25, 0.25), Vector(0.5, 0.5), Vector(0.5, 0.5)), 
+    Point(Vector(0.75, 0.25), Vector(0.5, 0.5), Vector(0.5, 0.5)), 
+    Point(Vector(0.75, 0.75), Vector(0.5, 0.5), Vector(0.5, 0.5)), 
+    Point(Vector(0.25, 0.75), Vector(0.5, 0.5), Vector(0.5, 0.5))
   ];
 
   double roundness = 0.0;
+  int noOfPoints = 4;
 
   void setPoint(int point, {double? x, double? y, double? c1x, double? c1y, double? c2x, double? c2y}) {
     setState(() {
@@ -30,14 +34,41 @@ class _TestPaintPage extends State<TestPaintPage> {
     setState(() {
       roundness = value;
     });
-    double posMain = 0.5 + ((value % 1) / 2);
-    double negMain = 0.5 - ((value % 1) / 2);
-    double posCross = 0.5 + ((value % 1) * 0.15);
-    double negCross = 0.5 - ((value % 1) * 0.15);
-    points[0] = painter.setPoint(0, c1y: negMain, c2y: negMain, c1x: negCross, c2x: posCross);
-    points[1] = painter.setPoint(1, c1x: posMain, c2x: posMain, c1y: negCross, c2y: posCross);
-    points[2] = painter.setPoint(2, c1y: posMain, c2y: posMain, c1x: posCross, c2x: negCross);
-    points[3] = painter.setPoint(3, c1x: negMain, c2x: negMain, c1y: posCross, c2y: negCross);
+    painter.points = BlobPainter.EvenlySpacePoints(noOfPoints, splineScale: value);
+  }
+
+  void addPoint() {
+    setState(() {
+      noOfPoints++;
+    });
+    // painter.points = BlobPainter.EvenlySpacePoints(noOfPoints, splineScale: roundness);
+    painter.points = BlobPainter.RandomBlob(noOfPoints, splineScale: roundness);
+  }
+
+  void removePoint() {
+    setState(() {
+      noOfPoints--;
+    });
+    // painter.points = BlobPainter.EvenlySpacePoints(noOfPoints, splineScale: roundness);
+    painter.points = BlobPainter.RandomBlob(noOfPoints, splineScale: roundness);
+  }
+
+  void scalePointUp() {
+    painter.ScaleSpline(1.1);
+  }
+
+  void scalePointDown() {
+    painter.ScaleSpline(0.9);
+  }
+
+  Widget Button(String title, Function onPress) {
+    return InkWell(
+      onTap: () {onPress();},
+      child: Container(
+        color: Colors.amber,
+        child: Text(title)
+      ),
+    );
   }
 
   Widget SliderColumn(String title, double value, Function onPress) {
@@ -56,13 +87,28 @@ class _TestPaintPage extends State<TestPaintPage> {
     return Row(
       children: [
         Text(title),
-        SliderColumn("x+", points[point].x, (value) => { setPoint(point, x: value) }),
-        SliderColumn("y+", points[point].y, (value) => { setPoint(point, y: value) }),
-        SliderColumn("c1x+", points[point].c1x, (value) => { setPoint(point, c1x: value) }),
-        SliderColumn("c1y+", points[point].c1y, (value) => { setPoint(point, c1y: value) }),
-        SliderColumn("c2x+", points[point].c2x, (value) => { setPoint(point, c2x: value) }),
-        SliderColumn("c2y+", points[point].c2y, (value) => { setPoint(point, c2y: value) }),
+        SliderColumn("x+", points[point].pos.x, (value) => { setPoint(point, x: value) }),
+        SliderColumn("y+", points[point].pos.y, (value) => { setPoint(point, y: value) }),
+        SliderColumn("c1x+", points[point].spline1.x, (value) => { setPoint(point, c1x: value) }),
+        SliderColumn("c1y+", points[point].spline1.y, (value) => { setPoint(point, c1y: value) }),
+        SliderColumn("c2x+", points[point].spline2.x, (value) => { setPoint(point, c2x: value) }),
+        SliderColumn("c2y+", points[point].spline2.y, (value) => { setPoint(point, c2y: value) }),
       ],
+    );
+  }
+
+  Widget TestText() {
+    return (
+      AnimatedTextKit(
+        repeatForever: true,
+        // isRepeatingAnimation: false,
+        animatedTexts: [
+          SuckAnimatedText('AMAZING', speed: Duration(milliseconds: 1000), target: Offset(-400, -200))
+        ],
+        onTap: () {
+          print("Tap Event");
+        },
+      )
     );
   }
 
@@ -84,18 +130,20 @@ class _TestPaintPage extends State<TestPaintPage> {
       body: Container(
         child: Column(
           children: [
-            InkWell(
-              child: Text("Toggle Dots"),
-              onTap: () {painter.showDots = !painter.showDots; },
-            ),
-            SliderColumn("Roundness", roundness, (value) => { setRoundness(value)}),
-            ...ButtonRows(),
+            Button("Toggle Dots", () { painter.showDots = !painter.showDots; }),
+            SliderColumn("Roundness", roundness, (value) => { setRoundness(value) }),
+            Button("Points +", () { addPoint(); }),
+            Button("Points -", () { removePoint(); }),
+            Button("scale +", () { scalePointUp(); }),
+            Button("scale -", () { scalePointDown(); }),
+            // ...ButtonRows(),
             Center(
               child: CustomPaint(
                 size: Size(400,400), 
                 painter: painter,
               ),
             ),
+            // TestText(),
           ],
         )
       ),
