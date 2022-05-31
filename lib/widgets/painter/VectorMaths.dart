@@ -20,6 +20,12 @@ class Vector {
     this.x = scaled.values[0][0];
     this.y = scaled.values[1][0];
   }
+
+  double Magnitude({Vector? offset}) {
+    final x = this.x - (offset?.x ?? 0);
+    final y = this.y - (offset?.y ?? 0);
+    return sqrt(pow(x, 2) + pow(y, 2));
+  }
 }
 
 class Matrix {

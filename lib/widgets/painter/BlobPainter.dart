@@ -16,47 +16,101 @@ class BlobPainter extends CustomPainter{
 
   bool showDots = false;
 
-  List<Point> points = EvenlySpacePoints(4);
+  // List<Point> points = EvenlySpacePoints(40);
+  List<Point> points = RandomBlob(4, randomness: 0);
 
   static Rand(double min, double max) {
-    print((Random().nextDouble() * (max - min)) + min);
     return (Random().nextDouble() * (max - min)) + min;
   }
 
-  static List<Point> RandomBlob(int points, {double offset = 5/4, double splineScale = 0.2}) {
+  static Vector placePoint({
+    required int totalPoints, 
+    required int pointNo, 
+    required double pointOffset, 
+    required double startOffset, 
+    required double magnitude, 
+    required double variation, 
+    double? nudge
+  }) {
+    final randX = Rand(magnitude - magnitude*variation, magnitude + magnitude*variation);
+    final mag = randX + (((nudge) ?? randX) - randX) * (1-variation*2) * (variation == 0 ? 0 : 1);
+    
+    return Vector(
+      (0.5 + cos(pi*2*pointNo/totalPoints + pi*2*startOffset + pi*2*pointOffset/totalPoints) / 2 * mag).clamp(0, 1),
+      (0.5 + sin(pi*2*pointNo/totalPoints + pi*2*startOffset + pi*2*pointOffset/totalPoints) / 2 * mag).clamp(0, 1)
+    );
+  }
+
+  static List<Point> RandomBlob(int points, {double offset = 1/8, double splineScale = 0.5, scale = 0.85, double randomness = 0.1}) {
+    final distribution = (splineScale - 0.5).abs();
+    final smoothscale = 0.4525 - (1 - 1/pow(2, points-4))/10;
     List<Point> newPoints = [];
-    final double mainMin = 2;
-    final double mainMax = 2.5;
-    final double crossMin = splineScale * 0.75;
-    final double crossMax = splineScale * 1.5;
     for (int i = 0; i < points; i++) {
-      final pos = i/points*2*pi;
-      final posRand = Rand(mainMin, mainMax);
-      final spline1Rand = Rand(crossMin,crossMax);
-      final spline2Rand = Rand(crossMin,crossMax);
-      double x = (0.5 + cos(pos + pi*offset)/posRand).clamp(0, 1);
-      double y = (0.5 + sin(pos + pi*offset)/posRand).clamp(0, 1);
-      double c1x = (0.5 + cos(pos + pi*offset + pi*2/points/3)*spline1Rand).clamp(0, 1);
-      double c1y = (0.5 + sin(pos + pi*offset + pi*2/points/3)*spline1Rand).clamp(0, 1);
-      double c2x = (0.5 + cos(pos + pi*offset + pi*4/points/3)*spline2Rand).clamp(0, 1);
-      double c2y = (0.5 + sin(pos + pi*offset + pi*4/points/3)*spline2Rand).clamp(0, 1);
-      newPoints.add(Point(Vector(x,y), Vector(c1x,c1y), Vector(c2x,c2y)));
+      Vector position = placePoint(
+        totalPoints: points, 
+        pointNo: i, 
+        pointOffset: 0, 
+        startOffset: offset, 
+        magnitude: scale, 
+        variation: distribution + randomness
+      );
+      Vector c1 = Vector(0.5, 0.5);
+      Vector c2 = Vector(0.5, 0.5);
+      newPoints.add(Point(position, c1, c2));
+    }
+    for (int i = 0; i < points; i++) {
+      newPoints[i].spline1 = placePoint(
+        totalPoints: points, 
+        pointNo: i, 
+        pointOffset: 1/3, 
+        startOffset: offset, 
+        magnitude: splineScale + smoothscale, 
+        variation: distribution + randomness / 10, 
+        nudge: newPoints[i].pos.Magnitude(offset: Vector(0.5, 0.5))*2
+      );
+      newPoints[i].spline2 = placePoint(
+        totalPoints: points, 
+        pointNo: i, 
+        pointOffset: 2/3, 
+        startOffset: offset, 
+        magnitude: splineScale + smoothscale, 
+        variation: distribution  + randomness / 10, 
+        nudge: newPoints[(i+1)%points].pos.Magnitude(offset: Vector(0.5, 0.5))*2
+      );
     }
     return newPoints;
   }
 
-  static List<Point> EvenlySpacePoints(int points, {double offset = 5/4, double splineScale = 0.2}) {
+  static List<Point> EvenlySpacePoints(int points, {double offset = 1/8, double splineScale = 0.5}) {
+    final smoothscale = 0.4525 - (1 - 1/pow(2, points-4))/10;
     List<Point> newPoints = [];
     
     for (int i = 0; i < points; i++) {
-      final pos = i/points*2*pi;
-      double x = 0.5 + cos(pos + pi*offset)/2.2;
-      double y = 0.5 + sin(pos + pi*offset)/2.2;
-      double c1x = (0.5 + cos(pos + pi*offset + pi*2/points/3)*splineScale).clamp(0, 1);
-      double c1y = (0.5 + sin(pos + pi*offset + pi*2/points/3)*splineScale).clamp(0, 1);
-      double c2x = (0.5 + cos(pos + pi*offset + pi*4/points/3)*splineScale).clamp(0, 1);
-      double c2y = (0.5 + sin(pos + pi*offset + pi*4/points/3)*splineScale).clamp(0, 1);
-      newPoints.add(Point(Vector(x,y), Vector(c1x,c1y), Vector(c2x,c2y)));
+      Vector position = placePoint(
+        totalPoints: points, 
+        pointNo: i, 
+        pointOffset: 0, 
+        startOffset: offset, 
+        magnitude: 0.85, 
+        variation: 0
+      );
+      Vector c1 = placePoint(
+        totalPoints: points, 
+        pointNo: i, 
+        pointOffset: 1/3, 
+        startOffset: offset, 
+        magnitude: splineScale + smoothscale, 
+        variation: 0
+      );
+      Vector c2 = placePoint(
+        totalPoints: points, 
+        pointNo: i, 
+        pointOffset: 2/3, 
+        startOffset: offset, 
+        magnitude: splineScale + smoothscale, 
+        variation: 0
+      );
+      newPoints.add(Point(position, c1, c2));
     }
     return newPoints;
   }
@@ -104,8 +158,8 @@ class BlobPainter extends CustomPainter{
     points[point].pos.y = y ?? points[point].pos.y;
     points[point].spline1.x = c1x ?? points[point].spline1.x;
     points[point].spline1.y = c1y ?? points[point].spline1.y;
-    points[point].spline2.x = c2x ?? points[point].spline1.x;
-    points[point].spline2.y = c2y ?? points[point].spline1.y;
+    points[point].spline2.x = c2x ?? points[point].spline2.x;
+    points[point].spline2.y = c2y ?? points[point].spline2.y;
 
     return points[point];
   }
@@ -114,7 +168,7 @@ class BlobPainter extends CustomPainter{
   void paint(Canvas canvas, Size size) {
     
     Paint paint0 = Paint()
-      ..color = const Color.fromARGB(255, 33, 150, 243)
+      ..color = const Color.fromARGB(255, 0, 0, 0)
       ..style = PaintingStyle.fill
       ..strokeWidth = 15;
 

@@ -21,7 +21,8 @@ class _TestPaintPage extends State<TestPaintPage> {
     Point(Vector(0.25, 0.75), Vector(0.5, 0.5), Vector(0.5, 0.5))
   ];
 
-  double roundness = 0.0;
+  double roundness = 0.5;
+  double randomness = 0;
   int noOfPoints = 4;
 
   void setPoint(int point, {double? x, double? y, double? c1x, double? c1y, double? c2x, double? c2y}) {
@@ -37,12 +38,20 @@ class _TestPaintPage extends State<TestPaintPage> {
     painter.points = BlobPainter.EvenlySpacePoints(noOfPoints, splineScale: value);
   }
 
+   void setRandomness(double value) {
+    setState(() {
+      randomness = value;
+    });
+    painter.points = BlobPainter.RandomBlob(noOfPoints, splineScale: value, randomness: randomness);
+  }
+
+
   void addPoint() {
     setState(() {
       noOfPoints++;
     });
     // painter.points = BlobPainter.EvenlySpacePoints(noOfPoints, splineScale: roundness);
-    painter.points = BlobPainter.RandomBlob(noOfPoints, splineScale: roundness);
+    painter.points = BlobPainter.RandomBlob(noOfPoints, splineScale: roundness, randomness: randomness);
   }
 
   void removePoint() {
@@ -50,7 +59,7 @@ class _TestPaintPage extends State<TestPaintPage> {
       noOfPoints--;
     });
     // painter.points = BlobPainter.EvenlySpacePoints(noOfPoints, splineScale: roundness);
-    painter.points = BlobPainter.RandomBlob(noOfPoints, splineScale: roundness);
+    painter.points = BlobPainter.RandomBlob(noOfPoints, splineScale: roundness, randomness: randomness);
   }
 
   void scalePointUp() {
@@ -87,12 +96,12 @@ class _TestPaintPage extends State<TestPaintPage> {
     return Row(
       children: [
         Text(title),
-        SliderColumn("x+", points[point].pos.x, (value) => { setPoint(point, x: value) }),
-        SliderColumn("y+", points[point].pos.y, (value) => { setPoint(point, y: value) }),
-        SliderColumn("c1x+", points[point].spline1.x, (value) => { setPoint(point, c1x: value) }),
-        SliderColumn("c1y+", points[point].spline1.y, (value) => { setPoint(point, c1y: value) }),
-        SliderColumn("c2x+", points[point].spline2.x, (value) => { setPoint(point, c2x: value) }),
-        SliderColumn("c2y+", points[point].spline2.y, (value) => { setPoint(point, c2y: value) }),
+        SliderColumn("x+", painter.points[point].pos.x, (value) => { setPoint(point, x: value) }),
+        SliderColumn("y+", painter.points[point].pos.y, (value) => { setPoint(point, y: value) }),
+        SliderColumn("c1x+", painter.points[point].spline1.x, (value) => { setPoint(point, c1x: value) }),
+        SliderColumn("c1y+", painter.points[point].spline1.y, (value) => { setPoint(point, c1y: value) }),
+        SliderColumn("c2x+", painter.points[point].spline2.x, (value) => { setPoint(point, c2x: value) }),
+        SliderColumn("c2y+", painter.points[point].spline2.y, (value) => { setPoint(point, c2y: value) }),
       ],
     );
   }
@@ -103,7 +112,7 @@ class _TestPaintPage extends State<TestPaintPage> {
         repeatForever: true,
         // isRepeatingAnimation: false,
         animatedTexts: [
-          SuckAnimatedText('AMAZING', speed: Duration(milliseconds: 1000), target: Offset(-400, -200))
+          SuckAnimatedText('AMAZING', speed: Duration(milliseconds: 1000), target: Offset(-50, -200))
         ],
         onTap: () {
           print("Tap Event");
@@ -132,18 +141,19 @@ class _TestPaintPage extends State<TestPaintPage> {
           children: [
             Button("Toggle Dots", () { painter.showDots = !painter.showDots; }),
             SliderColumn("Roundness", roundness, (value) => { setRoundness(value) }),
+            SliderColumn("Randomness", randomness, (value) => { setRandomness(value) }),
             Button("Points +", () { addPoint(); }),
             Button("Points -", () { removePoint(); }),
             Button("scale +", () { scalePointUp(); }),
             Button("scale -", () { scalePointDown(); }),
-            // ...ButtonRows(),
+            ...ButtonRows(),
             Center(
               child: CustomPaint(
                 size: Size(400,400), 
                 painter: painter,
               ),
             ),
-            // TestText(),
+            TestText(),
           ],
         )
       ),

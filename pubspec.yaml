@@ -23,15 +23,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  video_player: ^2.2.7 
-  provider: ^6.0.1
-  path_provider: ^2.0.8
-  nanoid: ^1.0.0
-  flutter_colorpicker: ^1.0.3 
-  flutter_reorderable_list: ^1.1.0
-  conduit_password_hash: ^3.1.0
-  http: ^0.13.4
+  video_player: 2.2.7 
+  provider: 6.0.1
+  path_provider: 2.0.8
+  nanoid: 1.0.0
+  flutter_colorpicker: 1.0.3 
+  flutter_reorderable_list: 1.1.0
+  conduit_password_hash: 3.1.0
+  http: 0.13.4
   reorderables: 0.4.4
+  animated_text_kit: 4.2.1
 
 dev_dependencies:
   flutter_test:
