@@ -114,7 +114,22 @@ class Auth {
     }
   }
 
-    static Future<bool> watchIntro() async {
+  static Future<String?> getQuestionMatrix() async {
+    try {
+      final response = await http.get(
+        Uri.parse("$apiEndpoint/export"),
+      );
+      if (response.statusCode == 200) {
+        return response.body;
+      }
+      return null;
+    } catch (e) {
+      print(e);
+      throw e;
+    }
+  }
+
+  static Future<bool> watchIntro() async {
     try {
       String token = SupaBaseService().authToken;
       final success = await http.post(

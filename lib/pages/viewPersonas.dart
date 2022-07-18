@@ -44,8 +44,8 @@ class _ViewPersonas extends State<ViewPersonas> {
 
   Widget ListItem(Persona persona, Color textColor, BuildContext context) {
     return Container(
-      width: 50,
-      height: 50,
+      width: 150,
+      height: 150,
       margin: EdgeInsets.all(5.0),
       decoration: BoxDecoration(
         color: persona.color,

@@ -115,6 +115,7 @@ class PersonaService {
 
   Future<List<Persona>> getPersonas({String? userId}) async {
     userId ??= this.userId;
+    if (this.allPersonas.length > 0) return this.allPersonas;
     Map decodedData = await readPersonaFile();
     List<Question> allQuestions = QuestionService().allQuestions;
     List<Persona> allPersonas = await Auth.getPersonas() ?? [];

@@ -1,6 +1,7 @@
 import 'package:personas/services/personaService.dart';
 import 'package:personas/services/questionService.dart';
 import 'package:personas/services/factService.dart';
+import 'package:personas/widgets/auth.dart';
 import 'package:personas/widgets/utility.dart';
 import 'package:http/http.dart' as http;
 import 'interviewService.dart';
@@ -27,8 +28,8 @@ class SupaBaseService {
     }
     try {
       _isSupabaseInitialized = true;
-      final api = await http.get(Uri.parse("https://question-matrix-creator-gamma.vercel.app/api/export"));
-      _qMatrix = api.body;
+      var api = await Auth.getQuestionMatrix();
+      _qMatrix = api ?? "";
 
       writeLocalDatabase(_qMatrix);
 

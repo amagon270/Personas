@@ -28,8 +28,13 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
   }
 
   void login(String username, String password) async {
-    UserData? newUser = await Auth.login(username, password);
-    assignUserData(newUser!);
+    try {
+      UserData? newUser = await Auth.login(username, password);
+      assignUserData(newUser!);
+    } catch (e) {
+     print(e);
+     throw e; 
+    }
   }
 
   void signup(String userName, String password) async {

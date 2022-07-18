@@ -168,7 +168,7 @@ class BlobPainter extends CustomPainter{
   void paint(Canvas canvas, Size size) {
     
     Paint paint0 = Paint()
-      ..color = const Color.fromARGB(255, 0, 0, 0)
+      ..color = const Color.fromARGB(100, 0, 0, 0)
       ..style = PaintingStyle.fill
       ..strokeWidth = 15;
 

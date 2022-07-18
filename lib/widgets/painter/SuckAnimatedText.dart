@@ -36,10 +36,13 @@ class SuckAnimatedText extends AnimatedText {
   }
 
   @override
+  Widget completeText(BuildContext context) => Container();
+
+  @override
   Widget animatedBuilder(BuildContext context, Widget? child) {
     final defaultTextStyle = DefaultTextStyle.of(context).style;
     final scaleFactor = MediaQuery.of(context).textScaleFactor;
-    // final screenSize = MediaQuery.of(context).size;
+    
     return RepaintBoundary(
       child: CustomPaint(
         painter: _WTextPainter(
@@ -86,8 +89,8 @@ class _WTextPainter extends CustomPainter {
       // calculate the initial position of each char
       calculateLayoutInfo(text);
     } else {
-    canvas.save();
-    final Offset centerOffset = Offset(size.width/2, size.height/2 - _textLayoutInfo!.height / 2);
+      canvas.save();
+      final Offset centerOffset = Offset(size.width/2, size.height/2 - _textLayoutInfo!.height / 2);
 
       final p = math.min(progress, 1.0);
       // drawing the char
@@ -96,7 +99,8 @@ class _WTextPainter extends CustomPainter {
         _textLayoutInfo!.text,
         Offset(target.dx * math.sin(p*math.pi/2), target.dy * (1-(math.cos(p*math.pi/2)))) +
           centerOffset,
-        _textLayoutInfo);
+        _textLayoutInfo
+      );
 
     canvas.restore();
     }
@@ -116,11 +120,9 @@ class _WTextPainter extends CustomPainter {
   void calculateMove() {
     if (_textLayoutInfo != null) {
       final height = _textLayoutInfo!.height;
-      final txtInMoInd = progress.floor();
-      final percent = progress - txtInMoInd;
 
       _textLayoutInfo!.isMoving = true;
-        _textLayoutInfo!.riseHeight = percent * height;
+      _textLayoutInfo!.riseHeight = progress * height;
     } else {
       calculateLayoutInfo(text);
     }
