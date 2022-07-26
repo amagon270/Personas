@@ -9,6 +9,7 @@ import 'package:personas/pages/viewPersona.dart';
 import 'package:personas/pages/viewPersonas.dart';
 import 'package:personas/services/personaService.dart';
 import 'package:personas/services/supaBaseService.dart';
+import 'package:personas/widgets/painter/TestPaintPage.dart';
 import 'package:personas/widgets/user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -123,6 +124,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     String userId = context.watch<User>().id;
     bool watchedIntro = context.watch<User>().hasWatchedIntro;
+
+    return TestPaintPage();
 
     if (userId == null) {
       return Center(child: CircularProgressIndicator());

@@ -30,7 +30,7 @@ class _TestPaintPage extends State<TestPaintPage> {
   bool isAnimating = false;
 
   //hexagon
-  double scale = 0.5;
+  double scale = 1;
   double colourRoation = 0;
   double colourScaleOffset = 0;
   double lightnessOffset = 0.7;
@@ -197,7 +197,7 @@ class _TestPaintPage extends State<TestPaintPage> {
   }
 
   Widget TestHexagonGrid() {
-    int colorWheelDepth = 6;
+    int colorWheelDepth = 40;
 
     return Container(
       width: 500,
@@ -206,36 +206,47 @@ class _TestPaintPage extends State<TestPaintPage> {
         minScale: 0.2,
         maxScale: 4.0,
         child: HexagonGrid(
-          hexType: HexagonType.FLAT,
+          hexType: HexagonType.POINTY,
           depth: colorWheelDepth,
           buildTile: (coordinates) {
             double hue = 1;
             double lightness = 1;
-            if (coordinates.z == colorWheelDepth && false) {
-              lightness = (-coordinates.y)/colorWheelDepth;
-              saturation = 0;
-            } else {
-            List<double> allAngles = [];
-            for (int i = 0; i < coordinates.x.abs(); i++) {
-              if (coordinates.x > 0) allAngles.add(pi/6);
-              if (coordinates.x < 0) allAngles.add(-pi*5/6);
-            }
-            for (int i = 0; i < coordinates.y.abs(); i++) {
-              if (coordinates.y > 0) allAngles.add(pi*5/6);
-              if (coordinates.y < 0) allAngles.add(-pi/6);
-            }
-            for (int i = 0; i < coordinates.z.abs(); i++) {
-              if (coordinates.z > 0) allAngles.add(-pi/2);
-              if (coordinates.z < 0) allAngles.add(pi/2);
-            }
-            double sins = 0;
-            double coss = 0;
-            for (int i = 0; i < allAngles.length; i++) {
-              sins += sin(allAngles[i]);
-              coss += cos(allAngles[i]);
-            }
-            double angle = (-atan2(sins, coss) - pi/3) % (pi*2);
-            double distance = 1 - (sqrt(pow(sins, 2) + pow(coss, 2)) / (sqrt(3)*colorWheelDepth));
+            // if (coordinates.z == colorWheelDepth) {
+            //   lightness = (-coordinates.y)/colorWheelDepth;
+            //   saturation = 0;
+            // } else {
+            // List<double> allAngles = [];
+            // for (int i = 0; i < coordinates.x.abs(); i++) {
+            //   if (coordinates.x > 0) allAngles.add(pi/6);
+            //   if (coordinates.x < 0) allAngles.add(-pi*5/6);
+            // }
+            // for (int i = 0; i < coordinates.y.abs(); i++) {
+            //   if (coordinates.y > 0) allAngles.add(pi*5/6);
+            //   if (coordinates.y < 0) allAngles.add(-pi/6);
+            // }
+            // for (int i = 0; i < coordinates.z.abs(); i++) {
+            //   if (coordinates.z > 0) allAngles.add(-pi/2);
+            //   if (coordinates.z < 0) allAngles.add(pi/2);
+            // }
+            // double sins = 0;
+            // double coss = 0;
+            // for (int i = 0; i < allAngles.length; i++) {
+            //   sins += sin(allAngles[i]);
+            //   coss += cos(allAngles[i]);
+            // }
+            // double angle = (-atan2(sins, coss) - pi/3) % (pi*2);
+            // double distance = 1 - (sqrt(pow(sins, 2) + pow(coss, 2)) / (sqrt(3)*colorWheelDepth));
+
+            double testX = 0;
+            double testY = 0;
+            testX += coordinates.x * 0.5;
+            testY += coordinates.x * 0.5;
+            testX -= coordinates.y * 0.5;
+            testY += coordinates.y * 0.5;
+            testY -= coordinates.z;
+
+            double angle = (-atan2(testY, testX*sqrt(3)) - pi/3) % (pi*2);
+            double distance = 1 - (sqrt(pow(testX, 2) + pow(testY, 2)) / (sqrt(3)*colorWheelDepth));
 
             final double rescaleFactor = 360/pow(360, scale);
 
@@ -245,13 +256,14 @@ class _TestPaintPage extends State<TestPaintPage> {
 
             hue = newRange;
             lightness = distance*lightnessOffset + (1-lightnessOffset);
-            }
+            // }
 
             return HexagonWidgetBuilder(
               color: HSLColor.fromAHSL(1, hue, saturation, lightness).toColor(),
               child: InkWell(
                 onTap: () {
                   print("$coordinates");
+                  print(angle);
                 },
               )
             );
@@ -278,15 +290,15 @@ class _TestPaintPage extends State<TestPaintPage> {
             // Button("scale +", () { scalePointUp(); }),
             // Button("scale -", () { scalePointDown(); }),
             // ButtonRows(),
-            Center(
-              child: CustomPaint(
-                size: Size(400,400), 
-                painter: painter,
-              ),
-            ),
-            Container(height: 200,),
-            Button("animate", () { toggleAnimation(); }),
-            TestText(),
+            // Center(
+            //   child: CustomPaint(
+            //     size: Size(400,400), 
+            //     painter: painter,
+            //   ),
+            // ),
+            // Container(height: 200,),
+            // Button("animate", () { toggleAnimation(); }),
+            // TestText(),
             // Row(children: [
             //   SliderColumn("scale", scale, (value) => { setHexagonParams(s: value)}),
             //   SliderColumn("rotation", colourRoation/360, (value) => { setHexagonParams(r: value*360)}),
@@ -298,7 +310,7 @@ class _TestPaintPage extends State<TestPaintPage> {
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.center,
             //   children: [
-            //   TestHexagonGrid(),
+              TestHexagonGrid(),
               
             // ],),
             // GreyscaleHexagon(),
