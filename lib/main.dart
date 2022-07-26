@@ -125,7 +125,7 @@ class HomePage extends StatelessWidget {
     String userId = context.watch<User>().id;
     bool watchedIntro = context.watch<User>().hasWatchedIntro;
 
-    return TestPaintPage();
+    // return TestPaintPage();
 
     if (userId == null) {
       return Center(child: CircularProgressIndicator());

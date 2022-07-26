@@ -9,8 +9,8 @@ class ScrollTextBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 600,
       alignment: Alignment.center,
+      constraints: BoxConstraints(maxHeight: 5000),
       child: entries != null
           ? ListView.builder(
               reverse: true,
