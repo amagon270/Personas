@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:personas/services/questionService.dart';
+import 'package:personas/widgets/hexagon.dart';
 import 'package:personas/widgets/utility.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ThemeQuestion extends StatefulWidget {
@@ -37,8 +37,6 @@ class _ThemeQuestion extends State<ThemeQuestion> {
     if (questionOptions.length >= 6) {
       questionOptions = questionOptions.sublist(0, 6);
     }
-    double _questionsLength = questionOptions.length.toDouble();
-    
 
     questionOptions.forEach((option) {
       Widget image = Container(
@@ -47,59 +45,52 @@ class _ThemeQuestion extends State<ThemeQuestion> {
       );
 
       currentlySelected[option.fact] ??= false;
-      double factor = ((option.order/_questionsLength)*pi*2) - pi;
 
       options.add(
-        Container(
-          alignment: Alignment(cos(factor), sin(factor)),
-          child: Stack(
-            clipBehavior: Clip.none,
-            alignment: AlignmentDirectional.topCenter,
-            children:[
-              Positioned(
-                child: Container(
-                  //color: widget.data.backgroundColour,
-                  child: Checkbox(
-                    hoverColor: widget.data.backgroundColour,
-                    value: currentlySelected[option.fact],
-                    onChanged: widget.data.editable ? (value) {
-                      setState(() {
-                        currentlySelected[option.fact] = !currentlySelected[option.fact];
-                      });
-                      List<String> returnData = [];
-                      currentlySelected.forEach((key, value) { 
-                        if (value == true) {
-                          returnData.add(key);
-                        }
-                      });
-                      //widget.data.selectAnswer(returnData);
-                      widget.data.selectAnswer(json.encode(currentlySelected));
-                    } : null,
-                  )
-                ),
-              ),
-              Positioned(
-                top: -33,
-                child: Container(
-                  //color: widget.data.backgroundColour,
-                  height: 30,
-                  width: 30,
-                  child: image
+        Stack(
+          clipBehavior: Clip.none,
+          alignment: AlignmentDirectional.topCenter,
+          children:[
+            Positioned(
+              child: Container(
+                child: Checkbox(
+                  value: currentlySelected[option.fact],
+                  onChanged: widget.data.editable ? (value) {
+                    setState(() {
+                      currentlySelected[option.fact] = !currentlySelected[option.fact];
+                    });
+                    List<String> returnData = [];
+                    currentlySelected.forEach((key, value) { 
+                      if (value == true) {
+                        returnData.add(key);
+                      }
+                    });
+                    widget.data.selectAnswer(json.encode(currentlySelected));
+                  } : null,
                 )
               ),
-              Positioned(
-                bottom: 40,
-                child: Container(
-                  //color: widget.data.backgroundColour,
-                  width: 110,
-                  child: Text(option.text, textAlign: TextAlign.center,)
-                )
+            ),
+            Positioned(
+              top: -33,
+              child: Container(
+                height: 30,
+                width: 30,
+                child: image
               )
-            ]
-          ),
+            ),
+            Positioned(
+              bottom: 40,
+              child: Container(
+                width: 110,
+                child: Text(option.text, textAlign: TextAlign.center,)
+              )
+            )
+          ]
         )
       );
     });
+
+    final size = min(min(MediaQuery.of(context).size.width, 800), MediaQuery.of(context).size.height - 150);
     return Container(
       padding: EdgeInsets.all(10),
       child: Column(
@@ -107,33 +98,9 @@ class _ThemeQuestion extends State<ThemeQuestion> {
           Text(widget.data.question.text, style: Theme.of(context).textTheme.headline6, textAlign: TextAlign.center,),
           Container(
             padding: EdgeInsets.all(20),
-            height: MediaQuery.of(context).size.width,
-            width: MediaQuery.of(context).size.width,
-            child: Stack(
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      return Image(
-                        image: AssetImage(
-                          Theme.of(context).brightness == Brightness.dark 
-                          ? "assets/images/BlackHexagon.png"
-                          : "assets/images/WhiteHexagon.png"),
-                        fit: BoxFit.fill,
-                        width: constraints.maxWidth*0.88,
-                        height: constraints.maxHeight*0.77,
-                      );
-                    }
-                  )
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  child: Text(widget.data.question.code, textAlign: TextAlign.center,)
-                ),
-                ...options,
-              ]
-            )
+            height: size,
+            width: size,
+            child: Hexagon(options, widget.data.question.text)
           ),
         ],
       )

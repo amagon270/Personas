@@ -28,6 +28,21 @@ class QuestionResponse {
   String toString() {
     return choice.toString();
   }
+
+  QuestionResponse.fromJson(Map<String, dynamic> json) : 
+    question = Question.fromJson(json['question']),
+    factFromQuestion = json['factFromQuestion'],
+    choice = json['choice'],
+    timestamp = DateTime.parse(json['timestamp']);
+
+  Map<String, dynamic> toJson() {
+    return {
+      "question": question.toJson(),
+      "choice": choice,
+      "timestamp": timestamp.toIso8601String(),
+      "factFromQuestion": factFromQuestion
+    };
+  }
 }
 
 class Session {
@@ -60,6 +75,16 @@ class Rule {
   TriggerType triggerType;
   List<RuleTest> tests;
   RuleAction action;
+
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "priority": priority,
+      "triggerType": triggerType.toString(),
+      "tests": tests.map((test) => test.toJson()).toList(),
+      "action": action.toJson()
+    };
+  }
 }
 
 class RuleAction {
@@ -67,6 +92,13 @@ class RuleAction {
 
   Fact fact;
   String questionId;
+
+  Map<String, dynamic> toJson() {
+    return {
+      "fact": fact.toJson(),
+      "questionId": questionId
+    };
+  }
 }
 
 class RuleTest {
@@ -79,6 +111,14 @@ class RuleTest {
   @override
   String toString() {
     return 'Test: {fact: $fact, operation: $operation, parameter: $parameter}';
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "fact": fact,
+      "operation": operation.toString(),
+      "parameter": parameter
+    };
   }
 }
 
@@ -321,6 +361,7 @@ class InterviewService {
     if (existingFact != null) {
       print("existing fact add: ${existingFact.text}: ${existingFact.value}");
       if (newFact.value is int) {
+        if (existingFact.value == "") existingFact.value = 0;
         existingFact.value += newFact.value;
       } else {
         existingFact.value = newFact.value;
@@ -420,14 +461,7 @@ class InterviewService {
   }
 
   Future<bool> clearUnfinishedSession() async {
-    if (!kIsWeb) {
-      Map sessionData = {};
-      final directory = await getApplicationDocumentsDirectory();
-      final file = File('${directory.path}/unfinishedSession.json');
-      await file.writeAsString(json.encode(sessionData));
-      return true;
-    }
-    return false;
+    return await UtilityFunctions.setStorage("unfinishedSession", json.encode({}));
   }
 
   void saveUnfinishedSession(Session session) async {
@@ -456,27 +490,11 @@ class InterviewService {
       sessionData["facts"][fact.id] = fact.value;
     });
 
-
-    if (!kIsWeb) {
-      final directory = await getApplicationDocumentsDirectory();
-      final file = File('${directory.path}/unfinishedSession.json');
-      await file.writeAsString(json.encode(sessionData));
-    }
+    await UtilityFunctions.setStorage("unfinishedSession", json.encode(sessionData));
   }
 
   Future<Session> loadUnfinishedSession() async {
-    String userAnswers = "{}";
-    
-    if (!kIsWeb) {
-      final directory = await getApplicationDocumentsDirectory();
-      final file = File('${directory.path}/unfinishedSession.json');
-      try {
-        userAnswers = await file.readAsString();
-      } catch (e) {
-        print("Couldn't find file, creating new file");
-        userAnswers = '{"" : {}}';
-      }
-    }
+    String userAnswers = await UtilityFunctions.getStorage("unfinishedSession") ?? '{"": {}}';
 
     Map userData = json.decode(userAnswers);
 

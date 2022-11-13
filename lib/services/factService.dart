@@ -22,6 +22,23 @@ class Fact {
   String toString() {
     return "Fact { id: $id, text: $text, tags: $tags, value: $value, negatedFacts: $negatedFacts}\n";
   }
+
+  Fact.fromJson(Map<String, dynamic> json) :
+    id = json['id'],
+    text = json['text'],
+    tags = json['tags'].map<String>((json) => json.toString()).toList(),
+    value = json['value'],
+    negatedFacts = json['negatedFacts']?.map<String>((json) => json.toString())?.toList() ?? [];
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id, 
+      'text': text, 
+      'tags': tags, 
+      'value': value, 
+      'negatedFacts': negatedFacts
+    };
+  }
 }
 
 class FactException implements Exception {
@@ -42,13 +59,16 @@ class FactService {
   List<Fact> get allFacts => _allFacts;
 
   Fact getFactById(String id, {dynamic value}) {
-    Fact newFact = _allFacts.firstWhere((e) => e.id == id, orElse: () {
-      if (id != "" && id != null) {
-        throw ("There has been an error with the $id fact");
-      }
-      return null;
-    });
-    return new Fact(newFact.id, newFact.text, newFact.tags, value: value);
+    if (_allFacts != null) {
+      Fact newFact = _allFacts.firstWhere((e) => e.id == id, orElse: () {
+        if (id != "" && id != null) {
+          throw ("There has been an error with the $id fact");
+        }
+        return null;
+      });
+      return new Fact(newFact.id, newFact.text, newFact.tags, value: value);
+    }
+    return null;
   }
 
   void assignFacts() async {
@@ -57,8 +77,8 @@ class FactService {
 
   static Future<List<Fact>> loadFacts() async {
     //final data = await rootBundle.loadString("assets/export.json");
-    final data = SupaBaseService().qMatrix;
-    List<dynamic> decodedData = json.decode(data)["facts"];
+    final data = SupaBaseService().qMatrix ?? [];
+    List<dynamic> decodedData = json.decode(data)["facts"] ?? [];
     List<Fact> newFacts = [];
     decodedData.forEach((fact) {
       var id = fact["id"].toString() ?? "";

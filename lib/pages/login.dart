@@ -13,11 +13,11 @@ class _LoginPage extends State<LoginPage> {
   final _formKey = new GlobalKey<FormState>();
   bool _isLoading;
   String _errorMessage;
-  String _email;
   String _password;
-  String _firstName;
-  String _lastName;
+  String _username;
   bool _showPassword;
+
+  bool _isLogin;
 
   BuildContext context;
   
@@ -26,57 +26,38 @@ class _LoginPage extends State<LoginPage> {
     super.initState();
     _isLoading = false;
     _errorMessage = "";
-    _email = "";
+    _username = "";
     _password = "";
     _showPassword = false;
+    _isLogin = true;
   }
 
-  Widget showCircularProgress() {
-    if (_isLoading) {
-      return Center(child: CircularProgressIndicator());
-    }
+  Widget title() {
     return Container(
-      height: 0.0,
-      width: 0.0,
+      margin: EdgeInsets.only(top: 100.0),
+      child: Text(
+        _isLogin ? "Login" : "Sign Up",
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: 40.0,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 
-  Widget showErrorMessage() {
-    if (_errorMessage != null && _errorMessage.length > 0) {
-      return Container(
-        padding: EdgeInsets.only(top: 20),
-        child: Text(
-          _errorMessage,
-          key: Key("loginError"),
-          style: TextStyle(
-              fontSize: 13.0,
-              color: Colors.red,
-              height: 1.0,
-              fontWeight: FontWeight.w300),
-        )
-      );
-    } else {
-      return new Container(
-        height: 0.0,
-      );
-    }
-  }
-
-  Widget emailInput() {
+  Widget userNameInput() {
     return Padding(
-      padding: const EdgeInsets.only(top: 70.0),
-      child: new TextFormField(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: TextFormField(
         maxLines: 1,
-        keyboardType: TextInputType.emailAddress,
-        decoration: new InputDecoration(
-            hintText: 'Email',
-            icon: new Icon(
-              Icons.mail,
-              //color: Colors.grey,
-            )),
-        validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
-        onSaved: (value) => _email = value.trim(),
-        key: Key("loginEmail")
+        decoration: InputDecoration(
+          hintText: 'First Name',
+          icon: Icon(Icons.account_circle),
+        ),  
+        validator: (value) => value.isEmpty ? 'Field can\'t be empty' : null,
+        onSaved: (value) => _username = value.trim(),
+        key: Key("loginFirstName")
       ),
     );
   }
@@ -107,47 +88,71 @@ class _LoginPage extends State<LoginPage> {
     );
   }
 
-  Widget firstNameInput() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20.0),
-      child: TextFormField(
-        maxLines: 1,
-        decoration: InputDecoration(
-          hintText: 'First Name',
-          icon: Icon(Icons.account_circle),
-        ),  
-        validator: (value) => value.isEmpty ? 'Field can\'t be empty' : null,
-        onSaved: (value) => _firstName = value.trim(),
-        key: Key("loginFirstName")
-      ),
-    );
+  Widget showErrorMessage() {
+    if (_errorMessage != null && _errorMessage.length > 0) {
+      return Container(
+        padding: EdgeInsets.only(top: 20),
+        child: Text(
+          _errorMessage,
+          key: Key("loginError"),
+          style: TextStyle(
+              fontSize: 13.0,
+              color: Colors.red,
+              height: 1.0,
+              fontWeight: FontWeight.w300),
+        )
+      );
+    } else {
+      return new Container(
+        height: 0.0,
+      );
+    }
   }
 
-  Widget lastNameInput() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20.0),
-      child: TextFormField(
-        maxLines: 1,
-        decoration: InputDecoration(
-          hintText: 'Last Name',
-          icon: Icon(Icons.account_circle),
-        ),  
-        validator: (value) => value.isEmpty ? 'Field can\'t be empty' : null,
-        onSaved: (value) => _lastName = value.trim(),
-        key: Key("loginLastName")
-      ),
-    );
-  }
-
-  Widget primaryButton() {
+  Widget LoginButton() {
     return Padding(
       padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
       child: SizedBox(
         height: 40.0,
         child: TextButton(
           key: Key("loginPrimaryButton"),
-          child: new Text('signup', style: new TextStyle(fontSize: 20.0, color: Colors.black)),
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.blue),
+          ),
           onPressed: validateAndSubmit,
+          child: new Text(
+            _isLogin ? "Login" : "Sign Up",
+            style: new TextStyle(
+              fontSize: 20.0, 
+              color: Colors.black
+            )
+          ),
+        ),
+      )
+    );
+  }
+
+    Widget switchButton() {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
+      child: SizedBox(
+        height: 40.0,
+        child: TextButton(
+          key: Key("loginPrimaryButton"),
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.blue),
+          ),
+          onPressed: () {
+            setState(() {
+              _isLogin = !_isLogin;
+            });
+          },
+          child: new Text(
+            !_isLogin ? "Go To Login" : "Go To Sign Up",
+            style: new TextStyle(
+              fontSize: 20.0, 
+              color: Colors.black)
+            ),
         ),
       )
     );
@@ -155,14 +160,12 @@ class _LoginPage extends State<LoginPage> {
 
   Widget loginForm() {
     List<Widget> items = <Widget>[
-      //showLogo(),
-      emailInput(),
+      title(),
+      userNameInput(),
       passwordInput(),
-      firstNameInput(),
-      lastNameInput(),
       showErrorMessage(),
-      primaryButton(),
-      //showSecondaryButton(),
+      LoginButton(),
+      switchButton(),
     ];
     return Container(
       padding: EdgeInsets.all(16.0),
@@ -203,7 +206,9 @@ class _LoginPage extends State<LoginPage> {
     if (form.validate()) {
       form.save();
       try {
-        context.read<User>().signup(_email, _password, _firstName, _lastName);
+        _isLogin 
+          ? context.read<User>().login(_username, _password,)
+          : context.read<User>().signup(_username, _password,);
       } catch (e) {
         print('Error: $e');
         setState(() {
@@ -214,5 +219,15 @@ class _LoginPage extends State<LoginPage> {
       }
     }
     _isLoading = false;
+  }
+
+  Widget showCircularProgress() {
+    if (_isLoading) {
+      return Center(child: CircularProgressIndicator());
+    }
+    return Container(
+      height: 0.0,
+      width: 0.0,
+    );
   }
 }

@@ -18,3 +18,9 @@ if you plugged in a phone make sure it has USB debugging enabled in developer op
 Look up how to find them for your phone
 
 run app in debug mode in code or android studio.
+
+to run as web app run "flutter run -d chrome"
+
+to build web app run "flutter build web --release"
+open directory with termainal and run "python -m http.server 8000"
+and the web app will be viewable at localhost:8000

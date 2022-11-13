@@ -100,7 +100,7 @@ class _ViewPersona extends State<ViewPersona> {
                 if (fact.value == false || fact.value.toString() == "" || fact.value == null) {
                   return Container(); 
                 }
-                if (fact.value is double) {
+                if (fact.value is double && fact.value <= 1 && fact.value >= 0) {
                   return Column(children: [
                     Text(fact.text),
                     Slider(value: fact.value, onChanged: (e) {})

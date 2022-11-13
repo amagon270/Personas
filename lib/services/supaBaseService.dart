@@ -1,11 +1,7 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:personas/services/personaService.dart';
 import 'package:personas/services/questionService.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:personas/services/factService.dart';
+import 'package:personas/widgets/utility.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'interviewService.dart';
@@ -15,12 +11,16 @@ class SupaBaseService {
   factory SupaBaseService() => _instance;
 
   SupaBaseService._internal() {
-    //getQMatrix();
+    getQMatrix();
   }
 
   String _qMatrix;
   String get qMatrix => _qMatrix;
   bool _isSupabaseInitialized = false;
+
+  String _authToken;
+  String get authToken => _authToken;
+  set authToken(String value) {_authToken = value;}
 
   Future<bool> getQMatrix() async {
     if (_isSupabaseInitialized) {
@@ -35,7 +35,6 @@ class SupaBaseService {
       _isSupabaseInitialized = true;
       final api = await http.get(Uri.parse("https://question-matrix-creator-gamma.vercel.app/api/export"));
       _qMatrix = api.body;
-      print(_qMatrix);
 
       writeLocalDatabase(_qMatrix);
 
@@ -62,24 +61,10 @@ class SupaBaseService {
   }
 
   Future<String> readLocalDatabase() async {
-    String database = "{}";
-    if (!kIsWeb) {
-      final directory = await getApplicationDocumentsDirectory();
-      final file = File('${directory.path}/database.json');
-      database = await file.readAsString();
-    }
-    return database;
+    return await UtilityFunctions.getStorage("database") ?? {"": {}};
   }
 
   Future<bool> writeLocalDatabase(String fileData) async {
-    if (!kIsWeb) {
-      final directory = await getApplicationDocumentsDirectory();
-      final file = File('${directory.path}/database.json');
-      await file.writeAsString(fileData);
-      return true;
-    }
-    return false;
+    return await UtilityFunctions.setStorage("database", fileData);
   }
-
-
 }

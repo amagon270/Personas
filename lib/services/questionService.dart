@@ -62,6 +62,25 @@ class QuestionOption {
   String toString() {
     return "QuestionOption { code: $code, value: $value, text: $text, image: $image, order: $order, fact: $fact }";
   }
+
+  QuestionOption.fromJson(Map<String, dynamic> json) : 
+    code = json['code'],
+    value = json['value'],
+    text = json['text'],
+    image = json['image'],
+    order = json['order'],
+    fact = json['fact'];
+
+  Map<String, dynamic> toJson() {
+    return {
+      "code": code,
+      "value": value,
+      "text": text,
+      "image": image,
+      "order": order,
+      "fact": fact,
+    };
+  }
 }
 
 class QuestionInputData {
@@ -126,6 +145,36 @@ class Question {
     }
     return MultipleChoiceQuestion(data: inputData, key: UniqueKey());
   }
+
+  Question.fromJson(Map<String, dynamic> json) : 
+    id = json['id'],
+    code = json['code'],
+    text = json['text'],
+    type = QuestionType.values.firstWhere((e) => e.toString() == json['type']),
+    factSubject = json['factSubject'],
+    options = (json['options'] as List).map((e) => QuestionOption.fromJson(e)).toList(),
+    min = json['min'],
+    max = json['max'],
+    labels = json['labels'].map<String>((json) => json.toString()).toList(),
+    timer = json['timer'],
+    enabled = json['enabled'];
+
+  Map<String, dynamic> toJson() {
+    List<Map> _options = this.options != null ? this.options.map((i) => i.toJson()).toList() : null;
+    return {
+      "id": id,
+      "code": code,
+      "text": text,
+      "type": type.toString(),
+      "factSubject": factSubject,
+      "options": _options,
+      "min": min,
+      "max": max,
+      "labels": labels,
+      "timer": timer,
+      "enabled": enabled,
+    };
+  }
 }
 
 class QuestionService {
@@ -160,7 +209,7 @@ class QuestionService {
   static Future<List<Question>> loadQuestions() async {
     //final data = await rootBundle.loadString("assets/export.json");
     final data = SupaBaseService().qMatrix;
-    List<dynamic> decodedData = json.decode(data)["questions"];
+    List<dynamic> decodedData = json.decode(data)["questions"] ?? [];
     List<Question> newQuestions = [];
     decodedData.forEach((question) {
       var id = question["id"]?.toString() ?? "";
